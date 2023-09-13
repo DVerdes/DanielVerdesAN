@@ -32,13 +32,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/FP/Desktop/DAM/AD/JavaRepasoSeed&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.saveactions&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/FP/Documents/GitHub/DanielVerdesAN/Acceso a Datos/Ejercicicos/1era evaluación/JavaRepasoSeed",
+    "settings.editor.selected.configurable": "settings.saveactions"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.example" />
