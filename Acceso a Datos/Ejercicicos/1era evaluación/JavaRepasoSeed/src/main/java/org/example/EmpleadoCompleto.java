@@ -19,6 +19,6 @@ public class EmpleadoCompleto implements Empleado {
 
     @Override
     public String obtenerDetalles() {
-        return "Nombre: " + nombre + " Edad: " + edad + "Salario: " + salario;
+        return "Nombre: " + nombre + " Edad: " + edad + " Salario: " + salario;
     }
 }

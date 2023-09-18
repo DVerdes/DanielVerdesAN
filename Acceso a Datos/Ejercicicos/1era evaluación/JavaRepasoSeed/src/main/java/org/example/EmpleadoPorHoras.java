@@ -21,6 +21,6 @@ public class EmpleadoPorHoras implements Empleado {
 
     @Override
     public String obtenerDetalles() {
-        return "Nombre: " + nombre + " Edad: " + edad + "Horas trabajadas: " + horasTrabajadas + "Tarifa: " + tarifaPorHora;
+        return "Nombre: " + nombre + " Edad: " + edad + " Horas trabajadas: " + horasTrabajadas + " Tarifa: " + tarifaPorHora;
     }
 }
