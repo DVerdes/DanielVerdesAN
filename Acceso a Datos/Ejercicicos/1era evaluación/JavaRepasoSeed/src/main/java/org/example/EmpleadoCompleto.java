@@ -19,7 +19,6 @@ public class EmpleadoCompleto implements Empleado {
 
     @Override
     public String obtenerDetalles() {
-        String cadenaEdad = String.valueOf(edad);
-        return nombre + " " + cadenaEdad;
+        return "Nombre: " + nombre + " Edad: " + edad + "Salario: " + salario;
     }
 }

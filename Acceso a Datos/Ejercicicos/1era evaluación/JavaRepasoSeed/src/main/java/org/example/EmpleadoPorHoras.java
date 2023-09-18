@@ -21,7 +21,6 @@ public class EmpleadoPorHoras implements Empleado {
 
     @Override
     public String obtenerDetalles() {
-        String cadenaEdad = String.valueOf(edad);
-        return nombre + " " + cadenaEdad;
+        return "Nombre: " + nombre + " Edad: " + edad + "Horas trabajadas: " + horasTrabajadas + "Tarifa: " + tarifaPorHora;
     }
 }
