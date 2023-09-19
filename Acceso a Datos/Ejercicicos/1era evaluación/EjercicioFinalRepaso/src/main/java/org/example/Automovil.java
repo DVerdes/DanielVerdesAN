@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Clase automovil, extendida de vehículo
+ */
 public class Automovil extends Vehiculo implements Arrancable{
 
     private int numeroPuertas;
@@ -22,6 +25,9 @@ public class Automovil extends Vehiculo implements Arrancable{
         this.numeroPuertas = numeroPuertas;
     }
 
+    /**
+     * Método para arrancar el automóvil
+     */
     @Override
     public void arrancar() {
         System.out.println("Arranca el automovil");

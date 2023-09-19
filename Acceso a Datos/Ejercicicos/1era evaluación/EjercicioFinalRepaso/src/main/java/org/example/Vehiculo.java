@@ -2,7 +2,10 @@ package org.example;
 
 import java.io.Serializable;
 
-public class Vehiculo implements Serializable {
+/**
+ * Clase vehículo
+ */
+public class Vehiculo implements Serializable, Arrancable {
 
     private String marca;
     private String modelo;
@@ -36,5 +39,13 @@ public class Vehiculo implements Serializable {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    /**
+     * Método para arrancar el vehículo
+     */
+    @Override
+    public void arrancar() {
+        System.out.println("El vehículo arranca");
     }
 }
