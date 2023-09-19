@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Hello world!
+ * Main de ejercicio 1 de ficheros
  *
  */
 public class App 
@@ -40,10 +40,6 @@ public class App
 
         File fichero3 = new File(ruta, "fichero3.txt");
         fichero3.createNewFile();
-
-
-
-
 
     }
 }
