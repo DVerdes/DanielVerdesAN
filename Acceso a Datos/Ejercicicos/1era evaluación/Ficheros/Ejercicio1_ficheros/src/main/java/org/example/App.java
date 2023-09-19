@@ -18,12 +18,9 @@ public class App
         File directorio2 = new File("C:\\Users\\FP\\Documents\\Ficheros\\EJ1\\Directorio2");
         directorio2.mkdir();
 
-
-
         ruta += "\\Directorio1";
 
         System.out.println(ruta);
-
 
         File fichero1 = new File(ruta, "fichero1.txt");
         fichero1.createNewFile();
@@ -40,6 +37,5 @@ public class App
 
         File fichero3 = new File(ruta, "fichero3.txt");
         fichero3.createNewFile();
-
     }
 }
