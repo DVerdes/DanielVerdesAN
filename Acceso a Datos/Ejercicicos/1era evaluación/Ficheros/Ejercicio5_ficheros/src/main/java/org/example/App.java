@@ -34,6 +34,8 @@ public class App
 
         }
 
+        // habría que meter los close en el FINALLY (usar try-catch)
+
         isr.close();
         osw.close();
 
