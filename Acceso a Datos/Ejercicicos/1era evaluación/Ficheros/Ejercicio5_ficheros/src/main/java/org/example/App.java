@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 public class App 
 {
     public static void main( String[] args ) throws IOException {
-    String ruta = "C:\\Users\\FP\\Documents\\Ficheros\\EJ5\\leer.txt";
+        String ruta = "C:\\Users\\FP\\Documents\\Ficheros\\EJ5\\leer.txt";
         String ruta2 = "C:\\Users\\FP\\Documents\\Ficheros\\EJ5\\escribir.txt";
 
         int num = 0;
