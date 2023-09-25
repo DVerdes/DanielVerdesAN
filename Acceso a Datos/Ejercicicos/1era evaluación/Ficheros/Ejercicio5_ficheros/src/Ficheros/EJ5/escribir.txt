@@ -1,0 +1,2 @@
+Esto es el contenido ñ
+del fichero de pruebas
