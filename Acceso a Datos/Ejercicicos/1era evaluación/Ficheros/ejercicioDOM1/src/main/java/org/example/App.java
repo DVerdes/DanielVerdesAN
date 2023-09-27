@@ -1,14 +1,15 @@
 package org.example;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,9 +19,9 @@ import java.util.ArrayList;
  */
 public class App 
 {
-    public static void main( String[] args ) throws ParserConfigurationException, IOException, SAXException {
+    public static void main( String[] args ) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
-//try{
+      //  try{
 
 
         ArrayList <Mascota> coleccionMascotas = new ArrayList<Mascota>();
@@ -98,16 +99,36 @@ public class App
             }
 
 
+            // parte 2
+            Element eMascota = documento.createElement("mascota");
+
+             eMascota.setAttribute("Nombre","Leo");
+            raiz.appendChild(eMascota);
+
+
+        Element eTipo = documento.createElement("tipo");
+            eMascota.appendChild(eTipo);
+
+            eTipo.appendChild(documento.createTextNode("gato"));
+
+
+
+
+            TransformerFactory tf = TransformerFactory.newInstance();
+            Transformer transformer = tf.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "3");
+            DOMSource domSource = new DOMSource(documento);
+            StreamResult resultado = new StreamResult((new File("src\\xml\\copia.xml")));
+            transformer.transform(domSource, resultado);
 
 
 
 
 
 
-
-      //  }catch (Exception e){
-        //    System.out.println("error");
-       // }
+       // }catch (Exception e){
+        //}
 
     }
 }
