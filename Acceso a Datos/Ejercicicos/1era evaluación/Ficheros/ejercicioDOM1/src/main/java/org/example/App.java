@@ -101,14 +101,11 @@ public class App
 
             // parte 2
             Element eMascota = documento.createElement("mascota");
-
-             eMascota.setAttribute("Nombre","Leo");
             raiz.appendChild(eMascota);
+            eMascota.setAttribute("Nombre","Leo");
 
-
-        Element eTipo = documento.createElement("tipo");
+            Element eTipo = documento.createElement("tipo");
             eMascota.appendChild(eTipo);
-
             eTipo.appendChild(documento.createTextNode("gato"));
 
 
