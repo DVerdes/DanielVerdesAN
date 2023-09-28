@@ -13,57 +13,62 @@ class SegundaClase extends StatelessWidget{
       appBar: AppBar(title: Text("Contacto")),
       body: Column(
         children: [
-          Row(
-             children: [
+          
              
                Container(
                 // foto
-                height: 500,
-                width: 840,
-                color: Color.fromARGB(255, 32, 106, 162),
-                child: Center(child: Icon(Icons.accessibility_new_sharp, size: 300,),),
+                height: 400,
+                color: Color.fromARGB(255, 223, 222, 222),
+                //child: Center(child: Icon(Icons.accessibility_new_sharp, size: 300),),
+                child: Center(child: Image.asset(contacto.rutaImg)),
+              
               ),
                
-            ],
-          ),
-          Row(
-             children: [
-              
-               Container(
-                // nombre
-                child: Center(child: Text(contacto.nombre + " " + contacto.apellidos, style: TextStyle(fontSize: 30)),),
-                height: 120,
-                width: 840,
-                color: const Color.fromARGB(255, 179, 199, 215),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              
-               Container(
-                child: Center(child: Text(contacto.telefono, style: TextStyle(fontSize: 20),),),
-                height: 120,
-                width: 840,
-                color: Color.fromARGB(255, 62, 87, 170),
-              ),
-            ],
-          ),
-          Row(
-            children: [
               Container(
-                child: Center(child: Text(contacto.correo, style: TextStyle(fontSize: 20),),),
+                height: 150,
+                child: Center(child: Text(contacto.nombre + " " + contacto.apellidos, style: TextStyle(fontSize: 40, letterSpacing: 3, decorationThickness: 2.8)),),
+                margin: EdgeInsets.all(20) ,
+
+                
+              ),
+               Container(
                 height: 120,
-                width: 840,
-                color: Color.fromARGB(255, 84, 102, 140),
-              )
+                child: Card(
+                child: Center(child: Text(contacto.telefono, style: TextStyle(fontSize: 30),),),
+                  color: Color.fromARGB(255, 210, 210, 211),
+                  margin: EdgeInsets.all(20) ,
+                  elevation: 20,
+                  surfaceTintColor: Color.fromARGB(255, 255, 255, 255),
+                  shadowColor: const Color.fromARGB(255, 0, 90, 164),
+                  
+              
+              
+                ),
+              ),
+               Container(
+                height: 120,
+                child: Card(
+                  child: Center(child: Text(contacto.correo, style: TextStyle(fontSize: 20),),),
+
+                  color: Color.fromARGB(255, 210, 210, 211),
+                  margin: EdgeInsets.all(20) ,
+                  elevation: 20,
+                  surfaceTintColor: Color.fromARGB(255, 255, 255, 255),
+                  shadowColor: const Color.fromARGB(255, 0, 90, 164),
+                  
+              
+              
+                ),
+              ),
+             
+            
             ],
           )
-        ],
-      ),
+        
+      );
       
       
-    );
+    
     
   }
 
