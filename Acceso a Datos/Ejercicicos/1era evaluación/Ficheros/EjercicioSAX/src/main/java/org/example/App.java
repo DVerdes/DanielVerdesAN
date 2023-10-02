@@ -25,7 +25,16 @@ public class App
              InputSource fichero = new InputSource(ruta);
              lector.parse(fichero);
              ArrayList<Mascota> lista = parser.obtenerResultado();
-             System.out.println(lista);
+
+             //print
+        for (Mascota m :lista) {
+            System.out.println(m.getNombre());
+            System.out.println("Tipo: "+m.getTipo());
+            System.out.println("Género: "+m.getGenero());
+            System.out.println("Edad: "+m.getEdad());
+            System.out.println();
+        }
+             
 
     }
 

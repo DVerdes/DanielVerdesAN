@@ -13,13 +13,13 @@ public class ParseadorMascotasSAX extends DefaultHandler {
 
 
     enum tiposNodo{
-        LISTAMASCOTAS,
+        MASCOTAS,
         MASCOTA,
 
         NOMBRE,
         TIPO,
         EDAD,
-        GÉNERO
+        GENERO
     }
 
     public ParseadorMascotasSAX(){
@@ -60,7 +60,7 @@ public class ParseadorMascotasSAX extends DefaultHandler {
                 case EDAD:
                     mascota.setEdad(Integer.parseInt(valorElemento));
                     break;
-                case GÉNERO:
+                case GENERO:
                     mascota.setGenero(valorElemento);
                     break;
             }
