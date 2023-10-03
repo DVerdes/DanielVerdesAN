@@ -11,6 +11,10 @@ public class Mascota implements Serializable {
     private int edad;
     private String genero;
 
+    private String cp;
+
+    private String ciudad;
+
     public Mascota(String nombre, String tipo, int edad, String genero) {
         this.nombre = nombre;
         this.tipo = tipo;
@@ -61,5 +65,23 @@ public class Mascota implements Serializable {
     @XmlElement
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public String getCp() {
+        return cp;
+    }
+
+    @XmlElement
+    public void setCp(String cp) {
+        this.cp = cp;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    @XmlElement
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 }

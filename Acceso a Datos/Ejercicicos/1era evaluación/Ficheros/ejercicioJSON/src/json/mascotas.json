@@ -1,0 +1,27 @@
+
+    [
+        {
+            "nombre":"Rex",
+            "tipo":"perro",
+            "edad":"5",
+            "genero":"macho"
+        },
+        {
+            "nombre":"Luna",
+            "tipo":"gato",
+            "edad":"6",
+            "genero":"hembra"
+        },
+        {
+            "nombre":"Leo",
+            "tipo":"hámster",
+            "edad":"2",
+            "genero":"macho"
+        },
+        {
+            "nombre":"Churchill",
+            "tipo":"gato",
+            "edad":"2",
+            "genero":"macho"
+        }
+    ]

@@ -24,6 +24,7 @@ public class App
             System.out.println("Edad: "+m.getEdad());
             System.out.println("Tipo: "+m.getTipo());
             System.out.println("Género: "+m.getGenero());
+            System.out.println("Ciudad: "+m.getCiudad());
             System.out.println();
         }
 

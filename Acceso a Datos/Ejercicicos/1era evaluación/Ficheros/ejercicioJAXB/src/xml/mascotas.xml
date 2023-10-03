@@ -4,6 +4,10 @@
         <tipo>Perro</tipo>
         <edad>5</edad>
         <genero>Macho</genero>
+        <direccion>
+            <cp></cp>
+            <ciudad>A Coruña</ciudad>
+        </direccion>
     </mascota>
     <mascota Nombre="Luna">
         <tipo>Gato</tipo>
