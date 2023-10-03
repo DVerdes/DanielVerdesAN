@@ -27,6 +27,8 @@ public class App
             System.out.println();
         }
 
+        listaMascotas.add(new Mascota("Pepe","Perro",12,"Macho"));
+
         realizarGuardadoXML(listaMascotas, "src\\xml\\copia.xml");
 
     }

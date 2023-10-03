@@ -18,4 +18,9 @@
         <edad>0</edad>
         <tipo>gato</tipo>
     </mascota>
+    <mascota Nombre="Pepe">
+        <edad>12</edad>
+        <genero>Macho</genero>
+        <tipo>Perro</tipo>
+    </mascota>
 </mascotas>
