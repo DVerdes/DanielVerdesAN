@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 
 public class MascotaGSON {
 
-    @Expose(serialize = false, deserialize = true)
+    @Expose(serialize = true, deserialize = true)
     private String nombre;
 
     @Expose
