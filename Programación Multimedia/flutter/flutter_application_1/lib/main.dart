@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Dam_calculadora());
+  runApp(calculadora());
 }
 
 // APLICACIÓN DE CALCULADORA
 
-class Dam_calculadora extends StatelessWidget {
+class calculadora extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => Dam_calculadora();
+}
+
+class Dam_calculadora extends State<calculadora> {
   // VARIABLES
   // Primer operando
   String op1 = "";
@@ -16,6 +21,9 @@ class Dam_calculadora extends StatelessWidget {
   int operador = 0;
   // Estado operador
   int operadorPulsado = 0;
+
+  String pantalla = "";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,10 +41,15 @@ class Dam_calculadora extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      child: Text(
-                        "Calculadora",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
+                      color: Color.fromARGB(255, 214, 214, 214),
+                      width: 250,
+                      height: 80,
+                      child: Center(
+                        child: Text(
+                          pantalla,
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     )
                   ],
@@ -46,111 +59,13 @@ class Dam_calculadora extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // 7
-                    InkWell(
-                      onTap: () {
-                        print("7");
-                        if (operadorPulsado == 0) {
-                          op1 += "7";
-                        } else if (operadorPulsado == 1) {
-                          op2 += "7";
-                        } else {
-                          op1 = "7";
-                          operadorPulsado = 0;
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text(
-                          "7",
-                          style: TextStyle(fontSize: 20),
-                        )),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionBoton("7"),
                     // 8
-                    InkWell(
-                      onTap: () {
-                        print("8");
-                        if (operadorPulsado == 0) {
-                          op1 += "8";
-                        } else if (operadorPulsado == 1) {
-                          op2 += "8";
-                        } else {
-                          op1 = "8";
-                          operadorPulsado = 0;
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("8", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionBoton("8"),
                     // 9
-                    InkWell(
-                      onTap: () {
-                        print("9");
-
-                        if (operadorPulsado == 0) {
-                          op1 += "9";
-                        } else if (operadorPulsado == 1) {
-                          op2 += "9";
-                        } else {
-                          op1 = "9";
-                          operadorPulsado = 0;
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("9", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionBoton("9"),
                     // Operador /
-                    InkWell(
-                      onTap: () {
-                        print("/");
-                        if (op1 != "") {
-                          operador = 4;
-                          operadorPulsado = 1;
-                        } else {
-                          print("Falta el primer operando");
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("/", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionOperador("/"),
                   ],
                 ),
                 // 2nda fila botones
@@ -158,111 +73,13 @@ class Dam_calculadora extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // 4
-                    InkWell(
-                      onTap: () {
-                        print("4");
-                        if (operadorPulsado == 0) {
-                          op1 += "4";
-                        } else if (operadorPulsado == 1) {
-                          op2 += "4";
-                        } else {
-                          op1 = "4";
-                          operadorPulsado = 0;
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text(
-                          "4",
-                          style: TextStyle(fontSize: 20),
-                        )),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionBoton("4"),
                     // 5
-                    InkWell(
-                      onTap: () {
-                        print("5");
-                        if (operadorPulsado == 0) {
-                          op1 += "5";
-                        } else if (operadorPulsado == 1) {
-                          op2 += "5";
-                        } else {
-                          op1 = "5";
-                          operadorPulsado = 0;
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("5", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionBoton("5"),
                     // 6
-                    InkWell(
-                      onTap: () {
-                        print("6");
-
-                        if (operadorPulsado == 0) {
-                          op1 += "6";
-                        } else if (operadorPulsado == 1) {
-                          op2 += "6";
-                        } else {
-                          op1 = "6";
-                          operadorPulsado = 0;
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("6", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionBoton("6"),
                     // Operador *
-                    InkWell(
-                      onTap: () {
-                        print("*");
-                        if (op1 != "") {
-                          operador = 3;
-                          operadorPulsado = 1;
-                        } else {
-                          print("Falta el primer operando");
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("*", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionOperador("*"),
                   ],
                 ),
                 // 3era fila botones
@@ -270,111 +87,13 @@ class Dam_calculadora extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // 1
-                    InkWell(
-                      onTap: () {
-                        print("1");
-                        if (operadorPulsado == 0) {
-                          op1 += "1";
-                        } else if (operadorPulsado == 1) {
-                          op2 += "1";
-                        } else {
-                          op1 = "1";
-                          operadorPulsado = 0;
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text(
-                          "1",
-                          style: TextStyle(fontSize: 20),
-                        )),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionBoton("1"),
                     // 2
-                    InkWell(
-                      onTap: () {
-                        print("2");
-
-                        if (operadorPulsado == 0) {
-                          op1 += "2";
-                        } else if (operadorPulsado == 1) {
-                          op2 += "2";
-                        } else {
-                          op1 = "2";
-                          operadorPulsado = 0;
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("2", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionBoton("2"),
                     // 3
-                    InkWell(
-                      onTap: () {
-                        print("3");
-                        if (operadorPulsado == 0) {
-                          op1 += "3";
-                        } else if (operadorPulsado == 1) {
-                          op2 += "3";
-                        } else {
-                          op1 = "3";
-                          operadorPulsado = 0;
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("3", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionBoton("3"),
                     // Operador -
-                    InkWell(
-                      onTap: () {
-                        print("-");
-                        if (op1 != "") {
-                          operador = 2;
-                          operadorPulsado = 1;
-                        } else {
-                          print("Falta el primer operando");
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("-", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionOperador("-"),
                   ],
                 ),
                 // 4arta fila botones
@@ -384,80 +103,21 @@ class Dam_calculadora extends StatelessWidget {
                     // CLEAR
                     InkWell(
                       onTap: () {
+                        setState(() {
+                          pantalla = "";
+                        });
                         print("Clear");
                         op1 = "";
                         op2 = "";
                         operador = 0;
                         operadorPulsado = 0;
                       },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text(
-                          "C",
-                          style: TextStyle(fontSize: 20),
-                        )),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
+                      child: mostrarContenedor("C", true),
                     ),
                     // 0
-                    InkWell(
-                      onTap: () {
-                        print("0");
-                        if (operadorPulsado == 0) {
-                          if (op1 != "") {
-                            op1 += "0";
-                          }
-                        } else if (operadorPulsado == 1) {
-                          op2 += "0";
-                        } else {
-                          op1 = "0";
-                          operadorPulsado = 0;
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("0", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionBoton("0"),
                     // Operador +
-                    InkWell(
-                      onTap: () {
-                        print("+");
-                        if (op1 != "") {
-                          operador = 1;
-                          operadorPulsado = 1;
-                        } else {
-                          print("Falta el primer operando");
-                        }
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("+", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
-                    ),
+                    accionOperador("+"),
                     // =
                     InkWell(
                       onTap: () {
@@ -505,6 +165,9 @@ class Dam_calculadora extends StatelessWidget {
                                 " = " +
                                 resultado.toString());
                           }
+                          setState(() {
+                            pantalla = resultado.toString();
+                          });
                           // Reinicio variables
                           op1 = resultado.toString();
                           op2 = "";
@@ -512,22 +175,79 @@ class Dam_calculadora extends StatelessWidget {
                           operadorPulsado = 2;
                         }
                       },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text("=", style: TextStyle(fontSize: 20))),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
+                      child: mostrarContenedor("=", true),
                     ),
                   ],
                 )
               ],
             )));
   }
+
+  Widget accionBoton(String num) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          pantalla += num;
+        });
+
+        print(num);
+        if (operadorPulsado == 0) {
+          op1 += num;
+        } else if (operadorPulsado == 1) {
+          op2 += num;
+        } else {
+          op1 = num;
+          operadorPulsado = 0;
+          setState(() {
+            pantalla = num;
+          });
+        }
+      },
+      child: mostrarContenedor(num, false),
+    );
+  }
+
+  Widget accionOperador(String signo) {
+    int operadorSelec = 0;
+    if (signo == "+") {
+      operadorSelec = 1;
+    } else if (signo == "-") {
+      operadorSelec = 2;
+    } else if (signo == "*") {
+      operadorSelec = 3;
+    } else {
+      operadorSelec = 4;
+    }
+
+    return InkWell(
+        onTap: () {
+          setState(() {
+            pantalla += signo;
+          });
+          print(signo);
+          if (op1 != "") {
+            operador = operadorSelec;
+            operadorPulsado = 1;
+          } else {
+            print("Falta el primer operando");
+          }
+        },
+        child: mostrarContenedor(signo, true));
+  }
 }
+
+Widget mostrarContenedor(String texto, bool blanco) {
+  return Container(
+    width: 100,
+    height: 100,
+    margin: EdgeInsets.all(10),
+    child: Center(child: Text(texto, style: TextStyle(fontSize: 20))),
+    decoration: BoxDecoration(
+        color: blanco ? Colors.white : const Color.fromARGB(255, 174, 174, 174),
+        border: Border.all(color: Colors.black, width: 2),
+        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+  );
+}
+
+
+

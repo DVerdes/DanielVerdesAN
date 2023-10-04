@@ -11,13 +11,13 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Contacto> contactos = [
       new Contacto("Pedro", "Martínez León", "24", "678345211",
-          "pman@gmail.com", "assets/images/pedro.png"),
+          "pedromar@gmail.com", "assets/images/pedro.png"),
       new Contacto("Marta", "García Suárez", "35", "654789666",
-          "martagarcia@gmail.com", "assets/images/marta.png"),
+          "martagarci@gmail.com", "assets/images/marta.png"),
       new Contacto("Roberto", "Varela Hernández", "45", "654333555",
           "robervar@gmail.com", "assets/images/roberto.png"),
       new Contacto("Santiago", "Ramirez Ledesma", "23", "678345345",
-          "santiramirez@gmail.com", "assets/images/santiago.png"),
+          "santiramir@gmail.com", "assets/images/santiago.png"),
       new Contacto("Asier", "Iraola Martín", "36", "654787898",
           "asierirma@gmail.com", "assets/images/asier.png"),
       new Contacto("Vanesa", "Villares Jurado", "31", "654787976",
@@ -29,10 +29,11 @@ class Main extends StatelessWidget {
       new Contacto("Humberto", "Barcia López", "56", "642123123",
           "humbbar@gmail.com", "assets/images/humberto.png"),
       new Contacto("Susana", "Piñeiro Pérez", "25", "675657345",
-          "susanapiñeiro@gmail.com", "assets/images/susana.png")
+          "susanapiñe@gmail.com", "assets/images/susana.png")
     ];
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: "Proyecto 2",
         routes: {
           "/segundaPagina": (BuildContext context) => SegundaClase(),

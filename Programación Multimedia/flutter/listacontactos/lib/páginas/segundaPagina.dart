@@ -23,7 +23,6 @@ class SegundaClase extends StatelessWidget {
                   child: ClipOval(child: Image.asset(contacto.rutaImg)),
                 ),
               ),
-              //child: Center(child: Image.asset(contacto.rutaImg)),
             ),
             Container(
               height: 150,
@@ -36,39 +35,36 @@ class SegundaClase extends StatelessWidget {
               ),
               margin: EdgeInsets.all(20),
             ),
-            Container(
-              height: 120,
-              child: Card(
-                child: Center(
-                  child: Text(
-                    contacto.telefono,
-                    style: TextStyle(fontSize: 30),
-                  ),
-                ),
-                color: Color.fromARGB(255, 210, 210, 211),
-                margin: EdgeInsets.all(20),
-                elevation: 20,
-                surfaceTintColor: Color.fromARGB(255, 255, 255, 255),
-                shadowColor: const Color.fromARGB(255, 0, 90, 164),
-              ),
-            ),
-            Container(
-              height: 120,
-              child: Card(
-                child: Center(
-                  child: Text(
-                    contacto.correo,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                color: Color.fromARGB(255, 210, 210, 211),
-                margin: EdgeInsets.all(20),
-                elevation: 20,
-                surfaceTintColor: Color.fromARGB(255, 255, 255, 255),
-                shadowColor: const Color.fromARGB(255, 0, 90, 164),
-              ),
-            ),
+            cardContainer(true, contacto),
+            cardContainer(false, contacto)
           ],
         ));
   }
+
+Widget cardContainer(bool tipo, Contacto contacto){
+   return Container(
+              height: 120,
+              child: Card(child: Center(
+                child: ListTile(
+                  leading: Padding(
+                    padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                    child: Icon(tipo ? Icons.add_call: Icons.mail, size: 30,),
+                  ),
+                  title: Padding(
+                    padding: tipo? EdgeInsets.fromLTRB(240, 0, 0, 0) : EdgeInsets.fromLTRB(220, 0,0, 0),
+                    child: Text(tipo ? contacto.telefono : contacto.correo, style: TextStyle(fontSize: tipo ? 30:20),),
+                  ),                    
+                ),
+              ),
+                color: Color.fromARGB(255, 210, 210, 211),
+                margin: EdgeInsets.all(20),
+                elevation: 20,
+                surfaceTintColor: Color.fromARGB(255, 255, 255, 255),
+                shadowColor: const Color.fromARGB(255, 0, 90, 164),
+              ),
+            );
 }
+
+
+}
+
