@@ -9,6 +9,7 @@ void main() {
 class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // ArrayList de objetos Contacto
     List<Contacto> contactos = [
       new Contacto("Pedro", "Martínez León", "24", "678345211",
           "pedromar@gmail.com", "assets/images/pedro.png"),

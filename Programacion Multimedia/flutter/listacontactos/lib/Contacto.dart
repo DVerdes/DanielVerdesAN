@@ -1,5 +1,6 @@
-class Contacto{
+// clase Contacto
 
+class Contacto {
   String nombre = "";
   String apellidos = "";
   String edad = "";
@@ -7,8 +8,8 @@ class Contacto{
   String correo = "";
   String rutaImg = "";
 
-
-  Contacto(String nombre, String apellidos, String edad, String telefono, String correo, String rutaImg){
+  Contacto(String nombre, String apellidos, String edad, String telefono,
+      String correo, String rutaImg) {
     this.nombre = nombre;
     this.apellidos = apellidos;
     this.edad = edad;
@@ -17,13 +18,11 @@ class Contacto{
     this.rutaImg = rutaImg;
   }
 
-  void set setNombre(String nombre){
+  void set setNombre(String nombre) {
     this.nombre = nombre;
-
   }
 
-  String get getNombre{
+  String get getNombre {
     return nombre;
   }
-
 }
