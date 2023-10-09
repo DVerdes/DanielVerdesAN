@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<encuentros>
+    <encuentro vd="1">
+        <criatura>
+            <nombre>Goblin</nombre>
+            <dc>1/4</dc>
+            <pg>4</pg>
+        </criatura>
+        <criatura>
+            <nombre>Orco</nombre>
+            <dc>1/2</dc>
+            <pg>8</pg>
+        </criatura>
+    </encuentro>
+    <encuentro vd="2">
+        <criatura>
+            <nombre>Lobo</nombre>
+            <dc>1/2</dc>
+            <pg>12</pg>
+        </criatura>
+        <criatura>
+            <nombre>Lobo</nombre>
+            <dc>1/2</dc>
+            <pg>12</pg>
+        </criatura>
+        <criatura>
+            <nombre>Lobo terrible</nombre>
+            <dc>1</dc>
+            <pg>20</pg>
+        </criatura>
+    </encuentro>
+    <encuentro vd="3">
+        <criatura>
+            <nombre>Esqueleto</nombre>
+            <dc>1/4</dc>
+            <pg>8</pg>
+        </criatura>
+        <criatura>
+            <nombre>Esqueleto</nombre>
+            <dc>1/4</dc>
+            <pg>6</pg>
+        </criatura>
+    </encuentro>
+</encuentros>
