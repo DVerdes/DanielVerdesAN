@@ -6,6 +6,7 @@ class PrimeraClase extends StatefulWidget {
 }
 
 class CorreosGestion extends State<PrimeraClase> {
+  final TextEditingController emailController = TextEditingController();
   List<Correo> recibidos = [
     new Correo("Aula Nosa", "Tiene un nuevo mensaje en su bandeja de entrada",
         "Nuevo mensaje"),
@@ -14,7 +15,7 @@ class CorreosGestion extends State<PrimeraClase> {
   ];
   List<Correo> destacados = [
     new Correo("Concesionario Ford",
-        "Disfrute de las nuevas finanziaciones en el concesionario", "Catálogo")
+        "Disfrute de las nuevas financiaciones en el concesionario", "Catálogo")
   ];
   List<Correo> pospuestos = [
     new Correo("María Martín",
@@ -110,8 +111,6 @@ class CorreosGestion extends State<PrimeraClase> {
           return ListTile(
             title: RichText(
               text: TextSpan(
-                // Note: Styles for TextSpans must be explicitly defined.
-                // Child text spans will inherit styles from parent
                 style: const TextStyle(
                   fontSize: 14.0,
                   color: Colors.black,
@@ -134,20 +133,95 @@ class CorreosGestion extends State<PrimeraClase> {
               spacing: 12,
               children: <Widget>[
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showEditor(context, lista, index);
+                  },
                   icon: Icon(Icons.edit),
                 ),
                 IconButton(
                   onPressed: () {
-                    eliminados.add(lista[index]);
-                    setState(() {
-                      lista.remove(lista[index]);
-                    });
+                    showAlertDialog(context, lista, index);
                   },
                   icon: Icon(Icons.delete),
                 ),
               ],
             ),
+          );
+        });
+  }
+
+  showAlertDialog(BuildContext context, List lista, int index) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Pregunta"),
+            content: Text("¿Seguro que deseas eliminar el elemento?"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    eliminados.add(lista[index]);
+                    setState(() {
+                      lista.remove(lista[index]);
+                    });
+                    showSnackBar(
+                        context, "Has eliminado el correo", Colors.red);
+                  },
+                  child: Text("Si")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showSnackBar(context, "No has eliminado el correo",
+                        Color.fromARGB(255, 255, 174, 0));
+                  },
+                  child: Text("No"))
+            ],
+          );
+        });
+  }
+
+  void showSnackBar(BuildContext context, String mensaje, Color color) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        mensaje,
+        textAlign: TextAlign.center,
+      ),
+      backgroundColor: color,
+    ));
+  }
+
+  showEditor(BuildContext context, List lista, int index) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Editar correo"),
+            content: TextField(
+              controller: emailController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Introduzca el nuevo contenido",
+              ),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      lista[index].mensaje = emailController.text;
+                    });
+                    emailController.clear();
+                    Navigator.pop(context);
+                    showSnackBar(
+                        context, "Mensaje editado con éxito", Colors.green);
+                  },
+                  child: Text("Confirmar")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Cancelar"))
+            ],
           );
         });
   }
