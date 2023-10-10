@@ -2,11 +2,16 @@ package org.example;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.example.entidades.Envio;
-import org.example.entidades.Nombre;
-import org.example.entidades.Peticion;
-import org.example.entidades.Respuesta;
+import org.example.entidades.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -83,7 +88,7 @@ public class BotUtils {
      * @param peticion Datos de la petición del usuario
      * @throws IOException Excepción en envío de mensaje
      */
-    public static void procesarPeticion(Peticion peticion) throws IOException {
+    public static void procesarPeticion(Peticion peticion) throws IOException, ParserConfigurationException, SAXException {
 
         // Obtener datos del mensaje recibido
         long destinatario = peticion.getMessage().getFrom().getId();
@@ -120,7 +125,7 @@ public class BotUtils {
             FileWriter fw = new FileWriter(fichero1);
             fw.write(escribirJSON(listaNombres));
             fw.close();
-            
+
             Envio envio = new Envio();
             envio.setChat_id(destinatario);
             envio.setText(nombreSugerido + " añadido con éxito");
@@ -140,6 +145,37 @@ public class BotUtils {
 
             // Nos quedamos con el último mensaje procesado
             offset = peticion.getUpdate_id() + 1;
+        } else if (texto.matches("^/encuentro [0-9]$")) {
+            String[] arrOfStr = texto.split(" ", 2);
+            int valorDesafio = Integer.parseInt(arrOfStr[1]);
+            if (valorDesafio > 0 && valorDesafio < 4) {
+                ArrayList<Encuentro> encuentros = devolverEncuentro("src\\xml\\encuentros.xml", String.valueOf(valorDesafio));
+
+                int random = (int) Math.floor(Math.random() * ((encuentros.size() - 1) - 0 + 1) + 0);
+                String criaturas = imprimirEncuentro(encuentros.get(random));
+
+                Envio envio = new Envio();
+                envio.setChat_id(destinatario);
+                envio.setText("Encuentro (vd: " + valorDesafio + "): \n" + criaturas);
+
+                // Enviar mensaje
+                enviarMensaje(envio);
+
+                // Nos quedamos con el último mensaje procesado
+                offset = peticion.getUpdate_id() + 1;
+            } else {
+
+                Envio envio = new Envio();
+                envio.setChat_id(destinatario);
+                envio.setText("Introduzca un valor de desafio correcto");
+
+                // Enviar mensaje
+                enviarMensaje(envio);
+
+                offset = peticion.getUpdate_id() + 1;
+
+            }
+
         }
 
 
@@ -197,6 +233,89 @@ public class BotUtils {
         Nombre[] nombres = gson.fromJson(fr, Nombre[].class);
         return new ArrayList<Nombre>(Arrays.asList(nombres));
     }// leer JSON
+
+
+    public static ArrayList<Encuentro> devolverEncuentro(String ruta, String valorDesafio) throws ParserConfigurationException, IOException, SAXException {
+        ArrayList<Encuentro> coleccionEncuentros = new ArrayList<Encuentro>();
+
+        DocumentBuilderFactory fabrica = DocumentBuilderFactory.newInstance();
+
+        DocumentBuilder creadorDocumento = fabrica.newDocumentBuilder();
+
+        Document documento = creadorDocumento.parse(ruta);
+
+        Element raiz = documento.getDocumentElement();
+
+        NodeList listaEncuentros = raiz.getElementsByTagName("encuentro");
+
+        int contador = 0;
+
+
+        for (int i = 0; i < listaEncuentros.getLength(); i++) {
+            Node encuentro = listaEncuentros.item(i);
+
+            Element e = (Element) encuentro;
+            String vd = e.getAttribute("vd");
+
+            if (vd.equals(valorDesafio)) {
+
+
+                coleccionEncuentros.add(new Encuentro(new ArrayList<Criatura>()));
+
+
+                NodeList datosEncuentro = e.getElementsByTagName("criatura");
+                ArrayList<Criatura> criaturas = new ArrayList<Criatura>();
+
+                for (int j = 0; j < datosEncuentro.getLength(); j++) {
+                    Node criatura = datosEncuentro.item(j);
+                    NodeList datosCriatura = criatura.getChildNodes();
+                    criaturas.add(new Criatura());
+
+                    for (int k = 0; k < datosCriatura.getLength(); k++) {
+                        Node datoCriatura = datosCriatura.item(k);
+
+                        Node datoContenido = datoCriatura.getFirstChild();
+
+                        if (datoContenido != null && datoContenido.getNodeType() == Node.TEXT_NODE) {
+                            System.out.println(datoContenido.getNodeValue());
+                            // GUARDANDO TEXTO DE LOS NODOS EN LOS ATRIBUTOS DE LOS OBJETOS DEL ARRAYLIST
+                            if (datoCriatura.getNodeName().equals("nombre")) {
+                                criaturas.get(j).setNombre(datoContenido.getNodeValue());
+                            } else if (datoCriatura.getNodeName().equals("dc")) {
+                                criaturas.get(j).setDc(datoContenido.getNodeValue());
+                            } else if (datoCriatura.getNodeName().equals("pg")) {
+                                criaturas.get(j).setPg(datoContenido.getNodeValue());
+                            }
+                        }
+                    }
+                }
+
+                coleccionEncuentros.get(contador).setCriaturas(criaturas);
+                contador++;
+
+
+            } else {
+
+            }
+
+        }
+
+
+        return coleccionEncuentros;
+    }
+
+
+    public static String imprimirEncuentro(Encuentro encuentro) {
+
+        String criaturas = "";
+
+        for (int i = 0; i < encuentro.getCriaturas().size(); i++) {
+            criaturas += encuentro.getCriaturas().get(i).getNombre() + " Pg: " + encuentro.getCriaturas().get(i).getPg() + " DC: " + encuentro.getCriaturas().get(i).getDc() + "\n";
+        }
+
+        return criaturas;
+    }
+
 }
 
 
