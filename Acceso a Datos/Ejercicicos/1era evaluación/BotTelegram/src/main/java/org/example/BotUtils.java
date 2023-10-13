@@ -94,91 +94,131 @@ public class BotUtils {
         long destinatario = peticion.getMessage().getFrom().getId();
         String texto = peticion.getMessage().getText();
 
-        if (texto.equals("/nombre")) {
+        Envio envio = new Envio();
+        envio.setChat_id(destinatario);
+
+        if (texto.equals("/start")) {
+
+            envio.setText("Bienvenido!, escriba /ayuda para obtener la lista de comandos y funcionalidades que ofrece el bot");
+
+            // Enviar mensaje
+            enviarMensaje(envio);
+
+
+        }else if (texto.equals("/nombre")) {
             // añadir aquí
-            ArrayList<Nombre> listaNombres = leerJSON("C:\\Users\\FP\\Documents\\GitHub\\DanielVerdesAN\\Acceso a Datos\\Ejercicicos\\1era evaluación\\BotTelegram\\src\\main\\java\\org\\example\\datos\\names.json");
+            ArrayList<Nombre> listaNombres = leerJSON("src\\json\\names.json");
             int random = (int) Math.floor(Math.random() * ((listaNombres.size() - 1) - 0 + 1) + 0);
 
             // Crear el mensaje de envío
-            Envio envio = new Envio();
-            envio.setChat_id(destinatario);
+
             envio.setText("Nombre aleatorio: " + listaNombres.get(random).getNombre());
 
             // Enviar mensaje
             enviarMensaje(envio);
 
-            // Nos quedamos con el último mensaje procesado
-            offset = peticion.getUpdate_id() + 1;
 
         } else if (texto.matches("^/anadirNombre .*$")) {
 
             String[] arrOfStr = texto.split(" ", 15);
-            String nombreSugerido = arrOfStr[1];
+            envio.setText(anadirNombre(arrOfStr[1]));
 
-            ArrayList<Nombre> listaNombres = leerJSON("C:\\Users\\FP\\Documents\\GitHub\\DanielVerdesAN\\Acceso a Datos\\Ejercicicos\\1era evaluación\\BotTelegram\\src\\main\\java\\org\\example\\datos\\names.json");
-            listaNombres.add(new Nombre(nombreSugerido));
-
-
-            File fichero1 = new File("C:\\Users\\FP\\Documents\\GitHub\\DanielVerdesAN\\Acceso a Datos\\Ejercicicos\\1era evaluación\\BotTelegram\\src\\main\\java\\org\\example\\datos\\names.json");
-            fichero1.createNewFile();
-
-            FileWriter fw = new FileWriter(fichero1);
-            fw.write(escribirJSON(listaNombres));
-            fw.close();
-
-            Envio envio = new Envio();
-            envio.setChat_id(destinatario);
-            envio.setText(nombreSugerido + " añadido con éxito");
-
-            // Enviar mensaje
             enviarMensaje(envio);
 
-            offset = peticion.getUpdate_id() + 1;
 
         } else if (texto.equals("/ayuda")) {
-            Envio envio = new Envio();
-            envio.setChat_id(destinatario);
-            envio.setText("Lista de comandos: \n-/nombre: devuelve nombre aleatorio\n-/anadirNombre Nombre: añade el nombre indicado");
 
-            // Enviar mensaje
+            envio.setText("Lista de comandos: \n-/nombre: devuelve nombre aleatorio\n-/anadirNombre nombre): añade el nombre indicado\n-/encuentro VD: devuelve un encuentro aleatorio con un VD especificado en formato numérico (1-3)\n-/datos nombreCriatura: devuelve las estadísticas de la criatura especificada");
+
             enviarMensaje(envio);
 
-            // Nos quedamos con el último mensaje procesado
-            offset = peticion.getUpdate_id() + 1;
         } else if (texto.matches("^/encuentro [0-9]$")) {
             String[] arrOfStr = texto.split(" ", 2);
-            int valorDesafio = Integer.parseInt(arrOfStr[1]);
-            if (valorDesafio > 0 && valorDesafio < 4) {
-                ArrayList<Encuentro> encuentros = devolverEncuentro("src\\xml\\encuentros.xml", String.valueOf(valorDesafio));
 
-                int random = (int) Math.floor(Math.random() * ((encuentros.size() - 1) - 0 + 1) + 0);
-                String criaturas = imprimirEncuentro(encuentros.get(random));
-
-                Envio envio = new Envio();
-                envio.setChat_id(destinatario);
-                envio.setText("Encuentro (vd: " + valorDesafio + "): \n" + criaturas);
-
-                // Enviar mensaje
+                envio.setText(sacarEncuentroAleatorio(Integer.parseInt(arrOfStr[1])));
                 enviarMensaje(envio);
 
-                // Nos quedamos con el último mensaje procesado
-                offset = peticion.getUpdate_id() + 1;
-            } else {
+        }else if(texto.matches("^/datos .*$")){
+            String[] arrOfStr = texto.split(" ", 15);
 
-                Envio envio = new Envio();
-                envio.setChat_id(destinatario);
-                envio.setText("Introduzca un valor de desafio correcto");
+            envio.setText(leerDatosCriatura(arrOfStr[1]));
+            enviarMensaje(envio);
 
-                // Enviar mensaje
-                enviarMensaje(envio);
 
-                offset = peticion.getUpdate_id() + 1;
 
+        }else{
+            envio.setText("No se ha introducido un comando válido. Por favor, escriba /ayuda para conocer la lista de funcionalidades del bot");
+            enviarMensaje(envio);
+        }
+
+        offset = peticion.getUpdate_id() + 1;
+
+
+
+    }
+
+    private static String sacarEncuentroAleatorio(int valorDesafio) throws ParserConfigurationException, IOException, SAXException {
+        if (valorDesafio > 0 && valorDesafio < 4) {
+            ArrayList<Encuentro> encuentros = devolverEncuentro("src\\xml\\encuentros.xml", String.valueOf(valorDesafio));
+
+            int random = (int) Math.floor(Math.random() * ((encuentros.size() - 1) - 0 + 1) + 0);
+            String criaturas = imprimirEncuentro(encuentros.get(random));
+            return "Encuentro (vd: " + valorDesafio + "): \n" + criaturas;
+
+        } else {
+            return "Introduzca un valor de desafio correcto";
+
+        }
+    }
+
+    private static String anadirNombre(String nombreSugerido) throws IOException {
+        ArrayList<Nombre> listaNombres = leerJSON("src\\json\\names.json");
+        listaNombres.add(new Nombre(nombreSugerido));
+
+
+        File fichero1 = new File("src\\json\\names.json");
+        fichero1.createNewFile();
+
+        FileWriter fw = new FileWriter(fichero1);
+        fw.write(escribirJSON(listaNombres));
+        fw.close();
+
+        return nombreSugerido+" añadido con éxito.";
+
+    }
+
+    private static String leerDatosCriatura(String criaturaBuscada) throws IOException {
+
+
+
+
+        String cadenaInfo = "";
+
+        int numLectura = 0;
+
+        FileInputStream stream = new FileInputStream("src\\txt\\criaturasInfo.txt");
+
+        while (numLectura!=-1){
+
+            numLectura = stream.read();
+            if(numLectura!=-1){
+                cadenaInfo += (char)numLectura + "";
             }
 
         }
 
+        String[] criaturas = cadenaInfo.split(";");
 
+
+        for(int i = 0; i<criaturas.length; i++){
+            if(criaturas[i].contains(criaturaBuscada)){
+                String [] criaturaInfo = criaturas[i].split(":");
+                return criaturaInfo[0]+":\nEstadísticas: "+criaturaInfo[1]+"\nPg: "+criaturaInfo[2]+", Iniciativa: "+criaturaInfo[3]+", CA: "+criaturaInfo[4]+"\nAtaques: "+criaturaInfo[5]+" "+criaturaInfo[6];
+
+            }
+        }
+
+        return "No se ha encontrado la criatura especificada.";
     }
 
     /**
@@ -217,9 +257,7 @@ public class BotUtils {
         }
     }
 
-    public static void ultimarMensaje(String mensaje) {
 
-    }
 
     public static String escribirJSON(ArrayList<Nombre> listaNombres) throws FileNotFoundException {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
@@ -277,7 +315,6 @@ public class BotUtils {
                         Node datoContenido = datoCriatura.getFirstChild();
 
                         if (datoContenido != null && datoContenido.getNodeType() == Node.TEXT_NODE) {
-                            System.out.println(datoContenido.getNodeValue());
                             // GUARDANDO TEXTO DE LOS NODOS EN LOS ATRIBUTOS DE LOS OBJETOS DEL ARRAYLIST
                             if (datoCriatura.getNodeName().equals("nombre")) {
                                 criaturas.get(j).setNombre(datoContenido.getNodeValue());
@@ -293,8 +330,6 @@ public class BotUtils {
                 coleccionEncuentros.get(contador).setCriaturas(criaturas);
                 contador++;
 
-
-            } else {
 
             }
 
