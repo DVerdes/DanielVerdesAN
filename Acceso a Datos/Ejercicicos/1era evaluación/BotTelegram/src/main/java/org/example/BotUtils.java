@@ -1,23 +1,18 @@
 package org.example;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.example.entidades.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.example.entidades.Envio;
+import org.example.entidades.Nombre;
+import org.example.entidades.Peticion;
+import org.example.entidades.Respuesta;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Clase con métodos para utilizar el bot de Telegram
@@ -90,136 +85,88 @@ public class BotUtils {
      */
     public static void procesarPeticion(Peticion peticion) throws IOException, ParserConfigurationException, SAXException {
 
-        // Obtener datos del mensaje recibido
-        long destinatario = peticion.getMessage().getFrom().getId();
-        String texto = peticion.getMessage().getText();
+        try {
+            // Obtener datos del mensaje recibido
+            long destinatario = peticion.getMessage().getFrom().getId();
+            String texto = peticion.getMessage().getText();
 
-        Envio envio = new Envio();
-        envio.setChat_id(destinatario);
-
-        if (texto.equals("/start")) {
-
-            envio.setText("Bienvenido!, escriba /ayuda para obtener la lista de comandos y funcionalidades que ofrece el bot");
-
-            // Enviar mensaje
-            enviarMensaje(envio);
+            Envio envio = new Envio();
+            envio.setChat_id(destinatario);
 
 
-        }else if (texto.equals("/nombre")) {
-            // añadir aquí
-            ArrayList<Nombre> listaNombres = leerJSON("src\\json\\names.json");
-            int random = (int) Math.floor(Math.random() * ((listaNombres.size() - 1) - 0 + 1) + 0);
-
-            // Crear el mensaje de envío
-
-            envio.setText("Nombre aleatorio: " + listaNombres.get(random).getNombre());
-
-            // Enviar mensaje
-            enviarMensaje(envio);
-
-
-        } else if (texto.matches("^/anadirNombre .*$")) {
-
-            String[] arrOfStr = texto.split(" ", 15);
-            envio.setText(anadirNombre(arrOfStr[1]));
-
-            enviarMensaje(envio);
-
-
-        } else if (texto.equals("/ayuda")) {
-
-            envio.setText("Lista de comandos: \n-/nombre: devuelve nombre aleatorio\n-/anadirNombre nombre): añade el nombre indicado\n-/encuentro VD: devuelve un encuentro aleatorio con un VD especificado en formato numérico (1-3)\n-/datos nombreCriatura: devuelve las estadísticas de la criatura especificada");
-
-            enviarMensaje(envio);
-
-        } else if (texto.matches("^/encuentro [0-9]$")) {
-            String[] arrOfStr = texto.split(" ", 2);
-
-                envio.setText(sacarEncuentroAleatorio(Integer.parseInt(arrOfStr[1])));
+            if (texto == null) {
+                // si texto nulo (imágenes, archivos de audio...)
+                envio.setText("Formato incorrecto");
                 enviarMensaje(envio);
 
-        }else if(texto.matches("^/datos .*$")){
-            String[] arrOfStr = texto.split(" ", 15);
-
-            envio.setText(leerDatosCriatura(arrOfStr[1]));
-            enviarMensaje(envio);
-
+            } else if (texto.equals("/start")) {
+                // si se inicializa el bot
+                envio.setText("Bienvenido!, escriba /ayuda para obtener la lista de comandos y funcionalidades que ofrece el bot");
+                enviarMensaje(envio);
 
 
-        }else{
-            envio.setText("No se ha introducido un comando válido. Por favor, escriba /ayuda para conocer la lista de funcionalidades del bot");
-            enviarMensaje(envio);
-        }
+            } else if (texto.equals("/nombre")) {
+                // comando para devolver nombres aleatorios del fichero JSON
+                ArrayList<Nombre> listaNombres = JsonUtils.leerJSON("src\\json\\names.json");
+                int random = (int) Math.floor(Math.random() * ((listaNombres.size() - 1) - 0 + 1) + 0);
 
-        offset = peticion.getUpdate_id() + 1;
+                // Crear el mensaje de envío
 
+                envio.setText("Nombre aleatorio: " + listaNombres.get(random).getNombre());
 
-
-    }
-
-    private static String sacarEncuentroAleatorio(int valorDesafio) throws ParserConfigurationException, IOException, SAXException {
-        if (valorDesafio > 0 && valorDesafio < 4) {
-            ArrayList<Encuentro> encuentros = devolverEncuentro("src\\xml\\encuentros.xml", String.valueOf(valorDesafio));
-
-            int random = (int) Math.floor(Math.random() * ((encuentros.size() - 1) - 0 + 1) + 0);
-            String criaturas = imprimirEncuentro(encuentros.get(random));
-            return "Encuentro (vd: " + valorDesafio + "): \n" + criaturas;
-
-        } else {
-            return "Introduzca un valor de desafio correcto";
-
-        }
-    }
-
-    private static String anadirNombre(String nombreSugerido) throws IOException {
-        ArrayList<Nombre> listaNombres = leerJSON("src\\json\\names.json");
-        listaNombres.add(new Nombre(nombreSugerido));
+                // Enviar mensaje
+                enviarMensaje(envio);
 
 
-        File fichero1 = new File("src\\json\\names.json");
-        fichero1.createNewFile();
+            } else if (texto.matches("^/anadirNombre .*$")) {
+                // comando para añadir nombres al fichero JSON especificados tras comando /anadirNombre
+                String[] arrOfStr = texto.split(" ", 15);
 
-        FileWriter fw = new FileWriter(fichero1);
-        fw.write(escribirJSON(listaNombres));
-        fw.close();
+                // control de error con nombres compuestos
+                if (arrOfStr.length > 2) {
+                    envio.setText("Por favor, introduzca un nombre de una sola palabra");
+                } else {
+                    envio.setText(JsonUtils.anadirNombre(arrOfStr[1]));
 
-        return nombreSugerido+" añadido con éxito.";
+                }
 
-    }
-
-    private static String leerDatosCriatura(String criaturaBuscada) throws IOException {
-
-
+                enviarMensaje(envio);
 
 
-        String cadenaInfo = "";
+            } else if (texto.equals("/ayuda")) {
+                // información de ayuda
+                envio.setText("Lista de comandos: \n-/nombre: devuelve nombre aleatorio\n-/anadirNombre nombre): añade el nombre indicado\n-/encuentro VD: devuelve un encuentro aleatorio con un VD especificado en formato numérico (1-3)\n-/datos nombreCriatura: devuelve las estadísticas de la criatura especificada");
 
-        int numLectura = 0;
+                enviarMensaje(envio);
 
-        FileInputStream stream = new FileInputStream("src\\txt\\criaturasInfo.txt");
+            } else if (texto.matches("^/encuentro [0-9]$")) {
+                // comando para obtener un encuentro aleatorio de un determinado valor de desafío
+                String[] arrOfStr = texto.split(" ", 2);
+                envio.setText(XMLUtils.sacarEncuentroAleatorio(Integer.parseInt(arrOfStr[1])));
+                enviarMensaje(envio);
 
-        while (numLectura!=-1){
+            } else if (texto.matches("^/datos .*$")) {
+                // comando para sacar datos de una criatura de un .txt
+                String[] arrOfStr = texto.split(" ", 15);
+                envio.setText(FicheroUtils.leerDatosCriatura(arrOfStr[1]));
+                enviarMensaje(envio);
 
-            numLectura = stream.read();
-            if(numLectura!=-1){
-                cadenaInfo += (char)numLectura + "";
+
+            } else {
+                // si no se corresponde a ningún comando conocido
+                envio.setText("No se ha introducido un comando válido. Por favor, escriba /ayuda para conocer la lista de funcionalidades del bot");
+                enviarMensaje(envio);
             }
 
+            offset = peticion.getUpdate_id() + 1;
+
+        } catch (Exception e) {
+            System.out.println("Error de excepción");
+            offset = peticion.getUpdate_id() + 1;
+
         }
-
-        String[] criaturas = cadenaInfo.split(";");
-
-
-        for(int i = 0; i<criaturas.length; i++){
-            if(criaturas[i].contains(criaturaBuscada)){
-                String [] criaturaInfo = criaturas[i].split(":");
-                return criaturaInfo[0]+":\nEstadísticas: "+criaturaInfo[1]+"\nPg: "+criaturaInfo[2]+", Iniciativa: "+criaturaInfo[3]+", CA: "+criaturaInfo[4]+"\nAtaques: "+criaturaInfo[5]+" "+criaturaInfo[6];
-
-            }
-        }
-
-        return "No se ha encontrado la criatura especificada.";
     }
+
 
     /**
      * Método que enviará un mensaje a un usuario
@@ -257,99 +204,6 @@ public class BotUtils {
         }
     }
 
-
-
-    public static String escribirJSON(ArrayList<Nombre> listaNombres) throws FileNotFoundException {
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
-        String json = gson.toJson(listaNombres);
-        return json;
-    }// escribirJson
-
-    public static ArrayList<Nombre> leerJSON(String ruta) throws FileNotFoundException {
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        FileReader fr = new FileReader(ruta);
-        Nombre[] nombres = gson.fromJson(fr, Nombre[].class);
-        return new ArrayList<Nombre>(Arrays.asList(nombres));
-    }// leer JSON
-
-
-    public static ArrayList<Encuentro> devolverEncuentro(String ruta, String valorDesafio) throws ParserConfigurationException, IOException, SAXException {
-        ArrayList<Encuentro> coleccionEncuentros = new ArrayList<Encuentro>();
-
-        DocumentBuilderFactory fabrica = DocumentBuilderFactory.newInstance();
-
-        DocumentBuilder creadorDocumento = fabrica.newDocumentBuilder();
-
-        Document documento = creadorDocumento.parse(ruta);
-
-        Element raiz = documento.getDocumentElement();
-
-        NodeList listaEncuentros = raiz.getElementsByTagName("encuentro");
-
-        int contador = 0;
-
-
-        for (int i = 0; i < listaEncuentros.getLength(); i++) {
-            Node encuentro = listaEncuentros.item(i);
-
-            Element e = (Element) encuentro;
-            String vd = e.getAttribute("vd");
-
-            if (vd.equals(valorDesafio)) {
-
-
-                coleccionEncuentros.add(new Encuentro(new ArrayList<Criatura>()));
-
-
-                NodeList datosEncuentro = e.getElementsByTagName("criatura");
-                ArrayList<Criatura> criaturas = new ArrayList<Criatura>();
-
-                for (int j = 0; j < datosEncuentro.getLength(); j++) {
-                    Node criatura = datosEncuentro.item(j);
-                    NodeList datosCriatura = criatura.getChildNodes();
-                    criaturas.add(new Criatura());
-
-                    for (int k = 0; k < datosCriatura.getLength(); k++) {
-                        Node datoCriatura = datosCriatura.item(k);
-
-                        Node datoContenido = datoCriatura.getFirstChild();
-
-                        if (datoContenido != null && datoContenido.getNodeType() == Node.TEXT_NODE) {
-                            // GUARDANDO TEXTO DE LOS NODOS EN LOS ATRIBUTOS DE LOS OBJETOS DEL ARRAYLIST
-                            if (datoCriatura.getNodeName().equals("nombre")) {
-                                criaturas.get(j).setNombre(datoContenido.getNodeValue());
-                            } else if (datoCriatura.getNodeName().equals("dc")) {
-                                criaturas.get(j).setDc(datoContenido.getNodeValue());
-                            } else if (datoCriatura.getNodeName().equals("pg")) {
-                                criaturas.get(j).setPg(datoContenido.getNodeValue());
-                            }
-                        }
-                    }
-                }
-
-                coleccionEncuentros.get(contador).setCriaturas(criaturas);
-                contador++;
-
-
-            }
-
-        }
-
-
-        return coleccionEncuentros;
-    }
-
-
-    public static String imprimirEncuentro(Encuentro encuentro) {
-
-        String criaturas = "";
-
-        for (int i = 0; i < encuentro.getCriaturas().size(); i++) {
-            criaturas += encuentro.getCriaturas().get(i).getNombre() + " Pg: " + encuentro.getCriaturas().get(i).getPg() + " DC: " + encuentro.getCriaturas().get(i).getDc() + "\n";
-        }
-
-        return criaturas;
-    }
 
 }
 

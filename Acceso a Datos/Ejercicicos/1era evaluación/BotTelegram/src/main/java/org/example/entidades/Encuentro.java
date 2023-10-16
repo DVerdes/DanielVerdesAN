@@ -2,6 +2,9 @@ package org.example.entidades;
 
 import java.util.ArrayList;
 
+/**
+ * Clase Encuentro para crear objetos Encuentro que están formados por una lista de objetos Criatura
+ */
 public class Encuentro {
 
     private ArrayList<Criatura> criaturas;

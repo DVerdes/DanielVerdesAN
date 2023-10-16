@@ -2,6 +2,9 @@ package org.example.entidades;
 
 import java.io.Serializable;
 
+/**
+ * Clase Criatura para permitir crear objetos Criatura con una serie de atributos
+ */
 public class Criatura implements Serializable {
     private String nombre;
     private String dc;

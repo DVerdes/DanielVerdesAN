@@ -2,6 +2,9 @@ package org.example.entidades;
 
 import com.google.gson.annotations.Expose;
 
+/**
+ * Clase Nombre para guardar cadenas de texto de nombres
+ */
 public class Nombre {
 
     @Expose
