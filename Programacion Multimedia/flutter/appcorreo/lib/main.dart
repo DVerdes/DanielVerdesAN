@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Proyecto_emergentes",
       initialRoute: "/rutaPP",
+      debugShowCheckedModeBanner: false,
       routes: {
         "/rutaPP": (BuildContext context) => PrimeraClase(),
       },

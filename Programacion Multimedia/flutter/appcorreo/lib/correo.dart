@@ -1,3 +1,4 @@
+//Clase Correo con atributos tipo String de su contenido
 class Correo {
   String remitente = "";
   String mensaje = "";
