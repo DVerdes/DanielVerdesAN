@@ -1,4 +1,4 @@
-import 'package:appcorreo/correo.dart';
+import '/correo.dart';
 import 'package:flutter/material.dart';
 
 class PrimeraClase extends StatefulWidget {

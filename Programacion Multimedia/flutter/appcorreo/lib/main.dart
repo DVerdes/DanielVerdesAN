@@ -1,4 +1,4 @@
-import 'package:appcorreo/pages/first_page.dart';
+import '/pages/first_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
