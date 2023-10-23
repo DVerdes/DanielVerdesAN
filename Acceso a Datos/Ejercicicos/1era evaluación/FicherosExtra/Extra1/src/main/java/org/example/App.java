@@ -11,8 +11,28 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Hello world!
  *
+ *
+ */
+/*
+File f = new File(path);
+
+f.getName();
+f.getParent();
+f.getPath(); DEVUELVEN STRING
+
+f.exists(); boolean
+f.isDirectory(); boolean
+f.isFile(); boolean
+
+f.listFiles(); File []
+
+f.createNewFile();
+f.mkdir();
+
+
+
+
  */
 public class App 
 {

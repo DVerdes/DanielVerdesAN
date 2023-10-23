@@ -19,6 +19,13 @@ public class App
         RandomAccessFile raf = null;
 
         try {
+            // no olvidarse de writeChars(String);
+            //  raf.seek(32);
+
+            // para poner un string de un tamaño
+            // StringBuffer sb = new StringBuffer(Alumno.getNombre());
+            // sb.setLength(10);
+            // raf.writeChars(sb.toString());
 
 
             raf = new RandomAccessFile("C://Pruebas//deportistas.txt","rw");

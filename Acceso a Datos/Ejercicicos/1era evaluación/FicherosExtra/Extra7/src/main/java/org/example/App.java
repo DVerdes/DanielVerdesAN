@@ -24,6 +24,7 @@ public class App
 {
     public static void main( String[] args ) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
+        // meter todo en un try catch
         ArrayList <Pelicula> coleccionPeliculas = new ArrayList<Pelicula>();
 
         DocumentBuilderFactory fabrica = DocumentBuilderFactory.newInstance();
@@ -61,7 +62,10 @@ public class App
                         }else if(dato.getNodeName().equals("estreno")){
                             coleccionPeliculas.get(i).setEstreno(dato.getTextContent());
                         }else if(dato.getNodeName().equals("reparto")){
+                            // podia ser mejor usar:
+                            // NodeList getElementsByTagName("reparto");
                             NodeList datosReparto = dato.getChildNodes();
+
                             ArrayList <String> actores = new ArrayList<String>();
                             for(int k = 0; k<datosReparto.getLength(); k++){
                                 Node datoReparto = datosReparto.item(k);

@@ -15,7 +15,7 @@ public class JsonUtils {
     /**
      * Método para escribir en fichero .JSON
      *
-     * @param listaNombres ArrayList con listado de objetos Nombre
+     * @param listaNombres ArrayList con listado de objetos
      * @return lista sobreeescrita
      * @throws FileNotFoundException
      */
@@ -29,7 +29,7 @@ public class JsonUtils {
      * Método para leer fichero JSON
      *
      * @param ruta ruta del fichero
-     * @return ArrayList con contenido del fichero en forma de objetos Nombre
+     * @return ArrayList con contenido del fichero en forma de objetos
      * @throws FileNotFoundException
      */
     public static ArrayList<Pelicula> leerJSON(String ruta) throws FileNotFoundException {
@@ -40,13 +40,7 @@ public class JsonUtils {
     }// leer JSON
 
 
-    /**
-     * Método para añadir nombre al fichero JSON
-     *
-     * @param nombreSugerido nombre facilitado mediante comando
-     * @return confirmación de nombre añadido
-     * @throws IOException
-     */
+
 
 
 }

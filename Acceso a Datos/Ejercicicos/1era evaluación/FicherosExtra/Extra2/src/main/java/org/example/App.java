@@ -28,6 +28,7 @@ public class App
         System.out.println(linea);
 
         //2nda parte (encriptar)
+        // recordar que en el fos se puede poder append o no true/false
 
         File f = new File("C://Pruebas//mensaje.txt");
         FileOutputStream fos = new FileOutputStream(f);
