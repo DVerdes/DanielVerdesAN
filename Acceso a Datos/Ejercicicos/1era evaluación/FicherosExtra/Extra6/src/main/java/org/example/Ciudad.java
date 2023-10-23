@@ -4,21 +4,20 @@ import java.io.Serializable;
 
 public class Ciudad implements Serializable {
 
-    private int elevacion;
     private String nombre;
     private String pais;
     private String region;
+    private int elevacion;
 
-    public Ciudad(int elevacion, String nombre, String pais, String region) {
+    public Ciudad() {
+    }
+
+    public Ciudad(String nombre, String pais, String region, int elevacion) {
         this.nombre = nombre;
         this.pais = pais;
         this.region = region;
         this.elevacion = elevacion;
     }
-
-    public Ciudad() {
-    }
-
 
     public String getNombre() {
         return nombre;
@@ -52,8 +51,13 @@ public class Ciudad implements Serializable {
         this.elevacion = elevacion;
     }
 
-    public String toString(){
-        String cadena = this.nombre+"-"+this.pais+"-"+this.region+"-"+this.elevacion;
-        return cadena;
+    @Override
+    public String toString() {
+        return "Ciudad{" +
+                "nombre='" + nombre + '\'' +
+                ", pais='" + pais + '\'' +
+                ", region='" + region + '\'' +
+                ", elevacion=" + elevacion +
+                '}';
     }
 }
