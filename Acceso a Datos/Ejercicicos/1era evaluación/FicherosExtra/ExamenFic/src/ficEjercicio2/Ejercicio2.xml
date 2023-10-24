@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rios>
+    <rio Nombre="Ebro" Longitud="910" Vertiente="Mediterránea">
+        <cuenca>Cuenca del Ebro</cuenca>
+    </rio>
+    <rio Nombre="Tajo" Longitud="863">
+        <cuenca>Cuenca del Tajo</cuenca>
+    </rio>
+    <rio Nombre="Duero" Vertiente="Atlántica">
+        <cuenca>Cuenca del Duero</cuenca>
+    </rio>
+</rios>
