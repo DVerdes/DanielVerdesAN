@@ -28,18 +28,21 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="75.0" minHeight="6.0" prefHeight="18.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="117.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="117.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="bJugar" onAction="#switchToSecondary" prefHeight="25.0" prefWidth="89.0" text="Jugar Online" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button fx:id="bJugar" onAction="#switchToSecondary" prefHeight="25.0" prefWidth="89.0" text="Jugar Online" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="30.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="bReservar" mnemonicParsing="false" onAction="#switchToTerciary" prefHeight="25.0" prefWidth="105.0" text="Reservar sala" GridPane.rowIndex="3">
+            <Button fx:id="bReservar" mnemonicParsing="false" onAction="#switchToTerciary" prefHeight="25.0" prefWidth="105.0" text="Reservar sala" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="80.0" />
                </GridPane.margin>
@@ -52,7 +55,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label text="Email" GridPane.rowIndex="1">
+            <Label text="Email" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />
                </font>
@@ -60,7 +63,7 @@
                   <Insets left="140.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Edad" GridPane.rowIndex="2">
+            <Label text="Edad" GridPane.rowIndex="4">
                <font>
                   <Font size="16.0" />
                </font>
@@ -69,8 +72,11 @@
                </GridPane.margin>
             </Label>
             <TextField id="tfJugador" fx:id="tfJugador" GridPane.columnIndex="1" />
-            <TextField id="tfEmail" fx:id="tfEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField id="tfEdad" fx:id="tfEdad" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField id="tfEmail" fx:id="tfEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField id="tfEdad" fx:id="tfEdad" onKeyReleased="#validateAge" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="labelValName" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="labelValMail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="labelValAge" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>

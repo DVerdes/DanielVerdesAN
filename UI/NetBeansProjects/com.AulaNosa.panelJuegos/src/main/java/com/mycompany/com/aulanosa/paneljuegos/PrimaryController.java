@@ -8,17 +8,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.commons.validator.routines.IntegerValidator;
 
 /**
  * Clase que contiene controlador del menú principal
+ *
  * @author DVerd
  */
 public class PrimaryController {
 
     //Componentes interfaz
-    
     //botón jugar
     @FXML
     private Button bJugar;
@@ -39,10 +41,20 @@ public class PrimaryController {
     @FXML
     private TextField tfEdad;
 
+    @FXML
+    private Label labelValName;
+
+    @FXML
+    private Label labelValMail;
+
+    @FXML
+    private Label labelValAge;
+
     /**
      * Método para cambiar a pantalla de juego (secondary)
+     *
      * @param event evento de botón
-     * @throws IOException 
+     * @throws IOException
      */
     @FXML
     private void switchToSecondary(ActionEvent event) throws IOException {
@@ -63,8 +75,9 @@ public class PrimaryController {
 
     /**
      * Método para cambiar a ventana de reservas (Tertiary)
+     *
      * @param event
-     * @throws IOException 
+     * @throws IOException
      */
     @FXML
     private void switchToTerciary(ActionEvent event) throws IOException {
@@ -86,5 +99,32 @@ public class PrimaryController {
             controlador.setUser(tfJugador.getText());
             controlador.setEmail(tfEmail.getText());
         }
+    }
+    
+    public boolean validateAge(){
+        
+        IntegerValidator vr = IntegerValidator.getInstance();
+        
+        if(!vr.isValid(tfEdad.getText())){
+                        labelValAge.setStyle("fx-focus-color:red");
+
+        }else{
+        }
+        
+        /*
+        if(!vr.minValue(Integer.parseInt(tfEdad.getText()), 18)){
+            
+            System.out.println("if");
+
+            
+            
+        }else{
+                        System.out.println("else");
+
+        }
+
+*/
+        return false;
+
     }
 }
