@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject3.proyectoController">
+   <children>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="224.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Button mnemonicParsing="false" onAction="#accButton" text="Enviar" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="90.0" />
+               </GridPane.margin></Button>
+      <ChoiceBox id="listaDesplegable" fx:id="listaDesplegable" prefWidth="150.0" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin></ChoiceBox>
+      <Label text="J1: Elige un valor" textFill="#0e71eb">
+         <GridPane.margin>
+            <Insets left="80.0" />
+         </GridPane.margin>
+      </Label>
+            <Label text="J2: CPU" textFill="#d71212" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="80.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="labelPuntosJugador" text="Puntos: 0" textFill="#0e71eb" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets left="90.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="labelPuntosCPU" text="Puntos: 0" textFill="#d71212" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="90.0" />
+               </GridPane.margin>
+            </Label>
+            <Label id="labelGanador" fx:id="labelGanador" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+            </Label>
+            <Label id="elecCPU" fx:id="elecCPU" textFill="#d71212" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="70.0" />
+               </GridPane.margin>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#cambiarVentana" text="Volver" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="80.0" />
+               </GridPane.margin>
+            </Button>
+   </children>
+</GridPane>
+   </children>
+</VBox>
