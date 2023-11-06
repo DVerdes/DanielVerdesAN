@@ -12,7 +12,7 @@
 
 <VBox alignment="CENTER" prefHeight="529.0" prefWidth="429.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.com.aulanosa.paneljuegos.PrimaryController">
    <children>
-      <Label alignment="TOP_CENTER" focusTraversable="false" text="Panel de Juegos" underline="true">
+      <Label fx:id="labelPanel" alignment="TOP_CENTER" focusTraversable="false" text="Panel de Juegos" textFill="#0735ee" underline="true">
          <font>
             <Font name="Arial Bold" size="29.0" />
          </font>
@@ -72,11 +72,11 @@
                </GridPane.margin>
             </Label>
             <TextField id="tfJugador" fx:id="tfJugador" GridPane.columnIndex="1" />
-            <TextField id="tfEmail" fx:id="tfEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField id="tfEmail" fx:id="tfEmail" onKeyReleased="#validateEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField id="tfEdad" fx:id="tfEdad" onKeyReleased="#validateAge" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label fx:id="labelValName" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="labelValMail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="labelValAge" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="labelValName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="labelValMail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="labelValAge" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>

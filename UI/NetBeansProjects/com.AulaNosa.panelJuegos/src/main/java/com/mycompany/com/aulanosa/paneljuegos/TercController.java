@@ -23,6 +23,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.apache.commons.validator.routines.DateValidator;
+import org.apache.commons.validator.routines.IntegerValidator;
 
 /**
  * Método de controlador de ventana de reservas
@@ -78,6 +80,19 @@ public class TercController {
     //label con mensaje de bienvenida (cabecera)
     @FXML
     private Label labelBienvenido;
+    
+    @FXML
+    private Label labelValPart;
+    
+    @FXML
+    private Label labelValS;
+    
+     
+    @FXML
+    private Label labelValH;
+    
+    
+    
 
     //String para recibir datos menú principal
     //usuario
@@ -162,4 +177,50 @@ public class TercController {
         }
     }
 
+    
+     public boolean validateParticipants(){
+        
+        IntegerValidator vr = IntegerValidator.getInstance();
+        
+        if(!vr.isValid(campoParticipantes.getText())){
+                 labelValPart.setText("Introduce un valor válido");
+                                  labelValPart.setStyle("fx-text-fill:red");
+                                  return false;
+
+
+        }else{
+            if(Integer.parseInt(campoParticipantes.getText())<4){
+                labelValPart.setText("Participantes insuficientes");
+                return false;
+            }else{
+                            labelValPart.setText("");
+                            return true;
+
+            }
+        }
+    
+    }
+     
+     
+     public boolean validateRoom(){
+        if(campoSalas.getText().isEmpty()){
+            labelValS.setText("Introduzca un nombre");
+            return false;
+        }else{
+            return true;
+        }
+    }
+     
+     public boolean validateDate(){
+         
+         DateValidator dv = DateValidator.getInstance();
+         
+         if(!dv.isValid(campoHorario.getValue().toString())){
+             labelValH.setText("Formato incorrecto");
+             return false;
+         }else{
+             return true;
+         }
+         
+     }
 }

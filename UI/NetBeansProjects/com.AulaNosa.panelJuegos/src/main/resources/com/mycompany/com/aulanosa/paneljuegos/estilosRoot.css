@@ -1,0 +1,12 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 6 nov 2023, 9:48:39
+    Author     : FP
+*/
+
+.label{
+    -fx-text-fill:yellow;
+}

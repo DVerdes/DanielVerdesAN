@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.commons.validator.routines.IntegerValidator;
 
 /**
@@ -49,6 +50,9 @@ public class PrimaryController {
 
     @FXML
     private Label labelValAge;
+    
+    @FXML 
+    private Label labelPanel;
 
     /**
      * Método para cambiar a pantalla de juego (secondary)
@@ -56,10 +60,20 @@ public class PrimaryController {
      * @param event evento de botón
      * @throws IOException
      */
+    
+    
+    public void initialize(){
+        labelPanel.setStyle("-fx-text-fill:red");
+    }
+    
+    
     @FXML
     private void switchToSecondary(ActionEvent event) throws IOException {
 
-        Scene scene = bJugar.getScene();
+        
+        if(tryForm()){
+            
+             Scene scene = bJugar.getScene();
 
         if (scene != null) {
 
@@ -71,6 +85,10 @@ public class PrimaryController {
             stage.setScene(scene);
             stage.show();
         }
+            
+        }
+        
+       
     }
 
     /**
@@ -81,8 +99,10 @@ public class PrimaryController {
      */
     @FXML
     private void switchToTerciary(ActionEvent event) throws IOException {
-
-        Scene scene = bReservar.getScene();
+        
+        if(tryForm()){
+            
+            Scene scene = bReservar.getScene();
 
         if (scene != null) {
 
@@ -99,6 +119,15 @@ public class PrimaryController {
             controlador.setUser(tfJugador.getText());
             controlador.setEmail(tfEmail.getText());
         }
+            
+            
+            
+        }else{
+            
+           System.out.println("Validación incompleta");
+        }
+
+        
     }
     
     public boolean validateAge(){
@@ -106,25 +135,56 @@ public class PrimaryController {
         IntegerValidator vr = IntegerValidator.getInstance();
         
         if(!vr.isValid(tfEdad.getText())){
-                        labelValAge.setStyle("fx-focus-color:red");
+                 labelValAge.setText("Introduce un valor válido");
+                                  labelValAge.setStyle("fx-text-fill:red");
+                                  return false;
+
 
         }else{
+            if(Integer.parseInt(tfEdad.getText())<18){
+                labelValAge.setText("Es necesario ser mayor de edad");
+                return false;
+            }else{
+                            labelValAge.setText("");
+                            return true;
+
+            }
+        }
+    
+    }
+    
+    public boolean validateEmail(){
+        
+        EmailValidator ev = EmailValidator.getInstance();
+        
+        if(!ev.isValid(tfEmail.getText())){
+            labelValMail.setText("Introduce una dirección válida");
+            return false;
+        }else{
+                                        labelValMail.setText("");
+                                        return true;
+
         }
         
-        /*
-        if(!vr.minValue(Integer.parseInt(tfEdad.getText()), 18)){
-            
-            System.out.println("if");
-
-            
-            
+        
+        
+    }
+    
+    
+    public boolean validateName(){
+        if(tfJugador.getText().isEmpty()){
+            labelValName.setText("Introduzca un nombre");
+            return false;
         }else{
-                        System.out.println("else");
-
+            return true;
         }
-
-*/
-        return false;
-
+    }
+    
+    public boolean tryForm(){
+        if(validateName() && validateEmail() && validateAge()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

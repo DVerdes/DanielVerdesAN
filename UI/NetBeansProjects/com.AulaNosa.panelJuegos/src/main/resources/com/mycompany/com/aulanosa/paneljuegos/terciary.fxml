@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.com.aulanosa.paneljuegos.TercController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.com.aulanosa.paneljuegos.TercController">
    <children>
       <GridPane layoutX="149.0" layoutY="60.0" prefHeight="90.0" prefWidth="283.0">
         <columnConstraints>
@@ -28,9 +28,9 @@
             <Label text="Participantes" />
             <Label text="Sala" GridPane.rowIndex="1" />
             <Label text="Horario" GridPane.rowIndex="2" />
-            <TextField id="campoParticipantes" fx:id="campoParticipantes" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="1" />
+            <TextField id="campoParticipantes" fx:id="campoParticipantes" onKeyReleased="#validateParticipants" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="1" />
             <TextField id="campoSala" fx:id="campoSalas" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <DatePicker fx:id="campoHorario" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <DatePicker fx:id="campoHorario" onKeyReleased="#validateDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <TableView fx:id="tView" layoutX="43.0" layoutY="172.0" prefHeight="172.0" prefWidth="514.0">
@@ -43,11 +43,14 @@
             <TableColumn fx:id="column6" prefWidth="108.0" text="Fecha Reserva" />
         </columns>
       </TableView>
-      <Button id="reservar" fx:id="reservar" layoutX="461.0" layoutY="137.0" mnemonicParsing="false" onAction="#addReserva" text="Reservar" />
+      <Button id="reservar" fx:id="reservar" layoutX="475.0" layoutY="361.0" mnemonicParsing="false" onAction="#addReserva" text="Reservar" />
       <Label fx:id="labelBienvenido" layoutX="206.0" layoutY="26.0" prefHeight="17.0" prefWidth="227.0" text="Bienvenido/a ">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
       <Button fx:id="botonVolverPanel" layoutX="233.0" layoutY="361.0" mnemonicParsing="false" onAction="#switchToPanel" text="Volver al panel de juegos" />
+      <Label fx:id="labelValPart" layoutX="461.0" layoutY="68.0" text="Label" />
+      <Label fx:id="labelValS" layoutX="461.0" layoutY="97.0" text="Label" />
+      <Label fx:id="labelValH" layoutX="461.0" layoutY="125.0" text="Label" />
    </children>
 </Pane>

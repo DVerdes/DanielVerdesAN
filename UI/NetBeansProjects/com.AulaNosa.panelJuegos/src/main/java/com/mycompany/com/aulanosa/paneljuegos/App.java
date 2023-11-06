@@ -18,6 +18,14 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 440, 480);
+        //String cssScene = this.getClass().getResource("estilosApp.css").toExternalForm();
+        //scene.getStylesheets().add(cssScene);
+        
+        //Parent root = scene.getRoot();
+       // String cssRoot = this.getClass().getResource("estilosRoot.css").toExternalForm();
+       // root.getStylesheets().add(cssRoot);
+        
+        
         stage.setScene(scene);
         stage.show();
     }
