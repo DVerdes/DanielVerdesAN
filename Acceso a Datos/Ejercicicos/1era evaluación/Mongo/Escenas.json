@@ -1,11 +1,100 @@
 [
     {
         "id": 1,
-        "texto": "Escena de prueba"
+        "texto": "Escena de prueba",
+        "modifPg":0,
+        "darObjeto":"no",
+        "quitarObjeto": "no",
+        "elecciones":[
+            {
+                "numElección":1,
+                "textoElección":"Continuar por la playa",
+                "idRuta":2,
+                "objetoNecesario":""            
+            },
+            {
+                "numElección":2,
+                "textoElección":"Registrar los restos del naufragio",
+                "idRuta":3,
+                "objetoNecesario":""            
+            },
+            {
+                "numElección":3,
+                "textoElección":"Adentrarse en la selva",
+                "idRuta":4,
+                "objetoNecesario":""            
+            }
+        ]
 
 
 
 
+
+    },
+    {
+        "id": 2,
+        "texto": "Continuas caminando por la playa. Al cabo de un rato compruebas que la cala termina abruptamente en un acantilado dificilmente escalable. Sin embargo, divisas cerca de su base las ruinas de una pequeña cabaña.",
+        "modifPg":0,
+        "darObjeto":"no",
+        "quitarObjeto": "no",
+        "elecciones":[
+            {
+                "numElección":1,
+                "textoElección":"Investigar la cabaña",
+                "idRuta":5,
+                "objetoNecesario":""            
+            },
+            {
+                "numElección":2,
+                "textoElección":"Internarse en la selva",
+                "idRuta":4,
+                "objetoNecesario":""                   
+            } 
+        ]
+
+    },
+    {
+        "id": 3,
+        "texto": "Rebuscas concienzudamente entre los escasos restos del casco del barco desperdigados por la orilla. Repentinamente, sientes un dolor punzante en el pie derecho: semienterrado en la arena distingues el brillo metálico de un pequeño cuchillo de tallar\nDecides recogerlo por la utilidad que podría brindarte \n(+cuchillo, -1 punto de golpe)",
+        "modifPg":-1,
+        "darObjeto":"cuchillo",
+        "quitarObjeto": "no",
+        "elecciones":[
+            {
+                "numElección":1,
+                "textoElección":"Continuar por la playa",
+                "idRuta":2,
+                "objetoNecesario":""            
+            },
+            {
+                "numElección":2,
+                "textoElección":"Internarse en la selva",
+                "idRuta":4,
+                "objetoNecesario":""                   
+            } 
+        ]
+
+    },
+    {
+        "id": 4,
+        "texto": "Te internas en la selva",
+        "modifPg":0,
+        "darObjeto":"no",
+        "quitarObjeto": "no",
+        "elecciones":[
+            {
+                "numElección":1,
+                "textoElección":"Continuar por la playa",
+                "idRuta":2,
+                "objetoNecesario":""            
+            },
+            {
+                "numElección":2,
+                "textoElección":"Internarse en la selva",
+                "idRuta":4,
+                "objetoNecesario":"mapa"                   
+            } 
+        ]
 
     }
 

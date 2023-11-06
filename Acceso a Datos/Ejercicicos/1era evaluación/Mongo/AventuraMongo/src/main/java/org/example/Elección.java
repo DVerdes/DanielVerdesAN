@@ -8,28 +8,18 @@ public class Elección {
 
     private int idRuta;
 
-    private boolean requiereCuchillo;
+    private String objetoNecesario;
 
-    private boolean requiereLampara;
 
-    private boolean requiereLanza;
-
-    private boolean requiereMapa;
-
-    private int modifPg;
 
     public Elección() {
     }
 
-    public Elección(int numElección, String textoElección, int idRuta, boolean requiereCuchillo, boolean requiereLampara, boolean requiereLanza, boolean requiereMapa, int modifPg) {
+    public Elección(int numElección, String textoElección, int idRuta, String objetoNecesario) {
         this.numElección = numElección;
         this.textoElección = textoElección;
         this.idRuta = idRuta;
-        this.requiereCuchillo = requiereCuchillo;
-        this.requiereLampara = requiereLampara;
-        this.requiereLanza = requiereLanza;
-        this.requiereMapa = requiereMapa;
-        this.modifPg = modifPg;
+        this.objetoNecesario = objetoNecesario;
     }
 
     public int getNumElección() {
@@ -56,44 +46,12 @@ public class Elección {
         this.idRuta = idRuta;
     }
 
-    public boolean isRequiereCuchillo() {
-        return requiereCuchillo;
+    public String getObjetoNecesario() {
+        return objetoNecesario;
     }
 
-    public void setRequiereCuchillo(boolean requiereCuchillo) {
-        this.requiereCuchillo = requiereCuchillo;
-    }
-
-    public boolean isRequiereLampara() {
-        return requiereLampara;
-    }
-
-    public void setRequiereLampara(boolean requiereLampara) {
-        this.requiereLampara = requiereLampara;
-    }
-
-    public boolean isRequiereLanza() {
-        return requiereLanza;
-    }
-
-    public void setRequiereLanza(boolean requiereLanza) {
-        this.requiereLanza = requiereLanza;
-    }
-
-    public boolean isRequiereMapa() {
-        return requiereMapa;
-    }
-
-    public void setRequiereMapa(boolean requiereMapa) {
-        this.requiereMapa = requiereMapa;
-    }
-
-    public int getModifPg() {
-        return modifPg;
-    }
-
-    public void setModifPg(int modifPg) {
-        this.modifPg = modifPg;
+    public void setObjetoNecesario(String objetoNecesario) {
+        this.objetoNecesario = objetoNecesario;
     }
 
     @Override
@@ -102,11 +60,7 @@ public class Elección {
                 "numElección=" + numElección +
                 ", textoElección='" + textoElección + '\'' +
                 ", idRuta=" + idRuta +
-                ", requiereCuchillo=" + requiereCuchillo +
-                ", requiereLampara=" + requiereLampara +
-                ", requiereLanza=" + requiereLanza +
-                ", requiereMapa=" + requiereMapa +
-                ", modifPg=" + modifPg +
+                ", objetoNecesario='" + objetoNecesario + '\'' +
                 '}';
     }
 }
