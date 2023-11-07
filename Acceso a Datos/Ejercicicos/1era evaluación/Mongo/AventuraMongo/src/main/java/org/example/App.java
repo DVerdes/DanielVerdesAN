@@ -119,6 +119,10 @@ public class App
                             }
 
                             eleccionJugador = scanner.nextInt();
+
+                            proximaEscena = eleccionesFiltradas.get(eleccionJugador-1).getIdRuta();
+                            comprobarEleccion = eleccionesFiltradas.get(eleccionJugador-1).getTextoElección();
+                            /*
                             for (Elección elección : eleccionesFiltradas) {
                                 if (elección.getNumElección() == eleccionJugador) {
                                     proximaEscena = elección.getIdRuta();
@@ -126,14 +130,18 @@ public class App
                                     break;
                                 }
                             }
+                            */
+
                             //ver inventario
                             if (comprobarEleccion.equals("Panel de personaje")) {
+                                System.out.println("________________________________");
                                 System.out.println(partida.getNombreJugador() + ":");
                                 System.out.println("Tienes " + partida.getPuntosDeGolpe() + " punto(s) de golpe.");
                                 System.out.println("Objetos: ");
                                 for (String objeto : inventario) {
                                     System.out.println("- " + objeto);
                                 }
+                                System.out.println("________________________________");
                                 Thread.sleep(3000);
                                 continuarEscena = false;
                             } else {
