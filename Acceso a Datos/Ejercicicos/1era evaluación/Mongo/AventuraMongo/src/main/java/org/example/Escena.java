@@ -12,19 +12,16 @@ public class Escena {
 
     private String darObjeto;
 
-    private String quitarObjeto;
-
     private Elección[] elecciones;
 
     public Escena() {
     }
 
-    public Escena(int id, String texto, int modifPg, String darObjeto, String quitarObjeto, Elección[] elecciones) {
+    public Escena(int id, String texto, int modifPg, String darObjeto, Elección[] elecciones) {
         this.id = id;
         this.texto = texto;
         this.modifPg = modifPg;
         this.darObjeto = darObjeto;
-        this.quitarObjeto = quitarObjeto;
         this.elecciones = elecciones;
     }
 
@@ -60,14 +57,6 @@ public class Escena {
         this.darObjeto = darObjeto;
     }
 
-    public String getQuitarObjeto() {
-        return quitarObjeto;
-    }
-
-    public void setQuitarObjeto(String quitarObjeto) {
-        this.quitarObjeto = quitarObjeto;
-    }
-
     public Elección[] getElecciones() {
         return elecciones;
     }
@@ -83,7 +72,6 @@ public class Escena {
                 ", texto='" + texto + '\'' +
                 ", modifPg=" + modifPg +
                 ", darObjeto='" + darObjeto + '\'' +
-                ", quitarObjeto='" + quitarObjeto + '\'' +
                 ", elecciones=" + Arrays.toString(elecciones) +
                 '}';
     }

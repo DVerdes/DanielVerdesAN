@@ -21,121 +21,142 @@ public class App
     public static void main( String[] args )
     {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner;
 
-        int contadorEscenas = 0;
-        int proximaEscena = 1;
-        int eleccionJugador = 0;
-        String comprobarEleccion = "";
-        boolean continuarEscena = true;
-        Escena escenaConsultada = new Escena();
+        boolean finalizarJuego;
+        int contadorEscenas ;
+        int proximaEscena;
+        int eleccionJugador;
+        String comprobarEleccion;
+        boolean continuarEscena;
+        Escena escenaConsultada;
+
 
         MongoClient cliente = MongoClients.create("mongodb://localhost:27017/pruebas");
 
-        try{
-            MongoDatabase conexion = cliente.getDatabase("Aventura");
-            MongoCollection<Document> colMongo = conexion.getCollection("Escenas");
-            MongoCollection<Document> colPartida = conexion.getCollection("Partidas");
-
-            int idPartida = PartidaCRUD.listarPartidas(colPartida).size()+1;
-
-            System.out.println("¡Hola!, bienvenido a la aventura interactiva.");
-            System.out.println("Por favor, escriba su nombre");
-
-            Partida partida = new Partida(idPartida,scanner.nextLine(),3,0, new ArrayList<String>());
-            PartidaCRUD.insertarPartida(colPartida,partida);
-
+        try {
 
             do{
 
-                System.out.println();
-                //temp
-                System.out.println( partida.toString());
+            scanner = new Scanner(System.in);
+
+            MongoDatabase conexion = cliente.getDatabase("Aventura");
+            MongoCollection<Document> colMongo = conexion.getCollection("Escenas");
 
 
 
-                escenaConsultada = EscenaCRUD.consultarEscena(colMongo,proximaEscena);
 
-                //actualizar pg
-                partida.setPuntosDeGolpe(partida.getPuntosDeGolpe()+escenaConsultada.getModifPg());
-                PartidaCRUD.actualizarPartida(colPartida,partida);
+                MongoCollection<Document> colPartida = conexion.getCollection("Partidas");
+                contadorEscenas = 0;
+                proximaEscena = 1;
+                eleccionJugador = 0;
+                comprobarEleccion = "";
+                continuarEscena = true;
+                finalizarJuego = false;
+                escenaConsultada = new Escena();
 
-                ArrayList <String> inventario = PartidaCRUD.consultarPartida(colPartida,idPartida).getInventario();
 
-                //añadir objeto
-                if(!escenaConsultada.getDarObjeto().equals("no")){
-                    inventario.add(escenaConsultada.getDarObjeto());
-                    partida.setInventario(inventario);
+                int idPartida = PartidaCRUD.listarPartidas(colPartida).size() + 1;
+
+                System.out.println("¡Hola!, bienvenido a la aventura interactiva.");
+                System.out.println("Por favor, escriba su nombre");
+
+                Partida partida = new Partida(idPartida, scanner.nextLine(), 3, 0, new ArrayList<String>());
+                PartidaCRUD.insertarPartida(colPartida, partida);
+
+
+                do {
+
+                    System.out.println();
+                    //temp
+                    System.out.println(partida.toString());
+
+
+                    escenaConsultada = EscenaCRUD.consultarEscena(colMongo, proximaEscena);
+
+                    //actualizar pg
+                    partida.setPuntosDeGolpe(partida.getPuntosDeGolpe() + escenaConsultada.getModifPg());
                     PartidaCRUD.actualizarPartida(colPartida, partida);
-                }
 
-                //comprobar si jugador sigue vivo
-                if(partida.getPuntosDeGolpe()<=0){
-                    proximaEscena = -1;
-                }else{
+                    ArrayList<String> inventario = PartidaCRUD.consultarPartida(colPartida, idPartida).getInventario();
+
+                    //añadir objeto
+                    if (!escenaConsultada.getDarObjeto().equals("no")) {
+                        inventario.add(escenaConsultada.getDarObjeto());
+                        partida.setInventario(inventario);
+                        PartidaCRUD.actualizarPartida(colPartida, partida);
+                    }
+
                     System.out.println(escenaConsultada.getTexto());
 
-                    do {
 
-                        System.out.println("¿Que deseas hacer?");
+                    //comprobar si jugador sigue vivo
+                    if (partida.getPuntosDeGolpe() <= 0 && escenaConsultada.getId() != -1) {
+                        proximaEscena = -1;
+                    } else {
 
-                        ArrayList<Elección> eleccionesFiltradas = new ArrayList<Elección>();
+                        do {
 
-                        //filtrado de elecciones según objetos en inventario
-                        for (Elección elección : escenaConsultada.getElecciones()) {
-                            if (inventario.contains(elección.getObjetoNecesario()) || elección.getObjetoNecesario().equals("")) {
-                                eleccionesFiltradas.add(elección);
+                            System.out.println("¿Que deseas hacer?");
+
+                            ArrayList<Elección> eleccionesFiltradas = new ArrayList<Elección>();
+
+                            //filtrado de elecciones según objetos en inventario
+                            for (Elección elección : escenaConsultada.getElecciones()) {
+                                if (inventario.contains(elección.getObjetoNecesario()) || elección.getObjetoNecesario().equals("")) {
+                                    eleccionesFiltradas.add(elección);
+                                }
                             }
-                        }
-                        //ver inventario
-                        eleccionesFiltradas.add(new Elección(eleccionesFiltradas.size() + 1, "Panel de personaje", proximaEscena, ""));
-                        //elecciones por pantalla
-                        int indice = 1;
-                        for (Elección elección : eleccionesFiltradas) {
-                            System.out.println(indice + " - " + elección.getTextoElección());
-                            indice++;
-                        }
-
-                        eleccionJugador = scanner.nextInt();
-                        for (Elección elección : eleccionesFiltradas) {
-                            if (elección.getNumElección() == eleccionJugador) {
-                                proximaEscena = elección.getIdRuta();
-                                comprobarEleccion = elección.getTextoElección();
-                                break;
+                            //ver inventario
+                            if (escenaConsultada.getId() != -1 && escenaConsultada.getId() != -2) {
+                                eleccionesFiltradas.add(new Elección(eleccionesFiltradas.size() + 1, "Panel de personaje", proximaEscena, ""));
                             }
-                        }
-                        //ver inventario
-                        if (comprobarEleccion.equals("Panel de personaje")) {
-                            System.out.println(partida.getNombreJugador() + ":");
-                            System.out.println("Tienes " + partida.getPuntosDeGolpe() + " puntos de golpe.");
-                            System.out.println("Objetos: ");
-                            for (String objeto : inventario) {
-                                System.out.println("- " + objeto);
+                            //elecciones por pantalla
+                            int indice = 1;
+                            for (Elección elección : eleccionesFiltradas) {
+                                System.out.println(indice + " - " + elección.getTextoElección());
+                                indice++;
                             }
-                            Thread.sleep(3000);
-                            continuarEscena = false;
-                        } else {
-                            contadorEscenas++;
-                            continuarEscena = true;
-                        }
 
-                    }while(!continuarEscena);
-                    Thread.sleep(1000);
+                            eleccionJugador = scanner.nextInt();
+                            for (Elección elección : eleccionesFiltradas) {
+                                if (elección.getNumElección() == eleccionJugador) {
+                                    proximaEscena = elección.getIdRuta();
+                                    comprobarEleccion = elección.getTextoElección();
+                                    break;
+                                }
+                            }
+                            //ver inventario
+                            if (comprobarEleccion.equals("Panel de personaje")) {
+                                System.out.println(partida.getNombreJugador() + ":");
+                                System.out.println("Tienes " + partida.getPuntosDeGolpe() + " punto(s) de golpe.");
+                                System.out.println("Objetos: ");
+                                for (String objeto : inventario) {
+                                    System.out.println("- " + objeto);
+                                }
+                                Thread.sleep(3000);
+                                continuarEscena = false;
+                            } else {
+                                contadorEscenas++;
+                                continuarEscena = true;
+                            }
 
+                        } while (!continuarEscena);
+                        Thread.sleep(500);
+
+                    }
+
+
+                } while (escenaConsultada.getId() != -1 && escenaConsultada.getId() != -2);
+
+                if (comprobarEleccion.equals("Salir")) {
+                    finalizarJuego = true;
                 }
 
 
+            } while (!finalizarJuego);
 
-
-
-            }while(escenaConsultada.getId()!=-1);
-
-
-
-
-
-
-
+            scanner.close();
 
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
