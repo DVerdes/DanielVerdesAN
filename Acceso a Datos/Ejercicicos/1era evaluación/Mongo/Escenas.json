@@ -1,7 +1,7 @@
 [
     {
         "id": -2,
-        "texto": "Frente a ti, entre dos montañas, se alzan los muros de una poderosa fortaleza.\nTe diriges a la puerta, donde rapidamente consigues que te procuren alimento y cobijo.\n(Aquí termina tu aventura)",
+        "texto": "Frente a ti, entre dos montañas, se alzan los muros de una poderosa fortaleza.\nTe diriges a la puerta, donde rapidamente consigues que te procuren alimento y cobijo.\n¡Felicidades, has salido victorioso en tu aventura!",
         "modifPg":0,
         "darObjeto":"no",
         "elecciones":[
@@ -41,7 +41,7 @@
     },
     {
         "id": 1,
-        "texto": "Despiertas con el batir de las olas y los graznidos de las aves marinas. Tembloroso, te levantas del suelo con dificultad.\nLentamente, los recuerdos del naufragio inundan tu mente.\nDecides alzar la vista y a tu alrededor distingues los escasos restos del navío que han llegado a la playa, frente a ti una salvaje selva",
+        "texto": "Despiertas con el batir de las olas y los graznidos de las aves marinas. Aturdido, te levantas del suelo con dificultad.\nLentamente, los recuerdos del naufragio inundan tu mente.\nDecides alzar la vista y a tu alrededor distingues los escasos restos del navío que han llegado a la playa, frente a ti una salvaje selva",
         "modifPg":0,
         "darObjeto":"no",
         "elecciones":[
@@ -99,7 +99,7 @@
     },
     {
         "id": 3,
-        "texto": "Rebuscas concienzudamente entre los escasos restos del casco del barco desperdigados por la orilla. Repentinamente, sientes un dolor punzante en el pie derecho: \nsemienterrado en la arena distingues el brillo metálico de un pequeño cuchillo de tallar\nDecides recogerlo por la utilidad que podría brindarte \n(+cuchillo, -1 punto de golpe)",
+        "texto": "Rebuscas concienzudamente entre los escasos restos del casco del barco desperdigados por la orilla. Repentinamente, sientes un dolor punzante en el pie derecho: \nsemienterrado en la arena distingues el brillo metálico de un pequeño cuchillo de tallar.\nDecides recogerlo por la utilidad que podría brindarte.\n(+ cuchillo, -1 punto de golpe)",
         "modifPg":-1,
         "darObjeto":"cuchillo",
         "elecciones":[
@@ -147,7 +147,7 @@
     },
     {
         "id": 5,
-        "texto": "Con cautela, te acercas a los restos de la choza.\nAunque resulta evidente que hace mucho tiempo que no está habitada, encuentras entre los restos del mobiliario podrido un par de antorchas y una lata de yesca.\nAlguien ha estado aquí recientemente.",
+        "texto": "Con cautela, te acercas a los restos de la choza.\nAunque resulta evidente que hace mucho tiempo que no está habitada, encuentras entre los restos del mobiliario podrido un par de antorchas y una lata de yesca.\nAlguien ha estado aquí recientemente.\n(+ antorcha).",
         "modifPg":0,
         "darObjeto":"antorcha",
         "elecciones":[
@@ -220,7 +220,7 @@
             {
                 "numElección":2,
                 "textoElección":"Ignorar la columna de humo",
-                "idRuta":14,
+                "idRuta":28,
                 "objetoNecesario":""                   
             } 
         ]
@@ -261,7 +261,7 @@
     },
     {
         "id": 11,
-        "texto": "Con destreza, usas el cuchillo para tallarle una punta al madero.\nDespués, te recoges en tu improvisado lecho y te dispones a dormir.\nTe despiertas con el amanecer, recuperado. Tu estómago ruge mientras distingues una columna de humo en la lejanía.\n(+1 punto de golpe)",
+        "texto": "Con destreza, usas el cuchillo para tallarle una punta al madero.\nDespués, te recoges en tu improvisado lecho y te dispones a dormir.\nTe despiertas con el amanecer, recuperado. Tu estómago ruge mientras distingues una columna de humo en la lejanía.\n(+ lanza, +1 punto de golpe)",
         "modifPg":1,
         "darObjeto":"lanza",
         "elecciones":[
@@ -301,7 +301,7 @@
     },
     {
         "id": 13,
-        "texto": "A medida que te acercas a la columna de humo, un penetrante aroma a carne asada impregna el ambiente.\nYa próximo al lugar, escuchas un coro de voces chillonas y crueles. Trasgos, concluyes certeramente.\nAtenúas tus pasos y te acercas un poco más para ver la escena: un grupo de tres trasgos cantan mientras cocinan un copioso muslo de jabalí en una hoguera.\nAgudizando la vista, distingues también postrado y atado contra un árbol a un hombre.",
+        "texto": "A medida que te acercas a la columna de humo un penetrante aroma a carne asada impregna el ambiente.\nYa próximo al lugar escuchas un coro de voces chillonas y crueles. Trasgos.\nAtenúas tus pasos y te acercas un poco más para ver la escena: un grupo de tres goblins cantan mientras cocinan un copioso muslo de jabalí en una hoguera.\nAgudizando la vista, distingues también postrado y atado contra un árbol a un hombre.",
         "modifPg":0,
         "darObjeto":"no",
         "elecciones":[
@@ -453,7 +453,7 @@
     },
     {
         "id": 20,
-        "texto": "Te aproximas al hombre tendido y pronto descubres que hace tiempo que dejó de estar vivo.\nEntre sus restos, roídos y maltrechos, aprecias un pequeño estuche de cuero pendiente de su cinto.\nCon un sonoro 'clac', lo abres y descubres en su interior un pergamino enrollado. Un mapa de la zona.\nAunque no consigues situarte con certeza, descubres que hay una fortaleza en las inmediaciones.\nSi llegas allí estarás a salvo.",
+        "texto": "Te aproximas al hombre tendido y pronto descubres que hace tiempo que dejó de estar vivo.\nEntre sus restos, roídos y maltrechos, aprecias un pequeño estuche de cuero pendiente de su cinto.\nCon un sonoro 'clac', lo abres y descubres en su interior un pergamino enrollado. Un mapa de la zona.\nAunque no consigues situarte con precisión, descubres que hay una fortaleza en las inmediaciones.\nSi llegas allí estarás a salvo.\n(+ mapa)",
         "modifPg":0,
         "darObjeto":"mapa",
         "elecciones":[
@@ -474,7 +474,7 @@
     {
         
             "id": 21,
-            "texto": "Te aprovisionas con la comida y agua del grupo de trasgos",
+            "texto": "Te aprovisionas con la comida y agua del grupo de trasgos.\n(+ comida)",
             "modifPg":0,
             "darObjeto":"comida",
             "elecciones":[
@@ -521,7 +521,7 @@
     },
     {
         "id": 23,
-        "texto": "Tus palabras suavizan el ademán de los trasgos, que con gestos te invitan a unirte a su campamento.\nEn un inesperado alarde de generosidad incluso comparten su comida contigo, la cual decides guardar para más tarde",
+        "texto": "Tus palabras suavizan el ademán de los trasgos, que con gestos te invitan a unirte a su campamento.\nEn un inesperado alarde de generosidad incluso comparten su comida contigo, la cual decides guardar para más tarde.\n(+ comida)",
         "modifPg":0,
         "darObjeto":"comida",
         "elecciones":[
@@ -547,7 +547,7 @@
     },
     {
         "id": 24,
-        "texto": "Te aproximas al hombre tendido y pronto descubres que hace tiempo que dejó de estar vivo.\nEchas un vistazo a tus anfitriones, a los que no parece importarles que te acerques al cadáver.\nEntre sus restos, roídos y maltrechos, aprecias un pequeño estuche de cuero pendiente de su cinto.\nCon un sonoro 'clac', lo abres y descubres en su interior un pergamino enrollado. Un mapa de la zona.\nAunque no consigues situarte con certeza, descubres que hay una fortaleza en las inmediaciones.\nSi llegas allí estarás a salvo.",
+        "texto": "Te aproximas al hombre tendido y pronto descubres que hace tiempo que dejó de estar vivo.\nEchas un vistazo a tus anfitriones, a los que no parece importarles que te acerques al cadáver.\nEntre sus restos, roídos y maltrechos, aprecias un pequeño estuche de cuero pendiente de su cinto.\nCon un sonoro 'clac', lo abres y descubres en su interior un pergamino enrollado. Un mapa de la zona.\nAunque no consigues situarte con precisión, descubres que hay una fortaleza en las inmediaciones.\nSi llegas allí estarás a salvo.\n(+ mapa)",
         "modifPg":0,
         "darObjeto":"mapa",
         "elecciones":[
@@ -568,7 +568,7 @@
     {
         
             "id": 25,
-            "texto": "Te aprovisionas con la comida y agua del grupo de trasgos.\nEstás aprovisionado de comida y con el mapa en tu posesión.",
+            "texto": "Te aprovisionas con la comida y agua del grupo de trasgos.\nEstás aprovisionado de comida y con el mapa en tu posesión.\n(+ comida)",
             "modifPg":0,
             "darObjeto":"comida",
             "elecciones":[
@@ -583,7 +583,7 @@
     },
     {
         "id": 26,
-        "texto": "Te aproximas al hombre tendido y pronto descubres que hace tiempo que dejó de estar vivo.\nEntre sus restos, roídos y maltrechos, aprecias un pequeño estuche de cuero pendiente de su cinto.\nCon un sonoro 'clac', lo abres y descubres en su interior un pergamino enrollado. Un mapa de la zona.\nAunque no consigues situarte con certeza, descubres que hay una fortaleza en la zona.\nSi llegas allí estarás a salvo.\nEstás aprovisionado de comida y con el mapa en tu posesión.",
+        "texto": "Te aproximas al hombre tendido y pronto descubres que hace tiempo que dejó de estar vivo.\nEntre sus restos, roídos y maltrechos, aprecias un pequeño estuche de cuero pendiente de su cinto.\nCon un sonoro 'clac', lo abres y descubres en su interior un pergamino enrollado. Un mapa de la zona.\nAunque no consigues situarte con precisión, descubres que hay una fortaleza en las inmediaciones.\nSi llegas allí estarás a salvo.\nEstás aprovisionado de comida y con el mapa en tu posesión.\n(+ mapa)",
         "modifPg":0,
         "darObjeto":"mapa",
         "elecciones":[
@@ -636,7 +636,7 @@
     },
     {        
         "id": 29,
-        "texto": "Te detienes unos minutos y aprovechas para comer. Te sientes renovado.\n.Aprovechas para examinar los alrededores, el camino se bifurca en dos direcciones.\nHacia la derecha apunta una vieja señal de madera, de la cual la interperie ha borrado su contenido.\nHacia la izquierda no hay señal alguna, pero escuchas el arrullar de un riachuelo.\n(+1 punto de golpe)",
+        "texto": "Te detienes unos minutos y aprovechas para comer. Te sientes renovado.\nEmpleas ese tiempo para examinar los alrededores, el camino se bifurca en dos direcciones.\nHacia la derecha apunta una vieja señal de madera, de la cual la interperie ha borrado su contenido.\nHacia la izquierda no hay señal alguna, pero escuchas el arrullar de un riachuelo.\n(+1 punto de golpe)",
         "modifPg":1,
         "darObjeto":"no",
         "elecciones":[
@@ -663,7 +663,7 @@
     },
     {        
         "id": 30,
-        "texto": "Te detienes unos minutos para examinar los alrededores, obervas que el camino se bifurca en dos direcciones.\nHacia la derecha apunta una vieja señal de madera, de la cual la interperie ha borrado su contenido.\nHacia la izquierda no hay señal alguna, pero escuchas el arrullar de un riachuelo.",
+        "texto": "Te detienes unos minutos para examinar los alrededores, obervas que el camino se bifurca en dos direcciones.\nHacia la derecha apunta una vieja señal de madera, de la cual la interperie ha borrado su contenido.\nHacia la izquierda no hay señal alguna, pero escuchas el arrullo de un riachuelo.",
         "modifPg":0,
         "darObjeto":"no",
         "elecciones":[
@@ -741,7 +741,7 @@
     },
     {
         "id": 33,
-        "texto": "Haciendo uso del mapa, localizas el lugar en el que te encuentras.\nEl camino de la derecha aboca a una antigua mina de gemas abandonada.\nEl camino de la izquierda transcurre pegado al río y lleva a la fortaleza (tu salvación). \nSin embargo, en el mapa alguién ha escrito la palabra 'bandidos' en dicho camino, por lo que determinas que la ruta para eludirlos pasaría por\ndesviarte hacia el puente de madera que cruza el río para luego volver a cruzarlo más adelante en el puente de piedra.",
+        "texto": "Haciendo uso del mapa, localizas el lugar en el que te encuentras.\nEl camino de la derecha aboca a una antigua mina de gemas abandonada.\nEl camino de la izquierda transcurre pegado al río y lleva a la fortaleza (tu salvación). \nSin embargo, en el mapa alguién ha escrito la palabra 'bandidos' en dicho camino, por lo que determinas que la ruta para eludirlos pasaría por, una vez tomado el camino de la izquierda,\ndesviarte hacia el puente de madera que cruza el río para luego volver a cruzarlo más adelante en el puente de piedra.",
         "modifPg":0,
         "darObjeto":"no",
         "elecciones":[
@@ -775,7 +775,7 @@
     },
     {
         "id": 35,
-        "texto": "Te adentras en la mina bajo la luz de una antorcha.\nAl cabo de un rato llegas a lo que parecían ser las antiguas dependencias de los mineros. Tras buscar detenidamente algo de utilidad, encuentras un saquito de gemas bajo un adoquín saliente.",
+        "texto": "Te adentras en la mina bajo la luz de una antorcha.\nAl cabo de un rato llegas a lo que parecían ser las antiguas dependencias de los mineros. Tras buscar detenidamente algo de utilidad, encuentras un saquito de gemas bajo un adoquín saliente.\n(+ gemas)",
         "modifPg":0,
         "darObjeto":"gemas",
         "elecciones":[
@@ -797,7 +797,7 @@
         "id": 36,
         "texto": "Sigues internándote en lo más profundo de la mina, dejando la superficie cientos de metros atrás.\n En un punto la mina continúa en dos direcciones contrarias, una parece ascender, y de ella te parece que emana aire limpio, mientras que la otra sigue descendiendo hacia las tinieblas.",
         "modifPg":0,
-        "darObjeto":"gemas",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -817,7 +817,7 @@
         "id": 37,
         "texto": "Continúas internándote en lo más profundo de la mina. El aire es cada vez más escaso y viciado.\nUna súbita corriente de aire apaga tu antorcha mientras escuchas una risa malvada.\nHas descendido demasiado profundo.\n(-5 puntos de golpe). ",
         "modifPg":-5,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -831,7 +831,7 @@
         "id": 38,
         "texto": "A medida que te acercas a la superficie, el aire es cada vez más limpio y abundante.\nLa luz natural pasa a iluminar tenuemente tu trayecto y apagas la antorcha.\nLlegas a la boca de la cueva que, ante tu desdicha, es el hogar de un enorme oso pardo que dormita en el centro de la caverna.",
         "modifPg":0,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -857,7 +857,7 @@
         "id": 39,
         "texto": "Empleándote a fondo, intentas escabullirte fuera de la caverna.\nAunque apenas has hecho ruído, ves como el animal arruga el hocico, olfateando, y ruge al percatarse de tu presencia.\nCon una rapidez inusitada, arremete contra ti y te propina un zarpazo que consigue lacerarte la espalda.\n(-1 punto de golpe).",
         "modifPg":0,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -883,7 +883,7 @@
         "id": 40,
         "texto": "Aprietas los dientes y decides combatir contra la bestia.\nConsigues rechazar un mordisco del animal contra tu brazo con una rápida lanzada.\nSin embargo, el oso te hiere de un zarpazo que provoca que la sangre mane a borbotones de tu pierna izquierda.\nHaciendo acopio de tus fuerzas restantes consigues perforar el pelaje del animal con tu lanza en un segundo ataque, llegando hasta el corazón de la bestia.\nHas vencido al oso y salido de la cueva, pero ¿superarás tus heridas?.\n(-2 puntos de golpe)",
         "modifPg":-2,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -897,7 +897,7 @@
         "id": 41,
         "texto": "Herido y magullado intentas escapar del animal, ignorando el dolor\nCorres, pero no eres más rápido que el enorme oso. Un segundo zarpazo te desgarra cuello y hombro.\nEn tus últimos estertores, vislumbras una regia fortaleza cerca de la salida de la caverna. Te has quedado cerca.\n(-5 puntos de golpe)",
         "modifPg":-5,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -911,7 +911,7 @@
         "id": 42,
         "texto": "Usando tu ingenio arrojas los restos de jabalí que guardabas como raciones a los pies del oso.\nÉste parece distraido momentáneamente olisqueando el cebo, momento que aprovechas para huír rapidamente.\nSales de la cueva.",
         "modifPg":0,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -925,7 +925,7 @@
         "id": 43,
         "texto": "Cruzas el río por el puente de madera y continúas tu camino por el linde izquierdo del río.\nEn el horizonte te parece ver una fortaleza.\nTu camino sigue hasta llegar a la altura de un puente de piedra que cruza el río de nuevo.",
         "modifPg":0,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -950,8 +950,8 @@
     {
         "id": 44,
         "texto": "Continúas tu camino por el lado izquierdo del río.\nAl cabo de unos minutos notas como tus pies se hunden irremediablemente en la tierra.\nAunque luchas con todas tus fuerzas, acabas sumergiéndote completamente en el lodo.\n(-5 puntos de golpe).",
-        "modifPg":0,
-        "darObjeto":"",
+        "modifPg":-5,
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -965,7 +965,7 @@
         "id": 45,
         "texto": "Prosigues tu camino esperanzado por el lado derecho del río.\nA lo lejos puedes distinguir las torres de una fortaleza, vas por buen camino.\nDerrepente, un virote se clava cerca de uno de tus pies.\nUn grupo de hombres encapuchados te cierran el paso con aire amenazador:\n'La bolsa o la vida'.",
         "modifPg":0,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -997,7 +997,7 @@
         "id": 46,
         "texto": "Aprietas los dientes y decides combatir contra los rufianes.\nEl combate es duro, pero consigues despachar a dos de ellos y ahuyentar a los otros dos. \nHas sufrido graves heridas\n(-2 puntos de golpe)",
         "modifPg":-2,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -1011,7 +1011,7 @@
         "id": 47,
         "texto": "El líder de los bandidos sopesa la bolsa y te dedica una sonrisa de pocos dientes.\nCon un gesto brusco te indica que continues",
         "modifPg":0,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -1025,7 +1025,7 @@
         "id": 48,
         "texto": "Intentas escapar a toda velocidad de la emboscada.\nUn primer virote perfora tu pierna, derribándote.\nSin poder moverte, agonizando en el suelo, ves como el cabecilla de los bandidos se acerca a ti y te remata sin miramientos.\n(-5 puntos de golpe).",
         "modifPg":-5,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,
@@ -1037,9 +1037,9 @@
     },
     {
         "id": 49,
-        "texto": "Pese a tu lamentable aspecto, se te ocurre asegurar a los bandidos de que eres un poderosísimo mago y no deben molestarte.\nEntre carcajadas, y viendo que no llevas nada encima, los bandidos te dejan pasar por pura lástima",
+        "texto": "Pese a tu lamentable aspecto, se te ocurre asegurar a los bandidos de que eres un poderosísimo mago y no deben importunarte.\nEntre carcajadas, y viendo que no llevas nada encima, los bandidos te dejan pasar por lástima.",
         "modifPg":0,
-        "darObjeto":"",
+        "darObjeto":"no",
         "elecciones":[
             {
                 "numElección":1,

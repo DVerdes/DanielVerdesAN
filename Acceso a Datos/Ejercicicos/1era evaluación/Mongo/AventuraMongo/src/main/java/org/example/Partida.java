@@ -15,16 +15,19 @@ public class Partida {
 
     private int escenasTotales;
 
+    private int puntuacion;
+
     private ArrayList<String> inventario;
 
     public Partida() {
     }
 
-    public Partida(int id, String nombreJugador, int puntosDeGolpe, int escenasTotales, ArrayList<String> inventario) {
+    public Partida(int id, String nombreJugador, int puntosDeGolpe, int escenasTotales, int puntuacion, ArrayList<String> inventario) {
         this.id = id;
         this.nombreJugador = nombreJugador;
         this.puntosDeGolpe = puntosDeGolpe;
         this.escenasTotales = escenasTotales;
+        this.puntuacion = puntuacion;
         this.inventario = inventario;
     }
 
@@ -60,6 +63,14 @@ public class Partida {
         this.escenasTotales = escenasTotales;
     }
 
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
     public ArrayList<String> getInventario() {
         return inventario;
     }
@@ -75,6 +86,7 @@ public class Partida {
                 ", nombreJugador='" + nombreJugador + '\'' +
                 ", puntosDeGolpe=" + puntosDeGolpe +
                 ", escenasTotales=" + escenasTotales +
+                ", puntuacion=" + puntuacion +
                 ", inventario=" + inventario +
                 '}';
     }
