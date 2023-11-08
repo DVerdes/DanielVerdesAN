@@ -4,19 +4,28 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Clase para crear y operar con objetos Partida
+ */
 public class Partida {
 
 
+    //identificador Partida
     private int id;
 
+    //nombre del jugador
     private String nombreJugador;
 
+    //puntos de golpe actuales
     private int puntosDeGolpe;
 
+    //escenas recorridas
     private int escenasTotales;
 
+    //puntuación final
     private int puntuacion;
 
+    //objetos obtenidos
     private ArrayList<String> inventario;
 
     public Partida() {

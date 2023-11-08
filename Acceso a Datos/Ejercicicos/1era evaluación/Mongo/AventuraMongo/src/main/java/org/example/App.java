@@ -84,8 +84,8 @@ public class App {
                             escenasTotales: se inician en 0.
                             inventario: se inicia vacío.
                      */
-                    Partida partida = new Partida(PartidaCRUD.listarPartidas(colPartida).size()+1, pedirNombre(), 3, 0, 0, new ArrayList<String>());
-                    
+                    Partida partida = new Partida(PartidaCRUD.listarPartidas(colPartida).size()+1, pedirNombre(15), 3, 0, 0, new ArrayList<String>());
+
                     do {
                         /*
                             Bucle de escenas:
@@ -119,7 +119,7 @@ public class App {
                                 System.out.println("¿Que deseas hacer?");
 
                                 //Filtrado de elecciones según objetos en inventario
-                                ArrayList<Elección> eleccionesFiltradas = gestionarElecciones(partida, escenaConsultada, proximaEscena);
+                                ArrayList<Elección> eleccionesFiltradas = gestionarElecciones(partida, escenaConsultada);
 
                                 //Elección tomada por jugador
                                 eleccionJugador = mostrarElecciones(eleccionesFiltradas);
@@ -132,7 +132,7 @@ public class App {
 
                                 if (comprobarEleccion.equals("Panel de personaje")) {
                                     //Ver Panel de Personaje
-                                    mostrarInventario(partida);
+                                    mostrarPanelPersonaje(partida);
                                     continuarEscena = false;
                                 } else {
                                     //Continuar
