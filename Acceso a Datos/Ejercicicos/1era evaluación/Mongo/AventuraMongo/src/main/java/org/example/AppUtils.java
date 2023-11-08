@@ -3,14 +3,11 @@ package org.example;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class AppUtils {
 
-    public static int pedirNumero(int limite){
+    public static int pedirNumero(int limite) {
         int numero = 0;
         boolean comprobacion = false;
         do {
@@ -31,13 +28,13 @@ public class AppUtils {
                 System.out.println("Por favor, introduzca un valor correcto");
                 comprobacion = false;
             }
-        }while (!comprobacion);
+        } while (!comprobacion);
         return numero;
 
     }
 
 
-    public static int mostrarMenu(){
+    public static int mostrarMenu() {
         System.out.println("MENÚ");
         System.out.println(" Seleccione una opción:");
         System.out.println(" 1 - Jugar");
@@ -46,21 +43,21 @@ public class AppUtils {
         System.out.println(" 4 - Salir");
         return pedirNumero(5);
     }
-    
+
     public static boolean bucleMenu(MongoCollection<Document> colPartida) throws InterruptedException {
         int numero = 0;
-        do{
+        do {
             numero = mostrarMenu();
-            if(numero==1){
+            if (numero == 1) {
                 return true;
-            }else if(numero==2){
+            } else if (numero == 2) {
                 mostrarReglas();
-            }else if(numero==3){
+            } else if (numero == 3) {
                 mostrarPuntuaciones(colPartida);
-            }else{
+            } else {
                 return false;
             }
-        }while (numero==2 || numero==3);
+        } while (numero == 2 || numero == 3);
         return false;
     }
 
@@ -68,9 +65,9 @@ public class AppUtils {
         int puntuacionesMostradas = 5;
         int indice = 1;
         List<Partida> partidas = PartidaCRUD.listarPartidas(colPartida);
-        Collections.sort(partidas, new Comparator<Partida>(){
-            public int compare(Partida o1, Partida o2){
-                if(o1.getPuntuacion() == o2.getPuntuacion())
+        Collections.sort(partidas, new Comparator<Partida>() {
+            public int compare(Partida o1, Partida o2) {
+                if (o1.getPuntuacion() == o2.getPuntuacion())
                     return 0;
                 return o1.getPuntuacion() > o2.getPuntuacion() ? -1 : 1;
             }
@@ -80,11 +77,11 @@ public class AppUtils {
         System.out.println("PUNTUACIONES: ");
         System.out.println("____________________________");
 
-        for (Partida partida:partidas
-             ) {
-            System.out.println(" - "+indice+": "+partida.getNombreJugador()+", "+partida.getPuntuacion()+" puntos.");
+        for (Partida partida : partidas
+        ) {
+            System.out.println(" - " + indice + ": " + partida.getNombreJugador() + ", " + partida.getPuntuacion() + " puntos.");
             indice++;
-            if(indice>puntuacionesMostradas){
+            if (indice > puntuacionesMostradas) {
                 break;
             }
         }
@@ -105,35 +102,24 @@ public class AppUtils {
 
     }
 
-    public static String pedirNombre(){
+    public static String pedirNombre() {
         Scanner scanner = new Scanner(System.in);
         String nombre = "";
 
-        do{
+        do {
             nombre = scanner.nextLine();
-            if(nombre.equals("")){
+            if (nombre.equals("")) {
                 System.out.println("Por favor, escriba un nombre");
-            }else if(nombre.length()>15){
+            } else if (nombre.length() > 15) {
                 System.out.println("Por favor, escriba un nombre más corto");
             }
 
-        }while (nombre.equals("")||nombre.length()>15);
+        } while (nombre.equals("") || nombre.length() > 15);
 
         return nombre;
 
     }
 
-    public static void mostrarInventario(Partida partida) throws InterruptedException {
-        System.out.println("________________________________");
-        System.out.println(partida.getNombreJugador() + ":");
-        System.out.println("Tienes " + partida.getPuntosDeGolpe() + " punto(s) de golpe.");
-        System.out.println("Objetos: ");
-        for (String objeto : partida.getInventario()) {
-            System.out.println("- " + objeto);
-        }
-        System.out.println("________________________________");
-        Thread.sleep(3000);
-    }
 
 
 
