@@ -2,16 +2,24 @@ package org.example;
 
 import java.util.Arrays;
 
+/**
+ *  * Clase para crear y operar con objetos Escena
+ */
 public class Escena {
 
-
+    //identificador de Escena
     private int id;
+
+    //descripción de Escena
     private String texto;
 
+    //cambio que produce sobre los Pg del personaje
     private int modifPg;
 
+    //objetos que otorga al jugador
     private String darObjeto;
 
+    //conjunto de objetos Elección asociados
     private Elección[] elecciones;
 
     public Escena() {

@@ -1,13 +1,20 @@
 package org.example;
 
+/**
+ *  * Clase para crear y operar con objetos Elección
+ */
 public class Elección {
 
+    //índice de Elección
     private int numElección;
 
+    //descripción de la Elección
     private String textoElección;
 
+    //Escena a la que dirige
     private int idRuta;
 
+    //objeto necesario para tomar Elección
     private String objetoNecesario;
 
 

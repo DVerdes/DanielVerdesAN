@@ -10,8 +10,16 @@ import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 
+/**
+ * Clase para gestión de objetos Escena en MongoDB
+ */
 public class EscenaCRUD {
 
+    /**
+     * Convierte Escena a Documento
+     * @param escena Escena a convertir
+     * @return documento
+     */
     public static Document escenaADoc(Escena escena){
 
         if (escena==null) return null;
@@ -24,7 +32,11 @@ public class EscenaCRUD {
 
     }
 
-
+    /**
+     * Convierte documento a Escena
+     * @param documento a convertir
+     * @return Escena
+     */
     public static Escena docAEscena(Document documento){
 
         if(documento==null) return null;
@@ -35,6 +47,11 @@ public class EscenaCRUD {
         return escena;
     }
 
+    /**
+     * Elimina Escena de colección
+     * @param colMongo colección
+     * @param id identificador de Escena
+     */
     public static void eliminarEscena(MongoCollection<Document> colMongo, int id) {
         try {
 
@@ -45,11 +62,22 @@ public class EscenaCRUD {
         }
     }
 
+    /**
+     * Consulta Escena de Colección
+     * @param colMongo colección
+     * @param id identificador de Escena
+     * @return Escena a consultar
+     */
     public static Escena consultarEscena(MongoCollection<Document> colMongo, int id) {
         Document documento = colMongo.find(eq("id",id)).first();
         return docAEscena(documento);
     }
 
+    /**
+     * Actualizar Escena de Colección
+     * @param colMongo colección
+     * @param escena Escena a actualizar
+     */
     public static void actualizarEscena(MongoCollection<Document> colMongo, Escena escena) {
         Document documento = escenaADoc(escena);
 
@@ -61,6 +89,11 @@ public class EscenaCRUD {
         }
     }
 
+    /**
+     * Listar Escenas de colección Mongo
+     * @param colMongo colección
+     * @return listado de Escenas
+     */
     public static List<Escena> listarEscenas(MongoCollection<Document> colMongo) {
         List<Escena> escenas = new ArrayList<>();
 
@@ -74,6 +107,11 @@ public class EscenaCRUD {
         return escenas;
     }
 
+    /**
+     * Añade Escena a colección
+     * @param colMongo colección
+     * @param escena Escena a añadir
+     */
     public static void insertarEscena(MongoCollection<Document> colMongo, Escena escena) {
         Document documento = escenaADoc(escena);
 
