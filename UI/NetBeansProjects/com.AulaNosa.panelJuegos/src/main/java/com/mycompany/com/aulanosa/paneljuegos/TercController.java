@@ -28,12 +28,12 @@ import org.apache.commons.validator.routines.IntegerValidator;
 
 /**
  * Método de controlador de ventana de reservas
+ *
  * @author DVerd
  */
 public class TercController {
 
     //componentes interfaz
-    
     //textField para participantes reserva
     @FXML
     private TextField campoParticipantes;
@@ -80,29 +80,25 @@ public class TercController {
     //label con mensaje de bienvenida (cabecera)
     @FXML
     private Label labelBienvenido;
-    
+
     @FXML
     private Label labelValPart;
-    
+
     @FXML
     private Label labelValS;
-    
-     
+
     @FXML
     private Label labelValH;
-    
-    
-    
 
     //String para recibir datos menú principal
     //usuario
     String user = "";
     //email
     String email = "";
-    
+
     //string para guardar horario
     String horario = "";
-    
+
     //fecha actual
     String fecha = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss").format(Calendar.getInstance().getTime());
 
@@ -123,6 +119,7 @@ public class TercController {
 
     /**
      * set usuario introducido en menú principal
+     *
      * @param user usuario
      */
     public void setUser(String user) {
@@ -132,23 +129,31 @@ public class TercController {
 
     /**
      * Método para añadir reserva con datos introducidos
-     * @param event evento de botón 
+     *
+     * @param event evento de botón
      */
     public void addReserva(ActionEvent event) {
-        //si el datePicker no es nulo...
-        if(campoHorario.getValue()!=null){
-            horario = campoHorario.getValue().toString();
+
+        if (tryForm()) {
+            //si el datePicker no es nulo...
+            if (campoHorario.getValue() != null) {
+                horario = campoHorario.getValue().toString();
+            }
+            campoHorario.setValue(null);
+            //Creación de objeto Reserva
+            Reserva reserva = new Reserva(user, email, campoParticipantes.getText(), campoSalas.getText(), horario, fecha);
+            //se añade objeto a valoresLista
+            valoresLista.add(reserva);
+            //cargamos valores de la lista en tabla
+            this.tView.setItems(valoresLista);
+        } else {
+
         }
-        //Creación de objeto Reserva
-        Reserva reserva = new Reserva(user, email, campoParticipantes.getText(), campoSalas.getText(), horario, fecha);
-        //se añade objeto a valoresLista
-        valoresLista.add(reserva);
-        //cargamos valores de la lista en tabla
-        this.tView.setItems(valoresLista);
     }
 
     /**
      * set email introducido en menú principal
+     *
      * @param email email
      */
     void setEmail(String email) {
@@ -157,8 +162,9 @@ public class TercController {
 
     /**
      * Método para volver al menú principal
+     *
      * @param event evento de botón
-     * @throws IOException 
+     * @throws IOException
      */
     @FXML
     private void switchToPanel(ActionEvent event) throws IOException {
@@ -177,50 +183,72 @@ public class TercController {
         }
     }
 
-    
-     public boolean validateParticipants(){
-        
+    public boolean validateParticipants() {
+
         IntegerValidator vr = IntegerValidator.getInstance();
-        
-        if(!vr.isValid(campoParticipantes.getText())){
-                 labelValPart.setText("Introduce un valor válido");
-                                  labelValPart.setStyle("fx-text-fill:red");
-                                  return false;
 
+        if (!vr.isValid(campoParticipantes.getText())) {
+            labelValPart.setText("Introduce un valor válido");
+            labelValPart.setStyle("fx-text-fill:red");
+            return false;
 
-        }else{
-            if(Integer.parseInt(campoParticipantes.getText())<4){
+        } else {
+            if (Integer.parseInt(campoParticipantes.getText()) < 4) {
                 labelValPart.setText("Participantes insuficientes");
                 return false;
-            }else{
-                            labelValPart.setText("");
-                            return true;
+            } else {
+                labelValPart.setText("");
+                return true;
 
             }
         }
-    
+
     }
-     
-     
-     public boolean validateRoom(){
-        if(campoSalas.getText().isEmpty()){
+
+    public boolean validateRoom() {
+        if (campoSalas.getText().isEmpty()) {
             labelValS.setText("Introduzca un nombre");
             return false;
-        }else{
+        } else {
+            labelValS.setText("");
             return true;
         }
     }
-     
-     public boolean validateDate(){
-         
-         DateValidator dv = DateValidator.getInstance();
-         
-         if(!dv.isValid(campoHorario.getValue().toString())){
-             labelValH.setText("Formato incorrecto");
-             return false;
-         }else{
-             return true;
-         }
-         
-     }
+
+    public boolean validateDate() {
+
+        /*
+        DateValidator dv = DateValidator.getInstance();
+
+        if (!dv.isValid(campoHorario.getValue().toString())) {
+            labelValH.setText("Formato incorrecto");
+            return false;
+        } else {
+            return true;
+        }
+         */
+        if (campoHorario.getValue() == null) {
+            
+            labelValH.setText("Introduzca una fecha válida");
+
+            return false;
+        } 
+        horario = campoHorario.getValue().toString();
+
+        if (horario.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            labelValH.setText("");
+            return true;
+        } else {
+            labelValH.setText("Formato incorrecto");
+            return false;
+        }
+    }
+
+    public boolean tryForm() {
+        if (validateParticipants() && validateRoom() &&  validateDate()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
