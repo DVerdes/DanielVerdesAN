@@ -1,0 +1,29 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 19 nov 2023, 13:23:18
+    Author     : DVerd
+*/
+
+
+.label{
+    -fx-text-fill:yellow;
+}
+
+
+.toogle-button{
+    -fx-background-color: red;
+
+}
+
+#leftPane{
+        -fx-background-color: linear-gradient(to bottom right, #00D2F7, #F70000);
+
+}
+
+#rightPane{
+     -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #63E18F, #ECF700);
+
+}
