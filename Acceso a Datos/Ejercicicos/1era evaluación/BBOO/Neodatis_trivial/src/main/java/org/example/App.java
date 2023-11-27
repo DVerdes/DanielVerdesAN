@@ -24,7 +24,7 @@ public class App
         Partida partida = new Partida(new ArrayList<Jugador>());
         int numeroJugadores = 0;
         String letraCorrecta = "";
-        int puntosVictoria = 5;
+        int puntosVictoria = 3;
         int contadorGanadores = 0;
         String nombreGanador = "";
         String respuestaJugador = "";
@@ -57,7 +57,7 @@ public class App
                     }
                 }
                 respuestaJugador = scanner.next();
-                if(respuestaJugador.equals(respuestaJugador)){
+                if(respuestaJugador.equals(letraCorrecta)){
                     System.out.println("Respuesta correcta!");
                     System.out.println(partida.getJugadores().get(i).getNombre()+" gana un punto");
                     partida.getJugadores().get(i).setPuntos(partida.getJugadores().get(i).getPuntos()+1);
@@ -72,8 +72,6 @@ public class App
             // Control de puntuaciones
             System.out.println("Puntuaciones: ");
             for(int k = 0; k<partida.getJugadores().size(); k++){
-                contadorGanadores = 0;
-                 nombreGanador = "";
                 System.out.println(partida.getJugadores().get(k).getNombre()+": "+partida.getJugadores().get(k).getPuntos()+" puntos");
                 if(partida.getJugadores().get(k).getPuntos()>=puntosVictoria){
                     contadorGanadores++;
@@ -84,6 +82,9 @@ public class App
             if(contadorGanadores==1){
                 System.out.println("GANA "+nombreGanador);
                 break;
+            }else if(contadorGanadores>1){
+                System.out.println("Desempate!");
+                puntosVictoria++;
             }
             contadorGanadores = 0;
 
