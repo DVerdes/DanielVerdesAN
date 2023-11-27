@@ -5,20 +5,15 @@
 package com.aulanosa.customcomponent;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 /**
- * FXML Controller class
+ * FXML Controller class de Contador
  *
- * @author laura
+ * @author Dverd
  */
 public class CustomControl extends VBox {
 
@@ -45,6 +40,9 @@ public class CustomControl extends VBox {
         this.contador = contador;
     }
 
+    /**
+     * Decremento contador
+     */
     @FXML
     protected void startContador() {
         var valor = Integer.parseInt(contador.getText()) - 1;

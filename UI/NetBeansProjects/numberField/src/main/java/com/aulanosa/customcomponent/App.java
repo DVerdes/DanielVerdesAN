@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * JavaFX App
+ * JavaFX App numberField
  */
 public class App extends Application {
 

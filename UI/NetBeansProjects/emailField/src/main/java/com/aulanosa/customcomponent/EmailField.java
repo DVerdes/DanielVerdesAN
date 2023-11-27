@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
- * FXML Controller class
+ * FXML Controller class emailField
  *
  */
 public class EmailField extends VBox {
@@ -44,6 +44,11 @@ public class EmailField extends VBox {
         this.textField = contador;
     }
 
+    /**
+     * Valida email introducido en textField
+     *
+     * @return booleano con validación
+     */
     @FXML
     public boolean validateEmail() {
 

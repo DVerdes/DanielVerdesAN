@@ -3,12 +3,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
 */
 /* 
+    Hoja estilos secundaria
     Created on : 19 nov 2023, 13:23:18
     Author     : DVerd
 */
 
 
-.label{
+.descLabel{
     -fx-text-fill:yellow;
 }
 

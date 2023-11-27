@@ -54,7 +54,7 @@
                               <Insets left="20.0" top="10.0" />
                            </GridPane.margin>
                         </NumberField>
-                        <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="113.0" text="Email">
+                        <Label styleClass="descLabel" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="113.0" text="Email">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -62,7 +62,7 @@
                               <Insets top="12.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="111.0" text="Edad" GridPane.rowIndex="1">
+                        <Label styleClass="descLabel" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="111.0" text="Edad" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>

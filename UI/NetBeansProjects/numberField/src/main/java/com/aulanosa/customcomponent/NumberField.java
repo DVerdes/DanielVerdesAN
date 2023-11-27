@@ -13,8 +13,7 @@ import javafx.scene.layout.VBox;
 import org.apache.commons.validator.routines.IntegerValidator;
 
 /**
- * FXML Controller class
- *
+ * FXML Controller class numberField
  */
 public class NumberField extends VBox {
 
@@ -44,6 +43,10 @@ public class NumberField extends VBox {
         this.textField = contador;
     }
 
+    /**
+     * Validador de edad
+     * @return booleano que confirma validación
+     */
     @FXML
     public boolean validateAge() {
 
