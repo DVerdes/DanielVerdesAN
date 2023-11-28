@@ -15,6 +15,7 @@ public class IniPreguntas {
 
         ArrayList <Pregunta> preguntas = new ArrayList<Pregunta>();
 
+        // borrado
 
         // Ciencia
         preguntas.add(new Pregunta(1,"¿Cuál es la unidad básica de la estructura de los ácidos nucleicos?","Ciencia",new ArrayList<>(Arrays.asList(new Respuesta("a","Aminoácido",false),new Respuesta("b","Nucleótido",true), new Respuesta("c","Monosacárido",false),new Respuesta("d","Péptido",false)))));
