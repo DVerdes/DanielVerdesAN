@@ -3,28 +3,31 @@ package org.example;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
-import org.neodatis.odb.core.query.IQuery;
-import org.neodatis.odb.core.query.criteria.Where;
-import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Hello world!
+ * Clase principal con bucle jugable
  *
  */
 public class App 
 {
+
+    static ArrayList <Pregunta> preguntasEliminadas = new ArrayList<Pregunta>();
+
     public static void main( String[] args ) throws Exception {
 
         Scanner scanner = new Scanner(System.in);
 
 
         Partida partida = new Partida(new ArrayList<Jugador>());
+        ArrayList <Pregunta> preguntasConsultadas = consultarPreguntas();
+
+
         int numeroJugadores = 0;
         String letraCorrecta = "";
-        int puntosVictoria = 3;
+        int puntosVictoria = 5;
         int contadorGanadores = 0;
         String nombreGanador = "";
         String respuestaJugador = "";
@@ -32,11 +35,11 @@ public class App
 
         System.out.println("Bienvenido al trivial!");
         System.out.println("Introduzca el número de jugadores");
-        numeroJugadores = scanner.nextInt();
+        numeroJugadores = pedirNumero(6);
 
         for(int i = 1; i<numeroJugadores+1; i++){
             System.out.println("Jugador "+i+", introduzca su nombre: ");
-            partida.getJugadores().add(new Jugador(scanner.next(),0));
+            partida.getJugadores().add(new Jugador(pedirNombre(10),0));
         }
 
         System.out.println(partida.toString());
@@ -47,7 +50,9 @@ public class App
             // Bucle jugadores
             for(int i = 0; i<partida.getJugadores().size(); i++){
                 System.out.println("Turno de "+partida.getJugadores().get(i).getNombre()+": ");
-                Pregunta pregunta = consultarPregunta();
+                Pregunta pregunta = preguntaAleatoria(preguntasConsultadas);
+                preguntasEliminadas.add(pregunta);
+                preguntasConsultadas.remove(pregunta);
                 System.out.println("Categoría: "+pregunta.getTema());
                 System.out.println(pregunta.getEnunciado());
                 for(int j = 0; j<pregunta.getRespuestas().size(); j++){
@@ -56,8 +61,8 @@ public class App
                         letraCorrecta = pregunta.getRespuestas().get(j).getLetra();
                     }
                 }
-                respuestaJugador = scanner.next();
-                if(respuestaJugador.equals(letraCorrecta)){
+
+                if(pedirOpcion().equals(letraCorrecta)){
                     System.out.println("Respuesta correcta!");
                     System.out.println(partida.getJugadores().get(i).getNombre()+" gana un punto");
                     partida.getJugadores().get(i).setPuntos(partida.getJugadores().get(i).getPuntos()+1);
@@ -95,47 +100,109 @@ public class App
 
         System.out.println("Fin partida");
 
+
     }
 
-    public static Pregunta consultarPregunta() throws Exception{
+    /**
+     * Saca pregunta aleatoria (también repone preguntas si se han agotado)
+     * @param preguntasConsultadas listado de preguntas actual
+     * @return pregunta aleatoria
+     */
+    private static Pregunta preguntaAleatoria(ArrayList<Pregunta> preguntasConsultadas) {
+        if(preguntasConsultadas.size()==0){
+            System.out.println("Reponiendo preguntas");
+            preguntasConsultadas = preguntasEliminadas;
+        }
+        return preguntasConsultadas.get((int) (Math.random() * (preguntasConsultadas.size() - 0)) + 0);
+    }
 
+
+    /**
+     * Consulta listado de preguntas de la BBDD
+     * @return lista de preguntas completo
+     * @throws Exception
+     */
+    public static ArrayList<Pregunta> consultarPreguntas() throws Exception{
         ODB odb = null;
         ArrayList <Pregunta> coleccionPreguntas = new ArrayList<Pregunta>();
-
         try{
-            odb = ODBFactory.open("C:\\BBOO\\NeodatisTrivial.db");
-
-            IQuery query = new CriteriaQuery(Pregunta.class, Where.equal("tema",temaAleatorio()));
-            Objects preguntas = odb.getObjects(query);
-
+            odb = ODBFactory.open("NeodatisTrivial.db");
+            Objects preguntas = odb.getObjects(Pregunta.class);
             while (preguntas.hasNext()){
                 coleccionPreguntas.add((Pregunta) preguntas.next());
             }
-
-            return coleccionPreguntas.get((int) (Math.random() * (coleccionPreguntas.size() - 0)) + 0);
-
+            return coleccionPreguntas;
         }finally{
             if(odb!=null){
                 odb.close();
             }
         }
-
     }
 
 
-    public static String temaAleatorio(){
-        int random = (int) (Math.random() * (3 - 1)) + 1;
-        switch (random){
-            case 1:
-                return "Ciencia";
-            case 2:
-                return "Cine";
-            case 3:
-                return "Historia";
+    /**
+     * Pide un número al jugador,
+     *  realiza manejo de excepciones
+     * @param limite superior del número
+     * @return número introducido por jugador
+     */
+    public static int pedirNumero(int limite) {
+        int numero = 0;
+        boolean comprobacion = false;
+        do {
+            Scanner scanner = new Scanner(System.in);
+            try {
+                do {
+                    numero = Integer.parseInt(scanner.next());
+                    if (numero >= limite || numero <= 0) {
+                        System.out.println("Por favor, introduzca un valor entre 1 y 6");
+                    }
+                } while (numero >= limite || numero <= 0);
+                comprobacion = true;
+            } catch (Exception e) {
+                System.out.println("Por favor, introduzca un valor correcto");
+                comprobacion = false;
+            }
+        } while (!comprobacion);
+        return numero;
+    }
 
+
+    /**
+     * Pide nombre al jugador
+     * @param longitudMaxima longitud máxima del nombre
+     * @return nombre comprobado
+     */
+    public static String pedirNombre(int longitudMaxima) {
+        Scanner scanner = new Scanner(System.in);
+        String nombre = "";
+
+        do {
+            nombre = scanner.nextLine();
+            if (nombre.equals("")) {
+                System.out.println("Por favor, escriba un nombre");
+            } else if (nombre.length() > longitudMaxima) {
+                System.out.println("Por favor, escriba un nombre más corto");
+            }
+
+        } while (nombre.equals("") || nombre.length() > longitudMaxima);
+
+        return nombre;
+    }
+
+    /**
+     * Pide opción de respuesta al jugador y comprueba su validez
+     * @return opción controlada
+     */
+    public static String pedirOpcion() {
+        Scanner scanner = new Scanner(System.in);
+        String opcion = "";
+        do {
+            opcion = scanner.nextLine().toLowerCase();
+            if (!opcion.equals("a") && !opcion.equals("b") && !opcion.equals("c") && !opcion.equals("d")) {
+                System.out.println("Por favor, elija una opción correcta");
+            }
+        }while (!opcion.equals("a") && !opcion.equals("b") && !opcion.equals("c") && !opcion.equals("d")) ;
+            return opcion;
         }
-
-        return null;
-    }
-
 }
