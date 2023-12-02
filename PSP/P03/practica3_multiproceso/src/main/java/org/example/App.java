@@ -3,8 +3,8 @@ package org.example;
 import java.util.Scanner;
 
 /**
- * Hello world!
- *
+ * PSP 3.1
+ * Leer cadena de texto desde entrada estándasr
  */
 public class App 
 {
