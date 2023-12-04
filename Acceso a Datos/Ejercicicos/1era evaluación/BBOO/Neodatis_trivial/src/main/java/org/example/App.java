@@ -14,56 +14,75 @@ import java.util.Scanner;
 public class App 
 {
 
+    // ArrayList para guardar preguntas eliminadas
     static ArrayList <Pregunta> preguntasEliminadas = new ArrayList<Pregunta>();
 
     public static void main( String[] args ) throws Exception {
 
         Scanner scanner = new Scanner(System.in);
 
+        // Variables
+        // numero de jugadores
+        int numeroJugadores = 0;
+        // preguntas acertadas para obtener victoria
+        int puntosVictoria = 5;
+        // control desempate
+        int contadorGanadores = 0;
+        // contador de rondas
+        int contadorRondas = 0;
 
+        // letra de respuesta correcta
+        String letraCorrecta = "";
+        // nombre de ganador
+        String nombreGanador = "";
+
+
+        // Creando nueva partida
         Partida partida = new Partida(new ArrayList<Jugador>());
+        // Guardando preguntas BBDD
         ArrayList <Pregunta> preguntasConsultadas = consultarPreguntas();
 
 
-        int numeroJugadores = 0;
-        String letraCorrecta = "";
-        int puntosVictoria = 5;
-        int contadorGanadores = 0;
-        String nombreGanador = "";
-        String respuestaJugador = "";
-        int contadorRondas = 0;
-
         System.out.println("Bienvenido al trivial!");
+        //número de jugadores
         System.out.println("Introduzca el número de jugadores");
         numeroJugadores = pedirNumero(6);
 
+        // nombres de jugadores
         for(int i = 1; i<numeroJugadores+1; i++){
             System.out.println("Jugador "+i+", introduzca su nombre: ");
             partida.getJugadores().add(new Jugador(pedirNombre(10),0));
         }
 
-        System.out.println(partida.toString());
-
+        // bucle jugable
         while (true){
+            // Nueva ronda
             contadorRondas++;
             System.out.println("Ronda "+contadorRondas+":");
-            // Bucle jugadores
+            // Bucle turno
             for(int i = 0; i<partida.getJugadores().size(); i++){
                 System.out.println("Turno de "+partida.getJugadores().get(i).getNombre()+": ");
+                // pregunta seleccionada
                 Pregunta pregunta = preguntaAleatoria(preguntasConsultadas);
+                // elmina pregunta
                 preguntasEliminadas.add(pregunta);
                 preguntasConsultadas.remove(pregunta);
+                // muestra tema y enunciado
                 System.out.println("Categoría: "+pregunta.getTema());
                 System.out.println(pregunta.getEnunciado());
+                // bucle de respuestas
                 for(int j = 0; j<pregunta.getRespuestas().size(); j++){
                     System.out.println(pregunta.getRespuestas().get(j).getLetra()+") "+pregunta.getRespuestas().get(j).getContenido());
                     if(pregunta.getRespuestas().get(j).isEsCorrecta()){
+                        // guarda respuesta correcta
                         letraCorrecta = pregunta.getRespuestas().get(j).getLetra();
                     }
                 }
 
+                // jugador elige opción
                 if(pedirOpcion().equals(letraCorrecta)){
                     System.out.println("Respuesta correcta!");
+                    // añadir punto
                     System.out.println(partida.getJugadores().get(i).getNombre()+" gana un punto");
                     partida.getJugadores().get(i).setPuntos(partida.getJugadores().get(i).getPuntos()+1);
                 }else{
@@ -84,23 +103,21 @@ public class App
                 }
             }
 
+            // Control de ganador
             if(contadorGanadores==1){
+                // Fin de partida
                 System.out.println("GANA "+nombreGanador);
                 break;
             }else if(contadorGanadores>1){
+                // Desempate (partida continúa)
                 System.out.println("Desempate!");
                 puntosVictoria++;
             }
             contadorGanadores = 0;
-
-
-
         }
 
-
+        // Fin
         System.out.println("Fin partida");
-
-
     }
 
     /**
@@ -139,7 +156,6 @@ public class App
         }
     }
 
-
     /**
      * Pide un número al jugador,
      *  realiza manejo de excepciones
@@ -166,7 +182,6 @@ public class App
         } while (!comprobacion);
         return numero;
     }
-
 
     /**
      * Pide nombre al jugador

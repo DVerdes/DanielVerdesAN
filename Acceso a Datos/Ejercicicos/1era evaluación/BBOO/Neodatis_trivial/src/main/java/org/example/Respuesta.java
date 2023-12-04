@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Clase para generar objetos Respuesta
+ */
 public class Respuesta {
 
 

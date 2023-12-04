@@ -2,6 +2,9 @@ package org.example;
 
 import java.util.ArrayList;
 
+/**
+ * Clase para generar objetos partida
+ */
 public class Partida {
 
     private ArrayList <Jugador> jugadores;

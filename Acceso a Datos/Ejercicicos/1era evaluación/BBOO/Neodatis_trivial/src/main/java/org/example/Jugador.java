@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Clase para crear objetos Jugador
+ */
 public class Jugador {
 
     private String nombre;
