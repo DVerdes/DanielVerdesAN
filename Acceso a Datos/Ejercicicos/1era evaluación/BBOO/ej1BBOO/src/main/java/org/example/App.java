@@ -132,15 +132,10 @@ public class App
             Objects jugadores = odb.getObjects(query);
             Jugador jugador = (Jugador) jugadores.getFirst();
             odb.delete(jugador);
-
-
         }finally{
             if(odb!=null){
                 odb.close();
             }
         }
-
-
     }
-
 }
