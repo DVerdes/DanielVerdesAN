@@ -12,7 +12,7 @@ class Inicio extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(height: 100),
-            Text(persona.nombre + ' ' + persona.apellidos + '\n' + persona.telefono.toString() + '\n' + persona.correo),
+            Text(persona.nombre + ' ' + persona.contrasena + '\n' + persona.telefono.toString() + '\n' ),
           ],
         ));
   }
@@ -20,14 +20,23 @@ class Inicio extends StatelessWidget {
 
 class Persona {
   String nombre = "";
-  String apellidos = "";
+  String contrasena = "";
   int telefono = 0;
-  String correo = "";
 
-  Persona(String nombre, String apellidos, int telefono, String correo) {
+  Persona(String nombre, String contrasena, int telefono) {
     this.nombre = nombre;
-    this.apellidos = apellidos;
+    this.contrasena = contrasena;
     this.telefono = telefono;
-    this.correo = correo;
+  }
+}
+
+class Usuario {
+  String usuario = "";
+ String contrasena = "";
+
+  Usuario(String usuario, String contrasena) {
+    this.usuario = usuario;
+    this.contrasena = contrasena;
+  
   }
 }

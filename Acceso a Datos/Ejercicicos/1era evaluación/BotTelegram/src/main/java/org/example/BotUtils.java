@@ -101,54 +101,29 @@ public class BotUtils {
 
             } else if (texto.equals("/start")) {
                 // si se inicializa el bot
-                envio.setText("Bienvenido!, escriba /ayuda para obtener la lista de comandos y funcionalidades que ofrece el bot");
+                envio.setText("Felices fiestas!, escribe /villancico para que el bot te recite una canción navideña!");
+                enviarMensaje(envio);
+                envio.setText("https://qrco.de/bedcQ3\n");
                 enviarMensaje(envio);
 
 
-            } else if (texto.equals("/nombre")) {
+            } else if (texto.equals("/villancico")) {
                 // comando para devolver nombres aleatorios del fichero JSON
-                ArrayList<Nombre> listaNombres = JsonUtils.leerJSON("src\\json\\names.json");
+                ArrayList<Nombre> listaNombres = JsonUtils.leerJSON("src\\json\\villancicos.json");
                 int random = (int) Math.floor(Math.random() * ((listaNombres.size() - 1) - 0 + 1) + 0);
 
                 // Crear el mensaje de envío
 
-                envio.setText("Nombre aleatorio: " + listaNombres.get(random).getNombre());
+                envio.setText(listaNombres.get(random).getNombre());
 
                 // Enviar mensaje
                 enviarMensaje(envio);
 
 
-            } else if (texto.matches("^/anadirNombre .*$")) {
-                // comando para añadir nombres al fichero JSON especificados tras comando /anadirNombre
-                String[] arrOfStr = texto.split(" ", 15);
-
-                // control de error con nombres compuestos
-                if (arrOfStr.length > 2) {
-                    envio.setText("Por favor, introduzca un nombre de una sola palabra");
-                } else {
-                    envio.setText(JsonUtils.anadirNombre(arrOfStr[1]));
-
-                }
-
-                enviarMensaje(envio);
-
-
             } else if (texto.equals("/ayuda")) {
                 // información de ayuda
-                envio.setText("Lista de comandos: \n-/nombre: devuelve nombre aleatorio\n-/anadirNombre nombre): añade el nombre indicado\n-/encuentro VD: devuelve un encuentro aleatorio con un VD especificado en formato numérico (1-3)\n-/datos nombreCriatura: devuelve las estadísticas de la criatura especificada");
+                envio.setText("Felices fiestas!, escribe /villancico para que el bot te recite una canción navideña!");
 
-                enviarMensaje(envio);
-
-            } else if (texto.matches("^/encuentro [0-9]$")) {
-                // comando para obtener un encuentro aleatorio de un determinado valor de desafío
-                String[] arrOfStr = texto.split(" ", 2);
-                envio.setText(XMLUtils.sacarEncuentroAleatorio(Integer.parseInt(arrOfStr[1])));
-                enviarMensaje(envio);
-
-            } else if (texto.matches("^/datos .*$")) {
-                // comando para sacar datos de una criatura de un .txt
-                String[] arrOfStr = texto.split(" ", 15);
-                envio.setText(FicheroUtils.leerDatosCriatura(arrOfStr[1]));
                 enviarMensaje(envio);
 
 

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_login/pages/conexion/conectionUser.dart';
 import 'package:proyecto_login/pages/inicio.dart';
 
-class Login extends StatelessWidget {
-  String usuario = "";
+class Registro extends StatelessWidget {
+  String nombre = "";
   String contrasena = "";
-  String mensajeError = "";
+  int telefono = 0;
  
 
   final formKey = GlobalKey<FormState>();
@@ -14,7 +13,7 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Login"),
+          title: Text("Registro"),
         ),
         body: Center(
           child: Form(
@@ -22,9 +21,9 @@ class Login extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
-                      decoration: InputDecoration(labelText: "Usuario"),
+                      decoration: InputDecoration(labelText: "Nombre"),
                       onSaved: (value) {
-                        usuario = value!;
+                        nombre = value!;
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -41,40 +40,25 @@ class Login extends StatelessWidget {
                       contrasena = value!;
                     },
                   ),
-                  Row(
-                    children: [
-                      Container(padding: EdgeInsets.only(top: 30), child: TextButton(onPressed: () => recogerDatos(context), child: Text("Enviar"))),
-                      Container(padding: EdgeInsets.only(top: 30), child: TextButton(onPressed: () => irRegistro(context), child: Text("Registro"))),
-
-                    ],
+                  TextFormField(
+                    decoration: InputDecoration(labelText: "Telefono"),
+                    keyboardType: TextInputType.phone,
+                    onSaved: (value) {
+                      telefono = int.parse(value!);
+                    },
                   ),
+                 
+                  Container(padding: EdgeInsets.only(top: 30), child: TextButton(onPressed: () => recogerDatos(context), child: Text("Enviar"))),
                 ],
               )),
         ));
   }
 
-  recogerDatos(BuildContext context) async{
+  recogerDatos(BuildContext context) {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
 
-      ConectionUser con = ConectionUser();
-      Persona persona = await con.login(usuario, contrasena);
-
-      if(persona.nombre!=''){
-          Navigator.of(context).pushNamed("/inicio", arguments: persona);
-
-      }
-
+      Navigator.of(context).pushNamed("/inicio", arguments: Persona(nombre, contrasena, telefono));
     }
-  }
-
-  irRegistro(BuildContext context){
-       if (formKey.currentState!.validate()) {
-      formKey.currentState!.save();
-
-      Navigator.of(context).pushNamed("/registro", arguments: Usuario(usuario, contrasena));
-    }
-
-
   }
 }
