@@ -19,9 +19,9 @@ public class HiloCarrera extends Thread{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        for(int i = 0; i<=100; i++){
-            System.out.println("Hilo" + caballo +
-                    " contando "+i+"...");
+        for(int i = 0; i<=1000000; i++){
+            //System.out.println("Hilo" + caballo +
+             //       " contando "+i+"...");
             switch (this.caballo){
                 case 1:
                     EvInicial.jbPB1.setValue(i);
@@ -30,6 +30,7 @@ public class HiloCarrera extends Thread{
                 case 2:
                     EvInicial.jbPB2.setValue(i);
                     EvInicial.jbtf2.setText(String.valueOf(i));
+
                     break;
                 case 3:
                     EvInicial.jbPB3.setValue(i);
