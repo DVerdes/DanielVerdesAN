@@ -51,7 +51,7 @@ public class EvInicial extends JPanel implements ActionListener {
         jbPB1 = new JProgressBar();
         jbPB1.setBounds(20,140,650,20);
         jbPB1.setStringPainted(true);
-        jbPB1.setMaximum(1000000000);
+        jbPB1.setMaximum(100);
         add(jbPB1);
 
         jbSli2 = new JSlider();
@@ -64,7 +64,7 @@ public class EvInicial extends JPanel implements ActionListener {
         jbPB2 = new JProgressBar();
         jbPB2.setBounds(20,240,650,20);
         jbPB2.setStringPainted(true);
-        jbPB2.setMaximum(1000000);
+        jbPB2.setMaximum(100);
 
         add(jbPB2);
 
@@ -78,7 +78,7 @@ public class EvInicial extends JPanel implements ActionListener {
         jbPB3 = new JProgressBar();
         jbPB3.setBounds(20,340,650,20);
         jbPB3.setStringPainted(true);
-        jbPB3.setMaximum(1000000);
+        jbPB3.setMaximum(100);
 
         add(jbPB3);
 
@@ -104,18 +104,18 @@ public class EvInicial extends JPanel implements ActionListener {
 
         //(int) ((long) Math.random() * 1000 + 1)
 
-        HiloCarrera caballo1 = new HiloCarrera(0,jbSli1.getValue(),1);
-        HiloCarrera caballo2 = new HiloCarrera(0,jbSli2.getValue(),2);
-        HiloCarrera caballo3 = new HiloCarrera(0,jbSli3.getValue(),3);
+        HiloCarrera caballo1 = new HiloCarrera(100,jbSli1.getValue(),1);
+        HiloCarrera caballo2 = new HiloCarrera(100,jbSli2.getValue(),2);
+        HiloCarrera caballo3 = new HiloCarrera(100,jbSli3.getValue(),3);
 
-        /*
+
         caballo1.start();
         caballo2.start();
         caballo3.start();
 
         while(carreraEnCurso){
 
-
+            System.out.println("carrera");
 
         }
 
@@ -125,11 +125,9 @@ public class EvInicial extends JPanel implements ActionListener {
                 "El caballo ganador es "+caballo,
                 "Fin carrera",
                 JOptionPane.PLAIN_MESSAGE);
-*/
 
-        for(int i = 0; i<1000000000; i++){
-            jbPB1.setValue(i);
-        }
+
+
 
     }
 

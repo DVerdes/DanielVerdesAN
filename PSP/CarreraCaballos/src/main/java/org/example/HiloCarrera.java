@@ -1,10 +1,16 @@
 package org.example;
 
+import javax.swing.*;
+
+import static org.example.EvInicial.*;
+
 public class HiloCarrera extends Thread{
 
     private int valorDormido;
     private int prioridad;
     private int caballo;
+
+    private int progress;
 
     HiloCarrera(int valorDormido, int prioridad, int caballo){
         this.valorDormido = valorDormido;
@@ -19,22 +25,45 @@ public class HiloCarrera extends Thread{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        for(int i = 0; i<=1000000; i++){
-            //System.out.println("Hilo" + caballo +
-             //       " contando "+i+"...");
+        for(int i = 0; i<=100; i++){
+            System.out.println("Hilo" + caballo +
+                    " contando "+i+"...");
             switch (this.caballo){
                 case 1:
-                    EvInicial.jbPB1.setValue(i);
-                    EvInicial.jbtf1.setText(String.valueOf(i));
+                    try {
+                        sleep(valorDormido);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    progress = i;
+                    SwingUtilities.invokeLater(() -> { jbPB1.setValue(progress); EvInicial.jbtf1.setText(String.valueOf(progress)); });
+
+
                     break;
                 case 2:
-                    EvInicial.jbPB2.setValue(i);
-                    EvInicial.jbtf2.setText(String.valueOf(i));
+                    try {
+                        sleep(valorDormido);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    progress = i;
+                    SwingUtilities.invokeLater(() -> { jbPB2.setValue(progress); EvInicial.jbtf2.setText(String.valueOf(progress)); });
+
 
                     break;
                 case 3:
-                    EvInicial.jbPB3.setValue(i);
-                    EvInicial.jbtf3.setText(String.valueOf(i));
+                    try {
+                        sleep(valorDormido);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    progress = i;
+                    SwingUtilities.invokeLater(() -> { jbPB3.setValue(progress); EvInicial.jbtf3.setText(String.valueOf(progress)); });
+
+
                     break;
             }
         }
