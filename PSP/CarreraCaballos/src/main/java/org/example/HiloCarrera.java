@@ -18,6 +18,14 @@ public class HiloCarrera extends Thread{
         this.caballo = caballo;
     }// Constructor
 
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
+    }
+
     public void run(){
         this.setPriority(this.prioridad);
         try {
@@ -37,6 +45,7 @@ public class HiloCarrera extends Thread{
                     }
 
                     test3.jbPB1.setValue(i);
+                    test3.jbtf1.setText(String.valueOf(i));
 
 
 
@@ -49,6 +58,8 @@ public class HiloCarrera extends Thread{
                     }
 
                     test3.jbPB2.setValue(i);
+                    test3.jbtf2.setText(String.valueOf(i));
+
 
 
                     break;
@@ -60,6 +71,8 @@ public class HiloCarrera extends Thread{
                     }
 
                     test3.jbPB3.setValue(i);
+                    test3.jbtf3.setText(String.valueOf(i));
+
 
 
 
@@ -68,8 +81,7 @@ public class HiloCarrera extends Thread{
         }
         System.out.println(this.getPriority());
 
-        test3.carreraEnCurso = false;
-        test3.caballo = this.caballo;
+
 
 
     }//Run
