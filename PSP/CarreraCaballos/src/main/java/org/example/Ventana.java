@@ -14,9 +14,13 @@ public class Ventana extends JFrame{
         setResizable(false);
 
 
+
         // INICIAR...
         EvInicial e = new EvInicial();
         add(e);
+
+
+
 
         setVisible(true);
 

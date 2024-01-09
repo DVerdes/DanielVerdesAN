@@ -102,6 +102,8 @@ public class EvInicial extends JPanel implements ActionListener {
 
         carreraEnCurso = true;
 
+
+
         //(int) ((long) Math.random() * 1000 + 1)
 
         HiloCarrera caballo1 = new HiloCarrera(100,jbSli1.getValue(),1);
@@ -114,9 +116,6 @@ public class EvInicial extends JPanel implements ActionListener {
         caballo3.start();
 
         while(carreraEnCurso){
-
-            System.out.println("carrera");
-
         }
 
         System.out.println("El caballo ganador es "+caballo);

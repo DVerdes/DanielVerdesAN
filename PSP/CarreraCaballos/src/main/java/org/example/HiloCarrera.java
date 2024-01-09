@@ -36,8 +36,8 @@ public class HiloCarrera extends Thread{
                         throw new RuntimeException(e);
                     }
 
-                    progress = i;
-                    SwingUtilities.invokeLater(() -> { jbPB1.setValue(progress); EvInicial.jbtf1.setText(String.valueOf(progress)); });
+                    test3.jbPB1.setValue(i);
+
 
 
                     break;
@@ -48,8 +48,7 @@ public class HiloCarrera extends Thread{
                         throw new RuntimeException(e);
                     }
 
-                    progress = i;
-                    SwingUtilities.invokeLater(() -> { jbPB2.setValue(progress); EvInicial.jbtf2.setText(String.valueOf(progress)); });
+                    test3.jbPB2.setValue(i);
 
 
                     break;
@@ -60,16 +59,19 @@ public class HiloCarrera extends Thread{
                         throw new RuntimeException(e);
                     }
 
-                    progress = i;
-                    SwingUtilities.invokeLater(() -> { jbPB3.setValue(progress); EvInicial.jbtf3.setText(String.valueOf(progress)); });
+                    test3.jbPB3.setValue(i);
+
 
 
                     break;
             }
         }
         System.out.println(this.getPriority());
-        EvInicial.carreraEnCurso = false;
-        EvInicial.caballo = this.caballo;
+
+        test3.carreraEnCurso = false;
+        test3.caballo = this.caballo;
+
+
     }//Run
 
 }
