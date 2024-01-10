@@ -148,8 +148,8 @@ public class test3 implements ActionListener, Runnable {
     public void run(){
 
         HiloCarrera hc = new HiloCarrera(50,5,1);
-        HiloCarrera hc2 = new HiloCarrera(70,5,2);
-        HiloCarrera hc3 = new HiloCarrera(40,5,3);
+        HiloCarrera hc2 = new HiloCarrera(50,5,2);
+        HiloCarrera hc3 = new HiloCarrera(50,5,3);
 
 
 

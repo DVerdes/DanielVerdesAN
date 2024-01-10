@@ -6,24 +6,23 @@ import java.sql.*;
  * Hello world!
  *
  */
-public class App 
+public class App
 {
     public static void main( String[] args ) throws SQLException {
 
 
-        buscarJugadores("Lucas");
 
     }
 
     public static Connection conectarBD(){
         String connecionUrl =
                 "jdbc:sqlserver://localhost:1445;"
-                    + "database=Pruebas;"
-                    + "user=sa;"
-                    + "password=ADMIN0;"
-                    + "encrypt=true;"
-                    + "trustServerCertificate=true;"
-                    + "loginTimeout=30;";
+                        + "database=Pruebas;"
+                        + "user=sa;"
+                        + "password=ADMIN0;"
+                        + "encrypt=true;"
+                        + "trustServerCertificate=true;"
+                        + "loginTimeout=30;";
         try{
             Connection connection = DriverManager.getConnection(connecionUrl);
             System.out.println("Conexión OK");
@@ -34,13 +33,13 @@ public class App
         }
     }
 
-    public static void crearTabla() throws SQLException{
+    public static void crearTablaAlm() throws SQLException{
         Connection c = conectarBD();
         Statement s = null;
         try{
             s = c.createStatement();
-            String sentenciaDDL = "CREATE TABLE Jugadores ("
-                    + "id int IDENTITY(1,1) PRIMARY KEY,"
+            String sentenciaDDL = "CREATE TABLE Almacenes ("
+                    + "idAlmacen INT PRIMARY KEY IDENTITY(1,1),"
                     + "nombre varchar(20) NOT NULL,"
                     + "dorsal int NOT NULL)";
             s.executeUpdate(sentenciaDDL);
