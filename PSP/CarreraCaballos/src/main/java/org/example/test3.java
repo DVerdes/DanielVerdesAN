@@ -1,6 +1,5 @@
 package org.example;
 
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -15,6 +14,8 @@ public class test3 implements ActionListener, Runnable {
     static JSlider jbSli2;
     static JSlider jbSli3;
 
+    static JButton jbInicio;
+
 
 
     static JTextField jbtf1;
@@ -26,7 +27,7 @@ public class test3 implements ActionListener, Runnable {
     static test3 _this;
 
 
-
+    static boolean haFinalizado = false;
     static int caballo;
 
 
@@ -36,20 +37,14 @@ public class test3 implements ActionListener, Runnable {
     }
 
     private static void createAndShowGUI(){
-        JFrame aFrame = new JFrame("Swing Thread Example:  Fixed Threading");
+        JFrame aFrame = new JFrame("PSP02P02");
 
         aFrame.setTitle("PSP02P02");
         aFrame.setBounds(100, 100, 700, 600);
         aFrame.setResizable(false);
 
 
-
-
-        JButton jbInicio;
-
-
-
-
+        aFrame.setLayout(null);
 
         jbInicio = new JButton();
         jbInicio.setBounds(250, 30, 200, 30);
@@ -115,13 +110,15 @@ public class test3 implements ActionListener, Runnable {
 
 
 
+
+        aFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         aFrame.setVisible(true);
+
 
 
     }
 
     public static void main(String args[]){
-
 
         test3 t2 = new test3();
         Thread hilo2 = new Thread(t2);
@@ -130,15 +127,26 @@ public class test3 implements ActionListener, Runnable {
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-
                 createAndShowGUI();
+
                 hilo2.start();
 
             }
         });
+
+
+
+
     }
 
+
+
     public void actionPerformed(ActionEvent ae){
+
+
+
+        jbInicio.setEnabled(false);
+
 
         // signal the worker thread to get crackin
         synchronized(this){notifyAll();}
@@ -146,6 +154,7 @@ public class test3 implements ActionListener, Runnable {
 
     // worker thread
     public void run(){
+
 
         HiloCarrera hc = new HiloCarrera(50,5,1);
         HiloCarrera hc2 = new HiloCarrera(50,5,2);
@@ -167,7 +176,9 @@ public class test3 implements ActionListener, Runnable {
             hc2.start();
             hc3.start();
 
-            while (hc.isAlive() && hc2.isAlive() && hc3.isAlive()){
+
+
+        while (hc.isAlive() && hc2.isAlive() && hc3.isAlive()){
             }
 
             if(!hc.isAlive()){
@@ -183,5 +194,27 @@ public class test3 implements ActionListener, Runnable {
                 "FIN CARRERA",
                 JOptionPane.PLAIN_MESSAGE);
 
+        haFinalizado = true;
+        resetearUI();
+
     }
+
+
+    public void resetearUI(){
+        jbPB1.setValue(0);
+        jbPB2.setValue(0);
+        jbPB3.setValue(0);
+
+        jbtf1.setText("");
+        jbtf2.setText("");
+        jbtf3.setText("");
+
+        jbInicio.setEnabled(true);
+
+
+
+    }
+
+
+
 }

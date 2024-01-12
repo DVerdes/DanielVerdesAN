@@ -10,7 +10,6 @@ public class HiloCarrera extends Thread{
     private int prioridad;
     private int caballo;
 
-    private int progress;
 
     HiloCarrera(int valorDormido, int prioridad, int caballo){
         this.valorDormido = valorDormido;
@@ -18,9 +17,6 @@ public class HiloCarrera extends Thread{
         this.caballo = caballo;
     }// Constructor
 
-    public int getPrioridad() {
-        return prioridad;
-    }
 
     public void setPrioridad(int prioridad) {
         this.prioridad = prioridad;
