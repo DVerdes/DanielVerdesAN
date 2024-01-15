@@ -1,6 +1,7 @@
 package org.example;
 
 import java.sql.*;
+import java.time.Instant;
 
 /**
  * Hello world!
@@ -10,12 +11,15 @@ public class App
 {
     public static void main( String[] args ) throws SQLException {
 
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
         eliminarTabla();
         crearTabla();
         agregarCampo();
         //
         //
         //
+        /*
         insertarEquipo("Lakers",200000000);
         insertarEquipo("76ers",100000000);
         insertarEquipo("OKC",100000000);
@@ -33,8 +37,23 @@ public class App
 
         gestionTransacciones();
         mostrarEquipos();
+        insertarLote();
+        mostrarEquipos();
+        */
+        long time1 = System.currentTimeMillis();
+        for(int i = 0; i<100000; i++){
+            insertarEquipo("OKC",10000);
+        }
+        long time2 = System.currentTimeMillis();
+
+        long time3 = System.currentTimeMillis();
+        insertarLote();
+        long time4 = System.currentTimeMillis();
 
 
+
+        System.out.println((time2-time1)/1000+" segundos (insert normal)");
+        System.out.println((time4-time3)/1000+" segundos (batch)");
     }
 
     public static Connection conectarBD() throws SQLException {
@@ -302,5 +321,37 @@ public class App
             c.close();
         }
     }
+
+    public static void insertarLote() throws SQLException{
+        Connection c = conectarBD();
+        PreparedStatement s = null;
+        try{
+            s = c.prepareStatement("INSERT INTO Equipos (nombre,presupuesto) VALUES (?,?);",
+                    Statement.RETURN_GENERATED_KEYS);
+
+                for (int j = 0; j<100000; j++){
+                    s.setString(1,"Heat");
+                    s.setInt(2,345666);
+                    s.addBatch();
+                    System.out.println("Insertando "+j);
+                    if(j%1000==0){
+                        s.executeBatch();
+
+                    }
+                }
+            s.executeBatch();
+
+
+
+            System.out.println("Insertados equipos ok");
+        }catch (SQLException e){
+            System.out.println("Insertar equipo KO");
+            throw new RuntimeException(e);
+        }finally {
+            if(s!=null) s.close();;
+            if (c!=null) c.close();
+        }
+    }
+
 
 }
