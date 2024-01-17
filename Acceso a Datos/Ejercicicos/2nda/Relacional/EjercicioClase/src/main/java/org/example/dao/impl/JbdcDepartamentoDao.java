@@ -23,7 +23,6 @@ public class JbdcDepartamentoDao implements DepartamentoDao {
         PreparedStatement s = null;
         try{
             s = c.prepareStatement("SELECT * FROM Departamento");
-            List <Departamento> departamentos = new ArrayList<Departamento>();
 
             return DepartamentoMapper.resALista(s.executeQuery());
 
