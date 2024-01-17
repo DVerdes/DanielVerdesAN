@@ -22,7 +22,7 @@ public class test3 implements ActionListener, Runnable {
     static  JTextField jbtf2;
     static JTextField jbtf3;
 
-    static JTextField jbtf4;
+    static JFrame aFrame;
 
     static test3 _this;
 
@@ -37,7 +37,7 @@ public class test3 implements ActionListener, Runnable {
     }
 
     private static void createAndShowGUI(){
-        JFrame aFrame = new JFrame("PSP02P02");
+        aFrame = new JFrame("PSP02P02");
 
         aFrame.setTitle("PSP02P02");
         aFrame.setBounds(100, 100, 700, 600);
@@ -103,9 +103,6 @@ public class test3 implements ActionListener, Runnable {
         jbtf3.setBounds(500,450,100,30);
         aFrame.add(jbtf3);
 
-        jbtf4 = new JTextField();
-        jbtf4.setBounds(300,450,100,30);
-        aFrame.add(jbtf4);
 
 
 
@@ -120,8 +117,16 @@ public class test3 implements ActionListener, Runnable {
 
     public static void main(String args[]){
 
+
+        iniciar();
+
+
+
+
+    }
+
+    public static void iniciar(){
         test3 t2 = new test3();
-        Thread hilo2 = new Thread(t2);
 
 
 
@@ -129,20 +134,18 @@ public class test3 implements ActionListener, Runnable {
             public void run() {
                 createAndShowGUI();
 
-                hilo2.start();
+                Thread h = new Thread(t2);
+                h.start();
+
 
             }
         });
-
-
-
 
     }
 
 
 
     public void actionPerformed(ActionEvent ae){
-
 
 
         jbInicio.setEnabled(false);
@@ -196,6 +199,7 @@ public class test3 implements ActionListener, Runnable {
 
         haFinalizado = true;
         resetearUI();
+        iniciar();
 
     }
 
@@ -210,6 +214,8 @@ public class test3 implements ActionListener, Runnable {
         jbtf3.setText("");
 
         jbInicio.setEnabled(true);
+
+        aFrame.dispose();
 
 
 
