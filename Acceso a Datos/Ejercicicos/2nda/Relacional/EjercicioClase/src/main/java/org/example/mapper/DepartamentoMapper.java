@@ -47,6 +47,10 @@ public class DepartamentoMapper {
         return departamentos;
     }
 
+    public static Departamento resADep(ResultSet res) throws SQLException {
+        return new Departamento(res.getInt("id"),res.getString("nombre"),res.getString("ubicacion"),res.getString("email"),res.getString("telefono"));
+    }
+
 
 
 

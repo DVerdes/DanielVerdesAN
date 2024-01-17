@@ -63,7 +63,7 @@ public class JbdcDepartamentoDao implements DepartamentoDao {
             s = c.prepareStatement("SELECT * FROM Departamento WHERE id like ?");
             s.setString(1,"%"+id+"%");
             ResultSet res = s.executeQuery();
-            while (res.next())return new Departamento(res.getInt("id"),res.getString("nombre"),res.getString("ubicacion"),res.getString("email"),res.getString("telefono"));
+            while (res.next())return DepartamentoMapper.resADep(res);
 
             return null;
 

@@ -31,7 +31,7 @@ public class App
         }
 
         //obtener por id
-        System.out.println(ds.obtenerPorId(1).toString());
+        System.out.println(ds.obtenerPorId(3).toString());
 
         // crear
         DepartamentoDTO depDTO =  new DepartamentoDTO("Contabilidad","Barcelona","log@gmail.com","654123123",0);
