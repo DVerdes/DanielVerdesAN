@@ -2,6 +2,7 @@ package org.example.dao.impl;
 
 import org.example.dao.DBConnector;
 import org.example.dao.DepartamentoDao;
+import org.example.mapper.DepartamentoMapper;
 import org.example.model.Departamento;
 
 import java.sql.Connection;
@@ -24,11 +25,7 @@ public class JbdcDepartamentoDao implements DepartamentoDao {
             s = c.prepareStatement("SELECT * FROM Departamento");
             List <Departamento> departamentos = new ArrayList<Departamento>();
 
-            ResultSet res = s.executeQuery();
-            while (res.next()){
-                departamentos.add(new Departamento(res.getInt("id"), res.getString("nombre"),res.getString("ubicacion"),res.getString("email"),res.getString("telefono")));
-            }
-            return departamentos;
+            return DepartamentoMapper.resALista(s.executeQuery());
 
         }catch (SQLException e){
             System.out.println("Consulta KO");

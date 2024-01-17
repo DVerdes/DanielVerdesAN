@@ -3,6 +3,7 @@ package org.example.service.impl;
 import org.example.dao.DepartamentoDao;
 import org.example.dao.impl.JbdcDepartamentoDao;
 import org.example.dto.DepartamentoDTO;
+import org.example.mapper.DepartamentoMapper;
 import org.example.model.Departamento;
 import org.example.service.DepartamentoService;
 
@@ -19,15 +20,10 @@ public class DepartamentoServiceImpl implements DepartamentoService {
         DepartamentoDao dd = new JbdcDepartamentoDao();
 
         List<Departamento> departamentos = dd.listar();
-        List <DepartamentoDTO> departamentoDTOS = new ArrayList<DepartamentoDTO>();
-
-        for(Departamento departamento: departamentos){
-            departamentoDTOS.add(new DepartamentoDTO(departamento.getId(),departamento.getNombre(),departamento.getUbicacion(),departamento.getEmail(),departamento.getTelefono(),dd.contarEmpleadosDepartamento(departamento.getId())));
+        return DepartamentoMapper.convertirLista(departamentos);
 
 
-        }
 
-        return departamentoDTOS;
     }
 
     @Override
