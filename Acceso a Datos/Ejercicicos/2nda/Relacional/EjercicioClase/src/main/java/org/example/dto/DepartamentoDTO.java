@@ -20,6 +20,14 @@ public class DepartamentoDTO implements Serializable {
         this.numeroEmpleados = numeroEmpleados;
     }
 
+    public DepartamentoDTO(String nombre, String ubicacion, String email, String telefono, int numeroEmpleados) {
+        this.nombre = nombre;
+        this.ubicacion = ubicacion;
+        this.email = email;
+        this.telefono = telefono;
+        this.numeroEmpleados = numeroEmpleados;
+    }
+
     public DepartamentoDTO() {
     }
 

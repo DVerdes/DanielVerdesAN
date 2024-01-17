@@ -8,13 +8,13 @@ import java.util.List;
 public interface DepartamentoService {
     List<DepartamentoDTO> obtenerTodos() throws SQLException;
 
-    List<DepartamentoDTO> obtenerPorNombre(String nombre);
+    List<DepartamentoDTO> obtenerPorNombre(String nombre) throws SQLException;
 
-    DepartamentoDTO obtenerPorId(int id);
+    DepartamentoDTO obtenerPorId(int id) throws SQLException;
 
-    int crear(DepartamentoDTO entidad);
+    int crear(DepartamentoDTO entidad) throws SQLException;
 
-    void actualizar(DepartamentoDTO entidad);
+    void actualizar(DepartamentoDTO entidad) throws SQLException;
 
-    void eliminar(int id);
+    void eliminar(int id) throws SQLException;
 }
