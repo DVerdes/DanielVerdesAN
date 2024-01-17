@@ -1,8 +1,12 @@
 package org.example;
 
 import org.example.dto.DepartamentoDTO;
+import org.example.dto.EmpleadoDTO;
+import org.example.model.Empleado;
 import org.example.service.DepartamentoService;
+import org.example.service.EmpleadoService;
 import org.example.service.impl.DepartamentoServiceImpl;
+import org.example.service.impl.EmpleadoServiceImpl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,6 +20,7 @@ public class App
     public static void main( String[] args ) throws SQLException {
 
         DepartamentoService ds = new DepartamentoServiceImpl();
+        EmpleadoService es = new EmpleadoServiceImpl();
 
         //listar todos
         List<DepartamentoDTO> lista = ds.obtenerTodos();
@@ -44,6 +49,15 @@ public class App
 
         //eliminar
         ds.eliminar(1);
+
+        //EMPLEADOS
+        //
+        //listar todos
+        List<EmpleadoDTO> listaEmp = es.obtenerTodos();
+
+        for(EmpleadoDTO emp : listaEmp){
+            System.out.println(emp.toString());
+        }
 
 
 

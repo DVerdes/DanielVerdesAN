@@ -3,11 +3,12 @@ package org.example.service;
 import org.example.dto.DepartamentoDTO;
 import org.example.dto.EmpleadoDTO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface EmpleadoService {
 
-    List<EmpleadoDTO> obtenerTodos();
+    List<EmpleadoDTO> obtenerTodos() throws SQLException;
 
     List<EmpleadoDTO> obtenerPorNombre(String nombre);
 

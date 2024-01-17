@@ -12,13 +12,14 @@ public class EmpleadoDTO implements Serializable {
     private Date fechaContratacion;
     private String direccion;
     private String telefono;
+    private String email;
     private int idDepartamento;
     private String nombreDepartamento;
 
     public EmpleadoDTO() {
     }
 
-    public EmpleadoDTO(int id, String nombre, String apellido, double salario, Date fechaContratacion, String direccion, String telefono, int idDepartamento, String nombreDepartamento) {
+    public EmpleadoDTO(int id, String nombre, String apellido, double salario, Date fechaContratacion, String direccion, String telefono, String email, int idDepartamento, String nombreDepartamento) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -26,6 +27,7 @@ public class EmpleadoDTO implements Serializable {
         this.fechaContratacion = fechaContratacion;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.email = email;
         this.idDepartamento = idDepartamento;
         this.nombreDepartamento = nombreDepartamento;
     }
@@ -86,6 +88,14 @@ public class EmpleadoDTO implements Serializable {
         this.telefono = telefono;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getIdDepartamento() {
         return idDepartamento;
     }
@@ -112,6 +122,7 @@ public class EmpleadoDTO implements Serializable {
                 ", fechaContratacion=" + fechaContratacion +
                 ", direccion='" + direccion + '\'' +
                 ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
                 ", idDepartamento=" + idDepartamento +
                 ", nombreDepartamento='" + nombreDepartamento + '\'' +
                 '}';
