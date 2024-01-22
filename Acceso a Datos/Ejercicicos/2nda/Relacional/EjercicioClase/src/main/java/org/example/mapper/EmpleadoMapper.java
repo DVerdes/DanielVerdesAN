@@ -1,6 +1,7 @@
 package org.example.mapper;
 
 import org.example.dto.EmpleadoDTO;
+import org.example.model.Departamento;
 import org.example.model.Empleado;
 
 import java.sql.ResultSet;
@@ -20,8 +21,7 @@ public class EmpleadoMapper {
     }
 
     public static EmpleadoDTO convertirADTO(Empleado empleado, String nombreDepartamento) throws SQLException {
-
-        return new EmpleadoDTO(empleado.getId(),empleado.getNombre(),empleado.getApellido(),empleado.getSalario(),empleado.getFechaContratacion(), empleado.getDireccion(),empleado.getTelefono(), empleado.getEmail(),empleado.getIdDepartamento(), nombreDepartamento);
+        return new EmpleadoDTO(empleado.getNombre(),empleado.getApellido(),empleado.getSalario(),empleado.getFechaContratacion(), empleado.getDireccion(),empleado.getTelefono(), empleado.getEmail(),empleado.getIdDepartamento(), nombreDepartamento);
     }
 
     public static List<EmpleadoDTO> convertirLista(HashMap<Empleado, String> empleadoStringHashMap) throws SQLException {
@@ -39,4 +39,13 @@ public class EmpleadoMapper {
     }
 
 
+    public static Empleado resAEmp(ResultSet res) throws SQLException {
+        return new Empleado(res.getInt("id"),res.getString("nombre"),res.getString("apellido"),res.getString("pinAcceso"),res.getDouble("salario"), res.getDate("fechaContratacion"),res.getString("direccion"),res.getString("telefono"),res.getString("email"),res.getInt("idDepartamento"));
+    }
+
+
+    public static Empleado convertirAEmpleado(EmpleadoDTO entidad) {
+        return new Empleado(entidad.getId(), entidad.getNombre(), entidad.getApellido(), "", entidad.getSalario(),entidad.getFechaContratacion(), entidad.getDireccion(), entidad.getTelefono(), entidad.getEmail(), entidad.getIdDepartamento());
+
+    }
 }

@@ -36,18 +36,39 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public List<EmpleadoDTO> obtenerPorNombre(String nombre) {
-        return null;
+    public List<EmpleadoDTO> obtenerPorNombre(String nombre) throws SQLException {
+        EmpleadoDao ed = new JbdcEmpleadoDao();
+        DepartamentoDao dd = new JbdcDepartamentoDao();
+
+
+        HashMap<Empleado, String> empleadosHashMap = new HashMap<Empleado, String>();
+
+        for(Empleado emp : ed.listarPorNombre(nombre)){
+                empleadosHashMap.put(emp,dd.obtenerDepartamento(emp.getIdDepartamento()).getNombre());
+        }
+
+
+
+
+        return EmpleadoMapper.convertirLista(empleadosHashMap);
+
     }
 
     @Override
-    public EmpleadoDTO obtenerPorId(int id) {
-        return null;
+    public EmpleadoDTO obtenerPorId(int id) throws SQLException {
+        EmpleadoDao ed = new JbdcEmpleadoDao();
+        DepartamentoDao dd = new JbdcDepartamentoDao();
+
+
+        return EmpleadoMapper.convertirADTO(ed.obtenerEmpleado(id),dd.obtenerDepartamento(ed.obtenerEmpleado(id).getIdDepartamento()).getNombre());
     }
 
     @Override
-    public int crear(EmpleadoDTO entidad) {
-        return 0;
+    public int crear(EmpleadoDTO entidad) throws SQLException {
+        EmpleadoDao ed = new JbdcEmpleadoDao();
+
+
+        return ed.insertarEmpleado(EmpleadoMapper.convertirAEmpleado(entidad));
     }
 
     @Override

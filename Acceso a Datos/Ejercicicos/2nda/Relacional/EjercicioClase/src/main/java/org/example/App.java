@@ -9,6 +9,9 @@ import org.example.service.impl.DepartamentoServiceImpl;
 import org.example.service.impl.EmpleadoServiceImpl;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -59,7 +62,38 @@ public class App
             System.out.println(emp.toString());
         }
 
+        //listar x nombre
+        List<EmpleadoDTO> listaEMP2 = es.obtenerPorNombre("paco");
+
+        for(EmpleadoDTO empleado : listaEMP2){
+            System.out.println(empleado.toString());
+        }
+
+        // obtener por id
+
+        EmpleadoDTO emp = es.obtenerPorId(4);
+        System.out.println(emp.toString());
+
+        // crear empleado
+
+        es.crear(new EmpleadoDTO("Jacinto","García",12000,StringToDate("2015-12-06 17:03:00"),"Betanzos","676998765","jacinto@gmail.com",2,"daigual"));
 
 
+
+    }
+
+    public static Date StringToDate(String s){
+
+        Date result = null;
+        try{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            result  = dateFormat.parse(s);
+        }
+
+        catch(ParseException e){
+            e.printStackTrace();
+
+        }
+        return result ;
     }
 }

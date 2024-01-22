@@ -10,6 +10,12 @@ public interface EmpleadoDao {
 
     List<Empleado> listar() throws SQLException;
 
+    List<Empleado> listarPorNombre(String nombre) throws SQLException;
+
+    Empleado obtenerEmpleado(int id) throws SQLException;
+
+    int insertarEmpleado(Empleado empleado) throws SQLException;
+
 
 
 

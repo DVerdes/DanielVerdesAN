@@ -19,8 +19,7 @@ public class EmpleadoDTO implements Serializable {
     public EmpleadoDTO() {
     }
 
-    public EmpleadoDTO(int id, String nombre, String apellido, double salario, Date fechaContratacion, String direccion, String telefono, String email, int idDepartamento, String nombreDepartamento) {
-        this.id = id;
+    public EmpleadoDTO( String nombre, String apellido, double salario, Date fechaContratacion, String direccion, String telefono, String email, int idDepartamento, String nombreDepartamento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.salario = salario;
