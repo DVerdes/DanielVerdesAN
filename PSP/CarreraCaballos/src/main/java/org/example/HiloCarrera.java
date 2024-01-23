@@ -1,16 +1,25 @@
 package org.example;
 
-import javax.swing.*;
-
-import static org.example.EvInicial.*;
-
+/**
+ * Clase de HiloCarrera
+ */
 public class HiloCarrera extends Thread{
 
+    //ATRIBUTOS
+    // Valor para sleep entre iteraciones
     private int valorDormido;
+    // Prioridad del hilo
     private int prioridad;
+    // Número del caballo
     private int caballo;
 
 
+    /**
+     * Constructor
+     * @param valorDormido Valor para sleep entre iteraciones
+     * @param prioridad Prioridad del hilo
+     * @param caballo Número del caballo
+     */
     HiloCarrera(int valorDormido, int prioridad, int caballo){
         this.valorDormido = valorDormido;
         this.prioridad = prioridad;
@@ -18,68 +27,43 @@ public class HiloCarrera extends Thread{
     }// Constructor
 
 
-    public void setPrioridad(int prioridad) {
-        this.prioridad = prioridad;
-    }
-
+    /**
+     * Método run()
+     */
     public void run(){
+        // Asigna prioridad al hilo
         this.setPriority(this.prioridad);
-        try {
-            sleep(valorDormido);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        // Iteración de hilo
         for(int i = 0; i<=100; i++){
+            // Mensaje por consola
             System.out.println("Hilo" + caballo +
                     " contando "+i+"...");
+            // Switch para que el hilo modifique unicamente los elementos de la GUI propios
             switch (this.caballo){
+                // CABALLO 1
                 case 1:
-                    try {
-                        sleep(valorDormido);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    test3.jbPB1.setValue(i);
-                    test3.jbtf1.setText(String.valueOf(i));
-
-
-
+                    Psp02p02.jbPB1.setValue(i);
+                    Psp02p02.jbtf1.setText(String.valueOf(i));
                     break;
+                // CABALLO 2
                 case 2:
-                    try {
-                        sleep(valorDormido);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    test3.jbPB2.setValue(i);
-                    test3.jbtf2.setText(String.valueOf(i));
-
-
-
+                    Psp02p02.jbPB2.setValue(i);
+                    Psp02p02.jbtf2.setText(String.valueOf(i));
                     break;
+                // CABALLO 3
                 case 3:
-                    try {
-                        sleep(valorDormido);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    test3.jbPB3.setValue(i);
-                    test3.jbtf3.setText(String.valueOf(i));
-
-
-
-
+                    Psp02p02.jbPB3.setValue(i);
+                    Psp02p02.jbtf3.setText(String.valueOf(i));
                     break;
             }
+            // Sleep entre iteraciones
+            try {
+                sleep(valorDormido);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
+        // Mensaje por consola para control de prioridad
         System.out.println(this.getPriority());
-
-
-
-
     }//Run
-
 }
