@@ -10,11 +10,11 @@ public interface EmpleadoService {
 
     List<EmpleadoDTO> obtenerTodos() throws SQLException;
 
-    List<EmpleadoDTO> obtenerPorNombre(String nombre);
+    List<EmpleadoDTO> obtenerPorNombre(String nombre) throws SQLException;
 
-    EmpleadoDTO obtenerPorId(int id);
+    EmpleadoDTO obtenerPorId(int id) throws SQLException;
 
-    int crear(EmpleadoDTO entidad);
+    int crear(EmpleadoDTO entidad) throws SQLException;
 
     void actualizar(EmpleadoDTO entidad);
 
