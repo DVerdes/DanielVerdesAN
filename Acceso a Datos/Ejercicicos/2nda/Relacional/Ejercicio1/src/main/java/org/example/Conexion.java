@@ -12,7 +12,7 @@ public class Conexion {
     private static HikariDataSource ds;
 
     static {
-        config.setJdbcUrl("jdbc:sqlserver://localhost:1445;");
+        config.setJdbcUrl("jdbc:sqlserver://localhost:1433;");
         config.setUsername("sa");
         config.setPassword("ADMIN0");
         config.addDataSourceProperty("database","Pruebas");

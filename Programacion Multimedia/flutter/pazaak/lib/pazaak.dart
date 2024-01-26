@@ -1,85 +1,21 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:pazaak/carta.dart';
+import 'package:pazaak/partidaUtils.dart';
 
 class JuegoPazaak extends StatefulWidget {
+  static bool botonActivo = true;
+
   State<JuegoPazaak> createState() => Pazaak();
 }
 
 class Pazaak extends State<JuegoPazaak> {
   @override
   Widget build(BuildContext context) {
-    String imgCarta1 = 'assets/vacio.png';
-    String imgCarta2 = 'assets/vacio.png';
-    String imgCarta3 = 'assets/vacio.png';
-    String imgCarta4 = 'assets/vacio.png';
-    String imgCarta5 = 'assets/vacio.png';
-    String imgCarta6 = 'assets/vacio.png';
-    String imgCarta7 = 'assets/vacio.png';
-    String imgCarta8 = 'assets/vacio.png';
-    String imgCarta9 = 'assets/vacio.png';
-
-    String imgCarta1CPU = 'assets/vacio.png';
-    String imgCarta2CPU = 'assets/vacio.png';
-    String imgCarta3CPU = 'assets/vacio.png';
-    String imgCarta4CPU = 'assets/vacio.png';
-    String imgCarta5CPU = 'assets/vacio.png';
-    String imgCarta6CPU = 'assets/vacio.png';
-    String imgCarta7CPU = 'assets/vacio.png';
-    String imgCarta8CPU = 'assets/vacio.png';
-    String imgCarta9CPU = 'assets/vacio.png';
-
-    Random random = new Random();
-    List<Carta> baraja = [
-      new Carta(1, "assets/carta1.png"),
-      new Carta(1, "assets/carta1.png"),
-      new Carta(2, "assets/carta2.png"),
-      new Carta(2, "assets/carta2.png"),
-      new Carta(3, "assets/carta3.png"),
-      new Carta(4, "assets/carta4.png"),
-      new Carta(5, "assets/carta5.png"),
-      new Carta(-1, "assets/cartam1.png"),
-      new Carta(-2, "assets/cartam2.png"),
-      new Carta(-3, "assets/cartam3.png")
-    ];
-
-    List<Carta> cartasVerdes = [
-      new Carta(1, "assets/c1.png"),
-      new Carta(2, "assets/c2.png"),
-      new Carta(3, "assets/c3.png"),
-      new Carta(4, "assets/c4.png"),
-      new Carta(5, "assets/c5.png"),
-      new Carta(6, "assets/c6.png"),
-      new Carta(7, "assets/c7.png"),
-      new Carta(8, "assets/c8.png"),
-      new Carta(9, "assets/c9.png"),
-      new Carta(10, "assets/c10.png")
-    ];
-
-    cartasVerdes.shuffle();
-
-    List<Carta> cartasVerdesJugador = cartasVerdes;
-
-    cartasVerdes.shuffle();
-
-    List<Carta> cartasVerdesCPU = cartasVerdes;
-
-    int cartasEnMesaJ = 1;
-    int cartasEnMesaCPU = 0;
-
-    int sumaJugador = cartasVerdesJugador.elementAt(0).getModificador;
-    int sumaCPU = 0;
-
-    bool cartaJugada = false;
-
-    List<Carta> mano = [];
-
-    for (int i = 0; i < 4; i++) {
-      int randomNumber = random.nextInt(baraja.length);
-      mano.add(baraja.elementAt(randomNumber));
-      baraja.removeAt(randomNumber);
-    }
+    sumaPuntosJugador();
+    sumaPuntosCPU();
 
     // Fondo
     return Container(
@@ -113,8 +49,26 @@ class Pazaak extends State<JuegoPazaak> {
                           Row(
                             children: [
                               Container(
-                                margin: EdgeInsets.all(
-                                    MediaQuery.of(context).size.width * 0.025),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Color.fromARGB(255, 167, 142, 1),
+                                  border: Border.all(
+                                      color: Color.fromARGB(255, 65, 64, 64),
+                                      width: 5),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.8),
+                                      spreadRadius: 10,
+                                      blurRadius: 12,
+                                      offset: Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.fromLTRB(
+                                    MediaQuery.of(context).size.width * 0.005,
+                                    0,
+                                    MediaQuery.of(context).size.width * 0.015,
+                                    0),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -132,8 +86,29 @@ class Pazaak extends State<JuegoPazaak> {
                                                           .width *
                                                       0.05,
                                                   0),
-                                              child: Image.asset(
-                                                  'assets/indicadoresj1_000.png'),
+                                              child: Container(
+                                                margin: EdgeInsets.fromLTRB(
+                                                    0,
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .height *
+                                                        0.003,
+                                                    0,
+                                                    0),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  color: Color.fromARGB(
+                                                      255, 167, 142, 1),
+                                                  border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 109, 102, 1),
+                                                      width: 1),
+                                                ),
+                                                child: Image.asset(
+                                                    'assets/indicadoresj1_000.png'),
+                                              ),
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
@@ -143,7 +118,50 @@ class Pazaak extends State<JuegoPazaak> {
                                         ),
                                         Column(
                                           children: [
-                                            Text(sumaJugador.toString())
+                                            Container(
+                                                margin: EdgeInsets.fromLTRB(
+                                                    0,
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .height *
+                                                        0.003,
+                                                    0,
+                                                    0),
+                                                padding: EdgeInsets.fromLTRB(
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        0.03,
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .height *
+                                                        0.01,
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        0.03,
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .height *
+                                                        0.01),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100.0),
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                  border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 153, 153, 153),
+                                                      width: 2),
+                                                ),
+                                                child: Text(
+                                                  PartidaUtils.sumaJugador
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          202, 255, 255, 255)),
+                                                ))
                                           ],
                                         )
                                       ],
@@ -152,33 +170,83 @@ class Pazaak extends State<JuegoPazaak> {
                                       children: [
                                         getCardTile(
                                             context,
-                                            cartasVerdesJugador
+                                            PartidaUtils.cartasJugadasJ
                                                 .elementAt(0)
                                                 .getRutaImg),
-                                        getCardTile(context, imgCarta2),
-                                        getCardTile(context, imgCarta3),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasJ
+                                                .elementAt(1)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasJ
+                                                .elementAt(2)
+                                                .getRutaImg),
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        getCardTile(context, imgCarta4),
-                                        getCardTile(context, imgCarta5),
-                                        getCardTile(context, imgCarta6),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasJ
+                                                .elementAt(3)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasJ
+                                                .elementAt(4)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasJ
+                                                .elementAt(5)
+                                                .getRutaImg),
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        getCardTile(context, imgCarta7),
-                                        getCardTile(context, imgCarta8),
-                                        getCardTile(context, imgCarta9),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasJ
+                                                .elementAt(6)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasJ
+                                                .elementAt(7)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasJ
+                                                .elementAt(8)
+                                                .getRutaImg),
                                       ],
                                     )
                                   ],
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.all(
-                                    MediaQuery.of(context).size.width * 0.025),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Color.fromARGB(255, 167, 142, 1),
+                                  border: Border.all(
+                                      color: Color.fromARGB(255, 65, 64, 64),
+                                      width: 5),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.8),
+                                      spreadRadius: 10,
+                                      blurRadius: 12,
+                                      offset: Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.fromLTRB(
+                                    MediaQuery.of(context).size.width * 0.015,
+                                    0,
+                                    MediaQuery.of(context).size.width * 0.005,
+                                    0),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -186,52 +254,145 @@ class Pazaak extends State<JuegoPazaak> {
                                     Row(
                                       children: [
                                         Column(
-                                          children: [Text("0")],
+                                          children: [
+                                            Container(
+                                                margin: EdgeInsets.fromLTRB(
+                                                    0,
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .height *
+                                                        0.003,
+                                                    0,
+                                                    0),
+                                                padding: EdgeInsets.fromLTRB(
+                                                    MediaQuery.of(context).size.width *
+                                                        0.03,
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .height *
+                                                        0.01,
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        0.03,
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .height *
+                                                        0.01),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100.0),
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                  border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 153, 153, 153),
+                                                      width: 2),
+                                                ),
+                                                child: Text(PartidaUtils.sumaCPU.toString(),
+                                                    style: TextStyle(
+                                                        color: Color.fromARGB(
+                                                            202, 255, 255, 255))))
+                                          ],
                                         ),
                                         Column(
                                           children: [
                                             Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  MediaQuery.of(context)
+                                                margin: EdgeInsets.fromLTRB(
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        0.05,
+                                                    0,
+                                                    0,
+                                                    0),
+                                                child: Container(
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      0,
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height *
+                                                          0.003,
+                                                      0,
+                                                      0),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0),
+                                                    color: Color.fromARGB(
+                                                        255, 167, 142, 1),
+                                                    border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 109, 102, 1),
+                                                        width: 1),
+                                                  ),
+                                                  child: Image.asset(
+                                                      'assets/indicadoresj2_000.png'),
+                                                  width: MediaQuery.of(context)
                                                           .size
                                                           .width *
-                                                      0.05,
-                                                  0,
-                                                  MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.01,
-                                                  0),
-                                              child: Image.asset(
-                                                  'assets/indicadoresj2_000.png'),
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.3,
-                                            )
+                                                      0.3,
+                                                ))
                                           ],
                                         )
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        getCardTile(context, imgCarta1CPU),
-                                        getCardTile(context, imgCarta2CPU),
-                                        getCardTile(context, imgCarta3CPU),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasCPU
+                                                .elementAt(0)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasCPU
+                                                .elementAt(1)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasCPU
+                                                .elementAt(2)
+                                                .getRutaImg),
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        getCardTile(context, imgCarta4CPU),
-                                        getCardTile(context, imgCarta5CPU),
-                                        getCardTile(context, imgCarta6CPU),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasCPU
+                                                .elementAt(3)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasCPU
+                                                .elementAt(4)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasCPU
+                                                .elementAt(5)
+                                                .getRutaImg),
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        getCardTile(context, imgCarta7CPU),
-                                        getCardTile(context, imgCarta8CPU),
-                                        getCardTile(context, imgCarta9CPU),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasCPU
+                                                .elementAt(6)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasCPU
+                                                .elementAt(7)
+                                                .getRutaImg),
+                                        getCardTile(
+                                            context,
+                                            PartidaUtils.cartasJugadasCPU
+                                                .elementAt(8)
+                                                .getRutaImg),
                                       ],
                                     )
                                   ],
@@ -245,8 +406,11 @@ class Pazaak extends State<JuegoPazaak> {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                 child: InkWell(
-                                  onTap: () {
-                                    // Opciones de compra
+                                  onTap: () async {
+                                    JuegoPazaak.botonActivo
+                                        ? finTurno()
+                                        : print(
+                                            "Botón bloqueado"); //aqui turno cpu
                                   },
                                   // Cuadrado
                                   child: Container(
@@ -333,6 +497,22 @@ class Pazaak extends State<JuegoPazaak> {
                             ],
                           ),
                           Container(
+                            width: MediaQuery.of(context).size.width * 0.82,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Color.fromARGB(255, 167, 142, 1),
+                              border: Border.all(
+                                  color: Color.fromARGB(255, 65, 64, 64),
+                                  width: 5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.8),
+                                  spreadRadius: 10,
+                                  blurRadius: 12,
+                                  offset: Offset(0, 3),
+                                ),
+                              ],
+                            ),
                             margin: EdgeInsets.fromLTRB(0, 30, 0, 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -345,18 +525,34 @@ class Pazaak extends State<JuegoPazaak> {
                             ),
                           ),
                           Container(
+                            width: MediaQuery.of(context).size.width * 0.98,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Color.fromARGB(255, 167, 142, 1),
+                              border: Border.all(
+                                  color: Color.fromARGB(255, 65, 64, 64),
+                                  width: 5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.8),
+                                  spreadRadius: 10,
+                                  blurRadius: 12,
+                                  offset: Offset(0, 3),
+                                ),
+                              ],
+                            ),
                             margin: EdgeInsets.fromLTRB(0, 30, 0, 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                getPlayerCardTile(
-                                    context, 0.24, mano.elementAt(0)),
-                                getPlayerCardTile(
-                                    context, 0.24, mano.elementAt(1)),
-                                getPlayerCardTile(
-                                    context, 0.24, mano.elementAt(2)),
-                                getPlayerCardTile(
-                                    context, 0.24, mano.elementAt(3))
+                                getPlayerCardTile(context, 0.24,
+                                    PartidaUtils.mano.elementAt(0), 0),
+                                getPlayerCardTile(context, 0.24,
+                                    PartidaUtils.mano.elementAt(1), 1),
+                                getPlayerCardTile(context, 0.24,
+                                    PartidaUtils.mano.elementAt(2), 2),
+                                getPlayerCardTile(context, 0.24,
+                                    PartidaUtils.mano.elementAt(3), 3)
                               ],
                             ),
                           )
@@ -372,9 +568,11 @@ class Pazaak extends State<JuegoPazaak> {
     );
   }
 
-  getPlayerCardTile(BuildContext context, double multi, Carta carta) {
+  getPlayerCardTile(
+      BuildContext context, double multi, Carta carta, int posicion) {
     return InkWell(
       onDoubleTap: () {
+        bajarCarta(carta, posicion);
         setState(() {});
       },
       child: Container(
@@ -389,5 +587,128 @@ class Pazaak extends State<JuegoPazaak> {
       width: MediaQuery.of(context).size.width * multi,
       child: Image.asset('assets/vacio.png'),
     );
+  }
+
+  void sumaPuntosJugador() {
+    PartidaUtils.sumaJugador =
+        PartidaUtils.cartasJugadasJ.elementAt(0).getModificador +
+            PartidaUtils.cartasJugadasJ.elementAt(1).getModificador +
+            PartidaUtils.cartasJugadasJ.elementAt(2).getModificador +
+            PartidaUtils.cartasJugadasJ.elementAt(3).getModificador +
+            PartidaUtils.cartasJugadasJ.elementAt(4).getModificador +
+            PartidaUtils.cartasJugadasJ.elementAt(5).getModificador +
+            PartidaUtils.cartasJugadasJ.elementAt(6).getModificador +
+            PartidaUtils.cartasJugadasJ.elementAt(7).getModificador +
+            PartidaUtils.cartasJugadasJ.elementAt(8).getModificador +
+            PartidaUtils.cartasJugadasJ.elementAt(9).getModificador;
+  }
+
+  void sumaPuntosCPU() {
+    PartidaUtils.sumaCPU =
+        PartidaUtils.cartasJugadasCPU.elementAt(0).getModificador +
+            PartidaUtils.cartasJugadasCPU.elementAt(1).getModificador +
+            PartidaUtils.cartasJugadasCPU.elementAt(2).getModificador +
+            PartidaUtils.cartasJugadasCPU.elementAt(3).getModificador +
+            PartidaUtils.cartasJugadasCPU.elementAt(4).getModificador +
+            PartidaUtils.cartasJugadasCPU.elementAt(5).getModificador +
+            PartidaUtils.cartasJugadasCPU.elementAt(6).getModificador +
+            PartidaUtils.cartasJugadasCPU.elementAt(7).getModificador +
+            PartidaUtils.cartasJugadasCPU.elementAt(8).getModificador +
+            PartidaUtils.cartasJugadasCPU.elementAt(9).getModificador;
+  }
+
+  void bajarCarta(Carta carta, int posicion) {
+    if (carta.getModificador == 0) {
+      print("carta vacia...");
+    } else if (PartidaUtils.cartasEnMesaJ >= 9 || PartidaUtils.cartaJugada) {
+      print("No se pueden bajar más");
+    } else {
+      PartidaUtils.cartasJugadasJ[PartidaUtils.cartasEnMesaJ] = carta;
+      PartidaUtils.cartaJugada = true;
+      PartidaUtils.cartasEnMesaJ++;
+      PartidaUtils.mano[posicion] = new Carta(0, 'assets/vacio.png');
+    }
+  }
+
+  void bajarCartaVerdeJugador() {
+    //sleep(1000 as Duration);
+    if (PartidaUtils.cartasEnMesaJ >= 9) {
+      print("No bjar más");
+    } else {
+      PartidaUtils.cartasJugadasJ[PartidaUtils.cartasEnMesaJ] =
+          PartidaUtils.cartasVerdesJugador.elementAt(PartidaUtils.ronda - 1);
+      PartidaUtils.ronda++;
+      PartidaUtils.cartasEnMesaJ++;
+    }
+  }
+
+  void bajarCartaVerdeCPU() {
+    //sleep(1000 as Duration);
+    if (PartidaUtils.cartasEnMesaCPU >= 9) {
+      print("No bjar más");
+    } else {
+      PartidaUtils.cartasJugadasCPU[PartidaUtils.cartasEnMesaCPU] =
+          PartidaUtils.cartasVerdesCPU.elementAt(PartidaUtils.ronda - 1);
+      PartidaUtils.cartasEnMesaCPU++;
+      //AQUI DECISIÓN CPU
+      sumaPuntosCPU();
+      decisionCPU();
+    }
+  }
+
+  int decisionCPU() {
+    for (int i = 0; i < 4; i++) {
+      int valorCarta = PartidaUtils.manoCPU.elementAt(i).getModificador;
+      if (valorCarta + PartidaUtils.sumaCPU == 20 && valorCarta != 0) {
+        //jugar carta
+        bajarCartaCPU(PartidaUtils.manoCPU.elementAt(i), i);
+        print("Bajar carta " + valorCarta.toString());
+        return 1;
+      }
+    }
+    for (int i = 0; i < 4; i++) {
+      int valorCarta = PartidaUtils.manoCPU.elementAt(i).getModificador;
+      if (valorCarta + PartidaUtils.sumaCPU == 19 && valorCarta != 0) {
+        //jugar carta y plantarse??
+        bajarCartaCPU(PartidaUtils.manoCPU.elementAt(i), i);
+
+        return 1;
+      }
+    }
+    return 0;
+  }
+
+  void bajarCartaCPU(Carta carta, int posicion) {
+    if (carta.getModificador == 0) {
+      print("carta vacia...");
+    } else if (PartidaUtils.cartasEnMesaJ >= 9 || PartidaUtils.cartaJugada) {
+      print("No se pueden bajar más");
+    } else {
+      PartidaUtils.cartasJugadasCPU[PartidaUtils.cartasEnMesaCPU] = carta;
+      PartidaUtils.cartasEnMesaCPU++;
+      PartidaUtils.manoCPU[posicion] = new Carta(0, 'assets/vacio.png');
+    }
+  }
+
+  finTurno() async {
+    JuegoPazaak.botonActivo = false;
+    await Future.delayed(const Duration(seconds: 1));
+    bajarCartaVerdeCPU();
+    setState(() {});
+
+    //vuelta turno jugador
+    await Future.delayed(const Duration(seconds: 2));
+    PartidaUtils.cartaJugada = false;
+    bajarCartaVerdeJugador();
+    setState(() {});
+    JuegoPazaak.botonActivo = true;
+    print("Mano CPU: " +
+        PartidaUtils.manoCPU.elementAt(0).getModificador.toString() +
+        " " +
+        PartidaUtils.manoCPU.elementAt(1).getModificador.toString() +
+        " " +
+        PartidaUtils.manoCPU.elementAt(2).getModificador.toString() +
+        " " +
+        PartidaUtils.manoCPU.elementAt(3).getModificador.toString());
   }
 }

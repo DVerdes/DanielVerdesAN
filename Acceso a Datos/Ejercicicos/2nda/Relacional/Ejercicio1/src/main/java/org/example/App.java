@@ -13,7 +13,7 @@ public class App
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        eliminarTabla();
+        //eliminarTabla();
         crearTabla();
         agregarCampo();
         //
