@@ -1,8 +1,8 @@
-package org.example.dao.impl;
+package com.example.demo.dao.impl;
 
+import com.example.demo.dao.DBConnector;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.example.dao.DBConnector;
 
 import java.sql.Connection;
 import java.sql.SQLException;

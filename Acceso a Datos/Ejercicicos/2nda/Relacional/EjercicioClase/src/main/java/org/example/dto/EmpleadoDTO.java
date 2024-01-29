@@ -9,7 +9,7 @@ public class EmpleadoDTO implements Serializable {
     private String nombre;
     private String apellido;
     private double salario;
-    private Date fechaContratacion;
+    private java.sql.Date fechaContratacion;
     private String direccion;
     private String telefono;
     private String email;
@@ -19,7 +19,20 @@ public class EmpleadoDTO implements Serializable {
     public EmpleadoDTO() {
     }
 
-    public EmpleadoDTO( String nombre, String apellido, double salario, Date fechaContratacion, String direccion, String telefono, String email, int idDepartamento, String nombreDepartamento) {
+    public EmpleadoDTO( String nombre, String apellido, double salario, java.sql.Date fechaContratacion, String direccion, String telefono, String email, int idDepartamento, String nombreDepartamento) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.salario = salario;
+        this.fechaContratacion = fechaContratacion;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.email = email;
+        this.idDepartamento = idDepartamento;
+        this.nombreDepartamento = nombreDepartamento;
+    }
+
+    public EmpleadoDTO( int id, String nombre, String apellido, double salario, java.sql.Date fechaContratacion, String direccion, String telefono, String email, int idDepartamento, String nombreDepartamento) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.salario = salario;
@@ -63,11 +76,11 @@ public class EmpleadoDTO implements Serializable {
         this.salario = salario;
     }
 
-    public Date getFechaContratacion() {
+    public java.sql.Date getFechaContratacion() {
         return fechaContratacion;
     }
 
-    public void setFechaContratacion(Date fechaContratacion) {
+    public void setFechaContratacion(java.sql.Date fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
     }
 

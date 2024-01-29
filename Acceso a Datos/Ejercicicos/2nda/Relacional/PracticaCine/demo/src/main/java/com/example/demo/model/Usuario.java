@@ -1,9 +1,10 @@
-package com.example.demo.dtos;
+package com.example.demo.model;
+
 
 import java.io.Serial;
 import java.io.Serializable;
 
-public class UsuarioDTO implements Serializable {
+public class Usuario implements Serializable {
 
     private int id;
     private String nombreUsuario;
@@ -14,13 +15,14 @@ public class UsuarioDTO implements Serializable {
 
     private String rol;
 
-    public UsuarioDTO(String nombreUsuario, String email, String claveAcceso) {
+    public Usuario(String nombreUsuario, String email, String claveAcceso, String rol) {
         this.nombreUsuario = nombreUsuario;
         this.email = email;
         this.claveAcceso = claveAcceso;
+        this.rol = rol;
     }
 
-    public UsuarioDTO() {
+    public Usuario() {
     }
 
     public int getId() {

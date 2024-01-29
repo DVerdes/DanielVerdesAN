@@ -72,13 +72,17 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void actualizar(EmpleadoDTO entidad) {
+    public void actualizar(EmpleadoDTO entidad) throws SQLException {
+        EmpleadoDao ed = new JbdcEmpleadoDao();
+
+        ed.actualizarEmpleado(EmpleadoMapper.convertirAEmpleado(entidad));
 
     }
 
     @Override
-    public void eliminar(int id) {
-
+    public void eliminar(int id) throws SQLException {
+        EmpleadoDao ed = new JbdcEmpleadoDao();
+        ed.elimarEmpleado(id);
     }
 
     @Override

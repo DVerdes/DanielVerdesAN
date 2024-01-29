@@ -1,19 +1,29 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dtos.*;
+import com.example.demo.service.AccesoService;
+import com.example.demo.service.UsuarioService;
+import com.example.demo.service.impl.AccesoServiceImpl;
+import com.example.demo.service.impl.UsuarioServiceImpl;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLException;
 
 @RestController
 public class UsuarioController {
 
     @PostMapping("/api/usuarios")
-    UsuarioDTO crearUsuario(UsuarioDTO usuario) {
-        return null;
+    UsuarioDTO crearUsuario(@RequestBody UsuarioDTO usuario) throws SQLException {
+        UsuarioService us = new UsuarioServiceImpl();
+        us.introducirUsuario(usuario);
+        return usuario;
     }
 
     @PostMapping("/api/iniciar-sesion")
-    UsuarioDTO iniciarSesion(@RequestBody AccesoDTO sesion) {
-        return null;
+    boolean iniciarSesion(@RequestBody AccesoDTO sesion) throws SQLException {
+        AccesoService as = new AccesoServiceImpl();
+
+        return as.validarInicioSesion(sesion);
     }
 
     @PutMapping("/api/usuarios/{usuarioID}/cambiar-contrasena")

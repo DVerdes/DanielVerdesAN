@@ -118,4 +118,53 @@ public class JbdcEmpleadoDao implements EmpleadoDao {
 
 
     }
+
+    @Override
+    public void actualizarEmpleado(Empleado empleado) throws SQLException {
+        Connection c = connector.obtenerConexion();
+        PreparedStatement s = null;
+        try{
+            s = c.prepareStatement("UPDATE Empleados SET nombre=?,apellido = ?, pinAcceso = ?, salario = ?, fechaContratacion= ?, direccion  = ?, telefono = ?, email= ?, idDepartamento = ? WHERE id = ?");
+            s.setString(1,empleado.getNombre());
+            s.setString(2,empleado.getApellido());
+            s.setString(3, empleado.getPinAcceso());
+            s.setDouble(4,empleado.getSalario());
+            s.setDate(5, empleado.getFechaContratacion());
+            s.setString(6, empleado.getDireccion());
+            s.setString(7, empleado.getTelefono());
+            s.setString(8,empleado.getEmail());
+            s.setInt(9,empleado.getIdDepartamento());
+            s.setInt(10,empleado.getId());
+
+            s.executeUpdate();
+            System.out.println("Actualizar empleado ok");
+
+        }catch (SQLException e){
+            System.out.println("Actualizar empleado ko");
+            throw new RuntimeException(e);
+        }finally {
+            if(s!=null) s.close();;
+            if(c!=null) c.close();
+        }
+    }
+
+    @Override
+    public void elimarEmpleado(int id) throws SQLException {
+        Connection c = connector.obtenerConexion();
+        PreparedStatement s = null;
+        try{
+            s = c.prepareStatement("DELETE FROM Empleados WHERE id = ?");
+            s.setInt(1,id);
+            s.executeUpdate();
+            System.out.println("borrado ok");
+
+
+        }catch (SQLException e){
+            System.out.println("borrado ko");
+            throw new RuntimeException(e);
+        }finally {
+            if(s!=null) s.close();;
+            if(c!=null) c.close();
+        }
+    }
 }

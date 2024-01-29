@@ -16,6 +16,10 @@ public interface EmpleadoDao {
 
     int insertarEmpleado(Empleado empleado) throws SQLException;
 
+    void actualizarEmpleado(Empleado empleado) throws SQLException;
+
+    void elimarEmpleado(int id) throws SQLException;
+
 
 
 

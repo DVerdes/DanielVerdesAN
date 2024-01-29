@@ -23,7 +23,16 @@ public class App
     public static void main( String[] args ) throws SQLException {
 
         DepartamentoService ds = new DepartamentoServiceImpl();
+
+
+
+
+
         EmpleadoService es = new EmpleadoServiceImpl();
+
+        java.sql.Date d = new java.sql.Date(2023,12,12);
+
+
 
         //listar todos
         List<DepartamentoDTO> lista = ds.obtenerTodos();
@@ -47,7 +56,7 @@ public class App
 
 
         //actualizar
-        ds.actualizar(new DepartamentoDTO(2,"Inventario","Ourense","invt@gmail.com","687934123",0));
+        ds.actualizar(new DepartamentoDTO(3,"Inventario","Ourense","invt@gmail.com","687934123",0));
 
 
         //eliminar
@@ -71,13 +80,20 @@ public class App
 
         // obtener por id
 
-        EmpleadoDTO emp = es.obtenerPorId(4);
+        EmpleadoDTO emp = es.obtenerPorId(1);
         System.out.println(emp.toString());
 
         // crear empleado
 
-        es.crear(new EmpleadoDTO("Jacinto","García",12000,StringToDate("2015-12-06 17:03:00"),"Betanzos","676998765","jacinto@gmail.com",2,"daigual"));
+        es.crear(new EmpleadoDTO("Jacinto","García",12000,d,"Betanzos","676998765","jacinto@gmail.com",2,"daigual"));
 
+        // actualizar empleado
+
+        es.actualizar(new EmpleadoDTO(3,"Pedro","Suarez",11000,d,"Cabanas","675435343","ps@gmail.com",3,"sa"));
+
+        // eliminar empleado
+
+        //es.eliminar(2);
 
 
     }

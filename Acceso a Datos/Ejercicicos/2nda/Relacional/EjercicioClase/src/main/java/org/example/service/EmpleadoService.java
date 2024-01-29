@@ -16,9 +16,9 @@ public interface EmpleadoService {
 
     int crear(EmpleadoDTO entidad) throws SQLException;
 
-    void actualizar(EmpleadoDTO entidad);
+    void actualizar(EmpleadoDTO entidad) throws SQLException;
 
-    void eliminar(int id);
+    void eliminar(int id) throws SQLException;
 
     void moverEmpleados(int idDepartamento, List<EmpleadoDTO> lista);
 

@@ -8,7 +8,7 @@ public class Empleado {
     private String apellido;
     private String pinAcceso;
     private double salario;
-    private Date fechaContratacion;
+    private java.sql.Date fechaContratacion;
     private String direccion;
     private String telefono;
     private String email;
@@ -17,7 +17,7 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(int id, String nombre, String apellido, String pinAcceso, double salario, Date fechaContratacion, String direccion, String telefono, String email, int idDepartamento) {
+    public Empleado(int id, String nombre, String apellido, String pinAcceso, double salario, java.sql.Date fechaContratacion, String direccion, String telefono, String email, int idDepartamento) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -70,11 +70,11 @@ public class Empleado {
         this.salario = salario;
     }
 
-    public Date getFechaContratacion() {
+    public java.sql.Date getFechaContratacion() {
         return fechaContratacion;
     }
 
-    public void setFechaContratacion(Date fechaContratacion) {
+    public void setFechaContratacion(java.sql.Date fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
     }
 

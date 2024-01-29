@@ -1,19 +1,19 @@
-package com.example.demo.dtos;
+package com.example.demo.model;
 
 import java.io.Serializable;
 
-public class AccesoDTO implements Serializable {
+public class Acceso implements Serializable {
 
     private String nombreUsuario;
 
     private String claveAcceso;
 
-    public AccesoDTO(String nombreUsuario, String claveAcceso) {
+    public Acceso(String nombreUsuario, String claveAcceso) {
         this.nombreUsuario = nombreUsuario;
         this.claveAcceso = claveAcceso;
     }
 
-    public AccesoDTO() {
+    public Acceso() {
     }
 
     public String getNombreUsuario() {
