@@ -84,6 +84,12 @@ class PartidaUtils {
   static bool cartaJugada = false;
   static int ronda = 1;
 
+  static bool jugadorPlantado = false;
+  static bool cpuPlantado = false;
+
+  static int victoriasJugador = 0;
+  static int victoriasCPU = 0;
+
   static void repartirManos() {
     Random random = new Random();
 

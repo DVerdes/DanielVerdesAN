@@ -407,10 +407,17 @@ class Pazaak extends State<JuegoPazaak> {
                                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                 child: InkWell(
                                   onTap: () async {
-                                    JuegoPazaak.botonActivo
+                                    
+                                    if(PartidaUtils.jugadorPlantado){
+                                      print("Te has plantado");
+                                    }else{
+JuegoPazaak.botonActivo
                                         ? finTurno()
                                         : print(
                                             "Botón bloqueado"); //aqui turno cpu
+                                    }
+
+                                    
                                   },
                                   // Cuadrado
                                   child: Container(
@@ -454,7 +461,7 @@ class Pazaak extends State<JuegoPazaak> {
                                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                 child: InkWell(
                                   onTap: () {
-                                    // Opciones de compra
+                                    plantarse();
                                   },
                                   // Cuadrado
                                   child: Container(
@@ -652,7 +659,7 @@ class Pazaak extends State<JuegoPazaak> {
       PartidaUtils.cartasEnMesaCPU++;
       //AQUI DECISIÓN CPU
       sumaPuntosCPU();
-      decisionCPU();
+      if(decisionCPU()==1) PartidaUtils.cpuPlantado = true;
     }
   }
 
@@ -675,6 +682,9 @@ class Pazaak extends State<JuegoPazaak> {
         return 1;
       }
     }
+    if(PartidaUtils.sumaCPU>=20) return 1;
+
+
     return 0;
   }
 
@@ -693,7 +703,7 @@ class Pazaak extends State<JuegoPazaak> {
   finTurno() async {
     JuegoPazaak.botonActivo = false;
     await Future.delayed(const Duration(seconds: 1));
-    bajarCartaVerdeCPU();
+    if(!PartidaUtils.cpuPlantado)   bajarCartaVerdeCPU();
     setState(() {});
 
     //vuelta turno jugador
@@ -711,4 +721,55 @@ class Pazaak extends State<JuegoPazaak> {
         " " +
         PartidaUtils.manoCPU.elementAt(3).getModificador.toString());
   }
+
+
+  Future<void> plantarse() async {
+
+  PartidaUtils.jugadorPlantado = true;
+   await Future.delayed(const Duration(seconds: 1));
+    while(!PartidaUtils.cpuPlantado){
+      bajarCartaVerdeCPU();
+      setState(() {});
+    }
+  
+    print("CPU plantada");
+
+    comprobarVictoriaRonda();
+
+
 }
+
+  void comprobarVictoriaRonda() {
+      int distanciaJugador = 0;
+      int distanciaCPU = 0;
+      if(PartidaUtils.sumaJugador>20){
+            distanciaJugador=PartidaUtils.sumaJugador-20;
+      }else if(PartidaUtils.sumaJugador<20) distanciaJugador=20-PartidaUtils.sumaJugador;
+
+        if(PartidaUtils.sumaCPU>20){
+            distanciaCPU=PartidaUtils.sumaCPU-20;
+      }else if(PartidaUtils.sumaCPU<20) distanciaCPU=20-PartidaUtils.sumaCPU;
+
+      print(distanciaJugador);
+      print(distanciaCPU);
+
+      if(distanciaJugador==distanciaCPU){
+        print("Ronda empatada");
+      }else if(distanciaJugador<distanciaCPU){
+        print("Gana la ronda el jugador");
+        PartidaUtils.victoriasJugador++;
+      }else{
+        print("Gana la ronda la cpu");
+        PartidaUtils.victoriasCPU++;
+      }
+
+      if(PartidaUtils.victoriasJugador>=3){
+
+      }
+
+
+
+  }
+}
+
+
