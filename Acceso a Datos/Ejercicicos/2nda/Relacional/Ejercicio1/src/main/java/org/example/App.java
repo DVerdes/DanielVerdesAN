@@ -78,6 +78,7 @@ public class App
          return Conexion.obtenerConexion();
     }
 
+
     public static void crearTabla() throws SQLException{
         Connection c = conectarBD();
         Statement s = null;
