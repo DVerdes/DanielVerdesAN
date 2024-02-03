@@ -1,8 +1,9 @@
-package com.example.demo.dtos;
+package com.example.demo.model;
 
 import java.sql.Date;
 
-public class PeliculaDTO {
+public class Pelicula {
+
     private int peliculaID;
 
     private int salaID;
@@ -17,10 +18,10 @@ public class PeliculaDTO {
 
     private int clasificacionEdad;
 
-    public PeliculaDTO() {
+    public Pelicula() {
     }
 
-    public PeliculaDTO(int peliculaID, int salaID, String titulo, Date fechaInicio, Date fechaFin, String genero, int clasificacionEdad) {
+    public Pelicula(int peliculaID, int salaID, String titulo, Date fechaInicio, Date fechaFin, String genero, int clasificacionEdad) {
         this.peliculaID = peliculaID;
         this.salaID = salaID;
         this.titulo = titulo;
@@ -30,7 +31,7 @@ public class PeliculaDTO {
         this.clasificacionEdad = clasificacionEdad;
     }
 
-    public PeliculaDTO(int salaID, String titulo, Date fechaInicio, Date fechaFin, String genero, int clasificacionEdad) {
+    public Pelicula(int salaID, String titulo, Date fechaInicio, Date fechaFin, String genero, int clasificacionEdad) {
         this.salaID = salaID;
         this.titulo = titulo;
         this.fechaInicio = fechaInicio;

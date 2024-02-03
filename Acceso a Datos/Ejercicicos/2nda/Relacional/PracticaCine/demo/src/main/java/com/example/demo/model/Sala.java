@@ -1,8 +1,8 @@
-package com.example.demo.dtos;
+package com.example.demo.model;
 
 import java.io.Serializable;
 
-public class SalaDTO implements Serializable {
+public class Sala implements Serializable {
 
     private int salaId;
 
@@ -16,10 +16,10 @@ public class SalaDTO implements Serializable {
 
     private int butacasPorFila;
 
-    public SalaDTO() {
+    public Sala() {
     }
 
-    public SalaDTO(int salaId, int cineId, String nombreSala, int capacidad, int filas, int butacasPorFila) {
+    public Sala(int salaId, int cineId, String nombreSala, int capacidad, int filas, int butacasPorFila) {
         this.salaId = salaId;
         this.cineId = cineId;
         this.nombreSala = nombreSala;
@@ -28,7 +28,7 @@ public class SalaDTO implements Serializable {
         this.butacasPorFila = butacasPorFila;
     }
 
-    public SalaDTO(int cineId, String nombreSala, int capacidad, int filas, int butacasPorFila) {
+    public Sala(int cineId, String nombreSala, int capacidad, int filas, int butacasPorFila) {
         this.cineId = cineId;
         this.nombreSala = nombreSala;
         this.capacidad = capacidad;
@@ -95,5 +95,4 @@ public class SalaDTO implements Serializable {
                 ", butacasPorFila=" + butacasPorFila +
                 '}';
     }
-
 }

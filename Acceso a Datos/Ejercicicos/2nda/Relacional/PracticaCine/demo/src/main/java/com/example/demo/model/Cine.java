@@ -1,20 +1,20 @@
-package com.example.demo.dtos;
+package com.example.demo.model;
 
-public class CineDTO {
+public class Cine {
 
     private int cineId;
     private String nombreCine;
     private String direccion;
 
-    public CineDTO() {
+    public Cine() {
     }
 
-    public CineDTO(String nombreCine, String direccion) {
+    public Cine(String nombreCine, String direccion) {
         this.nombreCine = nombreCine;
         this.direccion = direccion;
     }
 
-    public CineDTO(int cineId, String nombreCine, String direccion) {
+    public Cine(int cineId, String nombreCine, String direccion) {
         this.cineId = cineId;
         this.nombreCine = nombreCine;
         this.direccion = direccion;

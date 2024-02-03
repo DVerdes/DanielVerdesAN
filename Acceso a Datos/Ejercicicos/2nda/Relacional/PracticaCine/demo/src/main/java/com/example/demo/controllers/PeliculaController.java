@@ -2,8 +2,11 @@ package com.example.demo.controllers;
 
 import com.example.demo.dtos.PeliculaDTO;
 import com.example.demo.dtos.SesionDTO;
+import com.example.demo.service.PeliculaService;
+import com.example.demo.service.impl.PeliculaServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -15,7 +18,9 @@ public class PeliculaController {
     }
 
     @PostMapping("/api/admin/peliculas")
-    PeliculaDTO crearPelicula(@RequestBody PeliculaDTO pelicula) {
-        return null;
+    PeliculaDTO crearPelicula(@RequestBody PeliculaDTO pelicula) throws SQLException {
+
+        PeliculaService ps = new PeliculaServiceImpl();
+        return ps.insertarPelicula(pelicula);
     }
 }

@@ -1,6 +1,8 @@
 package org.example.model;
 
-public class Departamento {
+import java.io.Serializable;
+
+public class Departamento implements Serializable {
     private int id;
     private String nombre;
     private String ubicacion;

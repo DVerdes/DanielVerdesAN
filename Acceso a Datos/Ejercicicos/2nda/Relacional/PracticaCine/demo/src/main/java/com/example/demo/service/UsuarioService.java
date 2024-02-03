@@ -8,4 +8,6 @@ public interface UsuarioService {
 
     int introducirUsuario(UsuarioDTO usuarioDTO) throws SQLException;
 
+    void actualizarContrasenaUsuario(int idUsuario, String nuevaContrsena) throws SQLException;
+
 }

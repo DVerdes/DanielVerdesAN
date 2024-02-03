@@ -8,5 +8,8 @@ public interface UsuarioDAO {
 
         int insertarUsuario(Usuario usuario) throws SQLException;
 
+        void actualizarContrasena(int idUsuario, String nuevaContrasena) throws SQLException;
+
+
 
 }
