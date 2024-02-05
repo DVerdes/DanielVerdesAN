@@ -1,26 +1,24 @@
-package com.example.demo.dtos;
+package com.example.demo.model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
-public class SesionDTO {
-
+public class Sesion {
     private int SesionID;
     private int PeliculaID;
     private Timestamp HoraInicio;
     private Timestamp HoraFin;
 
-    public SesionDTO() {
+    public Sesion() {
     }
 
-    public SesionDTO(int sesionID, int peliculaID, Timestamp horaInicio, Timestamp horaFin) {
+    public Sesion(int sesionID, int peliculaID, Timestamp horaInicio, Timestamp horaFin) {
         SesionID = sesionID;
         PeliculaID = peliculaID;
         HoraInicio = horaInicio;
         HoraFin = horaFin;
     }
 
-    public SesionDTO(int peliculaID, Timestamp horaInicio, Timestamp horaFin) {
+    public Sesion(int peliculaID, Timestamp horaInicio, Timestamp horaFin) {
         PeliculaID = peliculaID;
         HoraInicio = horaInicio;
         HoraFin = horaFin;

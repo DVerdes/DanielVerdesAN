@@ -19,4 +19,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
     }
+
+    @Override
+    public void actualizarContrasenaUsuario(int idUsuario, String nuevaContrsena) throws SQLException {
+        UsuarioDAO ud = new JdbcUsuarioDAO();
+
+        ud.actualizarContrasena(idUsuario, nuevaContrsena);
+
+    }
 }

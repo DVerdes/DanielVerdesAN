@@ -27,8 +27,9 @@ public class UsuarioController {
     }
 
     @PutMapping("/api/usuarios/{usuarioID}/cambiar-contrasena")
-    void cambiarPassword(@RequestBody String nuevaClaveAcceso, @PathVariable int usuarioID) {
-
+    void cambiarPassword(@RequestBody String nuevaClaveAcceso, @PathVariable int usuarioID) throws SQLException {
+        UsuarioService us = new UsuarioServiceImpl();
+        us.actualizarContrasenaUsuario(usuarioID, nuevaClaveAcceso);
     }
 
 }

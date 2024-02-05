@@ -10,7 +10,6 @@ import java.sql.*;
 public class JdbcUsuarioDAO implements UsuarioDAO {
 
     private DBConnector connector =  new HikariDBConnector();
-
     @Override
     public int insertarUsuario(Usuario usuario) throws SQLException {
         Connection c = connector.obtenerConexion();
@@ -38,6 +37,25 @@ public class JdbcUsuarioDAO implements UsuarioDAO {
             if (c!=null) c.close();
         }
         return 0;
+    }
+
+    @Override
+    public void actualizarContrasena(int idUsuario, String nuevaContrasena) throws SQLException {
+        Connection c = connector.obtenerConexion();
+        PreparedStatement s = null;
+        try{
+            s = c.prepareStatement("UPDATE Usuarios SET ClaveAcceso=? WHERE UsuarioID = ?");
+            s.setString(1,nuevaContrasena);
+            s.setInt(2,idUsuario);
+            s.executeUpdate();
+            System.out.println("Actualizar contraseña ok");
+        }catch (SQLException e){
+            System.out.println("Actualizar contraseña KO");
+            throw new RuntimeException(e);
+        }finally {
+            if(s!=null) s.close();;
+            if (c!=null) c.close();
+        }
     }
 
 }

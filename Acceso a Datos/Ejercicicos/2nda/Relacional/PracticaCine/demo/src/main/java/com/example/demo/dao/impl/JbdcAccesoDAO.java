@@ -20,15 +20,14 @@ public class JbdcAccesoDAO implements AccesoDAO {
         Connection c = connector.obtenerConexion();
         PreparedStatement s = null;
         try{
-            s = c.prepareStatement("SELECT * FROM Departamento WHERE NombreUsuario = ? AND ClaveAcceso = ?");
+            s = c.prepareStatement("SELECT * FROM Usuarios WHERE NombreUsuario = ? AND ClaveAcceso = ?");
             s.setString(1, acceso.getNombreUsuario());
             s.setString(2, acceso.getClaveAcceso());
 
             ResultSet res = s.executeQuery();
-            if(res.next()) return true;
+            return res.next();
 
 
-            return false;
 
 
         }catch (SQLException e){
