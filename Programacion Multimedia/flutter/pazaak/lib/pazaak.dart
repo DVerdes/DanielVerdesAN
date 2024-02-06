@@ -1,12 +1,15 @@
+import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:pazaak/carta.dart';
 import 'package:pazaak/partidaUtils.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class JuegoPazaak extends StatefulWidget {
   static bool botonActivo = true;
+  static String rutaContadorJ = 'assets/indicadoresj1_000.png';
+  static String rutaContadorCPU = 'assets/indicadoresj2_000.png';
 
   State<JuegoPazaak> createState() => Pazaak();
 }
@@ -16,6 +19,7 @@ class Pazaak extends State<JuegoPazaak> {
   Widget build(BuildContext context) {
     sumaPuntosJugador();
     sumaPuntosCPU();
+    actualizarContadores();
 
     // Fondo
     return Container(
@@ -53,7 +57,9 @@ class Pazaak extends State<JuegoPazaak> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   color: Color.fromARGB(255, 167, 142, 1),
                                   border: Border.all(
-                                      color: Color.fromARGB(255, 65, 64, 64),
+                                      color: PartidaUtils.jugadorPlantado
+                                          ? Color.fromARGB(255, 2, 74, 207)
+                                          : Color.fromARGB(255, 65, 64, 64),
                                       width: 5),
                                   boxShadow: [
                                     BoxShadow(
@@ -67,7 +73,7 @@ class Pazaak extends State<JuegoPazaak> {
                                 margin: EdgeInsets.fromLTRB(
                                     MediaQuery.of(context).size.width * 0.005,
                                     0,
-                                    MediaQuery.of(context).size.width * 0.015,
+                                    MediaQuery.of(context).size.width * 0.007,
                                     0),
                                 child: Column(
                                   mainAxisAlignment:
@@ -107,7 +113,7 @@ class Pazaak extends State<JuegoPazaak> {
                                                       width: 1),
                                                 ),
                                                 child: Image.asset(
-                                                    'assets/indicadoresj1_000.png'),
+                                                    JuegoPazaak.rutaContadorJ),
                                               ),
                                               width: MediaQuery.of(context)
                                                       .size
@@ -156,8 +162,13 @@ class Pazaak extends State<JuegoPazaak> {
                                                       width: 2),
                                                 ),
                                                 child: Text(
-                                                  PartidaUtils.sumaJugador
-                                                      .toString(),
+                                                  PartidaUtils.sumaJugador >= 10
+                                                      ? PartidaUtils.sumaJugador
+                                                          .toString()
+                                                      : "0" +
+                                                          PartidaUtils
+                                                              .sumaJugador
+                                                              .toString(),
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           202, 255, 255, 255)),
@@ -231,7 +242,9 @@ class Pazaak extends State<JuegoPazaak> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   color: Color.fromARGB(255, 167, 142, 1),
                                   border: Border.all(
-                                      color: Color.fromARGB(255, 65, 64, 64),
+                                      color: PartidaUtils.cpuPlantado
+                                          ? Color.fromARGB(255, 180, 2, 2)
+                                          : Color.fromARGB(255, 65, 64, 64),
                                       width: 5),
                                   boxShadow: [
                                     BoxShadow(
@@ -243,7 +256,7 @@ class Pazaak extends State<JuegoPazaak> {
                                   ],
                                 ),
                                 margin: EdgeInsets.fromLTRB(
-                                    MediaQuery.of(context).size.width * 0.015,
+                                    MediaQuery.of(context).size.width * 0.007,
                                     0,
                                     MediaQuery.of(context).size.width * 0.005,
                                     0),
@@ -258,18 +271,14 @@ class Pazaak extends State<JuegoPazaak> {
                                             Container(
                                                 margin: EdgeInsets.fromLTRB(
                                                     0,
-                                                    MediaQuery.of(context)
-                                                            .size
-                                                            .height *
+                                                    MediaQuery.of(context).size.height *
                                                         0.003,
                                                     0,
                                                     0),
                                                 padding: EdgeInsets.fromLTRB(
                                                     MediaQuery.of(context).size.width *
                                                         0.03,
-                                                    MediaQuery.of(context)
-                                                            .size
-                                                            .height *
+                                                    MediaQuery.of(context).size.height *
                                                         0.01,
                                                     MediaQuery.of(context)
                                                             .size
@@ -290,10 +299,14 @@ class Pazaak extends State<JuegoPazaak> {
                                                           255, 153, 153, 153),
                                                       width: 2),
                                                 ),
-                                                child: Text(PartidaUtils.sumaCPU.toString(),
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            202, 255, 255, 255))))
+                                                child: Text(
+                                                    PartidaUtils.sumaCPU >= 10
+                                                        ? PartidaUtils.sumaCPU
+                                                            .toString()
+                                                        : "0" +
+                                                            PartidaUtils.sumaCPU
+                                                                .toString(),
+                                                    style: TextStyle(color: Color.fromARGB(202, 255, 255, 255))))
                                           ],
                                         ),
                                         Column(
@@ -327,8 +340,8 @@ class Pazaak extends State<JuegoPazaak> {
                                                             255, 109, 102, 1),
                                                         width: 1),
                                                   ),
-                                                  child: Image.asset(
-                                                      'assets/indicadoresj2_000.png'),
+                                                  child: Image.asset(JuegoPazaak
+                                                      .rutaContadorCPU),
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width *
@@ -406,18 +419,15 @@ class Pazaak extends State<JuegoPazaak> {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                 child: InkWell(
-                                  onTap: () async {
-                                    
-                                    if(PartidaUtils.jugadorPlantado){
+                                  onTap: () {
+                                    if (PartidaUtils.jugadorPlantado) {
                                       print("Te has plantado");
-                                    }else{
-JuegoPazaak.botonActivo
-                                        ? finTurno()
-                                        : print(
-                                            "Botón bloqueado"); //aqui turno cpu
+                                    } else {
+                                      JuegoPazaak.botonActivo
+                                          ? finTurno()
+                                          : print(
+                                              "Botón bloqueado"); //aqui turno cpu
                                     }
-
-                                    
                                   },
                                   // Cuadrado
                                   child: Container(
@@ -504,7 +514,7 @@ JuegoPazaak.botonActivo
                             ],
                           ),
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.82,
+                            width: MediaQuery.of(context).size.width * 0.83,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               color: Color.fromARGB(255, 167, 142, 1),
@@ -524,15 +534,15 @@ JuegoPazaak.botonActivo
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                getCPUCardTile(context, 0.2),
-                                getCPUCardTile(context, 0.2),
-                                getCPUCardTile(context, 0.2),
-                                getCPUCardTile(context, 0.2)
+                                getCPUCardTile(context, 0.2, 0),
+                                getCPUCardTile(context, 0.2, 1),
+                                getCPUCardTile(context, 0.2, 2),
+                                getCPUCardTile(context, 0.2, 3)
                               ],
                             ),
                           ),
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.98,
+                            width: MediaQuery.of(context).size.width * 0.99,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               color: Color.fromARGB(255, 167, 142, 1),
@@ -548,7 +558,7 @@ JuegoPazaak.botonActivo
                                 ),
                               ],
                             ),
-                            margin: EdgeInsets.fromLTRB(0, 30, 0, 30),
+                            margin: EdgeInsets.fromLTRB(0, 10, 0, 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -589,10 +599,15 @@ JuegoPazaak.botonActivo
     );
   }
 
-  getCPUCardTile(BuildContext context, double multi) {
+  getCPUCardTile(BuildContext context, double multi, int posicion) {
+    String rutaImg = 'assets/vacio.png';
+    if (PartidaUtils.manoCPU.elementAt(posicion).getModificador != 0) {
+      rutaImg = 'assets/backcard.png';
+    }
+
     return Container(
       width: MediaQuery.of(context).size.width * multi,
-      child: Image.asset('assets/vacio.png'),
+      child: Image.asset(rutaImg),
     );
   }
 
@@ -630,6 +645,8 @@ JuegoPazaak.botonActivo
     } else if (PartidaUtils.cartasEnMesaJ >= 9 || PartidaUtils.cartaJugada) {
       print("No se pueden bajar más");
     } else {
+      playMusic("jugar_carta.wav");
+
       PartidaUtils.cartasJugadasJ[PartidaUtils.cartasEnMesaJ] = carta;
       PartidaUtils.cartaJugada = true;
       PartidaUtils.cartasEnMesaJ++;
@@ -641,7 +658,10 @@ JuegoPazaak.botonActivo
     //sleep(1000 as Duration);
     if (PartidaUtils.cartasEnMesaJ >= 9) {
       print("No bjar más");
+    } else if (PartidaUtils.sumaJugador >= 20) {
     } else {
+      playMusic("carta_verde.wav");
+
       PartidaUtils.cartasJugadasJ[PartidaUtils.cartasEnMesaJ] =
           PartidaUtils.cartasVerdesJugador.elementAt(PartidaUtils.ronda - 1);
       PartidaUtils.ronda++;
@@ -656,14 +676,53 @@ JuegoPazaak.botonActivo
     } else {
       PartidaUtils.cartasJugadasCPU[PartidaUtils.cartasEnMesaCPU] =
           PartidaUtils.cartasVerdesCPU.elementAt(PartidaUtils.ronda - 1);
+      playMusic("carta_verde.wav");
+
       PartidaUtils.cartasEnMesaCPU++;
       //AQUI DECISIÓN CPU
       sumaPuntosCPU();
-      if(decisionCPU()==1) PartidaUtils.cpuPlantado = true;
+      if (decisionCPU() == 1) PartidaUtils.cpuPlantado = true;
+      sumaPuntosCPU();
     }
   }
 
   int decisionCPU() {
+    /*
+    if (PartidaUtils.jugadorPlantado) {
+      int distanciaJugador = 0;
+      int distanciaCPU = 0;
+      if (PartidaUtils.sumaJugador > 20) {
+        distanciaJugador = PartidaUtils.sumaJugador - 20;
+      } else if (PartidaUtils.sumaJugador < 20)
+        distanciaJugador = 20 - PartidaUtils.sumaJugador;
+
+      if (PartidaUtils.sumaCPU > 20) {
+        distanciaCPU = PartidaUtils.sumaCPU - 20;
+      } else if (PartidaUtils.sumaCPU < 20)
+        distanciaCPU = 20 - PartidaUtils.sumaCPU;
+
+      if (distanciaCPU < distanciaJugador) return 1;
+
+      for (int i = 0; i < 4; i++) {
+        int valorCarta = PartidaUtils.manoCPU.elementAt(i).getModificador;
+
+        if (PartidaUtils.sumaCPU + valorCarta > 20) {
+          distanciaCPU = (PartidaUtils.sumaCPU + valorCarta) - 20;
+        } else if (PartidaUtils.sumaCPU + valorCarta < 20)
+          distanciaCPU = 20 - (PartidaUtils.sumaCPU + valorCarta);
+
+        if (distanciaCPU < distanciaJugador && valorCarta != 0) {
+          //jugar carta
+          bajarCartaCPU(PartidaUtils.manoCPU.elementAt(i), i);
+          print("Bajar carta " + valorCarta.toString());
+          return 1;
+        }
+      }
+
+      if (PartidaUtils.sumaCPU < 15) return 0;
+    }
+    */
+
     for (int i = 0; i < 4; i++) {
       int valorCarta = PartidaUtils.manoCPU.elementAt(i).getModificador;
       if (valorCarta + PartidaUtils.sumaCPU == 20 && valorCarta != 0) {
@@ -682,8 +741,12 @@ JuegoPazaak.botonActivo
         return 1;
       }
     }
-    if(PartidaUtils.sumaCPU>=20) return 1;
+    if (PartidaUtils.sumaCPU >= 20) return 1;
 
+    if (PartidaUtils.sumaCPU < PartidaUtils.sumaJugador &&
+        PartidaUtils.sumaJugador <= 20) return 0;
+
+    if (PartidaUtils.sumaCPU > 16 && !PartidaUtils.jugadorPlantado) return 1;
 
     return 0;
   }
@@ -691,7 +754,7 @@ JuegoPazaak.botonActivo
   void bajarCartaCPU(Carta carta, int posicion) {
     if (carta.getModificador == 0) {
       print("carta vacia...");
-    } else if (PartidaUtils.cartasEnMesaJ >= 9 || PartidaUtils.cartaJugada) {
+    } else if (PartidaUtils.cartasEnMesaCPU >= 9 || PartidaUtils.cartaJugada) {
       print("No se pueden bajar más");
     } else {
       PartidaUtils.cartasJugadasCPU[PartidaUtils.cartasEnMesaCPU] = carta;
@@ -700,16 +763,22 @@ JuegoPazaak.botonActivo
     }
   }
 
-  finTurno() async {
+  finTurno() {
     JuegoPazaak.botonActivo = false;
-    await Future.delayed(const Duration(seconds: 1));
-    if(!PartidaUtils.cpuPlantado)   bajarCartaVerdeCPU();
+    if (!PartidaUtils.cpuPlantado) {
+      bajarCartaVerdeCPU();
+      setState(() {});
+    }
     setState(() {});
 
     //vuelta turno jugador
-    await Future.delayed(const Duration(seconds: 2));
     PartidaUtils.cartaJugada = false;
-    bajarCartaVerdeJugador();
+
+    Timer(Duration(seconds: 1), () {
+      bajarCartaVerdeJugador();
+      setState(() {});
+    });
+
     setState(() {});
     JuegoPazaak.botonActivo = true;
     print("Mano CPU: " +
@@ -720,56 +789,141 @@ JuegoPazaak.botonActivo
         PartidaUtils.manoCPU.elementAt(2).getModificador.toString() +
         " " +
         PartidaUtils.manoCPU.elementAt(3).getModificador.toString());
+
+    if (PartidaUtils.sumaJugador >= 20) plantarse();
   }
 
-
-  Future<void> plantarse() async {
-
-  PartidaUtils.jugadorPlantado = true;
-   await Future.delayed(const Duration(seconds: 1));
-    while(!PartidaUtils.cpuPlantado){
+  plantarse() async {
+    //playMusic("plantarse.wav");
+    PartidaUtils.jugadorPlantado = true;
+    while (!PartidaUtils.cpuPlantado) {
       bajarCartaVerdeCPU();
+      PartidaUtils.ronda++;
       setState(() {});
+      await Future.delayed(const Duration(seconds: 2));
     }
-  
+
     print("CPU plantada");
 
     comprobarVictoriaRonda();
-
-
-}
+  }
 
   void comprobarVictoriaRonda() {
-      int distanciaJugador = 0;
-      int distanciaCPU = 0;
-      if(PartidaUtils.sumaJugador>20){
-            distanciaJugador=PartidaUtils.sumaJugador-20;
-      }else if(PartidaUtils.sumaJugador<20) distanciaJugador=20-PartidaUtils.sumaJugador;
+    int distanciaJugador = 0;
+    int distanciaCPU = 0;
+    if (PartidaUtils.sumaJugador > 20) {
+      distanciaJugador = PartidaUtils.sumaJugador - 20;
+    } else if (PartidaUtils.sumaJugador < 20)
+      distanciaJugador = 20 - PartidaUtils.sumaJugador;
 
-        if(PartidaUtils.sumaCPU>20){
-            distanciaCPU=PartidaUtils.sumaCPU-20;
-      }else if(PartidaUtils.sumaCPU<20) distanciaCPU=20-PartidaUtils.sumaCPU;
+    if (PartidaUtils.sumaCPU > 20) {
+      distanciaCPU = PartidaUtils.sumaCPU - 20;
+    } else if (PartidaUtils.sumaCPU < 20)
+      distanciaCPU = 20 - PartidaUtils.sumaCPU;
 
-      print(distanciaJugador);
-      print(distanciaCPU);
+    print(distanciaJugador);
+    print(distanciaCPU);
 
-      if(distanciaJugador==distanciaCPU){
-        print("Ronda empatada");
-      }else if(distanciaJugador<distanciaCPU){
-        print("Gana la ronda el jugador");
-        PartidaUtils.victoriasJugador++;
-      }else{
-        print("Gana la ronda la cpu");
-        PartidaUtils.victoriasCPU++;
-      }
+    if (distanciaJugador == distanciaCPU) {
+      print("Ronda empatada");
 
-      if(PartidaUtils.victoriasJugador>=3){
+      ventanaEmergente("Ronda empatada");
+    } else if (distanciaJugador < distanciaCPU) {
+      print("Gana la ronda el jugador");
+      playMusic("ganar_ronda.wav");
+      ventanaEmergente("El jugador gana la ronda!");
 
-      }
+      PartidaUtils.victoriasJugador++;
+      PartidaUtils.puntuacionMinijuego += 50;
+    } else {
+      print("Gana la ronda la cpu");
+      playMusic("perder_ronda.wav");
 
+      ventanaEmergente("La CPU gana la ronda");
 
+      PartidaUtils.victoriasCPU++;
+    }
 
+    if (PartidaUtils.victoriasJugador >= 3) {
+      PartidaUtils.puntuacionMinijuego += 50;
+      playMusic("ganar_partida.wav");
+
+      ventanaFinPartida("¡El jugador gana la partida!");
+    }
+
+    if (PartidaUtils.victoriasCPU >= 3) {
+      playMusic("perder_partida.wav");
+
+      ventanaFinPartida("¡Has perdido!");
+    }
+
+    setState(() {});
+  }
+
+  Future ventanaEmergente(String ganador) => showDialog(
+      context: this.context,
+      builder: ((context) => AlertDialog(
+            title: Text("Fin de ronda"),
+            content: Text(ganador),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    PartidaUtils.reiniciarRonda();
+                    setState(() {});
+                    Navigator.pop(context);
+                  },
+                  child: Text("Continuar"))
+            ],
+          )));
+
+  void actualizarContadores() {
+    switch (PartidaUtils.victoriasJugador) {
+      case 0:
+        JuegoPazaak.rutaContadorJ = 'assets/indicadoresj1_000.png';
+        break;
+      case 1:
+        JuegoPazaak.rutaContadorJ = 'assets/indicadoresj1_100.png';
+        break;
+      case 2:
+        JuegoPazaak.rutaContadorJ = 'assets/indicadoresj1_110.png';
+        break;
+      case 3:
+        JuegoPazaak.rutaContadorJ = 'assets/indicadoresj1_111.png';
+        break;
+    }
+
+    switch (PartidaUtils.victoriasCPU) {
+      case 0:
+        JuegoPazaak.rutaContadorCPU = 'assets/indicadoresj2_000.png';
+        break;
+      case 1:
+        JuegoPazaak.rutaContadorCPU = 'assets/indicadoresj2_100.png';
+        break;
+      case 2:
+        JuegoPazaak.rutaContadorCPU = 'assets/indicadoresj2_110.png';
+        break;
+      case 3:
+        JuegoPazaak.rutaContadorCPU = 'assets/indicadoresj2_111.png';
+        break;
+    }
+  }
+
+  Future ventanaFinPartida(String ganador) => showDialog(
+      context: this.context,
+      builder: ((context) => AlertDialog(
+            title: Text("Fin de partida"),
+            content: Text(ganador +
+                "\nTu puntuación ha sido de " +
+                PartidaUtils.puntuacionMinijuego.toString() +
+                "."),
+            actions: [
+              TextButton(onPressed: () => exit(0), child: Text("Salir"))
+            ],
+          )));
+
+  AudioPlayer player = AudioPlayer();
+
+  playMusic(String ruta) {
+    player.play(AssetSource(ruta));
   }
 }
-
-

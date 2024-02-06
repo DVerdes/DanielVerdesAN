@@ -3,19 +3,6 @@ import 'dart:math';
 import 'package:pazaak/carta.dart';
 
 class PartidaUtils {
-  static List<Carta> baraja = [
-    new Carta(1, "assets/carta1.png"),
-    new Carta(1, "assets/carta1.png"),
-    new Carta(2, "assets/carta2.png"),
-    new Carta(2, "assets/carta2.png"),
-    new Carta(3, "assets/carta3.png"),
-    new Carta(4, "assets/carta4.png"),
-    new Carta(5, "assets/carta5.png"),
-    new Carta(-1, "assets/cartam1.png"),
-    new Carta(-2, "assets/cartam2.png"),
-    new Carta(-3, "assets/cartam3.png")
-  ];
-
   static List<Carta> cartasVerdes = [
     new Carta(1, "assets/c1.png"),
     new Carta(2, "assets/c2.png"),
@@ -90,7 +77,21 @@ class PartidaUtils {
   static int victoriasJugador = 0;
   static int victoriasCPU = 0;
 
+  static int puntuacionMinijuego = 0;
+
   static void repartirManos() {
+    List<Carta> baraja = [
+      new Carta(1, "assets/carta1.png"),
+      new Carta(1, "assets/carta1.png"),
+      new Carta(2, "assets/carta2.png"),
+      new Carta(2, "assets/carta2.png"),
+      new Carta(3, "assets/carta3.png"),
+      new Carta(4, "assets/carta4.png"),
+      new Carta(5, "assets/carta5.png"),
+      new Carta(-1, "assets/cartam1.png"),
+      new Carta(-2, "assets/cartam2.png"),
+      new Carta(-3, "assets/cartam3.png")
+    ];
     Random random = new Random();
 
     cartasVerdes.shuffle();
@@ -98,17 +99,81 @@ class PartidaUtils {
     cartasVerdes2.shuffle();
     cartasVerdesCPU = cartasVerdes2;
 
-    for (int i = 0; i < 4; i++) {
-      int randomNumber = random.nextInt(baraja.length);
-      mano.add(baraja.elementAt(randomNumber));
-      baraja.removeAt(randomNumber);
-    }
+    int randomNumber = 0;
+    int contadorBaraja = 10;
 
     for (int i = 0; i < 4; i++) {
-      int randomNumber = random.nextInt(baraja.length);
+      randomNumber = random.nextInt(contadorBaraja - 1);
+      mano.add(baraja.elementAt(randomNumber));
+      baraja.removeAt(randomNumber);
+      contadorBaraja--;
+    }
+
+    contadorBaraja = 10;
+
+    baraja = [
+      new Carta(1, "assets/carta1.png"),
+      new Carta(1, "assets/carta1.png"),
+      new Carta(2, "assets/carta2.png"),
+      new Carta(2, "assets/carta2.png"),
+      new Carta(3, "assets/carta3.png"),
+      new Carta(4, "assets/carta4.png"),
+      new Carta(5, "assets/carta5.png"),
+      new Carta(-1, "assets/cartam1.png"),
+      new Carta(-2, "assets/cartam2.png"),
+      new Carta(-3, "assets/cartam3.png")
+    ];
+
+    for (int i = 0; i < 4; i++) {
+      randomNumber = random.nextInt(contadorBaraja - 1);
       manoCPU.add(baraja.elementAt(randomNumber));
       baraja.removeAt(randomNumber);
+      contadorBaraja--;
     }
+
+    cartasJugadasJ[0] = cartasVerdesJugador.elementAt(0);
+  }
+
+  static void reiniciarRonda() {
+    ronda = 1;
+    cartasJugadasJ.clear();
+    cartasJugadasJ = [
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png")
+    ];
+    cartasJugadasCPU.clear();
+    cartasJugadasCPU = [
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png"),
+      new Carta(0, "assets/vacio.png")
+    ];
+    cartasEnMesaJ = 1;
+    cartasEnMesaCPU = 0;
+    sumaJugador = 0;
+    sumaCPU = 0;
+
+    jugadorPlantado = false;
+    cpuPlantado = false;
+
+    cartasVerdes.shuffle();
+    cartasVerdesJugador = cartasVerdes;
+    cartasVerdes2.shuffle();
+    cartasVerdesCPU = cartasVerdes2;
 
     cartasJugadasJ[0] = cartasVerdesJugador.elementAt(0);
   }
