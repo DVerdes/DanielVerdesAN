@@ -2,6 +2,7 @@ package org.example;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 public class Tarea implements Serializable {
 
@@ -10,6 +11,8 @@ public class Tarea implements Serializable {
     private String descripcion;
     private Timestamp fecha;
     private String estado;
+
+    private Set<Subtarea> subtareas;
 
     public Tarea() {
     }
@@ -20,6 +23,23 @@ public class Tarea implements Serializable {
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.estado = estado;
+    }
+
+    public Tarea(int id, String nombre, String descripcion, Timestamp fecha, String estado, Set<Subtarea> subtareas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.estado = estado;
+        this.subtareas = subtareas;
+    }
+
+    public Tarea(String nombre, String descripcion, Timestamp fecha, String estado, Set<Subtarea> subtareas) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.estado = estado;
+        this.subtareas = subtareas;
     }
 
     public int getId() {
@@ -62,6 +82,14 @@ public class Tarea implements Serializable {
         this.estado = estado;
     }
 
+    public Set<Subtarea> getSubtareas() {
+        return subtareas;
+    }
+
+    public void setSubtareas(Set<Subtarea> subtareas) {
+        this.subtareas = subtareas;
+    }
+
     @Override
     public String toString() {
         return "Tarea{" +
@@ -70,6 +98,7 @@ public class Tarea implements Serializable {
                 ", descripcion='" + descripcion + '\'' +
                 ", fecha=" + fecha +
                 ", estado='" + estado + '\'' +
+                ", subtareas=" + subtareas +
                 '}';
     }
 }

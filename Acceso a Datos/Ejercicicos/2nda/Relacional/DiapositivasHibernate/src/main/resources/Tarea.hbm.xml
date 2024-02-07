@@ -11,6 +11,10 @@
         <property name="descripcion" type="string" column="descripcion"/>
         <property name="fecha" type="timestamp" column="fecha"/>
         <property name="estado" type="string" column="estado"/>
+        <set name="subtareas" table="Subtareas" cascade="all" lazy="true">
+            <key column="idTarea"></key>
+            <one-to-many class="org.example.Subtarea"></one-to-many>
+        </set>
 
     </class>
 </hibernate-mapping>
