@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.practicafinal.SecondaryController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="155.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="462.0" minWidth="10.0" prefWidth="445.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="131.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="75.0" minHeight="6.0" prefHeight="29.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label text="nombre" />
+      <Label text="apellidos" GridPane.rowIndex="1" />
+      <Label text="edad" GridPane.rowIndex="2" />
+      <TextField fx:id="nombre" GridPane.columnIndex="1" />
+      <TextField fx:id="apellidos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="edad" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button fx:id="añadirImagen" mnemonicParsing="false" onAction="#seleccionimg" text="seleccionar imagen" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Button fx:id="guardar" mnemonicParsing="false" onAction="#guardarContacto" text="guardar " GridPane.rowIndex="4" />
+      <ImageView fx:id="mv" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   </children>
+</GridPane>

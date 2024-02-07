@@ -1,0 +1,5 @@
+com\aulanosa\pruebabbdd\PrimaryController.class
+module-info.class
+com\aulanosa\pruebabbdd\App.class
+com\aulanosa\pruebabbdd\JbdcDao.class
+com\aulanosa\pruebabbdd\SecondaryController.class
