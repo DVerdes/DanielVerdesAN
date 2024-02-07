@@ -469,7 +469,9 @@ class Pazaak extends State<JuegoPazaak> {
                                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                                 child: InkWell(
                                   onTap: () {
-                                    plantarse();
+                                    PartidaUtils.jugadorPlantado
+                                        ? print("")
+                                        : plantarse();
                                   },
                                   // Cuadrado
                                   child: Container(
@@ -664,7 +666,7 @@ class Pazaak extends State<JuegoPazaak> {
       playMusic("carta_verde.wav");
 
       PartidaUtils.cartasJugadasJ[PartidaUtils.cartasEnMesaJ] =
-          PartidaUtils.cartasVerdesJugador.elementAt(PartidaUtils.ronda - 1);
+          PartidaUtils.cartasVerdesJugador.elementAt(PartidaUtils.ronda);
       PartidaUtils.ronda++;
       PartidaUtils.cartasEnMesaJ++;
     }
@@ -676,7 +678,7 @@ class Pazaak extends State<JuegoPazaak> {
       print("No bjar más");
     } else {
       PartidaUtils.cartasJugadasCPU[PartidaUtils.cartasEnMesaCPU] =
-          PartidaUtils.cartasVerdesCPU.elementAt(PartidaUtils.ronda - 1);
+          PartidaUtils.cartasVerdesCPU.elementAt(PartidaUtils.ronda);
       playMusic("carta_verde.wav");
       PartidaUtils.cartaJugadaCPU = false;
 
@@ -743,10 +745,10 @@ class Pazaak extends State<JuegoPazaak> {
     Timer(Duration(seconds: 1), () {
       bajarCartaVerdeJugador();
       setState(() {});
+      JuegoPazaak.botonActivo = true;
     });
 
     setState(() {});
-    JuegoPazaak.botonActivo = true;
     print("Mano CPU: " +
         PartidaUtils.manoCPU.elementAt(0).getModificador.toString() +
         " " +
