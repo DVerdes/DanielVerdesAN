@@ -69,6 +69,7 @@ class PartidaUtils {
   static int sumaCPU = 0;
 
   static bool cartaJugada = false;
+  static bool cartaJugadaCPU = false;
   static int ronda = 1;
 
   static bool jugadorPlantado = false;

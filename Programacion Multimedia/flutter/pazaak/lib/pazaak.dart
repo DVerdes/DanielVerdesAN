@@ -40,14 +40,11 @@ class Pazaak extends State<JuegoPazaak> {
             child: Scaffold(
                 backgroundColor: Colors.transparent,
                 //appBar
-                appBar: AppBar(
-                    title: new Center(
-                  child: Text("Pazaak"),
-                )),
+
                 //Body
                 body: Center(
                   child: Container(
-                      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                      margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                       child: Column(
                         children: [
                           Row(
@@ -417,7 +414,7 @@ class Pazaak extends State<JuegoPazaak> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                                 child: InkWell(
                                   onTap: () {
                                     if (PartidaUtils.jugadorPlantado) {
@@ -459,7 +456,8 @@ class Pazaak extends State<JuegoPazaak> {
                                           // Nombre objeto + cantidad?
                                           "Finalizar turno",
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
                                         ),
                                         // Precio objeto
                                       ],
@@ -468,7 +466,7 @@ class Pazaak extends State<JuegoPazaak> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                                 child: InkWell(
                                   onTap: () {
                                     plantarse();
@@ -503,7 +501,8 @@ class Pazaak extends State<JuegoPazaak> {
                                           // Nombre objeto + cantidad?
                                           "Plantarse",
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
                                         ),
                                         // Precio objeto
                                       ],
@@ -642,7 +641,9 @@ class Pazaak extends State<JuegoPazaak> {
   void bajarCarta(Carta carta, int posicion) {
     if (carta.getModificador == 0) {
       print("carta vacia...");
-    } else if (PartidaUtils.cartasEnMesaJ >= 9 || PartidaUtils.cartaJugada) {
+    } else if (PartidaUtils.cartasEnMesaJ >= 9 ||
+        PartidaUtils.cartaJugada ||
+        PartidaUtils.jugadorPlantado) {
       print("No se pueden bajar más");
     } else {
       playMusic("jugar_carta.wav");
@@ -677,6 +678,7 @@ class Pazaak extends State<JuegoPazaak> {
       PartidaUtils.cartasJugadasCPU[PartidaUtils.cartasEnMesaCPU] =
           PartidaUtils.cartasVerdesCPU.elementAt(PartidaUtils.ronda - 1);
       playMusic("carta_verde.wav");
+      PartidaUtils.cartaJugadaCPU = false;
 
       PartidaUtils.cartasEnMesaCPU++;
       //AQUI DECISIÓN CPU
@@ -687,42 +689,6 @@ class Pazaak extends State<JuegoPazaak> {
   }
 
   int decisionCPU() {
-    /*
-    if (PartidaUtils.jugadorPlantado) {
-      int distanciaJugador = 0;
-      int distanciaCPU = 0;
-      if (PartidaUtils.sumaJugador > 20) {
-        distanciaJugador = PartidaUtils.sumaJugador - 20;
-      } else if (PartidaUtils.sumaJugador < 20)
-        distanciaJugador = 20 - PartidaUtils.sumaJugador;
-
-      if (PartidaUtils.sumaCPU > 20) {
-        distanciaCPU = PartidaUtils.sumaCPU - 20;
-      } else if (PartidaUtils.sumaCPU < 20)
-        distanciaCPU = 20 - PartidaUtils.sumaCPU;
-
-      if (distanciaCPU < distanciaJugador) return 1;
-
-      for (int i = 0; i < 4; i++) {
-        int valorCarta = PartidaUtils.manoCPU.elementAt(i).getModificador;
-
-        if (PartidaUtils.sumaCPU + valorCarta > 20) {
-          distanciaCPU = (PartidaUtils.sumaCPU + valorCarta) - 20;
-        } else if (PartidaUtils.sumaCPU + valorCarta < 20)
-          distanciaCPU = 20 - (PartidaUtils.sumaCPU + valorCarta);
-
-        if (distanciaCPU < distanciaJugador && valorCarta != 0) {
-          //jugar carta
-          bajarCartaCPU(PartidaUtils.manoCPU.elementAt(i), i);
-          print("Bajar carta " + valorCarta.toString());
-          return 1;
-        }
-      }
-
-      if (PartidaUtils.sumaCPU < 15) return 0;
-    }
-    */
-
     for (int i = 0; i < 4; i++) {
       int valorCarta = PartidaUtils.manoCPU.elementAt(i).getModificador;
       if (valorCarta + PartidaUtils.sumaCPU == 20 && valorCarta != 0) {
@@ -743,10 +709,8 @@ class Pazaak extends State<JuegoPazaak> {
     }
     if (PartidaUtils.sumaCPU >= 20) return 1;
 
-    if (PartidaUtils.sumaCPU < PartidaUtils.sumaJugador &&
-        PartidaUtils.sumaJugador <= 20) return 0;
-
-    if (PartidaUtils.sumaCPU > 16 && !PartidaUtils.jugadorPlantado) return 1;
+    if (PartidaUtils.sumaCPU >= 18 &&
+        PartidaUtils.sumaJugador <= PartidaUtils.sumaCPU) return 1;
 
     return 0;
   }
@@ -754,9 +718,11 @@ class Pazaak extends State<JuegoPazaak> {
   void bajarCartaCPU(Carta carta, int posicion) {
     if (carta.getModificador == 0) {
       print("carta vacia...");
-    } else if (PartidaUtils.cartasEnMesaCPU >= 9 || PartidaUtils.cartaJugada) {
+    } else if (PartidaUtils.cartasEnMesaCPU >= 9 ||
+        PartidaUtils.cartaJugadaCPU) {
       print("No se pueden bajar más");
     } else {
+      PartidaUtils.cartaJugadaCPU = true;
       PartidaUtils.cartasJugadasCPU[PartidaUtils.cartasEnMesaCPU] = carta;
       PartidaUtils.cartasEnMesaCPU++;
       PartidaUtils.manoCPU[posicion] = new Carta(0, 'assets/vacio.png');
@@ -863,6 +829,12 @@ class Pazaak extends State<JuegoPazaak> {
   Future ventanaEmergente(String ganador) => showDialog(
       context: this.context,
       builder: ((context) => AlertDialog(
+            shape: BeveledRectangleBorder(
+                side: BorderSide(
+                    color: Color.fromARGB(255, 65, 64, 64), width: 5),
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(30))),
+            backgroundColor: Color.fromARGB(255, 167, 142, 1),
             title: Text("Fin de ronda"),
             content: Text(ganador),
             actions: [
@@ -872,7 +844,10 @@ class Pazaak extends State<JuegoPazaak> {
                     setState(() {});
                     Navigator.pop(context);
                   },
-                  child: Text("Continuar"))
+                  child: Text(
+                    "Continuar",
+                    style: TextStyle(color: Color.fromARGB(255, 65, 64, 64)),
+                  ))
             ],
           )));
 
@@ -911,13 +886,24 @@ class Pazaak extends State<JuegoPazaak> {
   Future ventanaFinPartida(String ganador) => showDialog(
       context: this.context,
       builder: ((context) => AlertDialog(
+            shape: BeveledRectangleBorder(
+                side: BorderSide(
+                    color: Color.fromARGB(255, 65, 64, 64), width: 5),
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(30))),
+            backgroundColor: Color.fromARGB(255, 167, 142, 1),
             title: Text("Fin de partida"),
             content: Text(ganador +
                 "\nTu puntuación ha sido de " +
                 PartidaUtils.puntuacionMinijuego.toString() +
                 "."),
             actions: [
-              TextButton(onPressed: () => exit(0), child: Text("Salir"))
+              TextButton(
+                  onPressed: () => exit(0),
+                  child: Text(
+                    "Salir",
+                    style: TextStyle(color: Color.fromARGB(255, 65, 64, 64)),
+                  ))
             ],
           )));
 
