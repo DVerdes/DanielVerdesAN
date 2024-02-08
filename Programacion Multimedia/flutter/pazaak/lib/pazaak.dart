@@ -44,9 +44,16 @@ class Pazaak extends State<JuegoPazaak> {
                 //Body
                 body: Center(
                   child: Container(
-                      margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                      margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
                       child: Column(
                         children: [
+                          Row(
+                            children: [
+                              IconButton( icon: Icon(Icons.info, size: 30,), alignment: Alignment.centerRight, onPressed: (){
+                                ventanaInformacion();
+                              },)
+                            ],
+                          ),
                           Row(
                             children: [
                               Container(
@@ -675,7 +682,7 @@ class Pazaak extends State<JuegoPazaak> {
   void bajarCartaVerdeCPU() {
     //sleep(1000 as Duration);
     if (PartidaUtils.cartasEnMesaCPU >= 9) {
-      print("No bjar más");
+      print("No bajar más");
     } else {
       PartidaUtils.cartasJugadasCPU[PartidaUtils.cartasEnMesaCPU] =
           PartidaUtils.cartasVerdesCPU.elementAt(PartidaUtils.ronda);
@@ -914,4 +921,33 @@ class Pazaak extends State<JuegoPazaak> {
   playMusic(String ruta) {
     player.play(AssetSource(ruta));
   }
+  
+    ventanaInformacion() => showDialog(
+      context: this.context,
+      builder: ((context) =>  
+      AlertDialog(
+            shape: BeveledRectangleBorder(
+                side: BorderSide(
+                    color: Color.fromARGB(255, 65, 64, 64), width: 5),
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(30))),
+            backgroundColor: Color.fromARGB(255, 167, 142, 1),
+            title: Text("Información"),
+            content: Text("El jugador que se acerque más al valor de 20 puntos gana la ronda.\n\nFIN DE TURNO: finaliza tu turno, baja otra carta aleatoria\nPLANTARSE: finaliza la ronda en el valor actual\n\nPuedes usar las cartas de tu mano para sumar al valor, una vez por turno\nEl primero en ganar tres rondas gana."),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Continuar",
+                    style: TextStyle(color: Color.fromARGB(255, 65, 64, 64)),
+                  ))
+            ],
+          )));
+          
+         
+
+  
 }
