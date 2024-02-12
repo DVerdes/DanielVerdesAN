@@ -17,7 +17,7 @@ public class Cliente {
                 DataOutputStream(Cliente.getOutputStream());
 
 // ENVIO UN SALUDO AL SERVIDOR
-        flujoSalida.writeUTF("Saludos al SERVIDOR DESDE EL CLIENTE");
+        flujoSalida.writeUTF("HOLA");
 
 // CREO FLUJO DE ENTRADA AL SERVIDOR
         DataInputStream flujoEntrada = new

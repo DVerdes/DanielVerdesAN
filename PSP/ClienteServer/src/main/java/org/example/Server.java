@@ -28,7 +28,7 @@ public class Server {
         DataOutputStream flujoSalida = new DataOutputStream(salida);
 
 // ENVIO UN SALUDO AL CLIENTE
-        flujoSalida.writeUTF("Saludos al cliente del servidor");
+        flujoSalida.writeUTF(clienteConectado.getRemoteSocketAddress().toString());
 
 // CERRAR STREAMS Y SOCKETS
         entrada.close();
