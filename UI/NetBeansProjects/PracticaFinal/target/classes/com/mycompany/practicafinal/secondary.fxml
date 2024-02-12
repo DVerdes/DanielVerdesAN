@@ -1,34 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.practicafinal.SecondaryController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="155.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="462.0" minWidth="10.0" prefWidth="445.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="131.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="75.0" minHeight="6.0" prefHeight="29.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+
+<AnchorPane prefHeight="652.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.practicafinal.SecondaryController">
    <children>
-      <Label text="nombre" />
-      <Label text="apellidos" GridPane.rowIndex="1" />
-      <Label text="edad" GridPane.rowIndex="2" />
-      <TextField fx:id="nombre" GridPane.columnIndex="1" />
-      <TextField fx:id="apellidos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField fx:id="edad" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Button fx:id="añadirImagen" mnemonicParsing="false" onAction="#seleccionimg" text="seleccionar imagen" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <Button fx:id="guardar" mnemonicParsing="false" onAction="#guardarContacto" text="guardar " GridPane.rowIndex="4" />
-      <ImageView fx:id="mv" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <GridPane alignment="CENTER" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="476.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="507.0" minWidth="10.0" prefWidth="119.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="463.0" minWidth="10.0" prefWidth="257.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="75.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="Nombre" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Apellidos" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Edad" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nombre" prefHeight="25.0" prefWidth="231.0" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets right="70.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="apellidos" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="70.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="edad" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets right="70.0" />
+               </GridPane.margin>
+            </TextField>
+            <Button fx:id="añadirImagen" mnemonicParsing="false" onAction="#seleccionimg" text="Seleccionar imagen" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="guardar" mnemonicParsing="false" onAction="#guardarJugador" text="Guardar " GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </Button>
+            <ImageView fx:id="mv" fitHeight="100.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="60.0" top="10.0" />
+               </GridPane.margin>
+            </ImageView>
+            <Label text="Equipo" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="equipo" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets right="70.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label alignment="CENTER" text="Posicion" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="posicion" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets right="70.0" />
+               </GridPane.margin>
+            </TextField>
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="20.0" top="30.0" />
+         </padding>
+      </GridPane>
+      <Label layoutX="137.0" layoutY="44.0" text="INSERTAR JUGADOR">
+         <font>
+            <Font name="Britannic Bold" size="23.0" />
+         </font>
+      </Label>
    </children>
-</GridPane>
+</AnchorPane>

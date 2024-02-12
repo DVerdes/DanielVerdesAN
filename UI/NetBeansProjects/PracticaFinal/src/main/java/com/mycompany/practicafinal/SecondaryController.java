@@ -24,6 +24,10 @@ public class SecondaryController {
     @FXML
     private TextField apellidos;
     @FXML
+    private TextField equipo;
+    @FXML
+    private TextField posicion;
+    @FXML
     private TextField edad;
     
     final FileChooser f = new FileChooser();
@@ -51,11 +55,12 @@ public class SecondaryController {
     }
     
        @FXML
-    private void guardarContacto(){
+    private void guardarJugador(){
         
-        Contacto contacto = new Contacto(nombre.getText(), apellidos.getText(), Integer.valueOf(edad.getText()),url);
+        Jugador jugador = new Jugador(nombre.getText(), apellidos.getText(),equipo.getText(),posicion.getText(),Integer.valueOf(edad.getText()),url);
+        
        
-        PrimaryController.valoresLista.add(contacto);
+        PrimaryController.valoresLista.add(jugador);
         Stage stage = (Stage) añadirImagen.getScene().getWindow();
         stage.close();
       
