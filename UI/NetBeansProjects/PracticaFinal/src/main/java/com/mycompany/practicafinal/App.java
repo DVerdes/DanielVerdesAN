@@ -18,6 +18,11 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 879, 465);
+        
+         // hoja de estilos css inicial
+        String cssScene = this.getClass().getResource("firstStyles.css").toExternalForm();
+        scene.getStylesheets().add(cssScene);
+
         stage.setScene(scene);
         stage.show();
     }

@@ -1,0 +1,14 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 13 feb 2024, 13:11:26
+    Author     : DVerd
+*/
+
+
+#paneFondo{
+ -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #63E18F, #ECF700);
+}
+
