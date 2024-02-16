@@ -19,17 +19,17 @@ import java.sql.SQLException;
 public class JdbcDao {
 
     // Replace below database url, username and password with your actual database credentials
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3307/javafx_registration?useSSL=false";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3307/dam2?useSSL=false";
     private static final String DATABASE_USERNAME = "root";
     private static final String DATABASE_PASSWORD = null;
-    private static final String INSERT_QUERY = "INSERT INTO jugadores (nombre, apellido, equipo, posicion, edad) VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT_QUERY = "INSERT INTO jugadores (nombre, apellidos, equipo, posicion, edad, imgURL) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String DELETE_QUERY = "DELETE FROM jugadores WHERE id = ?";
 
         private static final String SELECT_QUERY = "SELECT full_name FROM registration WHERE email_id=?";
 
 
 
-    public void insertRecord(Jugador jugador) throws SQLException {
+    public static void insertRecord(Jugador jugador) throws SQLException {
 
         // Step 1: Establishing a Connection and 
         // try-with-resource statement will auto close the connection.
