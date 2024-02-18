@@ -3,40 +3,39 @@ package org.example;
 import java.io.*;
 import java.net.*;
 
+/**
+ * Clase del Servidor - PROTOCOLO SOSO
+ */
 public class Server {
+
+    // Contador para generar Ids autoincrementales
+    static int idCliente = 0;
 
     public static void main(String[] arg) throws IOException {
 
         int numeroPuerto = 6000;// Puerto
+        // ServerSocket
         ServerSocket servidor = new ServerSocket(numeroPuerto);
+        // Socket del cliente
         Socket clienteConectado = null;
-        System.out.println("Esperando al cliente ");
-        clienteConectado = servidor.accept();
+        // Bucle para estar a la espera de nuevos clientes
+        while (true){
+            System.out.println("Esperando al cliente ");
+            // Socket aceptado
+            clienteConectado = servidor.accept();
+            // Nuevo hilo con el código de la parte de servidor y el socket del cliente relacionado
+            new HiloServidor(clienteConectado, obtenerIdCliente()).start();
+        }
 
-// CREO FLUJO DE ENTRADA DEL CLIENTE
-        InputStream entrada = null;
-        entrada = clienteConectado.getInputStream();
-        DataInputStream flujoEntrada = new DataInputStream(entrada);
+}
 
-//EL CLIENTE ME ENVIA UN MENSAJE
-        System.out.println("Recibiendo del CLIENTE: \n\t" +
-                flujoEntrada.readUTF()) ;
+    /**
+     * Genera id autoincremental para el cliente
+     * @return id autoincremental
+     */
+    private static int obtenerIdCliente() {
+        idCliente++;
+        return idCliente;
+    }
 
-// CREO FLUJO DE SALIDA AL CLIENTE
-        OutputStream salida = null;
-        salida = clienteConectado.getOutputStream();
-        DataOutputStream flujoSalida = new DataOutputStream(salida);
-
-// ENVIO UN SALUDO AL CLIENTE
-        flujoSalida.writeUTF(clienteConectado.getRemoteSocketAddress().toString());
-
-// CERRAR STREAMS Y SOCKETS
-        entrada.close();
-        flujoEntrada.close();
-        salida.close();
-        flujoSalida.close();
-        clienteConectado.close();
-        servidor.close();
-
-    }// main
-}// fin
+}
