@@ -2,6 +2,7 @@ package com.mycompany.practicafinal;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -55,10 +56,10 @@ public class SecondaryController {
     }
     
        @FXML
-    private void guardarJugador(){
+    private void guardarJugador() throws SQLException{
         
         Jugador jugador = new Jugador(nombre.getText(), apellidos.getText(),equipo.getText(),posicion.getText(),Integer.valueOf(edad.getText()),url);
-        
+        JdbcDao.insertRecord(jugador);
        
         PrimaryController.valoresLista.add(jugador);
         Stage stage = (Stage) añadirImagen.getScene().getWindow();
