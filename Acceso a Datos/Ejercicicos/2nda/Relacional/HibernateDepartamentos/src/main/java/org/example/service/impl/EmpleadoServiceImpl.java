@@ -4,6 +4,8 @@ import org.example.dao.DepartamentoDao;
 import org.example.dao.EmpleadoDao;
 import org.example.dao.impl.JbdcDepartamentoDao;
 import org.example.dao.impl.JbdcEmpleadoDao;
+import org.example.dao.impl.OrmDepartamentoDAO;
+import org.example.dao.impl.OrmEmpleadoDAO;
 import org.example.dto.EmpleadoDTO;
 import org.example.mapper.DepartamentoMapper;
 import org.example.mapper.EmpleadoMapper;
@@ -18,8 +20,8 @@ import java.util.List;
 public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public List<EmpleadoDTO> obtenerTodos() throws SQLException {
-        EmpleadoDao ed = new JbdcEmpleadoDao();
-        DepartamentoDao dd = new JbdcDepartamentoDao();
+        EmpleadoDao ed = new OrmEmpleadoDAO();
+        DepartamentoDao dd = new OrmDepartamentoDAO();
 
 
 
@@ -37,8 +39,8 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public List<EmpleadoDTO> obtenerPorNombre(String nombre) throws SQLException {
-        EmpleadoDao ed = new JbdcEmpleadoDao();
-        DepartamentoDao dd = new JbdcDepartamentoDao();
+        EmpleadoDao ed = new OrmEmpleadoDAO();
+        DepartamentoDao dd = new OrmDepartamentoDAO();
 
 
         HashMap<Empleado, String> empleadosHashMap = new HashMap<Empleado, String>();
@@ -56,8 +58,8 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public EmpleadoDTO obtenerPorId(int id) throws SQLException {
-        EmpleadoDao ed = new JbdcEmpleadoDao();
-        DepartamentoDao dd = new JbdcDepartamentoDao();
+        EmpleadoDao ed = new OrmEmpleadoDAO();
+        DepartamentoDao dd = new OrmDepartamentoDAO();
 
 
         return EmpleadoMapper.convertirADTO(ed.obtenerEmpleado(id),dd.obtenerDepartamento(ed.obtenerEmpleado(id).getIdDepartamento()).getNombre());
@@ -65,7 +67,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public int crear(EmpleadoDTO entidad) throws SQLException {
-        EmpleadoDao ed = new JbdcEmpleadoDao();
+        EmpleadoDao ed = new OrmEmpleadoDAO();
 
 
         return ed.insertarEmpleado(EmpleadoMapper.convertirAEmpleado(entidad));
@@ -73,7 +75,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public void actualizar(EmpleadoDTO entidad) throws SQLException {
-        EmpleadoDao ed = new JbdcEmpleadoDao();
+        EmpleadoDao ed = new OrmEmpleadoDAO();
 
         ed.actualizarEmpleado(EmpleadoMapper.convertirAEmpleado(entidad));
 
@@ -81,7 +83,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public void eliminar(int id) throws SQLException {
-        EmpleadoDao ed = new JbdcEmpleadoDao();
+        EmpleadoDao ed = new OrmEmpleadoDAO();
         ed.elimarEmpleado(id);
     }
 

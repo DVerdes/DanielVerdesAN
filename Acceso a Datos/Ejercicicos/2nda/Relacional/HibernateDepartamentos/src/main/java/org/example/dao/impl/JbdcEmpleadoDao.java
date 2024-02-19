@@ -92,7 +92,7 @@ public class JbdcEmpleadoDao implements EmpleadoDao {
             s.setString(1,empleado.getNombre());
             s.setString(2,empleado.getApellido());
             s.setString(3, empleado.getPinAcceso());
-            s.setDouble(4,empleado.getSalario());
+            s.setBigDecimal(4,empleado.getSalario());
             s.setDate(5, empleado.getFechaContratacion());
             s.setString(6, empleado.getDireccion());
             s.setString(7, empleado.getTelefono());
@@ -128,7 +128,7 @@ public class JbdcEmpleadoDao implements EmpleadoDao {
             s.setString(1,empleado.getNombre());
             s.setString(2,empleado.getApellido());
             s.setString(3, empleado.getPinAcceso());
-            s.setDouble(4,empleado.getSalario());
+            s.setBigDecimal(4,empleado.getSalario());
             s.setDate(5, empleado.getFechaContratacion());
             s.setString(6, empleado.getDireccion());
             s.setString(7, empleado.getTelefono());

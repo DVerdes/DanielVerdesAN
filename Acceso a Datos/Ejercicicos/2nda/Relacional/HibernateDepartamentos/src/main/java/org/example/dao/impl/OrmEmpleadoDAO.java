@@ -1,6 +1,6 @@
 package org.example.dao.impl;
 
-import org.example.dao.DepartamentoDao;
+import org.example.dao.EmpleadoDao;
 import org.example.model.Departamento;
 import org.example.model.Empleado;
 import org.hibernate.Session;
@@ -10,18 +10,23 @@ import org.hibernate.query.Query;
 import java.sql.SQLException;
 import java.util.List;
 
-public class OrmDepartamentoDAO implements DepartamentoDao {
+public class OrmEmpleadoDAO implements EmpleadoDao {
+
     @Override
-    public List<Departamento> listar() throws SQLException {
+    public List<Empleado> listar() throws SQLException {
         Session session = HibernateConexion.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try {
 
-            Query<Departamento> query = session.createNativeQuery("Select * from Departamento" ,Departamento.class);
-            List<Departamento> departamentos = query.list();
+            Query<Empleado> query = session.createNativeQuery("SELECT * FROM Empleados" , Empleado.class);
+            List<Empleado> empleados = query.list();
+            System.out.println(empleados.toString());
+
+
 
             transaction.commit();
-            return departamentos;
+            return empleados;
+
         }catch (Exception e){
             transaction.rollback();
             e.printStackTrace();
@@ -34,17 +39,21 @@ public class OrmDepartamentoDAO implements DepartamentoDao {
     }
 
     @Override
-    public List<Departamento> listarPorNombre(String nombre) throws SQLException {
+    public List<Empleado> listarPorNombre(String nombre) throws SQLException {
         Session session = HibernateConexion.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try {
 
-            Query<Departamento> query = session.createNativeQuery("Select * from Departamento WHERE nombre like =:nombre" ,Departamento.class);
+            Query<Empleado> query = session.createNativeQuery("SELECT * FROM Empleados WHERE nombre like =:Nombre" , Empleado.class);
             query.setString("nombre","%"+nombre+"%");
-            List<Departamento> departamentos = query.list();
+            List<Empleado> empleados = query.list();
+            System.out.println(empleados.toString());
+
+
 
             transaction.commit();
-            return departamentos;
+            return empleados;
+
         }catch (Exception e){
             transaction.rollback();
             e.printStackTrace();
@@ -57,30 +66,38 @@ public class OrmDepartamentoDAO implements DepartamentoDao {
     }
 
     @Override
-    public Departamento obtenerDepartamento(int id) throws SQLException {
+    public Empleado obtenerEmpleado(int id) throws SQLException {
         Session session = HibernateConexion.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-
         try {
-            Departamento departamento = session.get(Departamento.class,id);
+
+            Empleado empleado = session.get(Empleado.class,id);
+
+
+
             transaction.commit();
-            return departamento;
+            return empleado;
+
         }catch (Exception e){
             transaction.rollback();
             e.printStackTrace();
         }finally {
+
             session.close();
-        }   return null; }
+
+        }
+        return null;
+    }
 
     @Override
-    public int insertarDepartamento(Departamento departamento) throws SQLException {
+    public int insertarEmpleado(Empleado empleado) throws SQLException {
         Session session = HibernateConexion.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.save(departamento);
+            session.save(empleado);
             transaction.commit();
-            return departamento.getId();
+            return empleado.getId();
         }catch (Exception e){
             transaction.rollback();
             e.printStackTrace();
@@ -91,41 +108,22 @@ public class OrmDepartamentoDAO implements DepartamentoDao {
     }
 
     @Override
-    public int contarEmpleadosDepartamento(int id) throws SQLException {
-        Session session = HibernateConexion.getSessionFactory().getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-
-            Query<Empleado> query = session.createNativeQuery("SELECT * FROM Empleados WHERE idDepartamento =:idDep" , Empleado.class);
-            query.setString("idDep", String.valueOf(id));
-            List<Empleado> empleados = query.list();
-            System.out.println(empleados.toString());
-
-
-
-            transaction.commit();
-            return empleados.size();
-
-
-        }catch (Exception e){
-            transaction.rollback();
-            e.printStackTrace();
-        }finally {
-
-            session.close();
-
-        }
-        return 1;
-    }
-
-    @Override
-    public void elimarDepartamento(int id) throws SQLException {
+    public void actualizarEmpleado(Empleado empleado) throws SQLException {
         Session session = HibernateConexion.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            Departamento departamento = session.get(Departamento.class,id);
-            session.delete(departamento);
+            Empleado empleado1 = session.get(Empleado.class,empleado.getId());
+            empleado1.setNombre(empleado.getNombre());
+            empleado1.setApellido(empleado.getApellido());
+            empleado1.setPinAcceso(empleado.getPinAcceso());
+            empleado1.setSalario(empleado.getSalario());
+            empleado1.setFechaContratacion(empleado.getFechaContratacion());
+            empleado1.setTelefono(empleado.getTelefono());
+            empleado1.setEmail(empleado.getEmail());
+            empleado1.setDireccion(empleado.getDireccion());
+            empleado1.setIdDepartamento(empleado.getIdDepartamento());
+            session.update(empleado1);
             transaction.commit();
         }catch (Exception e){
             transaction.rollback();
@@ -136,17 +134,13 @@ public class OrmDepartamentoDAO implements DepartamentoDao {
     }
 
     @Override
-    public void actualizarDepartamento(Departamento departamento) throws SQLException {
+    public void elimarEmpleado(int id) throws SQLException {
         Session session = HibernateConexion.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            Departamento departamento1 = session.get(Departamento.class,departamento.getId());
-            departamento1.setNombre(departamento.getNombre());
-            departamento1.setEmail(departamento.getEmail());
-            departamento1.setTelefono(departamento.getTelefono());
-            departamento1.setUbicacion(departamento.getUbicacion());
-            session.update(departamento1);
+            Empleado empleado = session.get(Empleado.class,id);
+            session.delete(empleado);
             transaction.commit();
         }catch (Exception e){
             transaction.rollback();

@@ -18,6 +18,7 @@
 
         <!--MAPEOS-->
         <mapping resource="Departamento.hbm.xml"/>
+        <mapping resource="Empleado.hbm.xml"/>
 
 
     </session-factory>

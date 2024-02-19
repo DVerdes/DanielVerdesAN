@@ -10,7 +10,7 @@
         <property name="nombre" type="string" column="nombre"/>
         <property name="apellido" type="string" column="apellido"/>
         <property name="pinAcceso" type="string" column="pinAcceso"/>
-        <property name="salario" type="double" column="salario"/>
+        <property name="salario" type="big_decimal" column="salario"/>
         <property name="fechaContratacion" type="date" column="fechaContratacion"/>
         <property name="direccion" type="string" column="direccion"/>
         <property name="telefono" type="string" column="telefono"/>

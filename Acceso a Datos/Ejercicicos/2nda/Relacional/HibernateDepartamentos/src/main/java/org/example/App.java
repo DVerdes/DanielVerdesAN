@@ -36,28 +36,28 @@ public class App
 
 
 
-       ds.crear(new DepartamentoDTO("SAP","Ferrol","sap@gmail.com","675887777",6));
+       ds.crear(new DepartamentoDTO("Odoo","Ferrol","sap@gmail.com","675887777",6));
 
+        //ds.actualizar(new DepartamentoDTO(6,"Dep actualizado","Malpica","act@gmail.com","678575757",7));
 
-
-
-
-
-       // ds.eliminar(7);
-
-        ds.actualizar(new DepartamentoDTO(5,"Dep actualizado","Malpica","act@gmail.com","678575757",7));
-
-
-        //listar todos
         List<DepartamentoDTO> lista = ds.obtenerTodos();
-
-
-
-
-
         for(DepartamentoDTO dep : lista){
             System.out.println(dep.toString());
         }
+
+        /*
+
+       // ds.eliminar(7);
+
+
+
+        //listar todos
+
+
+
+
+
+
 
 
         /*
@@ -118,6 +118,7 @@ public class App
         //es.eliminar(2);
 
         */
+
     }
 
     public static Date StringToDate(String s){

@@ -1,13 +1,14 @@
 package org.example.model;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.sql.Date;
 
 public class Empleado {
     private int id;
     private String nombre;
     private String apellido;
     private String pinAcceso;
-    private double salario;
+    private java.math.BigDecimal salario;
     private java.sql.Date fechaContratacion;
     private String direccion;
     private String telefono;
@@ -17,7 +18,7 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(int id, String nombre, String apellido, String pinAcceso, double salario, java.sql.Date fechaContratacion, String direccion, String telefono, String email, int idDepartamento) {
+    public Empleado(int id, String nombre, String apellido, String pinAcceso, BigDecimal salario, Date fechaContratacion, String direccion, String telefono, String email, int idDepartamento) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -62,19 +63,19 @@ public class Empleado {
         this.pinAcceso = pinAcceso;
     }
 
-    public double getSalario() {
+    public BigDecimal getSalario() {
         return salario;
     }
 
-    public void setSalario(double salario) {
+    public void setSalario(BigDecimal salario) {
         this.salario = salario;
     }
 
-    public java.sql.Date getFechaContratacion() {
+    public Date getFechaContratacion() {
         return fechaContratacion;
     }
 
-    public void setFechaContratacion(java.sql.Date fechaContratacion) {
+    public void setFechaContratacion(Date fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
     }
 
