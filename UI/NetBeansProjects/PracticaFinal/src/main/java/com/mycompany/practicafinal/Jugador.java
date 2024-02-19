@@ -10,6 +10,7 @@ package com.mycompany.practicafinal;
  */
 public class Jugador {
     
+    private int idJugador;
     private String nombre;
     private String apellido;
     private String equipo;
@@ -27,6 +28,26 @@ public class Jugador {
         this.posicion = posicion;
         this.edad = edad;
         this.imgURL = imgURL;
+    }
+
+    public Jugador(int idJugador, String nombre, String apellido, String equipo, String posicion, int edad, String imgURL) {
+        this.idJugador = idJugador;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.equipo = equipo;
+        this.posicion = posicion;
+        this.edad = edad;
+        this.imgURL = imgURL;
+    }
+    
+    
+
+    public int getIdJugador() {
+        return idJugador;
+    }
+
+    public void setIdJugador(int idJugador) {
+        this.idJugador = idJugador;
     }
 
     public String getNombre() {
@@ -79,8 +100,12 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "Jugador{" + "nombre=" + nombre + ", apellido=" + apellido + ", equipo=" + equipo + ", posicion=" + posicion + ", edad=" + edad + ", imgURL=" + imgURL + '}';
+        return "Jugador{" + "idJugador=" + idJugador + ", nombre=" + nombre + ", apellido=" + apellido + ", equipo=" + equipo + ", posicion=" + posicion + ", edad=" + edad + ", imgURL=" + imgURL + '}';
     }
+
+   
+    
+    
 
    
     

@@ -1,14 +1,13 @@
 package com.mycompany.practicafinal;
 
 import java.io.IOException;
-import java.util.Observable;
+import java.sql.SQLException;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,6 +29,8 @@ public class PrimaryController {
     
     @FXML
     private Button añadir ;
+     @FXML
+    private Button btnEditar ;
     @FXML
     private TableView<Jugador> formulario = new TableView<>();;
 
@@ -54,7 +55,8 @@ public class PrimaryController {
     static  ObservableList<Jugador> valoresLista =  FXCollections.observableArrayList();
     private Property<ObservableList<Jugador>> jugadorListProperty = new SimpleObjectProperty<>(valoresLista);
     
-    public void initialize() {
+    public void initialize() throws SQLException {
+        cargarBBDD();
         this.column1.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.column2.setCellValueFactory(new PropertyValueFactory("apellido"));
         this.colunm3.setCellValueFactory(new PropertyValueFactory("equipo"));
@@ -73,6 +75,8 @@ public class PrimaryController {
         fxmlLoader.setLocation(getClass().getResource("secondary.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 476, 652);
         Stage stage = new Stage();
+        String cssScene = this.getClass().getResource("firstStyles.css").toExternalForm();
+        scene.getStylesheets().add(cssScene);
         stage.setTitle("Nuevo jugador");
         stage.setScene(scene);
         stage.show();
@@ -104,6 +108,7 @@ public class PrimaryController {
     public void borrarJugador(){
         int index = formulario.getSelectionModel().getSelectedIndex();  
          if(index!=-1){
+             System.out.println(valoresLista.get(index));
         valoresLista.remove(index);
         datosJugador.setText("");
         img.setVisible(false);
@@ -112,11 +117,36 @@ public class PrimaryController {
     }
     
     
-    
+        @FXML
+    private void editarJugador() throws IOException{
+        int index = formulario.getSelectionModel().getSelectedIndex();  
 
-    @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
+
+            
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("editar.fxml"));
+        
+        
+        Scene scene = new Scene(fxmlLoader.load(), 476, 652);
+        Stage stage = new Stage();
+        
+         VentanaEditar controlador = fxmlLoader.getController();
+
+        controlador.setJugador(valoresLista.get(index),index);
+        String cssScene = this.getClass().getResource("firstStyles.css").toExternalForm();
+        scene.getStylesheets().add(cssScene);
+        stage.setTitle("Editar jugador");
+        stage.setScene(scene);
+        stage.show();
+   
+        
+    }
+
+
+    private void cargarBBDD() throws SQLException {
+        for(Jugador jugador : JdbcDao.selectRecords()){
+            PrimaryController.valoresLista.add(jugador);
+        }
     }
 
     

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="paneFondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.practicafinal.PrimaryController">
+<Pane fx:id="paneFondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.practicafinal.PrimaryController">
    <children>
       <TableView fx:id="formulario" layoutX="25.0" layoutY="25.0" onMouseClicked="#clickImagen" prefHeight="421.0" prefWidth="525.0">
         <columns>
@@ -21,7 +21,7 @@
       </TableView>
       <Button fx:id="añadir" layoutX="619.0" layoutY="385.0" mnemonicParsing="false" onAction="#añadirAlgo" text="Añadir" />
       <Button fx:id="botonBorrar" layoutX="700.0" layoutY="385.0" mnemonicParsing="false" onAction="#borrarJugador" text="Borrar" />
-      <Button layoutX="781.0" layoutY="385.0" mnemonicParsing="false" text="Editar" />
+      <Button fx:id="btnEditar" layoutX="781.0" layoutY="385.0" mnemonicParsing="false" onAction="#editarJugador" text="Editar" />
       <ImageView fx:id="img" fitHeight="147.0" fitWidth="117.0" layoutX="655.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="datosJugador" alignment="CENTER" contentDisplay="CENTER" layoutX="636.0" layoutY="236.0" prefHeight="113.0" prefWidth="178.0" textAlignment="CENTER">
          <font>

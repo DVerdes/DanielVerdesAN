@@ -103,10 +103,8 @@ public class JbdcEmpleadoDao implements EmpleadoDao {
             System.out.println("Insertar empleado ok");
 
             //Obtener ID insertado
-            ResultSet generatedKeys = s.getGeneratedKeys();
-            if(generatedKeys.next()){
-                return generatedKeys.getInt(1);
-            }
+
+
         }catch (SQLException e){
             System.out.println("Insertar empleado KO");
             throw new RuntimeException(e);

@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.mycompany.practicafinal;
 
 import java.io.File;
@@ -12,9 +16,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class SecondaryController {
-    
-    @FXML
+/**
+ *
+ * @author FP
+ */
+public class VentanaEditar {
+     @FXML
     private Button añadirImagen;
     @FXML
     private Button guardar;
@@ -31,12 +38,23 @@ public class SecondaryController {
     @FXML
     private TextField edad;
     
+    static Jugador jugador;
+    
+    static int indexLista;
+    
     final FileChooser f = new FileChooser();
     @FXML
      ImageView mv = new ImageView(); // create empty ImageView
     
     String url="";
  
+    
+       public void initialize()  {
+           //jugador = new Jugador("pepe","sanchez","deportivo","c",34,"sdgfd");
+           
+    }
+    
+    
     @FXML
     private void seleccionimg(){
         
@@ -56,13 +74,20 @@ public class SecondaryController {
     }
     
        @FXML
-    private void guardarJugador() throws SQLException{
+    private void editarJugador() throws SQLException{
         
-        Jugador jugador = new Jugador(nombre.getText(), apellidos.getText(),equipo.getText(),posicion.getText(),Integer.valueOf(edad.getText()),url);
-        int id = JdbcDao.insertRecord(jugador);
-        jugador.setIdJugador(id);
+        jugador.setNombre(nombre.getText());
+        jugador.setApellido(apellidos.getText());
+        jugador.setEquipo(equipo.getText());
+        jugador.setPosicion(posicion.getText());
+        jugador.setEdad(Integer.valueOf(edad.getText()));
+        jugador.setImgURL(url);
+        
+        
+        
+        JdbcDao.updateRecord(jugador);
+        PrimaryController.valoresLista.set(indexLista, jugador);
        
-        PrimaryController.valoresLista.add(jugador);
         Stage stage = (Stage) añadirImagen.getScene().getWindow();
         stage.close();
       
@@ -78,4 +103,25 @@ public class SecondaryController {
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
     }
+
+    public void setJugador(Jugador jugadorU, int index) {
+        this.jugador = jugadorU;
+        indexLista = index;
+        
+         nombre.setText(jugador.getNombre());
+           apellidos.setText(jugador.getApellido());
+           equipo.setText(jugador.getEquipo());
+           posicion.setText(jugador.getPosicion());
+           edad.setText(String.valueOf(jugador.getEdad()));
+           url = jugador.getImgURL();
+                        Image img = new Image(url);
+
+           mv.setImage(img);
+           
+                      System.out.println(jugador);
+
+    
+    }
+
+  
 }

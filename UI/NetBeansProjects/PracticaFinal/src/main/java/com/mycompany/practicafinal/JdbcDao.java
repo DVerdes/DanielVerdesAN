@@ -9,6 +9,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -24,12 +27,12 @@ public class JdbcDao {
     private static final String DATABASE_PASSWORD = null;
     private static final String INSERT_QUERY = "INSERT INTO jugadores (nombre, apellidos, equipo, posicion, edad, imgURL) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String DELETE_QUERY = "DELETE FROM jugadores WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE jugadores SET nombre = ?, apellidos=?, equipo =?, posicion= ?, edad=?, imgURL=? WHERE idJugador = ?";
+    private static final String SELECT_QUERY = "SELECT * FROM jugadores";
 
-        private static final String SELECT_QUERY = "SELECT full_name FROM registration WHERE email_id=?";
 
 
-
-    public static void insertRecord(Jugador jugador) throws SQLException {
+    public static int insertRecord(Jugador jugador) throws SQLException {
 
         // Step 1: Establishing a Connection and 
         // try-with-resource statement will auto close the connection.
@@ -37,13 +40,44 @@ public class JdbcDao {
             .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
 
             // Step 2:Create a statement using connection object
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY,Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, jugador.getNombre());
             preparedStatement.setString(2, jugador.getApellido());
             preparedStatement.setString(3, jugador.getEquipo());
             preparedStatement.setString(4, jugador.getPosicion());
             preparedStatement.setInt(5, jugador.getEdad());
             preparedStatement.setString(6, jugador.getImgURL());
+
+            preparedStatement.executeUpdate();
+
+            ResultSet gk = preparedStatement.getGeneratedKeys();
+            if(gk.next()) return gk.getInt(1);
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+        return 0;
+    }
+    
+    public static void updateRecord(Jugador jugador) throws SQLException {
+
+        // Step 1: Establishing a Connection and 
+        // try-with-resource statement will auto close the connection.
+        try (Connection connection = DriverManager
+            .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+            // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY)) {
+            preparedStatement.setString(1, jugador.getNombre());
+            preparedStatement.setString(2, jugador.getApellido());
+            preparedStatement.setString(3, jugador.getEquipo());
+            preparedStatement.setString(4, jugador.getPosicion());
+            preparedStatement.setInt(5, jugador.getEdad());
+            preparedStatement.setString(6, jugador.getImgURL());
+            preparedStatement.setInt(7, jugador.getIdJugador());
 
 
             System.out.println(preparedStatement);
@@ -54,6 +88,7 @@ public class JdbcDao {
             printSQLException(e);
         }
     }
+    
     
      public void deleteRecord(int id) throws SQLException {
 
@@ -79,8 +114,8 @@ public class JdbcDao {
     
     
     
-    public String selectRecord( String emailId) throws SQLException {
-        String nombre = "";
+    public static List<Jugador> selectRecords() throws SQLException {
+        List<Jugador> jugadores = new ArrayList<Jugador>();
 
         // Step 1: Establishing a Connection and 
         // try-with-resource statement will auto close the connection.
@@ -89,9 +124,12 @@ public class JdbcDao {
 
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY)) {
-            preparedStatement.setString(1, emailId);
               ResultSet res = preparedStatement.executeQuery();
-            while (res.next()) nombre = res.getString("full_name");
+            while (res.next()){
+                Jugador j = new Jugador(res.getString("nombre"),res.getString("apellidos"),res.getString("equipo"),res.getString("posicion"),
+                        res.getInt("edad"),res.getString("imgURL"));
+                jugadores.add(j);
+            }
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -100,7 +138,7 @@ public class JdbcDao {
             // print SQL exception information
             printSQLException(e);
         }
-        return nombre;
+        return jugadores;
     }
 
     
