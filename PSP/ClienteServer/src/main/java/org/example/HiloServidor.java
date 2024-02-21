@@ -1,5 +1,6 @@
 package org.example;
 
+import javax.net.ssl.SSLSocket;
 import java.io.*;
 import java.net.Socket;
 
@@ -8,10 +9,10 @@ import java.net.Socket;
  */
 public class HiloServidor extends Thread {
 
-    private Socket clienteConectado;// Socket del cliente
+    private SSLSocket clienteConectado;// Socket del cliente
     private int idCliente; // Id del cliente
 
-    public HiloServidor(Socket clienteConectado, int idCliente) {
+    public HiloServidor(SSLSocket clienteConectado, int idCliente) {
         this.clienteConectado = clienteConectado;
         this.idCliente = idCliente;
     }// Constructor
