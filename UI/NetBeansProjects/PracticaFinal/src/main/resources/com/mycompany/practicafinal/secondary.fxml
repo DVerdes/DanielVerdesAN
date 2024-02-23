@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="652.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.practicafinal.SecondaryController">
+<AnchorPane prefHeight="652.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.practicafinal.SecondaryController">
    <children>
       <GridPane alignment="CENTER" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="476.0">
         <columnConstraints>
@@ -68,7 +67,7 @@
                   <Insets right="70.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="edad" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <TextField fx:id="edad" onKeyReleased="#validateAge" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets right="70.0" />
                </GridPane.margin>
@@ -114,6 +113,7 @@
                   <Insets right="70.0" />
                </GridPane.margin>
             </TextField>
+            <Label fx:id="labelValAge" prefHeight="17.0" prefWidth="213.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="9" />
          </children>
          <padding>
             <Insets bottom="30.0" left="30.0" right="20.0" top="30.0" />

@@ -1,6 +1,8 @@
 module com.mycompany.practicafinal {
     requires javafx.controls;
     requires javafx.fxml;
+        requires commons.validator;
+
     requires mysql.connector.java;
         requires java.sql;
 

@@ -67,7 +67,7 @@
                   <Insets right="70.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="edad" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <TextField fx:id="edad" onKeyReleased="#validateAge" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets right="70.0" />
                </GridPane.margin>
@@ -113,6 +113,7 @@
                   <Insets right="70.0" />
                </GridPane.margin>
             </TextField>
+            <Label fx:id="labelValAge" prefHeight="17.0" prefWidth="213.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="9" />
          </children>
          <padding>
             <Insets bottom="30.0" left="30.0" right="20.0" top="30.0" />

@@ -5,8 +5,8 @@
 package com.mycompany.practicafinal;
 
 /**
- *
- * @author DVerd
+ * Clase para creación de objetos JUGADOR
+ * 
  */
 public class Jugador {
     
