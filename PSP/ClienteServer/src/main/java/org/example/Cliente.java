@@ -1,5 +1,7 @@
 package org.example;
 
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
@@ -17,7 +19,10 @@ public class Cliente {
         String Host = "localhost";//Host (local)
         int Puerto = 6000;//puerto
         System.out.println("PROGRAMA CLIENTE INICIADO....");
-        Socket Cliente = new Socket(Host, Puerto);//Socket
+
+        SSLSocketFactory sfact = (SSLSocketFactory) SSLSocketFactory.getDefault () ;//SSLSocketFactory
+
+        SSLSocket Cliente =  (SSLSocket) sfact.createSocket(Host, Puerto); //SSLSocket
         String entradaUsuario = "";//Entrada escaneada del usuario
         String respuestaServidor = "";//Respuesta del servidor
 
