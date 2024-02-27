@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mycompany</groupId>
-    <artifactId>PracticaFinal</artifactId>
+    <artifactId>RepasoBinding</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,17 +20,6 @@
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
         </dependency>
-         <dependency>
-            <groupId>commons-validator</groupId>
-            <artifactId>commons-validator</artifactId>
-            <version>1.7</version>
-        </dependency>
-       <dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.15</version>
-</dependency>
-       
     </dependencies>
     <build>
         <plugins>
@@ -47,7 +36,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>com.mycompany.practicafinal.App</mainClass>
+                    <mainClass>com.mycompany.repasobinding.App</mainClass>
                 </configuration>
                 <executions>
                     <execution>

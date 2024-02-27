@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.repasobinding.PrimaryController">
+   <children>
+      <CheckBox fx:id="cb" layoutX="196.0" layoutY="128.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="231.0" text="Acepta las condiciones " />
+      <Button fx:id="boton" layoutX="248.0" layoutY="188.0" mnemonicParsing="false" text="Entrar" />
+      <Label layoutX="168.0" layoutY="51.0" text="nombre" />
+      <Label fx:id="labelAp" layoutX="175.0" layoutY="82.0" text="apellidos" />
+      <TextField fx:id="tf" layoutX="226.0" layoutY="47.0" />
+      <TextField fx:id="tf2" layoutX="226.0" layoutY="78.0" />
+   </children>
+</Pane>
