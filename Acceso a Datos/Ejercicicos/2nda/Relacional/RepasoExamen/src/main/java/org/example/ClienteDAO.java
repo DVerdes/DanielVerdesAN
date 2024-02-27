@@ -1,25 +1,100 @@
 package org.example;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import java.sql.SQLException;
 import java.util.List;
 
+public class ClienteDAO {
 
-public class TareaDAO {
-
-    public static void crearTarea(Tarea tarea) {
+    public static int crearCliente(Cliente cliente) {
 
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.save(tarea);
+            session.save(cliente);
             transaction.commit();
-            System.out.println(tarea.toString());
+            System.out.println(cliente.toString());
+            return cliente.getClienteId();
+        }catch (Exception e){
+            transaction.rollback();
+            e.printStackTrace();
+            return  0;
+
+        }finally {
+            session.close();
+        }
+    }
+
+    public static Cliente obtenerCliente(int id) throws SQLException {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Cliente cliente = session.get(Cliente.class,id);
+            transaction.commit();
+            return cliente;
+        }catch (Exception e){
+            transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }   return null; }
+
+    public static List<Cliente> listar() throws SQLException {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+
+            Query<Cliente> query = session.createNativeQuery("Select * from Clientes" ,Cliente.class);
+            List<Cliente> clientes = query.list();
+
+            transaction.commit();
+            return clientes;
+        }catch (Exception e){
+            transaction.rollback();
+            e.printStackTrace();
+        }finally {
+
+            session.close();
+
+        }
+        return null;
+    }
+
+    public static List<Cliente> listarPorNombre(String nombre) throws SQLException {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+
+            Query<Cliente> query = session.createNativeQuery("Select * from Clientes WHERE Nombre like :nombre" ,Cliente.class);
+            query.setString("nombre","%"+nombre+"%");
+            List<Cliente> clientes = query.list();
+
+            transaction.commit();
+            return clientes;
+        }catch (Exception e){
+            transaction.rollback();
+            e.printStackTrace();
+        }finally {
+
+            session.close();
+
+        }
+        return null;
+    }
+
+    public static void eliminarCliente(int id) throws SQLException {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Cliente cliente = session.get(Cliente.class,id);
+            session.delete(cliente);
+            transaction.commit();
         }catch (Exception e){
             transaction.rollback();
             e.printStackTrace();
@@ -28,101 +103,27 @@ public class TareaDAO {
         }
     }
 
-    public static Tarea leerTarea(int id){
+    public static  void actualizarCliente(Cliente cliente) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            Tarea tarea = session.get(Tarea.class,id);
-            System.out.println(tarea.toString());
-            transaction.commit();
-            return tarea;
-        }catch (Exception e){
-            transaction.rollback();
-            e.printStackTrace();
-            return null;
-        }finally {
-            session.close();
-        }
-    }
+            Cliente cliente1 = session.get(Cliente.class,cliente.getClienteId());
+            cliente1.setNombre((cliente.getNombre()));
+            cliente1.setApellido(cliente.getApellido());
+            cliente1.setCiudad(cliente.getCiudad());
+            cliente1.setDireccion(cliente.getDireccion());
+            cliente1.setPais(cliente.getPais());
+            cliente1.setEmail(cliente.getEmail());
+            cliente1.setTelefono(cliente.getTelefono());
 
-    public static void modificarTarea(int id){
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-
-        try {
-            Tarea tarea = session.get(Tarea.class,id);
-            tarea.setEstado("Finalizada");
-            session.update(tarea);
-            System.out.println(tarea.toString());
+            session.update(cliente1);
             transaction.commit();
         }catch (Exception e){
             transaction.rollback();
             e.printStackTrace();
         }finally {
             session.close();
-        }
-
-
-    }
-
-    public static void eliminarTarea(int id){
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-
-        try {
-            Tarea tarea = session.get(Tarea.class,id);
-            session.delete(tarea);
-            transaction.commit();
-        }catch (Exception e){
-            transaction.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-
-    }
-
-    public static void consultarTareasSQL(){
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-
-        Query<Tarea> query = session.createNativeQuery("Select * from Tareas WHERE estado like '%En proceso%'",Tarea.class);
-        List<Tarea> tareas = query.list();
-        for(Tarea tarea : tareas){
-            System.out.println(tarea);
-        }
-        transaction.commit();
-        }catch (Exception e){
-            transaction.rollback();
-            e.printStackTrace();
-        }finally {
-
-            session.close();
-
-        }
-    }
-
-    public static void consultarTareasHQL(){
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            // en HQL se pasa en nombre del objeto mapeado no de la TABLA de la BBDD
-            Query query = session.createQuery("from Tarea where estado =: estado");
-            query.setString("estado","Completada");
-            List<Tarea> tareas = query.list();
-            for(Tarea tarea : tareas){
-                System.out.println(tarea);
-            }
-            transaction.commit();
-        }catch (Exception e){
-            transaction.rollback();
-            e.printStackTrace();
-        }finally {
-
-            session.close();
-
         }
     }
 

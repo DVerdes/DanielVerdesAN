@@ -33,7 +33,7 @@ public class App
         session.save(tarea1);
         session.save(tarea2);
         transaction.commit();
-        */
+
 
 
         Set <Subtarea> subtareaSet = new HashSet<Subtarea>();
@@ -43,6 +43,16 @@ public class App
 
 
         TareaDAO.crearTarea(st1);
+
+        */
+
+
+        SubtareaDAO.crearSubtarea(new Subtarea(1,"a ver si va"));
+        SubtareaDAO.leerSubtarea(6);
+
+        Tarea t = TareaDAO.leerTarea(1);
+        System.out.println(t.toString());
+        for(Subtarea st : t.getSubtareas()) System.out.println(st.toString());
 
 
         //TareaDAO.eliminarTarea(1);

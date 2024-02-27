@@ -12,14 +12,12 @@ public class Subtarea {
     }
 
     public Subtarea(int id, int idTarea, String nombre, Tarea tarea) {
-        this.id = id;
         this.idTarea = idTarea;
         this.nombre = nombre;
         this.tarea = tarea;
     }
 
-    public Subtarea(int id, int idTarea, String nombre) {
-        this.id = id;
+    public Subtarea( int idTarea, String nombre) {
         this.idTarea = idTarea;
         this.nombre = nombre;
     }

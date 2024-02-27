@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibertante Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.example.Pedido" table="Pedidos">
+        <id name="pedidoId" column="PedidoID">
+            <generator class="native"></generator>
+        </id>
+
+     <property name="clienteId" type="int" column="ClienteID"/>
+
+        <property name="fechaPedido" type="date" column="FechaPedido"/>
+
+        <property name="total" type="big_decimal" column="Total"/>
+
+
+        <property name="estado" type="string" column="Estado"/>
+
+        <many-to-one name="cliente" column="clienteId" not-null="true" insert="false" update="false" lazy="no-proxy" />
+
+    </class>
+</hibernate-mapping>

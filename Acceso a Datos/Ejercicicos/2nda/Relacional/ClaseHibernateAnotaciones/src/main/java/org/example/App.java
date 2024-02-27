@@ -18,7 +18,17 @@ public class App
 {
     public static void main( String[] args )
     {
-  /*      crearTarea();
+
+
+
+
+        Tarea t = leerTarea(1);
+
+        /*
+   SubTarea st = leerSubTarea(1);
+        System.out.println(st.toString());
+
+        crearTarea();
 
         Tarea tarea = null;
         tarea = leerTarea(1);
@@ -43,7 +53,9 @@ public class App
         modificarSubTarea(1);
         eliminarSubTarea(2);
         System.out.println(subTarea.toString());
+
 */
+/*
         Set<SubTarea> listaSubTareas = new HashSet<>();
         listaSubTareas.add(new SubTarea("NuevaSub"));
         listaSubTareas.add(new SubTarea("NuevaSub2"));
@@ -54,6 +66,9 @@ public class App
         agregarTareaPersonalizada(tareaNueva);
         System.out.println(tareaNueva.toString());
         HibernateUtil.close();
+
+        */
+
     }
 
     public static void crearTarea(){
@@ -91,6 +106,8 @@ public class App
         Transaction transaction = session.beginTransaction();
         Tarea tarea = session.get(Tarea.class, id);
         System.out.println(tarea);
+        for(SubTarea stu : tarea.getSubtareas()) System.out.println(stu.toString());
+
         transaction.commit();
 
 
