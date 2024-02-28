@@ -128,8 +128,7 @@ public class Cliente implements Serializable {
         this.telefono = telefono;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ClienteID")
+    @OneToMany(mappedBy = "cliente")
     public Set<Pedido> getPedidos() {
         return pedidos;
     }
