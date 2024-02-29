@@ -92,7 +92,6 @@ public class Pedido implements Serializable {
                 ", fechaPedido=" + fechaPedido +
                 ", total=" + total +
                 ", estado='" + estado + '\'' +
-                ", cliente=" + cliente +
                 '}';
     }
 }

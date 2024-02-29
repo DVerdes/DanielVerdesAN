@@ -13,14 +13,20 @@ public class App
 {
     public static void main( String[] args ) throws SQLException {
 
+        java.sql.Date d = new java.sql.Date(2023,12,12);
+
+        BigDecimal decimal = new BigDecimal("123.444");
+
         int id = ClienteDAO.crearCliente(new Cliente("Jesus","Garcia","asdfadsf","sdfds","sdfds","pepe@gmail","678", new HashSet<Pedido>()));
 
-        Cliente c = ClienteDAO.obtenerCliente(3);
+        Cliente c = ClienteDAO.obtenerCliente(1);
 
         System.out.println(c.toString());
 
-        Pedido p = PedidoDAO.obtenerPedido(20);
-        System.out.println(p.toString());
+        PedidoDAO.crearPedido(new Pedido(1,d,decimal,"Completado"));
+
+        Pedido p = PedidoDAO.obtenerPedido(1);
+        System.out.println(p.getCliente().toString());
 
 
         /*

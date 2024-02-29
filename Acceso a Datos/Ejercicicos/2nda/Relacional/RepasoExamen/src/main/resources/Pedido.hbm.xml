@@ -17,7 +17,7 @@
 
         <property name="estado" type="string" column="Estado"/>
 
-        <many-to-one name="cliente" column="clienteId" not-null="true" insert="false" update="false" lazy="no-proxy" />
+        <many-to-one name="cliente" column="clienteId" not-null="true" insert="false" update="false" lazy="false" />
 
     </class>
 </hibernate-mapping>

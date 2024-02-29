@@ -5,19 +5,25 @@ import org.hibernate.Transaction;
 
 import java.sql.SQLException;
 
-public class PedidoDAO {
+/**
+ * CLASE PARA OPERACIONES ACCESO BBDD
+ */
+public class ActorDAO {
 
-
-    public static int crearPedido   (Pedido pedido) {
+    /**
+     * INSERTA ACTOR
+     * @param actor actor a insertar
+     * @return id del actor insertado
+     */
+    public static int insertarActor(Actor actor) {
 
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.save(pedido);
+            session.save(actor);
             transaction.commit();
-            System.out.println(pedido.toString());
-            return pedido.getPedidoId();
+            return actor.getId();
         }catch (Exception e){
             transaction.rollback();
             e.printStackTrace();
@@ -28,16 +34,21 @@ public class PedidoDAO {
         }
     }
 
-    public static Pedido obtenerPedido(int id) throws SQLException {
+    /**
+     * Lee un actor de la BBDD
+     * @param id del actor a leer
+     * @return Actor obtenido
+     * @throws SQLException
+     */
+    public static Actor obtenerActor(int id) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            Pedido pedido = session.get(Pedido.class,id);
+            Actor actor = session.get(Actor.class,id);
             transaction.commit();
-            System.out.println(pedido.toString());
-            //pedido.setCliente(ClienteDAO.obtenerCliente(pedido.getClienteId()));
-            return pedido;
+
+            return actor;
         }catch (Exception e){
             transaction.rollback();
             e.printStackTrace();

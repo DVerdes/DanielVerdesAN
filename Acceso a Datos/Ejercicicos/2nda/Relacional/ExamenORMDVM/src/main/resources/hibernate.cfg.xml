@@ -8,20 +8,19 @@
 
         <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
         <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1445;databaseName=Pruebas ;trustServerCertificate=true ;encrypt=true</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1445;databaseName=ExamenORM ;trustServerCertificate=true ;encrypt=true</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password">ADMIN0</property>
         <property name="hibernate.default_schema">dbo</property>
-        <!--property name="dialect">org.hibernate.dialect.MySQLDialect</property-->
 
         <property name="hibernate.show_sql">true</property> <!--muestra en consola el sql generado -->
         <property name="hibernate.current_session_context_class">thread</property> <!--  -->
         <property name="hibernate.hbw2ddl.auto">validate</property> <!--verifica los ficheros de config cuando arrancamos el proyecto-->
 
-        <!-- ficheros de mapeo , 1 por cada una de las clases  -->
+        <!-- clases anotaciones mapeo  -->
 
-        <mapping resource="Cliente.hbm.xml"></mapping>
-        <mapping resource="Pedido.hbm.xml"></mapping>
+        <mapping class="org.example.Pelicula"></mapping>
+        <mapping class="org.example.Actor"></mapping>
 
 
     </session-factory>
