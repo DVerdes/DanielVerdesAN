@@ -23,9 +23,11 @@ public class PrimaryController {
     public TextField tf2 ;
     
 
-    public void initialize(){
-        
+    public void initialize(){   
+        // HACE VISIBLE AL BOTÓN AL MARCHAR CHECKBOX
         boton.visibleProperty().bind(cb.selectedProperty());
+        
+        
         //este seria para hacerlo que funcione al reves
         // boton.visibleProperty().bind(Bindings.when(cb.selectedProperty()).then(false).otherwise(true));
         
@@ -36,6 +38,7 @@ public class PrimaryController {
         //boton.visibleProperty().bind(cb.selectedProperty().isEqualTo(cond));
         
         
+        // PARA QUE SE VEA EL SEGUNDO LABEL Y TEXTFIELD AL ESCRIBIR EL PRIMERO
         // podemos añadir cosas a los property en caso de que no sean directo(bool - bool) , como en este caso 
         //con el isEmpty hacemos bool la propiedad de text
         labelAp.visibleProperty().bind(tf.textProperty().isNotEmpty());
