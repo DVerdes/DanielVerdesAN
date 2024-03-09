@@ -18,16 +18,18 @@ public class Server {
     public static void main(String[] arg) throws IOException {
 
         int numeroPuerto = 6000;// Puerto
-        System.setProperty("javax.net.ssl.keyStore", "AlmacenSSL");
-        System.setProperty("javax.net.ssl.keyStorePassword", "1234567");
 
+        //setProperty
+        //keyStore
+        System.setProperty("javax.net.ssl.keyStore", "almacenes\\AlmacenSSL");
+        //keyStorePassword
+        System.setProperty("javax.net.ssl.keyStorePassword", "1234567");
 
         //SSLServerSocketFactory
         SSLServerSocketFactory ssfact = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault ();
 
-        // ServerSocket
+        // SSLServerSocket
         SSLServerSocket servidorSSL = (SSLServerSocket) ssfact.createServerSocket(numeroPuerto);
-
 
         SSLSocketFactory sfact = (SSLSocketFactory) SSLSocketFactory.getDefault () ;//SSLSocketFactory
 
@@ -42,7 +44,7 @@ public class Server {
             new HiloServidor(clienteConectado, obtenerIdCliente()).start();
         }
 
-}
+    }
 
     /**
      * Genera id autoincremental para el cliente

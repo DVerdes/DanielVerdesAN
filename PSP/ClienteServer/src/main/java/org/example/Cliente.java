@@ -18,6 +18,11 @@ public class Cliente {
 
         String Host = "localhost";//Host (local)
         int Puerto = 6000;//puerto
+
+        //setProperty
+        System.setProperty("javax.net.ssl.trustStore", "almacenes\\UsuarioAlmacenSSL");//trustStore
+        System.setProperty("javax.net.ssl.trustStorePassword", "890123");//trustStorePassword
+
         System.out.println("PROGRAMA CLIENTE INICIADO....");
 
         SSLSocketFactory sfact = (SSLSocketFactory) SSLSocketFactory.getDefault () ;//SSLSocketFactory
@@ -153,11 +158,11 @@ public class Cliente {
     /**
      * Envía fichero al Servidor
      * @param path ruta del archivo
-     * @param socket socket del cliente pertinente
+     * @param socket SSLsocket del cliente pertinente
      * @param dataOutputStream dos del cliente
      * @throws IOException
      */
-    static void enviarArchivo(String path, Socket socket, DataOutputStream dataOutputStream) throws IOException {
+    static void enviarArchivo(String path, SSLSocket socket, DataOutputStream dataOutputStream) throws IOException {
 
         int bytes = 0;
         // Se crea el fichero

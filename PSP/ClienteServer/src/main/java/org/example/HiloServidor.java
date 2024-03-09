@@ -1,15 +1,17 @@
 package org.example;
 
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import java.io.*;
 import java.net.Socket;
+import java.security.cert.X509Certificate;
 
 /**
  * Clase que implementa parte comunicación servidor en un hilo
  */
 public class HiloServidor extends Thread {
 
-    private SSLSocket clienteConectado;// Socket del cliente
+    private SSLSocket clienteConectado;// SSLSocket del cliente
     private int idCliente; // Id del cliente
 
     public HiloServidor(SSLSocket clienteConectado, int idCliente) {
@@ -22,6 +24,7 @@ public class HiloServidor extends Thread {
     public void run() {
         boolean desconexion = false;
         try {
+            infoSesion(clienteConectado);
             // Flujo de entrada del cliente
             InputStream entrada = null;
             entrada = clienteConectado.getInputStream();
@@ -122,12 +125,11 @@ public class HiloServidor extends Thread {
 
     /**
      * Recibe archivo del cliente
-     *
      * @param fileName        nombre fichero
-     * @param socket          socket cliente
+     * @param socket          sslsocket cliente
      * @param longitudFichero longitud fichero
      */
-    void recibirArchivo(String fileName, Socket socket, long longitudFichero) {
+    void recibirArchivo(String fileName, SSLSocket socket, long longitudFichero) {
         try {
             InputStream is = socket.getInputStream();//Input Stream
             String ruta = "ficheros/" + "SERVERXXX" + fileName;//Ruta para guardar achivo
@@ -146,5 +148,26 @@ public class HiloServidor extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Información Sesión
+     * @param Cliente SSLSocket
+     */
+    void infoSesion(SSLSocket Cliente){
+        SSLSession session = ((SSLSocket) Cliente).getSession();
+        System.out.println("========SESSION "+this.idCliente+"=========");
+        System.out.println("Host: "+session.getPeerHost());
+        System.out.println("Cifrado: " + session.getCipherSuite());
+        System.out.println("Protocolo: " + session.getProtocol ());
+        System.out.println("Creación de la sesión: " +  session.getCreationTime());
+
+        X509Certificate certificate = (X509Certificate) session.getLocalCertificates()[0];
+        System.out.println("Propietario: "+certificate.getSubjectDN());
+        System.out.println("Algoritmo: "+certificate.getSigAlgName());
+        System.out.println("Tipo: "+certificate.getType());
+        System.out.println("Emisor: "+certificate.getIssuerDN());
+        System.out.println("Número Serie: "+certificate.getSerialNumber());
+        System.out.println("========================");
     }
 }
