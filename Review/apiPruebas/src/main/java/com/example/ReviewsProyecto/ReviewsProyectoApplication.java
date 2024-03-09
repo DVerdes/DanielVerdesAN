@@ -5,7 +5,9 @@ import com.example.ReviewsProyecto.dto.ReviewDTO;
 import com.example.ReviewsProyecto.model.Item;
 import com.example.ReviewsProyecto.model.Review;
 import com.example.ReviewsProyecto.service.ItemService;
+import com.example.ReviewsProyecto.service.ReviewService;
 import com.example.ReviewsProyecto.service.impl.ItemServiceImpl;
+import com.example.ReviewsProyecto.service.impl.ReviewServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -18,18 +20,24 @@ public class ReviewsProyectoApplication {
 	public static void main(String[] args) throws SQLException {
 
 		SpringApplication.run(ReviewsProyectoApplication.class, args);
+
+
+		ReviewService rs = new ReviewServiceImpl();
+		List<ReviewDTO> r = rs.obtenerPorItem(4);
+		for(ReviewDTO re : r){
+			System.out.println(re.toString());
+		}
+
 		/*
 		ItemService is = new ItemServiceImpl();
 		List<ItemDTO>items = is.obtenerPeliculas();
 
 		for(ItemDTO i: items){
 			System.out.println(i.toString());
-			for(ReviewDTO review: i.getReviewList()){
-				System.out.println(review.toString());
-			}
-		}
-		*/
 
+		}
+
+		*/
 
 	}
 

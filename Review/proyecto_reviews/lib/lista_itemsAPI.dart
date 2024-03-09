@@ -59,7 +59,7 @@ class Items extends State<ListaItems> {
                 future: hacerPeticion(),
                 builder: (context, datos) {
                   if (datos.hasData) {
-                    return ListView(children:[ listado(datos.data)]);
+                    return ListView(children: [listado(datos.data)]);
                   } else if (datos.hasError) {
                     return Text(datos.error.toString());
                   }
@@ -71,7 +71,7 @@ class Items extends State<ListaItems> {
     Navigator.of(context).pushNamed("/datos_item", arguments: info);
   }
 
-    String url = "http://10.0.2.2:8080/api/items/peliculas";
+  String url = "http://10.0.2.2:8080/api/items/peliculas";
 
   Future<List<Elemento>> hacerPeticion() async {
     Uri uri = Uri.parse(url);
@@ -84,7 +84,6 @@ class Items extends State<ListaItems> {
 
   List<Elemento> crearListaElementos(List respuestaJson) {
     List<Elemento> lista = [];
-    List<Review> listaRev = [];
     for (int i = 0; i < respuestaJson.length; i++) {
       int idItem = respuestaJson[i]['idItem'];
       String tipo = respuestaJson[i]['tipo'];
@@ -95,20 +94,6 @@ class Items extends State<ListaItems> {
       String rutaPortada = respuestaJson[i]['rutaPortada'];
       int estreno = respuestaJson[i]['estreno'];
       String sinopsis = respuestaJson[i]['sinopsis'];
-       List<dynamic> lista2 = respuestaJson[i]['reviewList'];
-      int reviewId = 0;
-      int itemID = 0;
-      String usuario = "";
-      int puntuacion= 0;
-      String contenido = "";
-      for(int j = 0; j< lista2.length; j++){
-          reviewId = lista2[j]['reviewID'];
-          itemID = lista2[j]['idItem'];
-          usuario = lista2[j]['usuario'];
-          puntuacion = lista2[j]['puntuacion'];
-          contenido = lista2[j]['contenido'];
-          listaRev.add(new Review(puntuacion, usuario, contenido));
-      }
       double puntuacionMedia = respuestaJson[i]['puntuacionMedia'];
 
       Elemento datos = Elemento(
@@ -121,7 +106,6 @@ class Items extends State<ListaItems> {
           rutaPortada: rutaPortada,
           estreno: estreno,
           sinopsis: sinopsis,
-          reviews: listaRev,
           puntuacionMedia: puntuacionMedia);
       lista.add(datos);
     }
@@ -137,6 +121,7 @@ class Items extends State<ListaItems> {
         itemCount: listadoDatos.length,
         itemBuilder: (BuildContext context, index) {
           final item = listadoDatos[index];
+
           return ListTile(
             title: Text(item.nombre),
             leading: Text(item.puntuacionMedia.toString() + "/5"),
@@ -158,7 +143,6 @@ class Elemento {
   String rutaPortada = "";
   int estreno = 0;
   String sinopsis = "";
-  List<Review> reviews = List.empty();
   double puntuacionMedia = 0.0;
 
   Elemento(
@@ -171,6 +155,5 @@ class Elemento {
       required this.rutaPortada,
       required this.estreno,
       required this.sinopsis,
-      required this.reviews,
       required this.puntuacionMedia});
 }

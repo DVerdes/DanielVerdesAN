@@ -8,7 +8,7 @@
 
         <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
         <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1445;databaseName=Pruebas ;trustServerCertificate=true ;encrypt=true</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=Pruebas ;trustServerCertificate=true ;encrypt=true</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password">ADMIN0</property>
         <property name="hibernate.default_schema">dbo</property>

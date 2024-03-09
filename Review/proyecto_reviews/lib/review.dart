@@ -7,11 +7,13 @@ class Review {
   String usuario = "";
   String contenido = "";
 
-  Review(int puntuacion, String usuario, String contenido) {
-    this.puntuacion = puntuacion;
-    this.usuario = usuario;
-    this.contenido = contenido;
-  }
+  Review({
+    required this.idReview,
+    required this.idItem,
+    required this.puntuacion,
+    required this.usuario,
+    required this.contenido,
+  });
 
   void setIdReview(int idReview) {
     this.idReview = idReview;

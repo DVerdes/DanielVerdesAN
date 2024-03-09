@@ -28,9 +28,7 @@ public class ItemServiceImpl implements ItemService {
         List<ItemDTO> itemDTOS = new ArrayList<>();
         for(Item item:items){
             itemDTOS.add(ItemMapper.modelDTO(item));
-            for(ReviewDTO r:ItemMapper.modelDTO(item).getReviewList()){
-                System.out.println(r.toString());
-            }
+
         }
         return itemDTOS;
     }

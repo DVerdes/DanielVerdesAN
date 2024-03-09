@@ -17,13 +17,12 @@ public class ItemDTO {
     private String rutaPortada;
     private int estreno;
     private String sinopsis;
-    private List<ReviewDTO> reviewList;
     private Double puntuacionMedia;
 
     public ItemDTO() {
     }
 
-    public ItemDTO(int idItem, String tipo, String nombre, String genero, String autor, int duracion, String rutaPortada, int estreno, String sinopsis, List<ReviewDTO> reviewList, Double puntuacionMedia) {
+    public ItemDTO(int idItem, String tipo, String nombre, String genero, String autor, int duracion, String rutaPortada, int estreno, String sinopsis,  Double puntuacionMedia) {
 
         this.idItem = idItem;
         this.tipo = tipo;
@@ -34,7 +33,6 @@ public class ItemDTO {
         this.rutaPortada = rutaPortada;
         this.estreno = estreno;
         this.sinopsis = sinopsis;
-        this.reviewList = reviewList;
         this.puntuacionMedia = puntuacionMedia;
     }
 
@@ -110,13 +108,7 @@ public class ItemDTO {
         this.sinopsis = sinopsis;
     }
 
-    public List<ReviewDTO> getReviewList() {
-        return reviewList;
-    }
 
-    public void setReviewList(List<ReviewDTO> reviewList) {
-        this.reviewList = reviewList;
-    }
 
     public Double getPuntuacionMedia() {
         return puntuacionMedia;

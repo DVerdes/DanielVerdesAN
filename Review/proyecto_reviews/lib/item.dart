@@ -8,14 +8,23 @@ class Item {
   String nombre = "";
   String genero = "";
   String autor = "";
-  String duracion = "";
+  int duracion = 0;
   String rutaPortada = "";
-  List<Review> reviews = List.empty();
   int estreno = 0;
   String sinopsis = "";
   double puntuacionMedia = 0.0;
 
-  Item(int idItem, String tipo, String nombre, String genero, String autor, String duracion, String rutaPortada, int estreno, String sinopsis, double puntuacionMedia) {
+  Item(
+      int idItem,
+      String tipo,
+      String nombre,
+      String genero,
+      String autor,
+      int duracion,
+      String rutaPortada,
+      int estreno,
+      String sinopsis,
+      double puntuacionMedia) {
     this.idItem = idItem;
     this.tipo = tipo;
     this.nombre = nombre;
@@ -68,11 +77,11 @@ class Item {
     return autor;
   }
 
-  void setDuracion(String duracion) {
+  void setDuracion(int duracion) {
     this.duracion = duracion;
   }
 
-  String getDuracion() {
+  int getDuracion() {
     return duracion;
   }
 
@@ -82,20 +91,6 @@ class Item {
 
   String getRutaPortada() {
     return rutaPortada;
-  }
-
-  //Seter y geter de todo el array de reviews
-  void setReviews(List<Review> reviews) {
-    this.reviews = reviews;
-  }
-
-  List<Review> getReviews() {
-    return reviews;
-  }
-
-  //Seter para una unica review
-  void setReview(Review review) {
-    reviews.add(review);
   }
 
   void setEstreno(int estreno) {

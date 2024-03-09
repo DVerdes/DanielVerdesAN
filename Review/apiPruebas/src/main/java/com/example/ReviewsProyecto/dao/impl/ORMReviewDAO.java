@@ -17,9 +17,8 @@ public class ORMReviewDAO implements ReviewDAO {
         Transaction transaction = session.beginTransaction();
         try {
 
-            Query<Review> query = session.createNativeQuery("Select * from Reviews WHERE ItemID like =:item" ,Review.class);
-
-            //query.setString("item", String.valueOf(idItem));
+            Query<Review> query = session.createNativeQuery("Select * from Reviews WHERE ItemID like :item" ,Review.class);
+            query.setParameter("item",String.valueOf(idItem));
             List<Review> reviews = query.list();
 
             transaction.commit();

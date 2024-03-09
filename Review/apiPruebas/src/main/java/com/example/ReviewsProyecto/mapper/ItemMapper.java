@@ -15,13 +15,13 @@ public class ItemMapper {
 
 
     public static ItemDTO modelDTO(Item item){
-        return new ItemDTO(item.getIdItem(),item.getTipo(), item.getNombre(), item.getGenero(), item.getAutor(), item.getDuracion(),item.getRutaPortada(), item.getEstreno(), item.getSinopsis(),devolverLista(item.getReviewSet()), 0.0);
+        return new ItemDTO(item.getIdItem(),item.getTipo(), item.getNombre(), item.getGenero(), item.getAutor(), item.getDuracion(),item.getRutaPortada(), item.getEstreno(), item.getSinopsis(), 0.0);
     }
 
 
 
     public static Item dtoModel(ItemDTO itemDTO){
-        return new Item(itemDTO.getIdItem(), itemDTO.getTipo(), itemDTO.getAutor(), itemDTO.getGenero(), itemDTO.getAutor(), itemDTO.getDuracion(), itemDTO.getRutaPortada(), itemDTO.getEstreno(), itemDTO.getSinopsis(),devolverSet(itemDTO.getReviewList()));
+        return new Item(itemDTO.getIdItem(), itemDTO.getTipo(), itemDTO.getAutor(), itemDTO.getGenero(), itemDTO.getAutor(), itemDTO.getDuracion(), itemDTO.getRutaPortada(), itemDTO.getEstreno(), itemDTO.getSinopsis(),new HashSet<>());
     }
 
 
