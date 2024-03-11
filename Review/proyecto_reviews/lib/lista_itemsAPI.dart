@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:proyecto_reviews/item.dart';
 import 'package:http/http.dart' as http;
+import 'package:proyecto_reviews/menu.dart';
 import 'package:proyecto_reviews/review.dart';
 
 class ListaItems extends StatefulWidget {
@@ -12,6 +13,8 @@ class ListaItems extends StatefulWidget {
 }
 
 class Items extends State<ListaItems> {
+  String url = "";
+
   // List<Item> listaItems = [
   // Item(
   //     1,
@@ -50,6 +53,9 @@ class Items extends State<ListaItems> {
 
   @override
   Widget build(BuildContext context) {
+    String tipoItem = ModalRoute.of(context)!.settings.arguments as String;
+
+    url = "http://10.0.2.2:8080/api/items/" + tipoItem + "s";
     return Scaffold(
         appBar: AppBar(
           title: Text("Lista"),
@@ -68,16 +74,19 @@ class Items extends State<ListaItems> {
   }
 
   mostrarDatos(BuildContext context, info) {
-    Navigator.of(context).pushNamed("/datos_item", arguments: info);
+    Navigator.of(context).pushNamed("/listaItems", arguments: info);
   }
 
-  String url = "http://10.0.2.2:8080/api/items/peliculas";
+  mostrarDatosItem(BuildContext context, info) {
+    Navigator.of(context).pushNamed("/datos_item", arguments: info);
+  }
 
   Future<List<Elemento>> hacerPeticion() async {
     Uri uri = Uri.parse(url);
     final respuesta = await http.get(uri);
 
-    List respuestaJson = json.decode(respuesta.body.toString());
+    List respuestaJson = json.decode(Utf8Decoder().convert(respuesta.bodyBytes).toString());
+
     List<Elemento> listaElementos = crearListaElementos(respuestaJson);
     return listaElementos;
   }
@@ -126,7 +135,7 @@ class Items extends State<ListaItems> {
             title: Text(item.nombre),
             leading: Text(item.puntuacionMedia.toString() + "/5"),
             onTap: () {
-              mostrarDatos(context, item);
+              mostrarDatosItem(context, item);
             },
           );
         });

@@ -21,7 +21,7 @@ class DatosReview extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(left: 5, right: 5),
                 child: Card(
-                  color: Theme.of(context).scaffoldBackgroundColor,
+                  color: Colors.transparent,
                   elevation: 0.0,
                   child: Column(
                     children: [

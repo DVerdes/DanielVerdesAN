@@ -22,22 +22,8 @@ public class ReviewsProyectoApplication {
 		SpringApplication.run(ReviewsProyectoApplication.class, args);
 
 
-		ReviewService rs = new ReviewServiceImpl();
-		List<ReviewDTO> r = rs.obtenerPorItem(4);
-		for(ReviewDTO re : r){
-			System.out.println(re.toString());
-		}
 
-		/*
-		ItemService is = new ItemServiceImpl();
-		List<ItemDTO>items = is.obtenerPeliculas();
 
-		for(ItemDTO i: items){
-			System.out.println(i.toString());
-
-		}
-
-		*/
 
 	}
 

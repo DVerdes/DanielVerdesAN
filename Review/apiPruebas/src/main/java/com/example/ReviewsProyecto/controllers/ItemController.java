@@ -35,14 +35,14 @@ public class ItemController {
         return is.obtenerLibros();
     }
 
-    @GetMapping("/api/items/videojuegos")
+    @GetMapping("/api/items/juegos")
     List<ItemDTO> devolverVideojuegos() throws SQLException {
 
         ItemService is = new ItemServiceImpl();
         return is.obtenerVideojuegos();
     }
 
-    @GetMapping("/api/items/musica")
+    @GetMapping("/api/items/musicas")
     List<ItemDTO> devolverMusica() throws SQLException {
 
         ItemService is = new ItemServiceImpl();

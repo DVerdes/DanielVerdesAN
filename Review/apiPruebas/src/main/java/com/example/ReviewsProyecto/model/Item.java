@@ -1,6 +1,8 @@
 package com.example.ReviewsProyecto.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -123,6 +125,7 @@ public class Item implements Serializable {
     }
 
     @OneToMany(mappedBy = "item")
+    @Fetch(FetchMode.JOIN)
     public Set<Review> getReviewSet() {
         return reviewSet;
     }

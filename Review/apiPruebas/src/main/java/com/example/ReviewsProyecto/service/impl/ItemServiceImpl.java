@@ -56,7 +56,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> obtenerVideojuegos() throws SQLException {
         ItemDAO idao = new ORMItemDAO();
-        List<Item>items = idao.listarPorTipo("Videojuego");
+        List<Item>items = idao.listarPorTipo("juego");
         List<ItemDTO> itemDTOS = new ArrayList<>();
         for(Item item:items){
             itemDTOS.add(ItemMapper.modelDTO(item));

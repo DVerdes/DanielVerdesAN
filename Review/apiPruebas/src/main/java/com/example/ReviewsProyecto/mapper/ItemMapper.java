@@ -15,7 +15,7 @@ public class ItemMapper {
 
 
     public static ItemDTO modelDTO(Item item){
-        return new ItemDTO(item.getIdItem(),item.getTipo(), item.getNombre(), item.getGenero(), item.getAutor(), item.getDuracion(),item.getRutaPortada(), item.getEstreno(), item.getSinopsis(), 0.0);
+        return new ItemDTO(item.getIdItem(),item.getTipo(), item.getNombre(), item.getGenero(), item.getAutor(), item.getDuracion(),item.getRutaPortada(), item.getEstreno(), item.getSinopsis(), calcularPuntuacionMedia(item));
     }
 
 
@@ -27,10 +27,13 @@ public class ItemMapper {
 
     static double calcularPuntuacionMedia(Item item){
         double punt = 0;
-        for(Review r : item.getReviewSet()){
-            punt += r.getPuntuacion();
+        if(item.getReviewSet().size()!=0){
+            for(Review r : item.getReviewSet()){
+                punt += r.getPuntuacion();
+            }
+            return punt/item.getReviewSet().size();
         }
-        return punt/item.getReviewSet().size();
+       return 0;
     }
 
     static List<ReviewDTO> devolverLista(Set<Review> itemSet){
