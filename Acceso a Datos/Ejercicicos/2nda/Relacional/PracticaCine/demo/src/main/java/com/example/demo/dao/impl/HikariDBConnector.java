@@ -7,6 +7,9 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * Pool de Hikari
+ */
 public class HikariDBConnector implements DBConnector {
 
     private static HikariConfig config = new HikariConfig();
@@ -23,6 +26,11 @@ public class HikariDBConnector implements DBConnector {
         ds = new HikariDataSource(config);
     }
 
+    /**
+     * Obtener conexión
+     * @return Connection
+     * @throws SQLException
+     */
     public Connection obtenerConexion() throws SQLException {
         return ds.getConnection();
     }

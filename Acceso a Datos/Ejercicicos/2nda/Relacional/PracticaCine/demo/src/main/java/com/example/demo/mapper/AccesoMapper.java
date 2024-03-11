@@ -3,6 +3,9 @@ package com.example.demo.mapper;
 import com.example.demo.dtos.AccesoDTO;
 import com.example.demo.model.Acceso;
 
+/**
+ * Mapper de acceso
+ */
 public class AccesoMapper {
 
     public static Acceso DTOaAcceso(AccesoDTO adto){

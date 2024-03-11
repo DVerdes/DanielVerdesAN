@@ -7,9 +7,19 @@ import com.example.demo.model.Usuario;
 
 import java.sql.*;
 
+/**
+ * JDBC Usuario
+ */
 public class JdbcUsuarioDAO implements UsuarioDAO {
 
     private DBConnector connector =  new HikariDBConnector();
+
+    /**
+     * Inserta usuarios
+     * @param usuario a insertar
+     * @return usuario insertado
+     * @throws SQLException
+     */
     @Override
     public int insertarUsuario(Usuario usuario) throws SQLException {
         Connection c = connector.obtenerConexion();
@@ -39,6 +49,12 @@ public class JdbcUsuarioDAO implements UsuarioDAO {
         return 0;
     }
 
+    /**
+     * Actualiza contraseña
+     * @param idUsuario id usuario
+     * @param nuevaContrasena nueva pass
+     * @throws SQLException
+     */
     @Override
     public void actualizarContrasena(int idUsuario, String nuevaContrasena) throws SQLException {
         Connection c = connector.obtenerConexion();

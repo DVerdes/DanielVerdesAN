@@ -9,10 +9,19 @@ import com.example.demo.model.Pelicula;
 import java.sql.*;
 import java.util.List;
 
+/**
+ * JDBC PELÍCULAS
+ */
 public class JbdcPeliculaDAO implements PeliculaDAO {
 
     private DBConnector connector =  new HikariDBConnector();
 
+    /**
+     * Inserta película
+     * @param pelicula a insertar
+     * @return peli iinsertada
+     * @throws SQLException
+     */
     @Override
     public Pelicula insertarPelicula(Pelicula pelicula) throws SQLException {
         Connection c = connector.obtenerConexion();
@@ -46,6 +55,12 @@ public class JbdcPeliculaDAO implements PeliculaDAO {
         return null;
     }
 
+    /**
+     * Lista películas en cine
+     * @param cineID id del cine
+     * @return listado de películas
+     * @throws SQLException
+     */
     @Override
     public List<Pelicula> listarPeliculasCine(int cineID) throws SQLException {
         Connection c = connector.obtenerConexion();

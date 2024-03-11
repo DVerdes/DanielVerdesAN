@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mapper de sesisón
+ */
 public class SesionMapper {
 
     public static SesionDTO sesionADTO (Sesion sesion){

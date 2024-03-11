@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mapper de sala
+ */
 public class SalaMapper {
 
     public static SalaDTO salaADTO (Sala sala){

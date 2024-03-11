@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Endpoints sesiones
+ */
 @RestController
 public class SesionController {
 
@@ -16,6 +19,12 @@ public class SesionController {
         return null;
     }
 
+    /**
+     * Crea sesión
+     * @param sesion a insertar
+     * @return sesion insertada
+     * @throws SQLException
+     */
     @PostMapping("/api/admin/sesiones")
     SesionDTO crearSesion(@RequestBody SesionDTO sesion) throws SQLException {
         SesionService ss = new SesionServiceImpl();

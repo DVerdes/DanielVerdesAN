@@ -6,10 +6,19 @@ import com.example.demo.model.Sala;
 
 import java.sql.*;
 
+/**
+ * JDBC Sala
+ */
 public class JdbcSalaDAO implements SalaDAO {
 
     private DBConnector connector =  new HikariDBConnector();
 
+    /**
+     * Inserta sala
+     * @param sala a insertar
+     * @return sala insertada
+     * @throws SQLException
+     */
     @Override
     public Sala insertarSala(Sala sala) throws SQLException {
 

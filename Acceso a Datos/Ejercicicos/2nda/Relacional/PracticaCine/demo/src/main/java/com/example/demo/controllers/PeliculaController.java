@@ -11,15 +11,30 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Endpoints peliculas
+ */
 @RestController
 public class PeliculaController {
 
+    /**
+     * Devuelve sesiones de una película
+     * @param peliculaID id de la película
+     * @return lista de sesiones
+     * @throws SQLException
+     */
     @GetMapping("/api/peliculas/{peliculaID}/sesiones")
     List<SesionDTO> devolverSesionesPelicula(@PathVariable int peliculaID) throws SQLException {
         SesionService ss = new SesionServiceImpl();
         return ss.listarSesionesdePelicula(peliculaID);
     }
 
+    /**
+     * Inserta película
+     * @param pelicula película a insertar
+     * @return película insertada
+     * @throws SQLException
+     */
     @PostMapping("/api/admin/peliculas")
     PeliculaDTO crearPelicula(@RequestBody PeliculaDTO pelicula) throws SQLException {
 

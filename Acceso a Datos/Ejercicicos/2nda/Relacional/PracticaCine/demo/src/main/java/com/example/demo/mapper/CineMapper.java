@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mapper de cine
+ */
 public class CineMapper {
 
     public static List<Cine> resALista(ResultSet res) throws SQLException {

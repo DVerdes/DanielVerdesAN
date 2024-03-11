@@ -3,6 +3,9 @@ package com.example.demo.mapper;
 import com.example.demo.dtos.UsuarioDTO;
 import com.example.demo.model.Usuario;
 
+/**
+ * Mapper de usuario
+ */
 public class UsuarioMapper {
 
 

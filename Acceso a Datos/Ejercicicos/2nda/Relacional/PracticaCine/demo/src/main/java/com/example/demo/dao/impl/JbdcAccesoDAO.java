@@ -10,10 +10,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * JDBC Acceso
+ */
 public class JbdcAccesoDAO implements AccesoDAO {
     private DBConnector connector =  new HikariDBConnector();
 
 
+    /**
+     * Comprueba inicio sesión
+     * @param acceso datos acceso
+     * @return booleano de si sesión es valida
+     * @throws SQLException
+     */
     @Override
     public boolean comprobarInicioSesion(Acceso acceso) throws SQLException {
 

@@ -9,11 +9,20 @@ import com.example.demo.model.Sesion;
 import java.sql.*;
 import java.util.List;
 
+/**
+ * Jdbc Sesión
+ */
 public class JbdcSesionDAO implements SesionDAO {
 
 
     private DBConnector connector =  new HikariDBConnector();
 
+    /**
+     * Crea nueva sesión
+     * @param sesion a crear
+     * @return sesión insertada
+     * @throws SQLException
+     */
     @Override
     public Sesion insertarSesion(Sesion sesion) throws SQLException {
         Connection c = connector.obtenerConexion();
@@ -44,6 +53,12 @@ public class JbdcSesionDAO implements SesionDAO {
         return null;
     }
 
+    /**
+     * Lista sesiones de una película
+     * @param idPelicula a listar
+     * @return listado
+     * @throws SQLException
+     */
     @Override
     public List<Sesion> listarSesionesDePelicula(int idPelicula) throws SQLException {
         Connection c = connector.obtenerConexion();

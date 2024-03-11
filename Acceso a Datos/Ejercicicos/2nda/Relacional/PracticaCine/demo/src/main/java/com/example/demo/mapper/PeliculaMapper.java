@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mapper de película
+ */
 public class PeliculaMapper {
 
     public static Pelicula DTOaPeli (PeliculaDTO pdto){
