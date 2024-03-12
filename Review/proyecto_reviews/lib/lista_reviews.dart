@@ -68,7 +68,7 @@ class Reviews extends State<ListaReviews> {
     Uri uri = Uri.parse(url);
     final respuesta = await http.get(uri);
 
-    List respuestaJson = json.decode(respuesta.body.toString());
+    List respuestaJson = json.decode(Utf8Decoder().convert(respuesta.bodyBytes).toString());
     List<Review> listaElementos = crearListaElementos(respuestaJson);
     return listaElementos;
   }
