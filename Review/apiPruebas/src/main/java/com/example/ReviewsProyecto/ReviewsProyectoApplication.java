@@ -14,6 +14,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * EJECUCIÓN SPRING APP
+ */
 @SpringBootApplication
 public class ReviewsProyectoApplication {
 

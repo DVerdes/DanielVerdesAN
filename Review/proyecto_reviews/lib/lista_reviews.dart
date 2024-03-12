@@ -27,7 +27,10 @@ class Reviews extends State<ListaReviews> {
         elevation: 0,
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+                        mostrarDatos(context);
+
+        },
         label: Text(' Añadir reseña'),
         icon: Icon(Icons.add),
         backgroundColor: Colors.black87,
@@ -57,8 +60,8 @@ class Reviews extends State<ListaReviews> {
     );
   }
 
-  mostrarDatos(BuildContext context, info) {
-    Navigator.of(context).pushNamed("/datos_review", arguments: info);
+  mostrarDatos(BuildContext context) {
+    Navigator.of(context).pushNamed("/datos_review");
   }
 
   Future<List<Review>> hacerPeticion() async {
@@ -110,7 +113,6 @@ class Reviews extends State<ListaReviews> {
             // poner botones en cada item de la lista para poder moverlos de página o eliminarlos
             trailing: Text(review.puntuacion.toString() + "/10"),
             onTap: () {
-              mostrarDatos(context, review);
             });
       },
       separatorBuilder: (BuildContext context, int index) {

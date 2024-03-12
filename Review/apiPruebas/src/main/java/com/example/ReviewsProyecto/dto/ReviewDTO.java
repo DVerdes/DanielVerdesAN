@@ -1,8 +1,10 @@
 package com.example.ReviewsProyecto.dto;
 
 
+/**
+ * Review DTO
+ */
 public class ReviewDTO {
-
     private int reviewID;
     private int idItem;
     private String usuario;

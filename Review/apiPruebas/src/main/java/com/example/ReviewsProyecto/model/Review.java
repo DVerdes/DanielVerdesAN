@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 
-
+/**
+ * Clase Review con anotaciones Hibernate
+ */
 @Entity
 @Table(name = "Reviews")
 public class Review implements Serializable {
-
     private int reviewID;
     private int idItem;
     private String usuario;

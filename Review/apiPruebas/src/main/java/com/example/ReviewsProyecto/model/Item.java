@@ -8,7 +8,9 @@ import java.io.Serializable;
 import java.util.Set;
 
 
-
+/**
+ * Clase Item con anotaciones Hibernate
+ */
 @Entity
 @Table(name = "Items")
 public class Item implements Serializable {

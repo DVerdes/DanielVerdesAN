@@ -15,7 +15,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service Review Impl
+ */
 public class ReviewServiceImpl implements ReviewService {
+
+    /**
+     * Lista reviews de un item determinado
+     * @param idItem id del item
+     * @return lista de reviews
+     * @throws SQLException
+     */
     @Override
     public List<ReviewDTO> obtenerPorItem(int idItem) throws SQLException {
         ReviewDAO rdao = new ORMReviewDAO();
@@ -27,6 +37,12 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewDTOS;
     }
 
+    /**
+     * Crea review
+     * @param entidad objeto ReviewDTO a crear
+     * @return índice autoincremental generado
+     * @throws SQLException
+     */
     @Override
     public int crearReview(ReviewDTO entidad) throws SQLException {
         ReviewDAO rdao = new ORMReviewDAO();

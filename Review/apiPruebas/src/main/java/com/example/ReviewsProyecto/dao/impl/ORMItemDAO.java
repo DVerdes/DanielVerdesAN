@@ -11,7 +11,16 @@ import org.hibernate.query.Query;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Clase ORM Acceso a Datos Item
+ */
 public class ORMItemDAO implements ItemDAO {
+
+    /**
+     * lista todos los items
+     * @return listado de items
+     * @throws SQLException
+     */
     @Override
     public List<Item> listar() throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
@@ -34,6 +43,12 @@ public class ORMItemDAO implements ItemDAO {
         return null;
     }
 
+    /**
+     * Lista items por tipo de item
+     * @param tipo tipo de item (película, serie...)
+     * @return listado de items
+     * @throws SQLException
+     */
     @Override
     public List<Item> listarPorTipo(String tipo) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
@@ -63,6 +78,12 @@ public class ORMItemDAO implements ItemDAO {
         }
     }
 
+    /**
+     * Obtiene un Item concreto por id
+     * @param id del item requerido
+     * @return Item buscado
+     * @throws SQLException
+     */
     @Override
     public Item obtenerItem(int id) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();

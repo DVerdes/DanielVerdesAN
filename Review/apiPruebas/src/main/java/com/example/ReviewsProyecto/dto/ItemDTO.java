@@ -6,8 +6,10 @@ import com.example.ReviewsProyecto.model.Review;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Item DTO
+ */
 public class ItemDTO {
-
     private int idItem;
     private String tipo;
     private String nombre;

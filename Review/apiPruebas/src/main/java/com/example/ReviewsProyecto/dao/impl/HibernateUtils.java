@@ -3,6 +3,9 @@ package com.example.ReviewsProyecto.dao.impl;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/**
+ * HIBERNATE UTILS
+ */
 public class HibernateUtils {
 
 
@@ -18,6 +21,10 @@ public class HibernateUtils {
 
         }}
 
+    /**
+     * Devuelve SessionFactory
+     * @return SessionFactory
+     */
     public static SessionFactory getSessionFactory(){
         return sessionFactory;
     }

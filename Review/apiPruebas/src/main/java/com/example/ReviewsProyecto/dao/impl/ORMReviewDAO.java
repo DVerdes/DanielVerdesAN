@@ -10,7 +10,17 @@ import org.hibernate.query.Query;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Clase ORM Acceso a Datos Review
+ */
 public class ORMReviewDAO implements ReviewDAO {
+
+    /**
+     * Lista reviews de un item determinado
+     * @param idItem id del item del que buscamos reviews
+     * @return listado de reviews
+     * @throws SQLException
+     */
     @Override
     public List<Review> listarPorItem(int idItem) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
@@ -35,6 +45,12 @@ public class ORMReviewDAO implements ReviewDAO {
         }
     }
 
+    /**
+     * Obtiene una reviews concreta
+     * @param id de la review
+     * @return Review requerida
+     * @throws SQLException
+     */
     @Override
     public Review obtenerReview(int id) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
@@ -52,6 +68,12 @@ public class ORMReviewDAO implements ReviewDAO {
         }
     }
 
+    /**
+     * Inserta review en BBDD
+     * @param review a insertar
+     * @return id de la review insertada
+     * @throws SQLException
+     */
     @Override
     public int insertarReview(Review review) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();

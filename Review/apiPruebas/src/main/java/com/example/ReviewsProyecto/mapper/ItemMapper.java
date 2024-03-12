@@ -11,20 +11,35 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Mapper de objetos Item
+ */
 public class ItemMapper {
 
-
+    /**
+     * Convierte objetos Item en ItemDTO
+     * @param item objeto item
+     * @return ItemDTO
+     */
     public static ItemDTO modelDTO(Item item){
         return new ItemDTO(item.getIdItem(),item.getTipo(), item.getNombre(), item.getGenero(), item.getAutor(), item.getDuracion(),item.getRutaPortada(), item.getEstreno(), item.getSinopsis(), calcularPuntuacionMedia(item));
     }
 
 
-
+    /**
+     * Convierte objetos ItemDTO en Item
+     * @param itemDTO objeto ItemDTO
+     * @return Item
+     */
     public static Item dtoModel(ItemDTO itemDTO){
         return new Item(itemDTO.getIdItem(), itemDTO.getTipo(), itemDTO.getAutor(), itemDTO.getGenero(), itemDTO.getAutor(), itemDTO.getDuracion(), itemDTO.getRutaPortada(), itemDTO.getEstreno(), itemDTO.getSinopsis(),new HashSet<>());
     }
 
-
+    /**
+     * Calcula puntuación media de las reseñas de un item
+     * @param item del que calcular puntuación media
+     * @return puntuación media
+     */
     static double calcularPuntuacionMedia(Item item){
         double punt = 0;
         if(item.getReviewSet().size()!=0){
@@ -36,21 +51,5 @@ public class ItemMapper {
        return 0;
     }
 
-    static List<ReviewDTO> devolverLista(Set<Review> itemSet){
-        List<ReviewDTO>items = new ArrayList<>();
-        for(Review i : itemSet){
 
-            items.add(ReviewMapper.reviewDTO(i));
-        }
-        return items;
-
-    }
-    static Set<Review> devolverSet(List<ReviewDTO> itemList){
-        Set<Review>items = new HashSet<>();
-        for(ReviewDTO i : itemList){
-            items.add(ReviewMapper.dtoReview(i,new Item()));
-        }
-        return items;
-
-    }
 }

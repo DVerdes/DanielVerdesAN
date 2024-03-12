@@ -6,6 +6,9 @@ import com.example.ReviewsProyecto.dto.ItemDTO;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Interfaz ITEMSERVICE
+ */
 public interface ItemService {
 
     List<ItemDTO> obtenerTodos() throws SQLException;
