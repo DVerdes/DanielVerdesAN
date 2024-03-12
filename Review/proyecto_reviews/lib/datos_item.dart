@@ -2,22 +2,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
-import 'package:proyecto_reviews/item.dart';
-import 'package:proyecto_reviews/lista_itemsAPI.dart';
-import 'package:proyecto_reviews/lista_reviews.dart';
+import 'package:proyecto_reviews/lista_items.dart';
 
 class DatosItem extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     Elemento el = ModalRoute.of(context)!.settings.arguments as Elemento;
-    // Item elemento = new Item(el.idItem, el.tipo, el.nombre, el.genero, el.autor, el.duracion, el.rutaPortada, el.estreno, el.sinopsis, el.puntuacionMedia);
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          iconTheme: IconThemeData(color: Colors.white),
+          backgroundColor: Colors.black,
           elevation: 0.0,
-          title: Text(el.nombre.toUpperCase(), style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black)),
+          title: Text(el.nombre.toUpperCase(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
@@ -25,46 +21,35 @@ class DatosItem extends StatelessWidget {
           },
           label: Text(' Ver reseñas'),
           icon: Icon(Icons.star),
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.black,
           shape: LinearBorder(),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: 
-        // Container(
-          // decoration: BoxDecoration(
-          // image: DecorationImage(
-          //   image: AssetImage("assets/bg.png"),
-            // image: identical(tipoItem, 'pelicula') ? AssetImage("assets/bg.png") : AssetImage("assets/bg2.png"),
-            
-            // opacity: 0.7,
-          //   fit: BoxFit.fill,
-          // ),
-        // ),
-          // child: 
-          Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: ListView(children: <Widget>[
-              InstaImageViewer(
-                  child: Container(
-                height: 270,
-                width: 270,
-                child: Image.asset(el.rutaPortada),
-              )),
-              SizedBox(height: 20),
-              // if (identical('pelicula', el.tipo))
-              if (el.tipo == "pelicula")
-                tipoVentana(context, el, "Género: ", "Director: ", "Duración: ", "Año: ", "Sinopsis: ", Icon(Icons.timer_outlined, color: Colors.black), " minutos")
-             else if (el.tipo == "musica")
-                tipoVentana(context, el, "Género: ", "Artista: ", "Duración: ", "Año: ", "Album: ", Icon(Icons.timer_outlined, color: Colors.black), " minutos")
-              else if (el.tipo == "libro")
-                tipoVentana(context, el, "Género: ", "Autor: ", "Páginas: ", "Año: ", "Sinopsis: ", Icon(Icons.copy, color: Colors.black), " páginas")
-              else if (el.tipo == "juego")
-                tipoVentana(context, el, "Género: ", "Desarrolladora: ", "Duración aproximada: ", "Año: ", "Argumento: ", Icon(Icons.timer_outlined, color: Colors.black), " horas")
-              else if (el.tipo == "serie")
-                tipoVentana(context, el, "Género: ", "Director: ", "Capítulos: ", "Año: ", "Sinopsis: ", Icon(Icons.live_tv_outlined, color: Colors.black), "")
-            ])))
-            // )
-            ;
+        body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage("assets/bgBlack.png"), fit: BoxFit.fill),
+            ),
+            child: Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: ListView(children: <Widget>[
+                  InstaImageViewer(
+                      child: Container(
+                    height: 270,
+                    width: 270,
+                    child: Image.asset(el.rutaPortada),
+                  )),
+                  SizedBox(height: 20),
+                  if (el.tipo == "pelicula")
+                    tipoVentana(context, el, "Género: ", "Director: ", "Duración: ", "Año: ", "Sinopsis: ", Icon(Icons.timer_outlined, color: Colors.white), " minutos")
+                  else if (el.tipo == "musica")
+                    tipoVentana(context, el, "Género: ", "Artista: ", "Duración: ", "Año: ", "Album: ", Icon(Icons.timer_outlined, color: Colors.white), " minutos")
+                  else if (el.tipo == "libro")
+                    tipoVentana(context, el, "Género: ", "Autor: ", "Páginas: ", "Año: ", "Sinopsis: ", Icon(Icons.copy, color: Colors.white), " páginas")
+                  else if (el.tipo == "juego")
+                    tipoVentana(context, el, "Género: ", "Desarrolladora: ", "Duración aproximada: ", "Año: ", "Argumento: ", Icon(Icons.timer_outlined, color: Colors.white), " horas")
+                  else if (el.tipo == "serie")
+                    tipoVentana(context, el, "Género: ", "Director: ", "Capítulos: ", "Año: ", "Sinopsis: ", Icon(Icons.live_tv_outlined, color: Colors.white), "")
+                ]))));
   }
 
   Widget tipoVentana(BuildContext context, Elemento e, String campo1, String campo2, String campo3, String campo4, String campo5, Icon icon3, String unidad) {
@@ -76,18 +61,18 @@ class DatosItem extends StatelessWidget {
         child: Column(
           children: [
             campo(
-              Icon(Icons.theater_comedy_outlined, color: Colors.black),
+              Icon(Icons.theater_comedy_outlined, color: Colors.white),
               campo1,
               e.genero,
             ),
             divider(),
-            campo(Icon(Icons.person_outline, color: Colors.black), campo2, e.autor),
+            campo(Icon(Icons.person_outline, color: Colors.white), campo2, e.autor),
             divider(),
             campo(icon3, campo3, e.duracion.toString() + unidad),
             divider(),
-            campo(Icon(Icons.calendar_month, color: Colors.black), campo4, e.estreno.toString()),
+            campo(Icon(Icons.calendar_month, color: Colors.white), campo4, e.estreno.toString()),
             divider(),
-            campo(Icon(Icons.text_snippet_outlined, color: Colors.black), campo5, e.sinopsis)
+            campo(Icon(Icons.text_snippet_outlined, color: Colors.white), campo5, e.sinopsis)
           ],
         ),
       ),
@@ -98,7 +83,7 @@ class DatosItem extends StatelessWidget {
     return Divider(
       indent: 15,
       endIndent: 15,
-      color: Colors.black,
+      color: Colors.white,
     );
   }
 
@@ -111,11 +96,11 @@ class DatosItem extends StatelessWidget {
             children: <TextSpan>[
               TextSpan(
                 text: campo,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               TextSpan(
                 text: valor,
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: TextStyle(fontSize: 16, color: Colors.white),
               ),
             ],
           ),

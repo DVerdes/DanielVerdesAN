@@ -12,7 +12,6 @@ class ListaReviews extends StatefulWidget {
 
 class Reviews extends State<ListaReviews> {
   String textBar = 'Tu correo electrónico';
-// crear la listas de correos, una para cada bandeja
   String url = "";
 
   @override
@@ -21,24 +20,26 @@ class Reviews extends State<ListaReviews> {
     url = "http://10.0.2.2:8080/api/reviews/" + id.toString() + "/reviews";
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(textBar),
-        backgroundColor: Colors.red[400],
-        elevation: 0,
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-                        mostrarDatos(context);
-
-        },
-        label: Text(' Añadir reseña'),
-        icon: Icon(Icons.add),
-        backgroundColor: Colors.black87,
-        shape: LinearBorder(),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: Container(
-          child: FutureBuilder<dynamic>(
+        appBar: AppBar(
+            iconTheme: IconThemeData(color: Colors.white),
+            backgroundColor: Colors.black,
+            elevation: 0.0,
+            title: Text("RESEÑAS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white))),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {},
+          label: Text(' Añadir reseña'),
+          icon: Icon(Icons.add),
+          backgroundColor: Colors.black87,
+          shape: LinearBorder(),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: Stack(children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage("assets/bgBlack.png"), fit: BoxFit.fill),
+            ),
+          ),
+          FutureBuilder<dynamic>(
               future: hacerPeticion(),
               builder: (context, datos) {
                 if (datos.hasData) {
@@ -47,21 +48,20 @@ class Reviews extends State<ListaReviews> {
                   return Text(datos.error.toString());
                 }
                 return CircularProgressIndicator();
-              })),
-    );
+              }),
+        ]));
   }
 
-// crear widget showText
-  Widget showText(dynamic tipoTexto, FontWeight weight, double size) {
+  Widget showText(dynamic tipoTexto) {
     return Text(
       tipoTexto,
-      style: TextStyle(fontWeight: weight, fontSize: size),
+      style: TextStyle(fontSize: 16, color: Colors.white),
       overflow: TextOverflow.ellipsis,
     );
   }
 
-  mostrarDatos(BuildContext context) {
-    Navigator.of(context).pushNamed("/datos_review");
+  mostrarDatos(BuildContext context, info) {
+    Navigator.of(context).pushNamed("/datos_review", arguments: info);
   }
 
   Future<List<Review>> hacerPeticion() async {
@@ -102,17 +102,14 @@ class Reviews extends State<ListaReviews> {
       itemBuilder: (BuildContext context, index) {
         final review = listadoDatos[index];
         return ListTile(
-            leading: Icon(Icons.person),
-            // llamar al widget showText para mostrarlo
-            title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  showText(review.usuario, FontWeight.bold, 18),
-                  showText(review.contenido, FontWeight.normal, 15),
-                ]),
-            // poner botones en cada item de la lista para poder moverlos de página o eliminarlos
-            trailing: Text(review.puntuacion.toString() + "/10"),
+            leading: Icon(Icons.person, color: Colors.white),
+            title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+              showText(review.usuario),
+              showText(review.contenido),
+            ]),
+            trailing: Text(review.puntuacion.toString() + "/10", style: TextStyle(fontSize: 16, color: Colors.white)),
             onTap: () {
+              mostrarDatos(context, review);
             });
       },
       separatorBuilder: (BuildContext context, int index) {

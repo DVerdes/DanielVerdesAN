@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_reviews/datos_review.dart';
 import 'package:proyecto_reviews/lista_items.dart';
-import 'package:proyecto_reviews/lista_itemsAPI.dart';
 import 'package:proyecto_reviews/datos_item.dart';
 import 'package:proyecto_reviews/lista_reviews.dart';
 import 'package:proyecto_reviews/menu.dart';
-import 'package:proyecto_reviews/resena.dart';
 
 void main() {
   runApp(const MyApp());
