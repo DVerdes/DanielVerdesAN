@@ -1,9 +1,0 @@
-lobo:12/10/14/10/8/8:8:+2:14:Mordisco +3 c/c:1d6+2;
-zombi:10/10/-/10/8/8:12:+2:12:Golpetazo +2 c/c:1d6+1;
-orco:15/12/14/8/6/6:8:+1:15:Gran hacha +3 c/c:1d12+3;
-goblin:12/16/10/8/6/6:4:+1:14:Clava +2 c/c:1d6+1;
-arana:10/17/8/3/6/6:5:+3:15:Mordisco +3 c/c:1d4+1;
-oso:18/12/18/3/6/6:18:+1:12:Garra +4 c/c:1d10+4;
-lobo_terrible:16/14/16/3/8/8:22:+3:16:Mordisco +6 c/c:1d6+4;
-esqueleto:10/10/-/10/8/8:8:+2:12:Garra +2 c/c:1d6+1;
-

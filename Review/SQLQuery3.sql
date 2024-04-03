@@ -1,1 +1,0 @@
-INSERT INTO Reviews (ItemID, Usuario, Puntuacion, Contenido) VALUES (1,'Daniel',23,'fsfsdfsd');
