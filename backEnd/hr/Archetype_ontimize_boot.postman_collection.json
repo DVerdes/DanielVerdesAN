@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "db4a5814-5251-4676-ab4a-daac593ee512",
+		"name": "Archetype Ontimize Boot",
+		"description": "Conjunto de peticiones relacionadas con el arquetipo del Ontimize Boot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6379296"
+	},
+	"item": [
+		{
+			"name": "MainController",
+			"item": [
+				{
+					"name": "main",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:33333/main",
+							"host": [
+								"localhost"
+							],
+							"port": "33333",
+							"path": [
+								"main"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TestController",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:33333/test/test",
+							"host": [
+								"localhost"
+							],
+							"port": "33333",
+							"path": [
+								"test",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:33333/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "33333",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:33333/users/user?columns=USER_,PASSWORD,NAME,SURNAME,EMAIL,NIF,USERBLOCKED,LASTPASSWORDUPDATE,FIRSTLOGIN",
+							"host": [
+								"localhost"
+							],
+							"port": "33333",
+							"path": [
+								"users",
+								"user"
+							],
+							"query": [
+								{
+									"key": "columns",
+									"value": "USER_,PASSWORD,NAME,SURNAME,EMAIL,NIF,USERBLOCKED,LASTPASSWORDUPDATE,FIRSTLOGIN"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"filter\":{\r\n        \"USER_\": \"demo\"\r\n    },\r\n    \"columns\": [\r\n        \"USER_\",\r\n        \"PASSWORD\",\r\n        \"NAME\",\r\n        \"SURNAME\",\r\n        \"EMAIL\",\r\n        \"NIF\",\r\n        \"USERBLOCKED\",\r\n        \"LASTPASSWORDUPDATE\",\r\n        \"FIRSTLOGIN\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:33333/users/user/search",
+							"host": [
+								"localhost"
+							],
+							"port": "33333",
+							"path": [
+								"users",
+								"user",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n        \"USER_\": \"user\",\r\n        \"PASSWORD\": \"userpass\",\r\n        \"NAME\": \"User\",\r\n        \"SURNAME\": \"Name\",\r\n        \"EMAIL\": \"user@name.com\",\r\n        \"NIF\": \"11111111H\",\r\n        \"USERBLOCKED\": false,\r\n        \"LASTPASSWORDUPDATE\": 1672527600000,\r\n        \"FIRSTLOGIN\": true\r\n    },\r\n    \"sqltypes\": {\r\n        \"USER_\": 12,\r\n        \"FIRSTLOGIN\": 16,\r\n        \"LASTPASSWORDUPDATE\": 93,\r\n        \"SURNAME\": 12,\r\n        \"PASSWORD\": 12,\r\n        \"USERBLOCKED\": 93,\r\n        \"NIF\": 12,\r\n        \"EMAIL\": 12,\r\n        \"NAME\": 12\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:33333/users/user",
+							"host": [
+								"localhost"
+							],
+							"port": "33333",
+							"path": [
+								"users",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"filter\": {\r\n        \"USER_\": \"user\"\r\n    },\r\n    \"data\": {\r\n        \"NIF\": \"22222222J\"\r\n    },\r\n    \"sqltypes\": {\r\n        \"NIF\": 12\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:33333/users/user",
+							"host": [
+								"localhost"
+							],
+							"port": "33333",
+							"path": [
+								"users",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"filter\": {\r\n        \"USER_\": \"user\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:33333/users/user",
+							"host": [
+								"localhost"
+							],
+							"port": "33333",
+							"path": [
+								"users",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "demouser",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "demo",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
