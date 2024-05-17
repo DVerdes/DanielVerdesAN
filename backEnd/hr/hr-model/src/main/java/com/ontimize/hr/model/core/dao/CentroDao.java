@@ -14,9 +14,7 @@ public class CentroDao extends OntimizeJdbcDaoSupport {
     public static final String ID_GESTOR = "ID_GESTOR";
     public static final String DIR_CENTRO = "DIR_CENTRO";
     public static final String NOMBRE_CENTRO = "NOMBRE_CENTRO";
-    public static final String CAPACIDAD = "CAPACIDAD";
     public static final String CNT_CREATION_DATE = "CNT_CREATION_DATE";
     public static final String CNT_DOWN_DATE = "CNT_DOWN_DATE";
-    public static final String CNT_PHOTO = "CNT_PHOTO";
 
 }

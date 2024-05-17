@@ -28,21 +28,10 @@ public class CentroService implements ICentroService {
         return this.daoHelper.query(this.centroDao, keyMap, attrList);
     }
 
-    @Override
-    public EntityResult centroOtroQuery(Map<String, Object> keyMap, List<String> attrList)
-            throws OntimizeJEERuntimeException {
 
-        return this.daoHelper.query(this.centroDao, keyMap, attrList);
-    }
 
     @Override
     public EntityResult centroInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException {
-        attrMap.clear();
-        attrMap.put("NOMBRE_CENTRO","Nombre modificado");
-        attrMap.put("DIR_CENTRO","DIR modificado");
-        attrMap.put("ID_GESTOR","demo");
-
-
 
         return this.daoHelper.insert(this.centroDao, attrMap);
     }
