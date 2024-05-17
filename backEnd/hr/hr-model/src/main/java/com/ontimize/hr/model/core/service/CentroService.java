@@ -1,8 +1,6 @@
 package com.ontimize.hr.model.core.service;
 
-import com.ontimize.hr.api.core.service.ICandidateService;
 import com.ontimize.hr.api.core.service.ICentroService;
-import com.ontimize.hr.model.core.dao.CandidateDao;
 import com.ontimize.hr.model.core.dao.CentroDao;
 import com.ontimize.jee.common.dto.EntityResult;
 import com.ontimize.jee.common.exceptions.OntimizeJEERuntimeException;
@@ -26,11 +24,26 @@ public class CentroService implements ICentroService {
     @Override
     public EntityResult centroQuery(Map<String, Object> keyMap, List<String> attrList)
             throws OntimizeJEERuntimeException {
+
+        return this.daoHelper.query(this.centroDao, keyMap, attrList);
+    }
+
+    @Override
+    public EntityResult centroOtroQuery(Map<String, Object> keyMap, List<String> attrList)
+            throws OntimizeJEERuntimeException {
+
         return this.daoHelper.query(this.centroDao, keyMap, attrList);
     }
 
     @Override
     public EntityResult centroInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException {
+        attrMap.clear();
+        attrMap.put("NOMBRE_CENTRO","Nombre modificado");
+        attrMap.put("DIR_CENTRO","DIR modificado");
+        attrMap.put("ID_GESTOR","demo");
+
+
+
         return this.daoHelper.insert(this.centroDao, attrMap);
     }
 
