@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Datos Usuario">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="64.0" layoutY="52.0" text="Nombre:" />
+                        <TextField layoutX="150.0" layoutY="48.0" />
+                        <Label layoutX="64.0" layoutY="92.0" text="Apellido 1:" />
+                        <TextField layoutX="150.0" layoutY="88.0" />
+                        <Label layoutX="64.0" layoutY="132.0" text="Apellido 2:" />
+                        <TextField layoutX="150.0" layoutY="128.0" />
+                        <Label layoutX="67.0" layoutY="192.0" text="Género:" />
+                        <ChoiceBox layoutX="150.0" layoutY="188.0" prefWidth="150.0" />
+                        <Label layoutX="67.0" layoutY="237.0" text="Dependencia:" />
+                        <Slider layoutX="155.0" layoutY="239.0" />
+                        <DatePicker layoutX="149.0" layoutY="279.0" prefHeight="25.0" prefWidth="152.0" />
+                        <Label layoutX="64.0" layoutY="283.0" text="Nacimiento:" />
+                        <ImageView fitHeight="150.0" fitWidth="109.0" layoutX="408.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button layoutX="419.0" layoutY="246.0" mnemonicParsing="false" text="Subir imagen" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Elegir Habitación">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="185.0" layoutY="137.0" prefHeight="21.0" prefWidth="63.0" text="Habitación:" />
+                        <Label layoutX="185.0" layoutY="198.0" prefHeight="21.0" prefWidth="63.0" text="Cama:" />
+                        <Label layoutX="250.0" layoutY="46.0" text="Nombre centro" />
+                        <ComboBox layoutX="291.0" layoutY="135.0" prefWidth="150.0" />
+                        <ComboBox layoutX="291.0" layoutY="196.0" prefWidth="150.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Contactos">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="13.0" layoutY="124.0" prefHeight="231.0" prefWidth="578.0">
+                          <columns>
+                            <TableColumn prefWidth="120.0" text="Nombre" />
+                            <TableColumn prefWidth="186.0" text="Apellidos" />
+                              <TableColumn prefWidth="99.0" text="Teléfono" />
+                              <TableColumn prefWidth="172.0" text="Email" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="505.0" layoutY="89.0" mnemonicParsing="false" text="Añadir" />
+                        <Label layoutX="32.0" layoutY="32.0" text="Nombre:" />
+                        <TextField layoutX="99.0" layoutY="28.0" />
+                        <Label layoutX="29.0" layoutY="72.0" text="Apellidos:" />
+                        <TextField layoutX="99.0" layoutY="68.0" />
+                        <Label layoutX="278.0" layoutY="32.0" text="Teléfono:" />
+                        <TextField layoutX="338.0" layoutY="28.0" />
+                        <Label layoutX="278.0" layoutY="72.0" text="Email:" />
+                        <TextField layoutX="338.0" layoutY="68.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+          <Button mnemonicParsing="false" text="Cancelar" />
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="Añadir Usuario" />
+        </items>
+      </ToolBar>
+   </children>
+</VBox>
