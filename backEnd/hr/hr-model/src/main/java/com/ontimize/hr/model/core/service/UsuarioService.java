@@ -25,6 +25,8 @@ public class UsuarioService implements IUsuarioService {
     public EntityResult usuarioQuery(Map<String, Object> keyMap, List<String> attrList)
             throws OntimizeJEERuntimeException {
 
+
+
         return this.daoHelper.query(this.UsuarioDao, keyMap, attrList);
     }
 
