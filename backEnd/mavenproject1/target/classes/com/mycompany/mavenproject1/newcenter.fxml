@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane id="AnchorPane" prefHeight="580.0" prefWidth="940.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject1.NewcenterController">
+    <stylesheets>
+        <URL value="@/styles/newcenter.css" />
+    </stylesheets>
+   <children>
+      <BorderPane prefHeight="580.0" prefWidth="940.0">
+         <top>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <items>
+                <Button mnemonicParsing="false" text="Atrás" />
+                  <Button fx:id="botonInsertar" mnemonicParsing="false" onAction="#insertarCentro" text="Insertar Centro" translateX="150.0" />
+              </items>
+            </ToolBar>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="centroNombre" layoutX="396.0" layoutY="64.0" />
+                  <Label layoutX="420.0" layoutY="42.0" text="Nombre del centro" />
+                  <Label layoutX="445.0" layoutY="123.0" text="Dirección" />
+                  <TextField fx:id="centroDireccion" layoutX="396.0" layoutY="146.0" />
+                  <Line endX="100.0" layoutX="470.0" layoutY="204.0" startX="-100.0" />
+                  <TextField fx:id="individualHab" layoutX="496.0" layoutY="258.0" onKeyTyped="#validateAge" />
+                  <Label layoutX="307.0" layoutY="262.0" text="Habitaciones Individuales:" />
+                  <Label layoutX="333.0" layoutY="306.0" text="Habitaciones Dobles:" />
+                  <TextField fx:id="dobleHab" layoutX="496.0" layoutY="302.0" onKeyTyped="#validateAge" />
+                  <Label layoutX="337.0" layoutY="350.0" text="Habitaciones Triples:" />
+                  <TextField fx:id="tripleHab" layoutX="496.0" layoutY="346.0" onKeyTyped="#validateAge" />
+                  <Label fx:id="validacionHabitaciones" layoutX="420.0" layoutY="388.0" textFill="RED" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject1.MainViewController">
+   <top>
+      <ToolBar prefHeight="41.0" prefWidth="592.0" BorderPane.alignment="CENTER">
+        <items>
+            <ChoiceBox prefWidth="150.0" />
+          <Button fx:id="anadirCentro" mnemonicParsing="false" onAction="#switchToNewCenter" text="Añadir Centro" />
+        </items>
+      </ToolBar>
+   </top>
+   <bottom>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button fx:id="anadirUsuario" mnemonicParsing="false" onAction="#switchToNewUser" text="Añadir Usuario" />
+        </items>
+      </ToolBar>
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="325.0" layoutY="14.0" text="USUARIOS">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tViewUsuarios" layoutX="17.0" layoutY="41.0" onMouseClicked="#detalleUsuario" prefHeight="388.0" prefWidth="675.0">
+              <columns>
+                <TableColumn fx:id="columnNombre" prefWidth="155.0" text="Nombre" />
+                  <TableColumn fx:id="columnApellidos" prefWidth="176.0" text="Apellidos" />
+                  <TableColumn fx:id="columnEdad" prefWidth="65.0" text="Edad" />
+                  <TableColumn fx:id="columnGenero" prefWidth="138.0" text="Género" />
+                  <TableColumn fx:id="columnIngreso" prefWidth="140.0" text="Fecha Ingreso" />
+              </columns>
+            </TableView>
+            <ImageView fitHeight="159.0" fitWidth="121.0" layoutX="752.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="labelEdad" layoutX="789.0" layoutY="232.0" text="Edad: " />
+            <Label layoutX="768.0" layoutY="272.0" text="Fecha ingreso:" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
