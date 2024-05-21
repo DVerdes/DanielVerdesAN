@@ -32,4 +32,9 @@ public class LoginController {
 
     }
 
+     @FXML
+    private void cambiarRegistro() throws IOException {
+        App.setRoot("register");
+    }
+    
 }

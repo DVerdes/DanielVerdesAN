@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -43,12 +44,24 @@ public class MainViewController {
     @FXML
     private Label labelEdad;
     
+    @FXML
+    private ChoiceBox comboCentros;
+    
      //ObservableList
     static ObservableList<Usuario> valoresLista = FXCollections.observableArrayList();
+    
+    static ObservableList<String> listaCentros =  FXCollections.observableArrayList();
+    
+    
+    
     //Property
     private Property<ObservableList<Usuario>> usuarioListProperty = new SimpleObjectProperty<>(valoresLista);
     
     public void initialize() throws IOException, UnirestException, ParseException{
+        
+        listaCentros.add("RESIDENCIA MIRAMAR");
+        
+        comboCentros.setItems(listaCentros);
        
         
         requestUserList();
@@ -84,6 +97,12 @@ public class MainViewController {
         App.setRoot("newcenter");
     }
     
+     @FXML
+    private void verDetalles() throws IOException {
+        
+        App.setRoot("userdetail");
+    }
+    
     
     public void requestUserList() throws IOException, UnirestException, ParseException{
         
@@ -106,7 +125,7 @@ public class MainViewController {
             //setea en ImgView
             //img.setImage(i);
             //Descripción jugador bajo imagen
-            labelEdad.setText(c.getNOMBRE_USUARIO());
+            labelEdad.setText(c.getNOMBRE_USUARIO()+" "+c.getAPELLIDOS_USUARIO()+"\n"+c.getEDAD()+" años");
             //img.setVisible(true);
 
         }
