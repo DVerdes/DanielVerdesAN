@@ -5,6 +5,7 @@ com\mycompany\mavenproject1\utils\ImageUtils.class
 com\mycompany\mavenproject1\utils\JsonUtils.class
 com\mycompany\mavenproject1\MainViewController.class
 com\mycompany\mavenproject1\APIConnector.class
+com\mycompany\mavenproject1\Contacto.class
 module-info.class
 com\mycompany\mavenproject1\LoginController.class
 com\mycompany\mavenproject1\Farmaco.class
