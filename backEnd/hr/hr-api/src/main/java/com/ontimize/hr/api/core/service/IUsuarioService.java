@@ -11,6 +11,9 @@ public interface IUsuarioService {
 
     EntityResult usuarioQuery(Map<String, Object> keyMap, List<String> attrList) throws OntimizeJEERuntimeException;
 
+    EntityResult usuarioCentroQuery(Map<String, Object> keyMap, List<String> attrList)
+            throws OntimizeJEERuntimeException;
+
     EntityResult usuarioInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException;
 
     EntityResult usuarioUpdate(Map<String, Object> attrMap, Map<String, Object> keyMap) throws OntimizeJEERuntimeException;

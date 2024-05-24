@@ -1,7 +1,9 @@
 package com.mycompany.mavenproject1;
 
+import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mycompany.mavenproject1.utils.JsonUtils;
+import static com.mycompany.mavenproject1.utils.JsonUtils.getResponseData;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
@@ -11,12 +13,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import org.json.JSONArray;
 
 public class MainViewController {
     
@@ -45,12 +49,17 @@ public class MainViewController {
     private Label labelEdad;
     
     @FXML
-    private ChoiceBox comboCentros;
+    private Label labelUsuarios;
+    
+    @FXML
+    private ComboBox comboCentros;
     
      //ObservableList
     static ObservableList<Usuario> valoresLista = FXCollections.observableArrayList();
     
-    static ObservableList<String> listaCentros =  FXCollections.observableArrayList();
+    static ObservableList<Centro> listaCentros =  FXCollections.observableArrayList();
+    
+    static Centro centroActivo;
     
     
     
@@ -59,12 +68,21 @@ public class MainViewController {
     
     public void initialize() throws IOException, UnirestException, ParseException{
         
-        listaCentros.add("RESIDENCIA MIRAMAR");
+        requestCenterList();
+
         
         comboCentros.setItems(listaCentros);
+        comboCentros.setVisibleRowCount(8);
+        comboCentros.getSelectionModel().selectFirst();
+        
+        //centroActivo = (Centro) comboCentros.getValue();
+        
        
         
-        requestUserList();
+        
+        
+        
+        //searchUsuariosCentro();
 
         this.columnNombre.setCellValueFactory(new PropertyValueFactory("NOMBRE_USUARIO"));
         this.columnApellidos.setCellValueFactory(new PropertyValueFactory("APELLIDOS_USUARIO"));
@@ -98,6 +116,13 @@ public class MainViewController {
     }
     
      @FXML
+    private void changeActiveCenter() throws IOException, UnirestException, ParseException {
+        
+        centroActivo = (Centro) comboCentros.getValue();
+        searchUsuariosCentro();
+    }
+    
+     @FXML
     private void verDetalles() throws IOException {
         
         App.setRoot("userdetail");
@@ -110,6 +135,33 @@ public class MainViewController {
         for(Usuario u : listaUsuario){
             valoresLista.add(u);
         }
+    }
+    
+     public void requestCenterList() throws IOException, UnirestException, ParseException{
+        
+        List<Centro> listaCentro =  JsonUtils.parseCentro(        APIConnector.getMethod("http://localhost:33333/centros/centro?columns=NOMBRE_CENTRO%2CID_CENTRO"));
+        for(Centro u : listaCentro){
+            listaCentros.add(u);
+        }
+    }
+     
+      @FXML
+    private void searchUsuariosCentro() throws UnirestException, ParseException{
+        valoresLista.clear();
+        int centroId = centroActivo.getID_CENTRO();
+        String url = "http://localhost:33333/usuarios/usuarioCentro/search";
+        String body = "{\n" +
+"    \"columns\" : [\"U.ID_USUARIO\",\"U.NOMBRE_USUARIO\",\"U.APELLIDOS_USUARIO\",\"U.FECHA_NACIMIENTO\",\"U.GENERO_USUARIO\",\"U.DEPENDENCIA_USUARIO\",\"U.ALTA_USUARIO\"],\n" +
+"    \"filter\" : {\n" +
+"        \"CE.ID_CENTRO\" : "+centroId+"\n" +
+"    }\n" +
+"}";
+        List<Usuario> listaUsuario =  JsonUtils.parseUsuarios(APIConnector.postMethod(url, body));
+        for(Usuario u : listaUsuario){
+            valoresLista.add(u);
+        }
+        
+        
     }
     
     @FXML

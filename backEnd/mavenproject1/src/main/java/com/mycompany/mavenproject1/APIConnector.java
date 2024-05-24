@@ -26,13 +26,13 @@ public class APIConnector {
 
     }
 
-    public static void postMethod(String url, String body) throws UnirestException {
+    public static String postMethod(String url, String body) throws UnirestException {
         Unirest.setTimeouts(0, 0);
-        HttpResponse<String> response = Unirest.post(url)
+        return Unirest.post(url)
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Basic ZGVtbzpkZW1vdXNlcg==")
                 .body(body)
-                .asString();
+                .asString().getBody();
     }
 
 }

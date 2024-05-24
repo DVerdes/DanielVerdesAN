@@ -24,5 +24,25 @@
                 ]]>
             </Sentence>
         </Query>
+        <Query id="usuarioCentro">
+            <Sentence>
+                <![CDATA[
+                    SELECT
+                        #COLUMNS#
+                    FROM
+                        ${mainschema}.USUARIO U
+                        INNER JOIN ${mainschema}.HABITAR H
+                        ON U.ID_USUARIO=H.ID_USUARIO
+                        INNER JOIN ${mainschema}.CAMA C
+                        ON H.ID_CAMA=C.ID_CAMA
+                        INNER JOIN ${mainschema}.HABITACION HT
+                        ON C.ID_HABITACION=HT.ID_HABITACION
+                        INNER JOIN ${mainschema}.CENTRO CE
+                        ON HT.ID_CENTRO=CE.ID_CENTRO
+                    #WHERE#
+                    #ORDER#
+                ]]>
+            </Sentence>
+        </Query>
     </Queries>
 </JdbcEntitySetup>

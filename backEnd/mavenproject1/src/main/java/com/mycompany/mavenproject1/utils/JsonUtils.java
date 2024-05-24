@@ -4,6 +4,7 @@
  */
 package com.mycompany.mavenproject1.utils;
 
+import com.mycompany.mavenproject1.Centro;
 import com.mycompany.mavenproject1.Farmaco;
 import com.mycompany.mavenproject1.Usuario;
 import java.text.ParseException;
@@ -29,9 +30,8 @@ public class JsonUtils {
         JSONArray array = new JSONArray(str2);
         JSONObject obj = array.getJSONObject(0);
         JSONArray data = obj.getJSONArray("data");
-        
-        
-            return data;
+           
+        return data;
     }
     
     
@@ -45,6 +45,18 @@ public class JsonUtils {
             listaFarmacos.add(new Farmaco(farmaco.getString("NOMBRE_FARMACO")));
         }
         return listaFarmacos;
+    }
+    
+    public static List<Centro> parseCentro(String responseBody){
+        
+        JSONArray centros = new JSONArray(getResponseData(responseBody));
+        List <Centro> listaCentros = new ArrayList<Centro>();
+        for(int i = 0; i< centros.length(); i++){
+            JSONObject centro = centros.getJSONObject(i);
+            listaCentros.add(new Centro(centro.getInt("ID_CENTRO"),centro.getString("NOMBRE_CENTRO")));
+
+        }
+        return listaCentros;
     }
     
     public static List<Usuario> parseUsuarios(String responseBody) throws ParseException{

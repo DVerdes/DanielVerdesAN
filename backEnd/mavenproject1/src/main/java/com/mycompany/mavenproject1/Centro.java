@@ -28,6 +28,15 @@ public class Centro {
         this.CNT_DOWN_DATE = CNT_DOWN_DATE;
     }
 
+    public Centro(int ID_CENTRO, String NOMBRE_CENTRO) {
+        this.ID_CENTRO = ID_CENTRO;
+        this.NOMBRE_CENTRO = NOMBRE_CENTRO;
+    }
+
+ 
+    
+    
+
     public Centro() {
     }
 
@@ -81,7 +90,7 @@ public class Centro {
 
     @Override
     public String toString() {
-        return "Centro{" + "ID_CENTRO=" + ID_CENTRO + ", ID_GESTOR=" + ID_GESTOR + ", DIR_CENTRO=" + DIR_CENTRO + ", NOMBRE_CENTRO=" + NOMBRE_CENTRO + ", CNT_CREATION_DATE=" + CNT_CREATION_DATE + ", CNT_DOWN_DATE=" + CNT_DOWN_DATE + '}';
+        return this.NOMBRE_CENTRO;
     }
     
     
