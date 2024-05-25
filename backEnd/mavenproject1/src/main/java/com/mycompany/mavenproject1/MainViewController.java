@@ -12,6 +12,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -20,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import org.json.JSONArray;
 
 public class MainViewController {
@@ -123,9 +126,27 @@ public class MainViewController {
     }
     
      @FXML
-    private void verDetalles() throws IOException {
+    private void verDetalles() throws IOException, UnirestException, ParseException {
         
-        App.setRoot("userdetail");
+        //indice
+        int index = tViewUsuarios.getSelectionModel().getSelectedIndex();
+        if (index != -1) {
+
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("userdetail.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Stage stage = new Stage();
+
+            UserdetailController controlador = fxmlLoader.getController();
+        stage.getIcons().add(new Image("file:C:\\Users\\DVerd\\Documents\\GitHub\\DanielVerdesAN\\backEnd\\mavenproject1\\src\\main\\resources\\imgs\\favicon.png"));
+
+            controlador.setUsuario(valoresLista.get(index),centroActivo.getNOMBRE_CENTRO());
+           
+            stage.setTitle("Detalles Usuario");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
     
     
@@ -151,7 +172,7 @@ public class MainViewController {
         int centroId = centroActivo.getID_CENTRO();
         String url = "http://localhost:33333/usuarios/usuarioCentro/search";
         String body = "{\n" +
-"    \"columns\" : [\"U.ID_USUARIO\",\"U.NOMBRE_USUARIO\",\"U.APELLIDOS_USUARIO\",\"U.FECHA_NACIMIENTO\",\"U.GENERO_USUARIO\",\"U.DEPENDENCIA_USUARIO\",\"U.ALTA_USUARIO\"],\n" +
+"    \"columns\" : [\"U.ID_USUARIO\",\"U.NOMBRE_USUARIO\",\"U.APELLIDOS_USUARIO\",\"U.FECHA_NACIMIENTO\",\"U.GENERO_USUARIO\",\"U.DEPENDENCIA_USUARIO\",\"U.FOTO_USUARIO\",\"U.ALTA_USUARIO\"],\n" +
 "    \"filter\" : {\n" +
 "        \"CE.ID_CENTRO\" : "+centroId+"\n" +
 "    }\n" +

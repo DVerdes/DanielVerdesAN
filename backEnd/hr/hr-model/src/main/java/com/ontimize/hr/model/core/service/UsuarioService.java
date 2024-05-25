@@ -33,6 +33,12 @@ public class UsuarioService implements IUsuarioService {
         return this.daoHelper.query(this.UsuarioDao, keyMap, attrList,"usuarioCentro");
     }
 
+    @Override
+    public EntityResult usuarioCamaQuery(Map<String, Object> keyMap, List<String> attrList)
+            throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.UsuarioDao, keyMap, attrList,"habitacionCama");
+    }
+
 
 
     @Override

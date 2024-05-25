@@ -83,10 +83,26 @@ public class JsonUtils {
                 utilDate = new java.util.Date(longDate);
                 sqlDate = new java.sql.Date(utilDate.getTime());
             u.setALTA_USUARIO(sqlDate);
+            
+            u.setFOTO_USUARIO(usuario.getString("FOTO_USUARIO"));
   
             listaUsuarios.add(u);
         }
         return listaUsuarios;
+    }
+    
+    public static List<String> parseHabitacionCama(String responseBody) throws ParseException{
+        
+        JSONArray datos = new JSONArray(getResponseData(responseBody));
+        List <String> lista = new ArrayList<String>();
+        for(int i = 0; i< datos.length(); i++){
+            JSONObject objeto = datos.getJSONObject(i);
+            
+            lista.add(objeto.getString("NOM_HABITACION")+" Cama "+objeto.getString("NOMBRE_CAMA"));
+            
+                
+        }
+        return lista;
     }
     
 }

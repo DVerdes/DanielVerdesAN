@@ -6,6 +6,11 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mycompany.mavenproject1.utils.JsonUtils;
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 
 
@@ -13,11 +18,22 @@ import javafx.fxml.FXML;
 
 public class LoginController {
     
+    @FXML
+    private Button primaryButton;
+    
     
 
     @FXML
     private void switchToSecondary() throws IOException {
+        primaryButton.getScene().getWindow().setWidth(940);
+                primaryButton.getScene().getWindow().setHeight(545);
+
+      
+        
+
+        
         App.setRoot("main");
+        
     }
     
     @FXML

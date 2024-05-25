@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -58,8 +59,8 @@
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
-                              <Label text="Grado 2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label text="6/5/1943" GridPane.columnIndex="1" />
+                              <Label fx:id="labelDependencia" text="Grado 2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="labelNacimiento" text="6/5/1943" GridPane.columnIndex="1" />
                               <Label text="Fecha de ingreso:" GridPane.rowIndex="3">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
@@ -70,30 +71,48 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label text="21/5/2024" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label text="Doble 12 Cama A" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label text="Mujer" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="labelIngreso" text="21/5/2024" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="labelHabitacion" text="Doble 12 Cama A" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="labelGenero" text="Mujer" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
-                        <ImageView fitHeight="147.0" fitWidth="122.0" layoutX="411.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../imgs/fotosna.png" />
-                           </image>
-                           <effect>
-                              <DropShadow />
-                           </effect></ImageView>
-                        <Label layoutX="425.0" layoutY="227.0" text="Mercedes">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="427.0" layoutY="257.0" text="Pereira Bort">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
+                        <VBox alignment="CENTER" layoutX="382.0" layoutY="58.0">
+                           <children>
+                              <ImageView fx:id="imageUsuario" fitHeight="147.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../imgs/fotosna.png" />
+                                 </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Label fx:id="labelNombre" text="Mercedes">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="labelApellidos" text="Pereira Bort">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="-10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="labelCentro" text="Usuaria de RESIDENCIA MIRAMAR">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
                         <Label layoutX="79.0" layoutY="34.0" text="Datos" />
-                        <Label layoutX="379.0" layoutY="301.0" text="Usuaria de RESIDENCIA MIRAMAR" />
                      </children>
                   </AnchorPane>
                </content>
