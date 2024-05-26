@@ -56,7 +56,7 @@
             <ImageView fitHeight="159.0" fitWidth="121.0" layoutX="752.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
             <VBox alignment="CENTER" layoutX="713.0" layoutY="64.0" minWidth="200.0" spacing="20.0">
                <children>
-                  <ImageView fitHeight="173.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageDetail" fitHeight="173.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../imgs/fotosn.png" />
                      </image>

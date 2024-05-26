@@ -28,6 +28,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,6 +48,9 @@ public class NewuserController implements Initializable {
     
      @FXML
     private Button subirImage;
+     
+     @FXML
+     private Label labelCentro;
     
      @FXML
     private TableView<Contacto> tViewContactos = new TableView<>();
@@ -64,8 +68,7 @@ public class NewuserController implements Initializable {
         @FXML
     private TableColumn<Contacto, String> columnEmail;
         
-        @FXML
-    private ComboBox comboHabitacion;
+
         
          @FXML
     private ComboBox comboCama;
@@ -100,7 +103,6 @@ public class NewuserController implements Initializable {
         
     static ObservableList<Contacto> valoresListaContacto = FXCollections.observableArrayList();
     
-        static ObservableList<String> listaHabitaciones =  FXCollections.observableArrayList();
         
                 static ObservableList<Cama> listaCamas =  FXCollections.observableArrayList();
                 
@@ -133,17 +135,16 @@ public class NewuserController implements Initializable {
         dateNacimiento.setValue( LocalDate.parse(fechaInicial, formatter));
 
         
-        listaHabitaciones.add("Doble 12");
         
         comboCama.setVisibleRowCount(8);
         comboCama.getSelectionModel().selectFirst();
         
+        listaGenero.clear();
         listaGenero.add("Hombre");
                 listaGenero.add("Mujer");
         listaGenero.add("Otro");
 
         
-        comboHabitacion.setItems(listaHabitaciones);
         comboGenero.setItems(listaGenero);
         
         valoresListaContacto.add(new Contacto("Jesús","Ramirez","62345623","jesusram@gmail.com"));
@@ -177,6 +178,9 @@ public class NewuserController implements Initializable {
         int id =  JsonUtils.returnInsertedUserId(APIConnector.postMethod(urlEndpoint, body));
         System.out.println("Id insertada: "+id);
         
+        insertarHabitar(id);
+        
+        MainViewController.searchUsuariosCentro();
         
     }
     
@@ -211,7 +215,7 @@ public class NewuserController implements Initializable {
          this.centro = c;
          System.out.println( getCamasDisponibles().toString());
          
-         
+         labelCentro.setText(c.getNOMBRE_CENTRO());
 
          
      }
@@ -228,17 +232,25 @@ public class NewuserController implements Initializable {
         List<Cama> listCamas =  JsonUtils.parseCama(APIConnector.postMethod(url, body));
         
                 
-        
+        listaCamas.clear();
         for(Cama c: listCamas){
             listaCamas.add(c);
         }
-        
+               
                 comboCama.setItems(listaCamas);
 
 
         
         return listCamas;
      }
+
+    private void insertarHabitar(int idUsuario) throws UnirestException {
+        Cama cama = (Cama) comboCama.getValue();
+        int idCama = cama.getID_CAMA();
+         String urlHabitar = "http://localhost:33333/habitares/habitar";
+        String body = "{\r\n    \"data\": \r\n        {\r\n                        \"ID_USUARIO\": \""+idUsuario+"\",\r\n\r\n  \"ID_CAMA\": \""+idCama+"\"\r\n            \r\n        }\r\n}";
+        APIConnector.postMethod(urlHabitar, body);
+    }
      
     
 }

@@ -115,8 +115,8 @@ public class UserdetailController implements Initializable {
         }
         
         
-       // Image img = new Image(usuario.getFOTO_USUARIO());
-       // imageUsuario.setImage(img);
+       Image img = new Image(usuario.getFOTO_USUARIO());
+       imageUsuario.setImage(img);
         
         
         System.out.println(usuario.toString());

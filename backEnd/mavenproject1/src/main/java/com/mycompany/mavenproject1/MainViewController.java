@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.json.JSONArray;
 
@@ -45,6 +46,9 @@ public class MainViewController {
         
          @FXML
     private TableColumn<Usuario, String> columnIngreso;
+         
+         @FXML
+         private ImageView imageDetail;
     
     
     
@@ -112,7 +116,7 @@ public class MainViewController {
          FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("newuser.fxml"));
 
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 440);
             Stage stage = new Stage();
 
             NewuserController controlador = fxmlLoader.getController();
@@ -180,7 +184,7 @@ public class MainViewController {
     }
      
       @FXML
-    private void searchUsuariosCentro() throws UnirestException, ParseException{
+    public static void searchUsuariosCentro() throws UnirestException, ParseException{
         valoresLista.clear();
         int centroId = centroActivo.getID_CENTRO();
         String url = "http://localhost:33333/usuarios/usuarioCentro/search";
@@ -207,12 +211,12 @@ public class MainViewController {
         if (index != -1) {
             Usuario c = (Usuario) tViewUsuarios.getItems().get(index);
             //crea objeto Image
-            //Image i = new Image(c.getFOTO_USUARIO());
+            Image i = new Image(c.getFOTO_USUARIO());
             //setea en ImgView
-            //img.setImage(i);
+            imageDetail.setImage(i);
             //Descripción jugador bajo imagen
             labelEdad.setText(c.getNOMBRE_USUARIO()+" "+c.getAPELLIDOS_USUARIO()+"\n"+c.getEDAD()+" años");
-            //img.setVisible(true);
+            imageDetail.setVisible(true);
 
         }
 
