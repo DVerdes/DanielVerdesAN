@@ -105,4 +105,21 @@ public class JsonUtils {
         return lista;
     }
     
+    public static int returnInsertedUserId(String responseBody) throws ParseException{
+        int id = 0;
+        responseBody+="]";
+        String str2 = "[";
+        str2 += responseBody;
+        JSONArray datos = new JSONArray(str2);
+        for(int i = 0; i< datos.length(); i++){
+            JSONObject objeto = datos.getJSONObject(i);
+            
+            JSONObject data = objeto.getJSONObject("data");
+            
+           id = data.getInt("ID_USUARIO");
+                
+        }
+        return id;
+    }
+    
 }

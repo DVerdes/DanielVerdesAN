@@ -6,12 +6,15 @@ package com.mycompany.mavenproject1;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 import static com.mycompany.mavenproject1.MainViewController.valoresLista;
+import com.mycompany.mavenproject1.utils.JsonUtils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
@@ -158,7 +161,7 @@ public class NewuserController implements Initializable {
     }    
     
      @FXML
-    private void crearUsuario() throws IOException, UnirestException {
+    private void crearUsuario() throws IOException, UnirestException, ParseException {
         String apellidos = tfApellido1.getText()+" "+tfApellido2.getText();
         int dependenciaN= (int) Math.round(sliDependencia.getValue());
         String dependencia = completarDependencia(String.valueOf(dependenciaN));
@@ -169,8 +172,8 @@ public class NewuserController implements Initializable {
         
          String urlEndpoint = "http://localhost:33333/usuarios/usuario";
         String body = "{\r\n    \"data\": \r\n        {\r\n                        \"FOTO_USUARIO\": \""+url+"\",\r\n                                    \"NOMBRE_USUARIO\": \""+tfNombre.getText()+"\",\r\n\r\n   \"APELLIDOS_USUARIO\": \""+apellidos+"\",\r\n\r\n    \"FECHA_NACIMIENTO\": \""+sqlDate+"\",\r\n\r\n   \"GENERO_USUARIO\": \""+genero+"\",\r\n\r\n  \"DEPENDENCIA_USUARIO\": \""+dependencia+"\"\r\n            \r\n        }\r\n}";
-        APIConnector.postMethod(urlEndpoint, body);
-       
+        int id =  JsonUtils.returnInsertedUserId(APIConnector.postMethod(urlEndpoint, body));
+        System.out.println("Id insertada: "+id);
     }
     
     
