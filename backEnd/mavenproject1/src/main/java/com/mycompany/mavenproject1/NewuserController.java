@@ -68,6 +68,18 @@ public class NewuserController implements Initializable {
         @FXML
     private TableColumn<Contacto, String> columnEmail;
         
+        @FXML
+        private TextField tfContactoNombre;
+        @FXML
+        private TextField tfContactoApellidos;
+        
+        @FXML
+        private TextField tfContactoTelefono;
+        
+        @FXML
+        private TextField tfContactoEmail;
+        
+        
 
         
          @FXML
@@ -180,6 +192,8 @@ public class NewuserController implements Initializable {
         
         insertarHabitar(id);
         
+        insertarContactosUsuario(id);
+        
         MainViewController.searchUsuariosCentro();
         
     }
@@ -250,6 +264,39 @@ public class NewuserController implements Initializable {
          String urlHabitar = "http://localhost:33333/habitares/habitar";
         String body = "{\r\n    \"data\": \r\n        {\r\n                        \"ID_USUARIO\": \""+idUsuario+"\",\r\n\r\n  \"ID_CAMA\": \""+idCama+"\"\r\n            \r\n        }\r\n}";
         APIConnector.postMethod(urlHabitar, body);
+    }
+    
+    @FXML
+    private void anadirContacto(){
+        Contacto co = new Contacto(tfContactoNombre.getText(),tfContactoApellidos.getText(),tfContactoTelefono.getText(),tfContactoEmail.getText());
+        valoresListaContacto.add(co);
+    }
+    
+    @FXML
+    private void quitarContacto(){
+        
+        Contacto co = tViewContactos.getSelectionModel().getSelectedItem();
+        valoresListaContacto.remove(co);
+        
+    }
+
+    private void insertarContactosUsuario(int idUsuario) throws UnirestException, ParseException {
+        
+        String urlEndpoint = "http://localhost:33333/contactos/contacto";
+        String urlCU = "http://localhost:33333/usuarioContactos/usuarioContacto";
+
+        for(Contacto c : valoresListaContacto){
+            String body = "{\r\n    \"data\": \r\n        {\r\n                        \"NOMBRE_CONTACTO\": \""+c.getNOMBRE_CONTACTO()+"\",\r\n                                    \"APELLIDOS_CONTACTO\": \""+c.getAPELL_CONTACTO()+"\",\r\n\r\n   \"TELF_CONTACTO\": \""+c.getTELF_CONTACTO()+"\",\r\n\r\n  \"EMAIL_CONTACTO\": \""+c.getEMAIL_CONTACTO()+"\"\r\n            \r\n        }\r\n}";
+            int idContacto =  JsonUtils.returnInsertedContactoId(APIConnector.postMethod(urlEndpoint, body));
+            
+            
+            String bodyCU = "{\r\n    \"data\": \r\n        {\r\n                        \"ID_USUARIO\": \""+idUsuario+"\",\r\n\r\n  \"ID_CONTACTO\": \""+idContacto+"\"\r\n            \r\n        }\r\n}";
+            APIConnector.postMethod(urlCU, bodyCU);
+            
+        }
+        
+        valoresListaContacto.clear();
+        
     }
      
     

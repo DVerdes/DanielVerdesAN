@@ -116,15 +116,16 @@
                               <TableColumn fx:id="columnEmail" prefWidth="172.0" text="Email" />
                           </columns>
                         </TableView>
-                        <Button layoutX="522.0" layoutY="89.0" mnemonicParsing="false" text="Añadir" />
+                        <Button layoutX="523.0" layoutY="60.0" mnemonicParsing="false" onAction="#anadirContacto" text="Añadir" />
                         <Label layoutX="32.0" layoutY="32.0" text="Nombre:" />
-                        <TextField layoutX="99.0" layoutY="28.0" />
+                        <TextField fx:id="tfContactoNombre" layoutX="99.0" layoutY="28.0" />
                         <Label layoutX="29.0" layoutY="72.0" text="Apellidos:" />
-                        <TextField layoutX="99.0" layoutY="68.0" />
+                        <TextField fx:id="tfContactoApellidos" layoutX="99.0" layoutY="68.0" />
                         <Label layoutX="278.0" layoutY="32.0" text="Teléfono:" />
-                        <TextField layoutX="338.0" layoutY="28.0" />
+                        <TextField fx:id="tfContactoTelefono" layoutX="338.0" layoutY="28.0" />
                         <Label layoutX="278.0" layoutY="72.0" text="Email:" />
-                        <TextField layoutX="338.0" layoutY="68.0" />
+                        <TextField fx:id="tfContactoEmail" layoutX="338.0" layoutY="68.0" />
+                        <Button layoutX="523.0" layoutY="93.0" mnemonicParsing="false" onAction="#quitarContacto" text="Quitar" />
                      </children>
                   </AnchorPane>
               </content>
