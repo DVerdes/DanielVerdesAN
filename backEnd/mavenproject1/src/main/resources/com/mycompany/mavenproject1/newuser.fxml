@@ -49,27 +49,27 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField fx:id="tfNombre" GridPane.columnIndex="1" />
                               <Label text="Apellido 1:" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="tfApellido1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label text="Apellido 2:" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="tfApellido2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label text="Género:" GridPane.rowIndex="3" />
                               <ChoiceBox fx:id="comboGenero" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label text="Dependencia:" GridPane.rowIndex="4" />
-                              <Slider GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <DatePicker prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Slider fx:id="sliDependencia" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <DatePicker fx:id="dateNacimiento" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                               <Label text="Nacimiento:" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
-                        <ImageView fitHeight="147.0" fitWidth="122.0" layoutX="403.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="mv" fitHeight="147.0" fitWidth="122.0" layoutX="403.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../imgs/fotosna.png" />
+                              <Image url="@../../../imgs/Portrait_Placeholder.png" />
                            </image>
                            <effect>
                               <DropShadow />
                            </effect></ImageView>
-                        <Button layoutX="419.0" layoutY="246.0" mnemonicParsing="false" text="Subir imagen" />
+                        <Button fx:id="subirImage" layoutX="419.0" layoutY="246.0" mnemonicParsing="false" onAction="#subirImagen" text="Subir imagen" />
                      </children>
                   </AnchorPane>
                </content>

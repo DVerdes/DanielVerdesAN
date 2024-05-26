@@ -1,7 +1,9 @@
 com\mycompany\mavenproject1\RegisterController.class
 com\mycompany\mavenproject1\Usuario.class
 com\mycompany\mavenproject1\App.class
+com\mycompany\mavenproject1\NewuserController$1.class
 com\mycompany\mavenproject1\UserdetailController.class
+com\mycompany\mavenproject1\AssignbedController.class
 com\mycompany\mavenproject1\utils\ImageUtils.class
 com\mycompany\mavenproject1\utils\JsonUtils.class
 com\mycompany\mavenproject1\MainViewController.class
