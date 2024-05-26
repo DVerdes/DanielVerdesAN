@@ -49,7 +49,7 @@ public class Cama {
 
     @Override
     public String toString() {
-        return "Cama{" + "ID_CAMA=" + ID_CAMA + ", ID_HABITACION=" + ID_HABITACION + ", NOMBRE_CAMA=" + NOMBRE_CAMA + '}';
+        return NOMBRE_CAMA;
     }
     
     

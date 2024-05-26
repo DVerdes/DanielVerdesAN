@@ -24,5 +24,23 @@
                 ]]>
             </Sentence>
         </Query>
+        <Query id="camasDisponibles">
+            <Sentence>
+                <![CDATA[
+                    SELECT
+                        #COLUMNS#
+                    FROM
+                        ${mainschema}.CENTRO C
+                        INNER JOIN ${mainschema}.HABITACION H
+                        ON C.ID_CENTRO=H.ID_CENTRO
+                        INNER JOIN ${mainschema}.CAMA CA
+                        ON H.ID_HABITACION=CA.ID_HABITACION
+                        LEFT JOIN ${mainschema}.HABITAR HA
+                        ON CA.ID_CAMA=HA.ID_CAMA
+                    #WHERE#
+                    #ORDER#
+                ]]>
+            </Sentence>
+        </Query>
     </Queries>
 </JdbcEntitySetup>

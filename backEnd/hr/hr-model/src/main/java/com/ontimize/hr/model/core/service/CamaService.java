@@ -28,6 +28,13 @@ public class CamaService implements ICamaService {
         return this.daoHelper.query(this.CamaDao, keyMap, attrList);
     }
 
+    @Override
+    public EntityResult camaCentroQuery(Map<String, Object> keyMap, List<String> attrList)
+            throws OntimizeJEERuntimeException {
+
+        return this.daoHelper.query(this.CamaDao, keyMap, attrList,"camasCentro");
+    }
+
 
 
     @Override

@@ -37,6 +37,13 @@ public class CentroService implements ICentroService {
         return this.daoHelper.query(this.centroDao, keyMap, attrList);
     }
 
+    @Override
+    public EntityResult centroCamasQuery(Map<String, Object> keyMap, List<String> attrList)
+            throws OntimizeJEERuntimeException {
+
+        return this.daoHelper.query(this.centroDao, keyMap, attrList,"camasDisponibles");
+    }
+
 
 
     @Override

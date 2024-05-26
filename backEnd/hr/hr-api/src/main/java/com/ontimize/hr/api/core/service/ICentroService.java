@@ -11,6 +11,9 @@ public interface ICentroService {
 
     EntityResult centroQuery(Map<String, Object> keyMap, List<String> attrList) throws OntimizeJEERuntimeException;
 
+    EntityResult centroCamasQuery(Map<String, Object> keyMap, List<String> attrList)
+            throws OntimizeJEERuntimeException;
+
     EntityResult centroInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException;
 
     EntityResult centroUpdate(Map<String, Object> attrMap, Map<String, Object> keyMap) throws OntimizeJEERuntimeException;

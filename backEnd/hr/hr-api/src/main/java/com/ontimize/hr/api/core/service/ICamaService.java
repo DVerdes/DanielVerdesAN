@@ -11,6 +11,9 @@ public interface ICamaService {
 
     EntityResult camaQuery(Map<String, Object> keyMap, List<String> attrList) throws OntimizeJEERuntimeException;
 
+    EntityResult camaCentroQuery(Map<String, Object> keyMap, List<String> attrList)
+            throws OntimizeJEERuntimeException;
+
     EntityResult camaInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException;
 
     EntityResult camaUpdate(Map<String, Object> attrMap, Map<String, Object> keyMap) throws OntimizeJEERuntimeException;

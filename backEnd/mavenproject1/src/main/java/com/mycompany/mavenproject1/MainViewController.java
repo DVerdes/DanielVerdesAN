@@ -107,9 +107,22 @@ public class MainViewController {
     }
     
     @FXML
-    private void switchToNewUser() throws IOException {
+    private void switchToNewUser() throws IOException, UnirestException, ParseException {
         
-        App.setRoot("newuser");
+         FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("newuser.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Stage stage = new Stage();
+
+            NewuserController controlador = fxmlLoader.getController();
+        stage.getIcons().add(new Image("file:C:\\Users\\DVerd\\Documents\\GitHub\\DanielVerdesAN\\backEnd\\mavenproject1\\src\\main\\resources\\imgs\\favicon.png"));
+
+            controlador.setCentro(centroActivo);
+           
+            stage.setTitle("Nuevo Usuario");
+            stage.setScene(scene);
+            stage.show();
     }
     
      @FXML

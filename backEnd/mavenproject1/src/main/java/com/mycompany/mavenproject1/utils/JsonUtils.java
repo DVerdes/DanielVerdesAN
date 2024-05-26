@@ -4,6 +4,7 @@
  */
 package com.mycompany.mavenproject1.utils;
 
+import com.mycompany.mavenproject1.Cama;
 import com.mycompany.mavenproject1.Centro;
 import com.mycompany.mavenproject1.Farmaco;
 import com.mycompany.mavenproject1.Usuario;
@@ -99,6 +100,29 @@ public class JsonUtils {
             JSONObject objeto = datos.getJSONObject(i);
             
             lista.add(objeto.getString("NOM_HABITACION")+" Cama "+objeto.getString("NOMBRE_CAMA"));
+            
+                
+        }
+        return lista;
+    }
+    
+    public static List<Cama> parseCama(String responseBody) throws ParseException{
+        
+        JSONArray datos = new JSONArray(getResponseData(responseBody));
+        List <Cama> lista = new ArrayList<Cama>();
+        for(int i = 0; i< datos.length(); i++){
+            JSONObject objeto = datos.getJSONObject(i);
+            
+            if(!objeto.has("ID_USUARIO")){
+                    Cama c = new Cama();
+                    c.setID_CAMA(objeto.getInt("ID_CAMA"));
+                    c.setNOMBRE_CAMA(objeto.getString("NOM_HABITACION")+", Cama: "+objeto.getString("NOMBRE_CAMA"));
+                    
+                                lista.add(c);
+
+            }
+           
+            
             
                 
         }

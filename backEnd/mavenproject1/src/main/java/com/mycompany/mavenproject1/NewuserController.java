@@ -5,7 +5,9 @@
 package com.mycompany.mavenproject1;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
+import static com.mycompany.mavenproject1.MainViewController.listaCentros;
 import static com.mycompany.mavenproject1.MainViewController.valoresLista;
+import static com.mycompany.mavenproject1.UserdetailController.usuario_static;
 import com.mycompany.mavenproject1.utils.JsonUtils;
 import java.io.File;
 import java.io.IOException;
@@ -100,13 +102,13 @@ public class NewuserController implements Initializable {
     
         static ObservableList<String> listaHabitaciones =  FXCollections.observableArrayList();
         
-                static ObservableList<String> listaCamas =  FXCollections.observableArrayList();
+                static ObservableList<Cama> listaCamas =  FXCollections.observableArrayList();
                 
                                 static ObservableList<String> listaGenero =  FXCollections.observableArrayList();
 
 
 
-    
+    static Centro centro;
     
     
     //Property
@@ -131,17 +133,17 @@ public class NewuserController implements Initializable {
         dateNacimiento.setValue( LocalDate.parse(fechaInicial, formatter));
 
         
-        
         listaHabitaciones.add("Doble 12");
-        listaCamas.add("A");
-        listaCamas.add("B");
+        
+        comboCama.setVisibleRowCount(8);
+        comboCama.getSelectionModel().selectFirst();
+        
         listaGenero.add("Hombre");
                 listaGenero.add("Mujer");
         listaGenero.add("Otro");
 
         
         comboHabitacion.setItems(listaHabitaciones);
-        comboCama.setItems(listaCamas);
         comboGenero.setItems(listaGenero);
         
         valoresListaContacto.add(new Contacto("Jesús","Ramirez","62345623","jesusram@gmail.com"));
@@ -174,6 +176,8 @@ public class NewuserController implements Initializable {
         String body = "{\r\n    \"data\": \r\n        {\r\n                        \"FOTO_USUARIO\": \""+url+"\",\r\n                                    \"NOMBRE_USUARIO\": \""+tfNombre.getText()+"\",\r\n\r\n   \"APELLIDOS_USUARIO\": \""+apellidos+"\",\r\n\r\n    \"FECHA_NACIMIENTO\": \""+sqlDate+"\",\r\n\r\n   \"GENERO_USUARIO\": \""+genero+"\",\r\n\r\n  \"DEPENDENCIA_USUARIO\": \""+dependencia+"\"\r\n            \r\n        }\r\n}";
         int id =  JsonUtils.returnInsertedUserId(APIConnector.postMethod(urlEndpoint, body));
         System.out.println("Id insertada: "+id);
+        
+        
     }
     
     
@@ -202,5 +206,39 @@ public class NewuserController implements Initializable {
         }
         
     }
+    
+     public void setCentro(Centro c) throws UnirestException, ParseException{
+         this.centro = c;
+         System.out.println( getCamasDisponibles().toString());
+         
+         
+
+         
+     }
+     
+     public List<Cama> getCamasDisponibles() throws UnirestException, ParseException{
+          int centroId = centro.getID_CENTRO();
+        String url = "http://localhost:33333/camas/camaCentro/search";
+        String body = "{\n" +
+"    \"columns\" : [\"ID_CAMA\",\"NOMBRE_CAMA\",\"NOM_HABITACION\",\"ID_USUARIO\"],\n" +
+"    \"filter\" : {\n" +
+"        \"ID_CENTRO\" : "+centroId+"\n" +
+"    }\n" +
+"}";
+        List<Cama> listCamas =  JsonUtils.parseCama(APIConnector.postMethod(url, body));
+        
+                
+        
+        for(Cama c: listCamas){
+            listaCamas.add(c);
+        }
+        
+                comboCama.setItems(listaCamas);
+
+
+        
+        return listCamas;
+     }
+     
     
 }

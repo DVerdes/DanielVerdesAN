@@ -26,7 +26,7 @@ public class LoginController {
     @FXML
     private void switchToSecondary() throws IOException {
         primaryButton.getScene().getWindow().setWidth(940);
-                primaryButton.getScene().getWindow().setHeight(545);
+                primaryButton.getScene().getWindow().setHeight(600);
 
       
         
