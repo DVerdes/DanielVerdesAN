@@ -7,6 +7,7 @@ package com.mycompany.mavenproject1.utils;
 import com.mycompany.mavenproject1.Cama;
 import com.mycompany.mavenproject1.Centro;
 import com.mycompany.mavenproject1.Farmaco;
+import com.mycompany.mavenproject1.Pauta;
 import com.mycompany.mavenproject1.Usuario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -105,6 +106,27 @@ public class JsonUtils {
         }
         return lista;
     }
+    
+    public static List<Pauta> parsePauta(String responseBody) throws ParseException{
+        
+        JSONArray datos = new JSONArray(getResponseData(responseBody));
+        List <Pauta> lista = new ArrayList<Pauta>();
+        for(int i = 0; i< datos.length(); i++){
+            JSONObject objeto = datos.getJSONObject(i);
+            Pauta p = new Pauta();
+            p.setNombreFarmaco(objeto.getString("NOMBRE_FARMACO"));
+            p.setViaAdministracion(objeto.getString("VIA_ADMINISTRACION"));
+            p.setDosis(objeto.getString("DOSIS"));
+            p.setPosologia(objeto.getString("POSOLOGIA"));
+            
+            lista.add(p);
+            
+                
+        }
+        return lista;
+    }
+    
+    
     
     public static List<Cama> parseCama(String responseBody) throws ParseException{
         

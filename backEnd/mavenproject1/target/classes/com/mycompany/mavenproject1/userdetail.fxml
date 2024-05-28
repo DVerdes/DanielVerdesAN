@@ -117,7 +117,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab text="Medicación">
+          <Tab onSelectionChanged="#searchPautas" text="Medicación">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -137,7 +137,7 @@
                         <Label layoutX="14.0" layoutY="59.0" text="Desayuno" />
                         <Label layoutX="217.0" layoutY="59.0" text="Comida" />
                         <Label layoutX="420.0" layoutY="59.0" text="Cena" />
-                        <Button layoutX="15.0" layoutY="14.0" mnemonicParsing="false" text="-" />
+                        <Button layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#removePauta" text="-" />
                         <Button layoutX="565.0" layoutY="14.0" mnemonicParsing="false" onAction="#insertarPauta" text="+" />
                      </children>
                   </AnchorPane>

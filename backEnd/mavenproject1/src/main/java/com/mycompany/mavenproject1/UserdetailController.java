@@ -16,11 +16,14 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -76,16 +79,9 @@ public class UserdetailController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-     
+      
         
-        desayunoList.getItems().add("Paracetamol oral 1g");
-        desayunoList.getItems().add("Atorvastatina 20mg");
-        desayunoList.getItems().add("Atenolol 50mg");
-                desayunoList.getItems().add("Clexane 40 sc");
-
-                comidaList.getItems().add("Adiro 100mg");
-                cenaList.getItems().add("Paracetamol oral 1g");
-                cenaList.getItems().add("Levofloxacino 500mg");
+       
 
 
     }    
@@ -93,7 +89,19 @@ public class UserdetailController implements Initializable {
      @FXML
     private void insertarPauta() throws IOException {
         
-        App.setRoot("newmed");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("newmed.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load(), 277, 415);
+            Stage stage = new Stage();
+
+            NewmedController controlador = fxmlLoader.getController();
+        stage.getIcons().add(new Image("file:C:\\Users\\DVerd\\Documents\\GitHub\\DanielVerdesAN\\backEnd\\mavenproject1\\src\\main\\resources\\imgs\\favicon.png"));
+
+           
+            stage.setTitle("Nueva Pauta");
+            stage.setScene(scene);
+            stage.show();
     }
     
     public void setUsuario(Usuario usuario, String nombreCentro) throws UnirestException, ParseException {
@@ -139,6 +147,67 @@ public class UserdetailController implements Initializable {
         
         
     }
+    
+    @FXML
+    public  void searchPautas() throws UnirestException, ParseException{
+        
+        desayunoList.getItems().clear();
+        comidaList.getItems().clear();
+        cenaList.getItems().clear();
+
+        
+        int usuarioId = usuario_static.getID_USUARIO();
+         String url = "http://localhost:33333/pautas/pauta/search";
+        String body = "{\n" +
+"    \"columns\" : [\"NOMBRE_FARMACO\",\"VIA_ADMINISTRACION\",\"DOSIS\",\"POSOLOGIA\"],\n" +
+"    \"filter\" : {\n" +
+"        \"ID_USUARIO\" : "+usuarioId+"\n" +
+"    }\n" +
+"}";
+        List<Pauta> listaPautas =  JsonUtils.parsePauta(APIConnector.postMethod(url, body));
+        
+        for(Pauta p : listaPautas){
+            String posologia = p.getPosologia();
+            
+            if(posologia.contains("desayuno")){
+                desayunoList.getItems().add(p.toString());
+            }
+            if(posologia.contains("comida")){
+                comidaList.getItems().add(p.toString());
+            }
+            if(posologia.contains("cena")){
+                cenaList.getItems().add(p.toString());
+            }
+            
+            
+        }
+        
+        
+        
+    }
+    
+     @FXML
+    private void removePauta() throws IOException {
+         int indexDno = desayunoList.getSelectionModel().getSelectedIndex();
+        if (indexDno != -1) {
+            
+            desayunoList.getItems().remove(indexDno);
+        }
+        
+        int indexCda = comidaList.getSelectionModel().getSelectedIndex();
+        if (indexCda != -1) {
+            
+            comidaList.getItems().remove(indexDno);
+        }
+        int indexCna = cenaList.getSelectionModel().getSelectedIndex();
+        if (indexCna != -1) {
+            
+            cenaList.getItems().remove(indexDno);
+        }
+        
+        
+    }
+    
     
     
     

@@ -2,6 +2,7 @@ package com.ontimize.hr.model.core.service;
 
 import com.ontimize.hr.api.core.service.IFarmacoService;
 import com.ontimize.hr.model.core.dao.FarmacoDao;
+import com.ontimize.hr.model.core.dao.PautaDao;
 import com.ontimize.jee.common.dto.EntityResult;
 import com.ontimize.jee.common.exceptions.OntimizeJEERuntimeException;
 import com.ontimize.jee.server.dao.DefaultOntimizeDaoHelper;
@@ -19,6 +20,8 @@ public class FarmacoService implements IFarmacoService {
     @Autowired
     private FarmacoDao FarmacoDao;
     @Autowired
+    private PautaDao pautaDao;
+    @Autowired
     private DefaultOntimizeDaoHelper daoHelper;
 
     @Override
@@ -33,7 +36,16 @@ public class FarmacoService implements IFarmacoService {
     @Override
     public EntityResult farmacoInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException {
 
-        return this.daoHelper.insert(this.FarmacoDao, attrMap);
+
+
+        EntityResult er =  this.daoHelper.insert(this.FarmacoDao, attrMap);
+        int idFarmaco = (int) er.get("ID_FARMACO");
+        attrMap.put("ID_FARMACO",idFarmaco);
+
+
+
+        return  this.daoHelper.insert(this.pautaDao, attrMap);
+
     }
 
     @Override

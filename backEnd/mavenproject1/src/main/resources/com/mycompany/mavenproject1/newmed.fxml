@@ -40,16 +40,16 @@
             <Label text="Fármaco:" />
             <Label text="Administración:" GridPane.rowIndex="1" />
             <Label text="Dosis:" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="tfFarmaco" GridPane.columnIndex="1" />
             <ComboBox fx:id="comboAdmin" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="tfDosis" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <HBox alignment="TOP_CENTER" prefHeight="40.0" prefWidth="208.0" spacing="20.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="Desayuno" />
-            <RadioButton mnemonicParsing="false" text="Comida" />
-            <RadioButton mnemonicParsing="false" text="Cena" />
+            <RadioButton fx:id="rDesayuno" mnemonicParsing="false" text="Desayuno" />
+            <RadioButton fx:id="rComida" mnemonicParsing="false" text="Comida" />
+            <RadioButton fx:id="rCena" mnemonicParsing="false" text="Cena" />
          </children>
          <VBox.margin>
             <Insets top="10.0" />
@@ -67,8 +67,8 @@
          <children>
             <Label text="Inicio tratamiento:" />
             <Label text="Fin tratamiento:" GridPane.rowIndex="1" />
-            <DatePicker GridPane.columnIndex="1" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dateIniciotto" GridPane.columnIndex="1" />
+            <DatePicker fx:id="dateFintto" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <VBox.margin>
             <Insets left="10.0" right="10.0" top="10.0" />
@@ -84,7 +84,7 @@
                   <Insets top="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Añadir" />
+            <Button mnemonicParsing="false" onAction="#anadirFarmaco" text="Añadir" />
          </children>
       </HBox>
    </children>

@@ -18,7 +18,9 @@
                     SELECT
                         #COLUMNS#
                     FROM
-                        ${mainschema}.PAUTA_FARMACOLOGICA
+                        ${mainschema}.PAUTA_FARMACOLOGICA PF
+                        INNER JOIN ${mainschema}.FARMACO F
+                        ON PF.ID_FARMACO=F.ID_FARMACO
                     #WHERE#
                     #ORDER#
                 ]]>
