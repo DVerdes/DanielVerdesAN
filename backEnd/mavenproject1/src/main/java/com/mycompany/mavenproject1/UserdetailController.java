@@ -11,6 +11,7 @@ import static com.mycompany.mavenproject1.NewuserController.valoresListaContacto
 import com.mycompany.mavenproject1.utils.JsonUtils;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,6 +25,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -80,6 +82,8 @@ public class UserdetailController implements Initializable {
           
           @FXML
     private TableView<Contacto> tViewContactos = new TableView<>();
+          
+          
     
     //Columnas
     @FXML
@@ -93,6 +97,14 @@ public class UserdetailController implements Initializable {
       
         @FXML
     private TableColumn<Contacto, String> columnEmail;
+        @FXML
+    private TableView<Vacuna> tViewVacunas = new TableView<>();
+        @FXML
+    private TableColumn<Vacuna, String> columnVacuna;
+      
+        @FXML
+    private TableColumn<Vacuna, String> columnAdministracion;
+        
         
          @FXML
         private TextField tfContactoNombre;
@@ -105,9 +117,19 @@ public class UserdetailController implements Initializable {
         @FXML
         private TextField tfContactoEmail;
         
+        @FXML
+        private TextField tfVacuna;
+        
+        @FXML
+        private DatePicker dateVacuna;
+        
          static ObservableList<Contacto> valoresListaContacto = FXCollections.observableArrayList();
          
              private Property<ObservableList<Contacto>> contactoListProperty = new SimpleObjectProperty<>(valoresListaContacto);
+             
+              static ObservableList<Vacuna> valoresListaVacuna = FXCollections.observableArrayList();
+         
+             private Property<ObservableList<Vacuna>> vacunaListProperty = new SimpleObjectProperty<>(valoresListaVacuna);
 
           
           
@@ -124,6 +146,9 @@ public class UserdetailController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        valoresListaVacuna.clear();
+        
+        
        this.columnNombre.setCellValueFactory(new PropertyValueFactory("NOMBRE_CONTACTO"));
         this.columnApellidos.setCellValueFactory(new PropertyValueFactory("APELL_CONTACTO"));
         this.columnTelf.setCellValueFactory(new PropertyValueFactory("TELF_CONTACTO"));
@@ -134,6 +159,13 @@ public class UserdetailController implements Initializable {
         this.tViewContactos.setItems(valoresListaContacto);
         //Binding: valoresLista - formulario (TableView)
         tViewContactos.itemsProperty().bind(contactoListProperty);
+        
+        this.columnVacuna.setCellValueFactory(new PropertyValueFactory("NOMBRE_VACUNA"));
+        this.columnAdministracion.setCellValueFactory(new PropertyValueFactory("FECHA_VACUNACION"));
+        
+        this.tViewVacunas.setItems(valoresListaVacuna);
+        //Binding: valoresLista - formulario (TableView)
+        tViewVacunas.itemsProperty().bind(vacunaListProperty);
         
          desayunoItems = FXCollections.observableArrayList();
         comidaItems = FXCollections.observableArrayList();
@@ -194,6 +226,7 @@ public class UserdetailController implements Initializable {
         searchHabitacionYCama();
         UserdetailController.valoresListaContacto.clear();
         searchContactos();
+        searchVacunas();
 
     }
     
@@ -324,9 +357,56 @@ public class UserdetailController implements Initializable {
         
         
     }
+     
+      private void searchVacunas() throws UnirestException, ParseException{
+        int usuarioId = usuario_static.getID_USUARIO();
+        String url = "http://localhost:33333/vacunas/vacuna/search";
+        String body = "{\n" +
+"    \"columns\" : [\"NOMBRE_VACUNA\",\"FECHA_VACUNACION\",\"ID_VACUNA\"],\n" +
+"    \"filter\" : {\n" +
+"        \"ID_USUARIO\" : "+usuarioId+"\n" +
+"    }\n" +
+"}";
+        List<Vacuna> listaV =  JsonUtils.parseVacuna(APIConnector.postMethod(url, body));
+        for(Vacuna c: listaV){
+            valoresListaVacuna.add(c);
+        }
+        
+        
+    }
+     
+    @FXML
+    private void anadirVacuna() throws UnirestException, ParseException{
+                int usuarioId = usuario_static.getID_USUARIO();
+
+        Vacuna v = new Vacuna();
+        v.setNOMBRE_VACUNA(tfVacuna.getText());
+        
+        Date sqlDate = Date.valueOf(dateVacuna.getValue());
+        
+        v.setFECHA_VACUNACION(sqlDate);
+        
+        valoresListaVacuna.add(v);
+        
+         String urlEndpoint = "http://localhost:33333/vacunas/vacuna";
+
+        
+            String body = "{\r\n    \"data\": \r\n        {\r\n                        \"NOMBRE_VACUNA\": \""+v.getNOMBRE_VACUNA()+"\",\r\n                                    \"FECHA_VACUNACION\": \""+v.getFECHA_VACUNACION()+"\",\r\n\r\n  \"ID_USUARIO\": \""+usuarioId+"\"\r\n            \r\n        }\r\n}";
+            APIConnector.postMethod(urlEndpoint, body);
+            
+            
+            
+            
+        tfVacuna.clear();
+        
+    }
     
     
-    
+     @FXML
+    private void quitarVacuna() throws UnirestException, ParseException{
+            
+        
+    }
     
     
     

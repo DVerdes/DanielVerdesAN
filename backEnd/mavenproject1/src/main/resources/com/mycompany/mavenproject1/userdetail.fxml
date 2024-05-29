@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
@@ -174,12 +175,30 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tViewContactos1" layoutX="11.0" layoutY="70.0" prefHeight="231.0" prefWidth="578.0">
+                        <TableView fx:id="tViewVacunas" layoutX="11.0" layoutY="89.0" prefHeight="244.0" prefWidth="578.0">
                            <columns>
                               <TableColumn fx:id="columnVacuna" prefWidth="303.0" text="Nombre vacuna" />
                               <TableColumn fx:id="columnAdministracion" prefWidth="274.0" text="Fecha administración" />
                            </columns>
                         </TableView>
+                        <GridPane layoutX="31.0" layoutY="14.0" prefHeight="60.0" prefWidth="269.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Nombre:" />
+                              <Label text="Fecha:" GridPane.rowIndex="1" />
+                              <DatePicker fx:id="dateVacuna" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="tfVacuna" prefHeight="25.0" prefWidth="142.0" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Button layoutX="515.0" layoutY="49.0" mnemonicParsing="false" onAction="#quitarVacuna" text="Quitar" />
+                        <Button layoutX="514.0" layoutY="19.0" mnemonicParsing="false" onAction="#anadirVacuna" text="Añadir" />
                      </children>
                   </AnchorPane>
               </content>

@@ -10,6 +10,7 @@ import com.mycompany.mavenproject1.Contacto;
 import com.mycompany.mavenproject1.Farmaco;
 import com.mycompany.mavenproject1.Pauta;
 import com.mycompany.mavenproject1.Usuario;
+import com.mycompany.mavenproject1.Vacuna;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,9 +52,9 @@ public class JsonUtils {
     }
     
     public static List<Contacto> parseContacto(String responseBody){
-        
-        JSONArray contactos = new JSONArray(getResponseData(responseBody));
-        List <Contacto> listaContactos = new ArrayList<Contacto>();
+                List <Contacto> listaContactos = new ArrayList<Contacto>();
+                try{
+                     JSONArray contactos = new JSONArray(getResponseData(responseBody));
         for(int i = 0; i< contactos.length(); i++){
             JSONObject contacto = contactos.getJSONObject(i);
             Contacto c = new Contacto();
@@ -66,7 +67,37 @@ public class JsonUtils {
             
             listaContactos.add(c);
         }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+       
         return listaContactos;
+    }
+    
+    public static List<Vacuna> parseVacuna(String responseBody){
+                List <Vacuna> lista = new ArrayList<Vacuna>();
+                try{
+                     JSONArray array = new JSONArray(getResponseData(responseBody));
+        for(int i = 0; i< array.length(); i++){
+            JSONObject objeto = array.getJSONObject(i);
+            Vacuna c = new Vacuna();
+            c.setID_VACUNA(objeto.getInt("ID_VACUNA"));
+            c.setNOMBRE_VACUNA(objeto.getString("NOMBRE_VACUNA"));
+             long longDate = objeto.getLong("FECHA_VACUNACION");
+        java.util.Date utilDate = new java.util.Date(longDate);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            c.setFECHA_VACUNACION(sqlDate);
+          
+            
+            
+            
+            lista.add(c);
+        }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+       
+        return lista;
     }
     
     public static List<Centro> parseCentro(String responseBody){
