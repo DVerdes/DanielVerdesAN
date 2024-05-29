@@ -159,7 +159,6 @@ public class NewuserController implements Initializable {
         
         comboGenero.setItems(listaGenero);
         
-        valoresListaContacto.add(new Contacto("Jesús","Ramirez","62345623","jesusram@gmail.com"));
         
          this.columnNombre.setCellValueFactory(new PropertyValueFactory("NOMBRE_CONTACTO"));
         this.columnApellidos.setCellValueFactory(new PropertyValueFactory("APELL_CONTACTO"));

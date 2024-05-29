@@ -28,6 +28,13 @@ public class ContactoService implements IContactoService {
         return this.daoHelper.query(this.ContactoDao, keyMap, attrList);
     }
 
+    @Override
+    public EntityResult contactosUsuarioQuery(Map<String, Object> keyMap, List<String> attrList)
+            throws OntimizeJEERuntimeException {
+
+        return this.daoHelper.query(this.ContactoDao, keyMap, attrList,"contactosUsuario");
+    }
+
 
 
     @Override

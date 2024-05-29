@@ -7,20 +7,29 @@ package com.mycompany.mavenproject1;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import static com.mycompany.mavenproject1.MainViewController.centroActivo;
 import static com.mycompany.mavenproject1.MainViewController.valoresLista;
+import static com.mycompany.mavenproject1.NewuserController.valoresListaContacto;
 import com.mycompany.mavenproject1.utils.JsonUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -69,9 +78,45 @@ public class UserdetailController implements Initializable {
           @FXML
           private ImageView imageUsuario;
           
+          @FXML
+    private TableView<Contacto> tViewContactos = new TableView<>();
+    
+    //Columnas
+    @FXML
+    private TableColumn<Contacto, String> columnNombre;
+    
+     @FXML
+    private TableColumn<Contacto, String> columnApellidos;
+     
+      @FXML
+    private TableColumn<Contacto, String> columnTelf;
+      
+        @FXML
+    private TableColumn<Contacto, String> columnEmail;
+        
+         @FXML
+        private TextField tfContactoNombre;
+        @FXML
+        private TextField tfContactoApellidos;
+        
+        @FXML
+        private TextField tfContactoTelefono;
+        
+        @FXML
+        private TextField tfContactoEmail;
+        
+         static ObservableList<Contacto> valoresListaContacto = FXCollections.observableArrayList();
+         
+             private Property<ObservableList<Contacto>> contactoListProperty = new SimpleObjectProperty<>(valoresListaContacto);
+
+          
           
           
           static Usuario usuario_static;
+          
+           public static ObservableList<String> desayunoItems;
+    public static ObservableList<String> comidaItems;
+    public static ObservableList<String> cenaItems;
 
     /**
      * Initializes the controller class.
@@ -79,7 +124,24 @@ public class UserdetailController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-      
+       this.columnNombre.setCellValueFactory(new PropertyValueFactory("NOMBRE_CONTACTO"));
+        this.columnApellidos.setCellValueFactory(new PropertyValueFactory("APELL_CONTACTO"));
+        this.columnTelf.setCellValueFactory(new PropertyValueFactory("TELF_CONTACTO"));
+        this.columnEmail.setCellValueFactory(new PropertyValueFactory("EMAIL_CONTACTO"));
+        
+
+
+        this.tViewContactos.setItems(valoresListaContacto);
+        //Binding: valoresLista - formulario (TableView)
+        tViewContactos.itemsProperty().bind(contactoListProperty);
+        
+         desayunoItems = FXCollections.observableArrayList();
+        comidaItems = FXCollections.observableArrayList();
+        cenaItems = FXCollections.observableArrayList();
+        
+        desayunoList.setItems(desayunoItems);
+        comidaList.setItems(comidaItems);
+        cenaList.setItems(cenaItems);
         
        
 
@@ -130,6 +192,8 @@ public class UserdetailController implements Initializable {
         System.out.println(usuario.toString());
         
         searchHabitacionYCama();
+        UserdetailController.valoresListaContacto.clear();
+        searchContactos();
 
     }
     
@@ -170,13 +234,13 @@ public class UserdetailController implements Initializable {
             String posologia = p.getPosologia();
             
             if(posologia.contains("desayuno")){
-                desayunoList.getItems().add(p.toString());
+                desayunoItems.add(p.toString());
             }
             if(posologia.contains("comida")){
-                comidaList.getItems().add(p.toString());
+                comidaItems.add(p.toString());
             }
             if(posologia.contains("cena")){
-                cenaList.getItems().add(p.toString());
+                cenaItems.add(p.toString());
             }
             
             
@@ -207,6 +271,62 @@ public class UserdetailController implements Initializable {
         
         
     }
+    
+    @FXML
+    private void anadirContacto() throws UnirestException, ParseException{
+                int usuarioId = usuario_static.getID_USUARIO();
+
+        Contacto c = new Contacto();
+        c.setNOMBRE_CONTACTO(tfContactoNombre.getText());
+        c.setAPELL_CONTACTO(tfContactoApellidos.getText());
+        c.setTELF_CONTACTO(tfContactoTelefono.getText());
+        c.setEMAIL_CONTACTO(tfContactoEmail.getText());
+        
+        valoresListaContacto.add(c);
+        
+         String urlEndpoint = "http://localhost:33333/contactos/contacto";
+        String urlCU = "http://localhost:33333/usuarioContactos/usuarioContacto";
+
+        
+            String body = "{\r\n    \"data\": \r\n        {\r\n                        \"NOMBRE_CONTACTO\": \""+c.getNOMBRE_CONTACTO()+"\",\r\n                                    \"APELLIDOS_CONTACTO\": \""+c.getAPELL_CONTACTO()+"\",\r\n\r\n   \"TELF_CONTACTO\": \""+c.getTELF_CONTACTO()+"\",\r\n\r\n  \"EMAIL_CONTACTO\": \""+c.getEMAIL_CONTACTO()+"\"\r\n            \r\n        }\r\n}";
+            int idContacto =  JsonUtils.returnInsertedContactoId(APIConnector.postMethod(urlEndpoint, body));
+            
+            
+            String bodyCU = "{\r\n    \"data\": \r\n        {\r\n                        \"ID_USUARIO\": \""+usuarioId+"\",\r\n\r\n  \"ID_CONTACTO\": \""+idContacto+"\"\r\n            \r\n        }\r\n}";
+            APIConnector.postMethod(urlCU, bodyCU);
+            
+        tfContactoNombre.clear();
+        tfContactoApellidos.clear();
+        tfContactoTelefono.clear();
+        tfContactoEmail.clear();
+        
+    }
+    
+    @FXML
+    private void quitarContacto(){
+        
+        
+    }
+    
+     private void searchContactos() throws UnirestException, ParseException{
+        int usuarioId = usuario_static.getID_USUARIO();
+        String url = "http://localhost:33333/contactos/contactosUsuario/search";
+        String body = "{\n" +
+"    \"columns\" : [\"NOMBRE_CONTACTO\",\"APELLIDOS_CONTACTO\",\"TELF_CONTACTO\",\"EMAIL_CONTACTO\"],\n" +
+"    \"filter\" : {\n" +
+"        \"UC.ID_USUARIO\" : "+usuarioId+"\n" +
+"    }\n" +
+"}";
+        List<Contacto> listaC =  JsonUtils.parseContacto(APIConnector.postMethod(url, body));
+        for(Contacto c: listaC){
+            valoresListaContacto.add(c);
+        }
+        
+        
+    }
+    
+    
+    
     
     
     

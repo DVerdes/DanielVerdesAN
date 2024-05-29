@@ -152,7 +152,7 @@ public class MainViewController {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("userdetail.fxml"));
 
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 440);
             Stage stage = new Stage();
 
             UserdetailController controlador = fxmlLoader.getController();

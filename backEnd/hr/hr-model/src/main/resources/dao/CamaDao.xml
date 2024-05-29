@@ -35,7 +35,7 @@
                          ON H.ID_HABITACION=CA.ID_HABITACION
                         INNER JOIN ${mainschema}.CENTRO C
                         ON C.ID_CENTRO=H.ID_CENTRO
-                        RIGHT OUTER JOIN ${mainschema}.HABITAR HA
+                        LEFT JOIN ${mainschema}.HABITAR HA
                         ON CA.ID_CAMA=HA.ID_CAMA
                     #WHERE#
                     #ORDER#

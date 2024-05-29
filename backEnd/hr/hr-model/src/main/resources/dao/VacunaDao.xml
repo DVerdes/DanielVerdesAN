@@ -2,15 +2,15 @@
 <JdbcEntitySetup xmlns="http://www.ontimize.com/schema/jdbc"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://www.ontimize.com/schema/jdbc http://www.ontimize.com/schema/jdbc/ontimize-jdbc-dao.xsd"
-                 catalog="" schema="${mainschema}" table="CONTACTO" datasource="mainDataSource"
+                 catalog="" schema="${mainschema}" table="VACUNA" datasource="mainDataSource"
                  sqlhandler="dbSQLStatementHandler">
     <DeleteKeys>
-        <Column>ID_CONTACTO</Column>
+        <Column>ID_VACUNA</Column>
     </DeleteKeys>
     <UpdateKeys>
-        <Column>ID_CONTACTO</Column>
+        <Column>ID_VACUNA</Column>
     </UpdateKeys>
-    <GeneratedKey>ID_CONTACTO</GeneratedKey>
+    <GeneratedKey>ID_VACUNA</GeneratedKey>
     <Queries>
         <Query id="default">
             <Sentence>
@@ -18,21 +18,7 @@
                     SELECT
                         #COLUMNS#
                     FROM
-                        ${mainschema}.CONTACTO
-                    #WHERE#
-                    #ORDER#
-                ]]>
-            </Sentence>
-        </Query>
-        <Query id="contactosUsuario">
-            <Sentence>
-                <![CDATA[
-                    SELECT
-                        #COLUMNS#
-                    FROM
-                        ${mainschema}.CONTACTO C
-                        INNER JOIN ${mainschema}.USUARIO_CONTACTO UC
-                        ON UC.ID_CONTACTO=C.ID_CONTACTO
+                        ${mainschema}.VACUNA
                     #WHERE#
                     #ORDER#
                 ]]>

@@ -6,6 +6,7 @@ package com.mycompany.mavenproject1.utils;
 
 import com.mycompany.mavenproject1.Cama;
 import com.mycompany.mavenproject1.Centro;
+import com.mycompany.mavenproject1.Contacto;
 import com.mycompany.mavenproject1.Farmaco;
 import com.mycompany.mavenproject1.Pauta;
 import com.mycompany.mavenproject1.Usuario;
@@ -47,6 +48,25 @@ public class JsonUtils {
             listaFarmacos.add(new Farmaco(farmaco.getString("NOMBRE_FARMACO")));
         }
         return listaFarmacos;
+    }
+    
+    public static List<Contacto> parseContacto(String responseBody){
+        
+        JSONArray contactos = new JSONArray(getResponseData(responseBody));
+        List <Contacto> listaContactos = new ArrayList<Contacto>();
+        for(int i = 0; i< contactos.length(); i++){
+            JSONObject contacto = contactos.getJSONObject(i);
+            Contacto c = new Contacto();
+            c.setNOMBRE_CONTACTO(contacto.getString("NOMBRE_CONTACTO"));
+            c.setAPELL_CONTACTO(contacto.getString("APELLIDOS_CONTACTO"));
+            c.setTELF_CONTACTO(contacto.getString("TELF_CONTACTO"));
+            c.setEMAIL_CONTACTO(contacto.getString("EMAIL_CONTACTO"));
+            
+            
+            
+            listaContactos.add(c);
+        }
+        return listaContactos;
     }
     
     public static List<Centro> parseCentro(String responseBody){
@@ -108,9 +128,11 @@ public class JsonUtils {
     }
     
     public static List<Pauta> parsePauta(String responseBody) throws ParseException{
-        
-        JSONArray datos = new JSONArray(getResponseData(responseBody));
-        List <Pauta> lista = new ArrayList<Pauta>();
+                List <Pauta> lista = new ArrayList<Pauta>();
+
+                
+                try{
+                    JSONArray datos = new JSONArray(getResponseData(responseBody));
         for(int i = 0; i< datos.length(); i++){
             JSONObject objeto = datos.getJSONObject(i);
             Pauta p = new Pauta();
@@ -123,6 +145,10 @@ public class JsonUtils {
             
                 
         }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+        
         return lista;
     }
     

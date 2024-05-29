@@ -6,6 +6,9 @@ package com.mycompany.mavenproject1;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 import static com.mycompany.mavenproject1.NewuserController.listaGenero;
+import static com.mycompany.mavenproject1.UserdetailController.cenaItems;
+import static com.mycompany.mavenproject1.UserdetailController.comidaItems;
+import static com.mycompany.mavenproject1.UserdetailController.desayunoItems;
 import java.net.URL;
 import java.sql.Date;
 import java.text.ParseException;
@@ -20,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -96,6 +100,29 @@ public class NewmedController implements Initializable {
          String urlHabitar = "http://localhost:33333/farmacos/farmaco";
         String body = "{\r\n    \"data\": \r\n        {\r\n                        \"ID_USUARIO\": \""+userId+"\",\r\n\r\n   \"VIA_ADMINISTRACION\": \""+viaAdm+"\",\r\n\r\n   \"DOSIS\": \""+dosis+"\",\r\n\r\n   \"POSOLOGIA\": \""+posologia+"\",\r\n\r\n   \"INICIO_PAUTA\": \""+sqlDateInicio+"\",\r\n\r\n   \"FIN_PAUTA\": \""+sqlDateFin+"\",\r\n\r\n  \"NOMBRE_FARMACO\": \""+nombreFarmaco+"\"\r\n            \r\n        }\r\n}";
         APIConnector.postMethod(urlHabitar, body);
+        
+        Pauta p = new Pauta();
+        p.setNombreFarmaco(nombreFarmaco);
+        p.setDosis(dosis);
+        p.setPosologia(posologia);
+        p.setViaAdministracion(viaAdm);
+        
+        if(posologia.contains("desayuno")){
+                desayunoItems.add(p.toString());
+            }
+            if(posologia.contains("comida")){
+                comidaItems.add(p.toString());
+            }
+            if(posologia.contains("cena")){
+                cenaItems.add(p.toString());
+            }
+        
+        
+        
+        
+        Stage stage = (Stage) comboAdmin.getScene().getWindow();
+    // do what you have to do
+        stage.close();
     }
     
 }
