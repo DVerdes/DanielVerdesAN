@@ -209,7 +209,7 @@
         <items>
           <Button mnemonicParsing="false" text="Atrás" />
             <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#editarUsuario" text="Editar Usuario" />
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="Borrar Usuario" />
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#borrarUsuario" text="Borrar Usuario" />
         </items>
       </ToolBar>
    </children>

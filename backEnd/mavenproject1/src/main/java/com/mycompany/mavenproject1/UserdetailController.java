@@ -12,7 +12,10 @@ import com.mycompany.mavenproject1.utils.JsonUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.Property;
@@ -25,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -422,7 +426,34 @@ public class UserdetailController implements Initializable {
         
     }
     
-    
+       @FXML
+    private void borrarUsuario() throws IOException, UnirestException, ParseException{
+        
+        String urlEndpoint = "http://localhost:33333/usuarios/usuario";
+        LocalDate ld = LocalDate.now();
+         LocalDateTime localDateTime = ld.atStartOfDay();
+
+        // Convertir LocalDateTime a Timestamp
+        Timestamp timestamp = Timestamp.valueOf(localDateTime);
+        
+        
+        
+        String body = "{\r\n    \"filter\":{\r\n        \"ID_USUARIO\":"+UserdetailController.usuario_static.getID_USUARIO()+"\r\n    },\r\n    \"data\": \r\n        {\r\n                        \"BAJA_USUARIO\": \""+timestamp+"\"            \r\n        }\r\n      \r\n    \r\n    \r\n}";
+        APIConnector.putMethod(urlEndpoint, body);
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Usuario borrado");
+    alert.setHeaderText("Usuario eliminado");
+    alert.setContentText("El usuario "+this.usuario_static.getNOMBRE_USUARIO()+" "+this.usuario_static.getAPELLIDOS_USUARIO()  +"ha sido eliminado correctamente");
+
+alert.showAndWait();
+        
+        MainViewController.searchUsuariosCentro();
+        
+        Stage stage = (Stage) tfVacuna.getScene().getWindow();
+        stage.close();
+        
+    }
     
     
 }

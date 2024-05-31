@@ -37,6 +37,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 /**
@@ -192,6 +193,9 @@ public class NewuserController implements Initializable {
         insertarHabitar(id);
         
         insertarContactosUsuario(id);
+        
+         Stage stage = (Stage) comboGenero.getScene().getWindow();
+        stage.close();
         
         MainViewController.searchUsuariosCentro();
         

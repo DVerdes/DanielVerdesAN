@@ -39,7 +39,8 @@
                         ON C.ID_HABITACION=HT.ID_HABITACION
                         INNER JOIN ${mainschema}.CENTRO CE
                         ON HT.ID_CENTRO=CE.ID_CENTRO
-                    #WHERE#
+
+                    #WHERE# AND U.BAJA_USUARIO IS NULL
                     #ORDER#
                 ]]>
             </Sentence>
