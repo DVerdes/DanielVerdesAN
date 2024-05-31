@@ -34,5 +34,15 @@ public class APIConnector {
                 .body(body)
                 .asString().getBody();
     }
+    
+       public static String putMethod(String url, String body) throws UnirestException {
+        Unirest.setTimeouts(0, 0);
+        return Unirest.put(url)
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Basic ZGVtbzpkZW1vdXNlcg==")
+                .body(body)
+                .asString().getBody();
+    }
+
 
 }

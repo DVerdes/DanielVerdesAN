@@ -121,7 +121,6 @@ public class NewmedController implements Initializable {
         
         
         Stage stage = (Stage) comboAdmin.getScene().getWindow();
-    // do what you have to do
         stage.close();
     }
     

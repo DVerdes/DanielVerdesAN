@@ -201,7 +201,12 @@ public class UserdetailController implements Initializable {
     public void setUsuario(Usuario usuario, String nombreCentro) throws UnirestException, ParseException {
         this.usuario_static = new Usuario();
         this.usuario_static.setID_USUARIO(usuario.getID_USUARIO());
-        
+        this.usuario_static.setNOMBRE_USUARIO(usuario.getNOMBRE_USUARIO());
+        this.usuario_static.setFECHA_NACIMIENTO(usuario.getFECHA_NACIMIENTO());
+        this.usuario_static.setDEPENDENCIA_USUARIO(usuario.getDEPENDENCIA_USUARIO());
+        this.usuario_static.setAPELLIDOS_USUARIO(usuario.getAPELLIDOS_USUARIO());
+        this.usuario_static.setFOTO_USUARIO(usuario.getFOTO_USUARIO());
+        this.usuario_static.setGENERO_USUARIO(usuario.getGENERO_USUARIO());
         
         labelNacimiento.setText(usuario.getFECHA_NACIMIENTO().toString());
         labelGenero.setText(usuario.getGENERO_USUARIO());
@@ -405,6 +410,15 @@ public class UserdetailController implements Initializable {
      @FXML
     private void quitarVacuna() throws UnirestException, ParseException{
             
+        
+    }
+    
+    
+    @FXML
+    private void editarUsuario() throws IOException{
+        
+        labelNombre.getScene().setRoot(App.loadFXML("edituser"));
+        
         
     }
     

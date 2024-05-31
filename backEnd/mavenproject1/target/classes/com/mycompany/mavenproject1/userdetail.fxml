@@ -208,7 +208,7 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: lightblue;">
         <items>
           <Button mnemonicParsing="false" text="Atrás" />
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="Editar Usuario" />
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#editarUsuario" text="Editar Usuario" />
             <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="Borrar Usuario" />
         </items>
       </ToolBar>

@@ -160,7 +160,7 @@ public class MainViewController {
 
             controlador.setUsuario(valoresLista.get(index),centroActivo.getNOMBRE_CENTRO());
            
-            stage.setTitle("Detalles Usuario");
+            stage.setTitle(valoresLista.get(index).getNOMBRE_USUARIO()+" "+(valoresLista.get(index).getAPELLIDOS_USUARIO()));
             stage.setScene(scene);
             stage.show();
         }

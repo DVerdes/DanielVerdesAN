@@ -1,3 +1,4 @@
+com\mycompany\mavenproject1\EdituserController.class
 com\mycompany\mavenproject1\RegisterController.class
 com\mycompany\mavenproject1\Usuario.class
 com\mycompany\mavenproject1\App.class
@@ -17,6 +18,7 @@ com\mycompany\mavenproject1\Centro.class
 com\mycompany\mavenproject1\UserUtils.class
 com\mycompany\mavenproject1\Cama.class
 com\mycompany\mavenproject1\NewcenterController.class
+com\mycompany\mavenproject1\EdituserController$1.class
 com\mycompany\mavenproject1\Habitacion.class
 com\mycompany\mavenproject1\Vacuna.class
 com\mycompany\mavenproject1\NewmedController.class
