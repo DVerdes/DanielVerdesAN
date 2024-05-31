@@ -28,6 +28,7 @@ public class UserService implements IUserService {
 	private DefaultOntimizeDaoHelper daoHelper;
 
 	public void loginQuery(Map<?, ?> key, List<?> attr) {
+
 	}
 
 	//Sample to permission

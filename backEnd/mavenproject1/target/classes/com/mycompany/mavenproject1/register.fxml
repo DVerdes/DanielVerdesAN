@@ -44,12 +44,12 @@
          <children>
             <Label text="Usuario:" />
             <Label text="Contraseña:" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" />
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="tfUsuario" GridPane.columnIndex="1" />
+            <PasswordField fx:id="tfPass1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Repetir:" GridPane.rowIndex="4" />
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <PasswordField fx:id="tfPass2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Nombre:" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="tfNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <HBox alignment="TOP_CENTER" prefHeight="40.0" prefWidth="208.0" spacing="20.0">

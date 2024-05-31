@@ -4,11 +4,17 @@
  */
 package com.mycompany.mavenproject1;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mycompany.mavenproject1.utils.JsonUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -16,6 +22,16 @@ import javafx.fxml.Initializable;
  * @author DVerd
  */
 public class RegisterController implements Initializable {
+    
+    
+    @FXML
+    private TextField tfNombre;
+        @FXML
+    private TextField tfUsuario;
+            @FXML
+    private TextField tfPass1;
+                @FXML
+    private TextField tfPass2;
 
     /**
      * Initializes the controller class.
@@ -31,8 +47,58 @@ public class RegisterController implements Initializable {
     }
     
     @FXML
-    private void confirmarRegistro() throws IOException {
-        App.setRoot("login");
+    private void confirmarRegistro() throws IOException, UnirestException {
+        
+        if(validarContrasena(tfPass1.getText()) && compararContrasena(tfPass1.getText(),tfPass2.getText())){
+            
+            
+            String urlEndpoint = "http://localhost:33333/users/user";
+        String body = "{\r\n    \"data\": \r\n        {\r\n                        \"USER_\": \""+tfUsuario.getText()+"\",\r\n                                    \"NAME\": \""+tfNombre.getText()+"\",\r\n\r\n  \"PASSWORD\": \""+tfPass1.getText()+"\"\r\n            \r\n        }\r\n}";
+        APIConnector.postMethod(urlEndpoint, body);
+            
+            
+           
+            
+            
+                    App.setRoot("login");
+
+        }else{
+            
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Contraseña no válida");
+    alert.setHeaderText("Error en contraseña");
+    alert.setContentText("Comprueba la contraseña introducida");
+            alert.showAndWait();
+
+        }
+        
+        
     }
     
+    public static boolean validarContrasena(String password) {
+        if (password.length() < 6) {
+            return false;
+        }
+        Pattern uppercasePattern = Pattern.compile("[A-Z]");
+        Matcher uppercaseMatcher = uppercasePattern.matcher(password);
+        if (!uppercaseMatcher.find()) {
+            return false;
+        }
+        Pattern digitPattern = Pattern.compile("[0-9]");
+        Matcher digitMatcher = digitPattern.matcher(password);
+        if (!digitMatcher.find()) {
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean compararContrasena(String pass1, String pass2) {
+        if (pass1 == null && pass2 == null) {
+            return true;
+        }
+        else if (pass1 == null || pass2 == null) {
+            return false;
+        }
+        return pass1.equalsIgnoreCase(pass2);
+    }
 }
