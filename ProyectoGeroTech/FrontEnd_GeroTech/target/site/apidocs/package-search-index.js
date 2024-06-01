@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.mycompany.mavenproject1","l":"com.mycompany.mavenproject1"}];updateSearchResults();

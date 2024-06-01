@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"com.mycompany.mavenproject1"}];updateSearchResults();

@@ -359,6 +359,9 @@ public class UserdetailController implements Initializable {
      */
     @FXML
     private void quitarContacto() {
+        int index = tViewContactos.getSelectionModel().getSelectedIndex();
+        
+        valoresListaContacto.remove(index);
 
     }
 
@@ -438,7 +441,9 @@ public class UserdetailController implements Initializable {
      */
     @FXML
     private void quitarVacuna() throws UnirestException, ParseException {
-
+         int index = tViewVacunas.getSelectionModel().getSelectedIndex();
+        
+        valoresListaVacuna.remove(index);
     }
 
     /**

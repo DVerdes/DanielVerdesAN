@@ -1,0 +1,51 @@
+@options
+@packages
+@argfile
+--class-path
+'C:/Users/DVerd/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13.jar;C:/Users/DVerd/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar;C:/Users/DVerd/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13.jar;C:/Users/DVerd/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13.jar;C:/Users/DVerd/.m2/repository/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar;C:/Users/DVerd/.m2/repository/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4.jar;C:/Users/DVerd/.m2/repository/commons-codec/commons-codec/1.9/commons-codec-1.9.jar;C:/Users/DVerd/.m2/repository/org/apache/httpcomponents/httpasyncclient/4.1.1/httpasyncclient-4.1.1.jar;C:/Users/DVerd/.m2/repository/org/apache/httpcomponents/httpcore-nio/4.4.4/httpcore-nio-4.4.4.jar;C:/Users/DVerd/.m2/repository/org/apache/httpcomponents/httpmime/4.5.2/httpmime-4.5.2.jar;C:/Users/DVerd/.m2/repository/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar;C:/Users/DVerd/.m2/repository/commons-digester/commons-digester/2.1/commons-digester-2.1.jar;C:/Users/DVerd/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar;C:/Users/DVerd/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar'
+--module-path
+'C:/Users/DVerd/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-win.jar;C:/Users/DVerd/.m2/repository/org/json/json/20240303/json-20240303.jar;C:/Users/DVerd/.m2/repository/commons-validator/commons-validator/1.7/commons-validator-1.7.jar;C:/Users/DVerd/Documents/GitHub/DanielVerdesAN/ProyectoGeroTech/FrontEnd_GeroTech/target/classes;C:/Users/DVerd/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13-win.jar;C:/Users/DVerd/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13-win.jar;C:/Users/DVerd/.m2/repository/com/mashape/unirest/unirest-java/1.4.9/unirest-java-1.4.9.jar;C:/Users/DVerd/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13-win.jar'
+--patch-module
+com.mycompany.mavenproject1='C:/Users/DVerd/Documents/GitHub/DanielVerdesAN/ProyectoGeroTech/FrontEnd_GeroTech/src/main/java'
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+--module-source-path
+'C:/Users/DVerd/Documents/GitHub/DanielVerdesAN/ProyectoGeroTech/FrontEnd_GeroTech/target/site/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/DVerd/Documents/GitHub/DanielVerdesAN/ProyectoGeroTech/FrontEnd_GeroTech/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'FrontEnd_GeroTech 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/DVerd/Documents/GitHub/DanielVerdesAN/ProyectoGeroTech/FrontEnd_GeroTech/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'FrontEnd_GeroTech 1.0-SNAPSHOT API'
+com.mycompany.mavenproject1
+'C:/Users/DVerd/Documents/GitHub/DanielVerdesAN/ProyectoGeroTech/FrontEnd_GeroTech/src/main/java/module-info.java'
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\allclasses-index.html = 1717239286377
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\allpackages-index.html = 1717239286380
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\element-list = 1717239286245
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\help-doc.html = 1717239286423
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\index-all.html = 1717239286414
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\index.html = 1717239286417
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\jquery-ui.overrides.css = 1717239286441
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\member-search-index.js = 1717239286387
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\module-search-index.js = 1717239286382
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\overview-tree.html = 1717239286352
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\package-search-index.js = 1717239286383
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\script.js = 1717239286428
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\search.js = 1717239286430
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\stylesheet.css = 1717239286426
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\tag-search-index.js = 1717239286388
+C:\Users\DVerd\Documents\GitHub\DanielVerdesAN\ProyectoGeroTech\FrontEnd_GeroTech\target\site\apidocs\type-search-index.js = 1717239286385

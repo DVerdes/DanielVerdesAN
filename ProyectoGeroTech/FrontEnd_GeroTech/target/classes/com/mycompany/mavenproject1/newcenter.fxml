@@ -70,11 +70,11 @@
                      </rowConstraints>
                      <children>
                         <Label text="Habitaciones Individuales:" />
-                        <TextField fx:id="individualHab" onKeyTyped="#validateAge" GridPane.columnIndex="1" />
+                        <TextField fx:id="individualHab" onKeyTyped="#validateFields" GridPane.columnIndex="1" />
                         <Label text="Habitaciones Dobles:" GridPane.rowIndex="1" />
-                        <TextField fx:id="dobleHab" onKeyTyped="#validateAge" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="dobleHab" onKeyTyped="#validateFields" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Habitaciones Triples:" GridPane.rowIndex="2" />
-                        <TextField fx:id="tripleHab" onKeyTyped="#validateAge" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="tripleHab" onKeyTyped="#validateFields" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />

@@ -64,5 +64,22 @@ public class APIConnector {
                 .body(body)
                 .asString().getBody();
     }
+    
+    
+    /**
+     * Método DELETE
+     * @param url url
+     * @param body parámetros del filtro
+     * @return cadena de texto con respuesta (JSON)
+     * @throws UnirestException 
+     */
+    public static String deleteMethod(String url, String body) throws UnirestException {
+        Unirest.setTimeouts(0, 0);
+        return Unirest.delete(url)
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Basic ZGVtbzpkZW1vdXNlcg==")
+                .body(body)
+                .asString().getBody();
+    }
 
 }
