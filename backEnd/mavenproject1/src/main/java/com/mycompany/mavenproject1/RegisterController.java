@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 /**
@@ -32,6 +33,12 @@ public class RegisterController implements Initializable {
     private TextField tfPass1;
                 @FXML
     private TextField tfPass2;
+                
+                @FXML
+                private RadioButton radioSanitario;
+                
+                 @FXML
+                private RadioButton radioGestor;
 
     /**
      * Initializes the controller class.
@@ -52,10 +59,24 @@ public class RegisterController implements Initializable {
         if(validarContrasena(tfPass1.getText()) && compararContrasena(tfPass1.getText(),tfPass2.getText())){
             
             
-            String urlEndpoint = "http://localhost:33333/users/user";
-        String body = "{\r\n    \"data\": \r\n        {\r\n                        \"USER_\": \""+tfUsuario.getText()+"\",\r\n                                    \"NAME\": \""+tfNombre.getText()+"\",\r\n\r\n  \"PASSWORD\": \""+tfPass1.getText()+"\"\r\n            \r\n        }\r\n}";
+            if(radioGestor.isSelected()){
+                
+                 String urlEndpoint = "http://localhost:33333/gestores/gestor";
+        String body = "{\r\n    \"data\": \r\n        {\r\n                                                         \"NOMBRE_PROFESIONAL\": \""+tfUsuario.getText()+"\",\r\n\r\n  \"CONTRASENA\": \""+tfPass1.getText()+"\"\r\n            \r\n        }\r\n}";
         APIConnector.postMethod(urlEndpoint, body);
             
+            }else{
+                
+                 String urlEndpoint = "http://localhost:33333/sanitarios/sanitario";
+        String body = "{\r\n    \"data\": \r\n        {\r\n                                                         \"NOMBRE_PROFESIONAL\": \""+tfUsuario.getText()+"\",\r\n\r\n  \"CONTRASENA\": \""+tfPass1.getText()+"\"\r\n            \r\n        }\r\n}";
+        APIConnector.postMethod(urlEndpoint, body);
+                
+                
+            }
+            
+            
+            
+           
             
            
             

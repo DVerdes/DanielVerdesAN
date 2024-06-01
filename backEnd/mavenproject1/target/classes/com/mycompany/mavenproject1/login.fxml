@@ -40,10 +40,11 @@
          <children>
             <Label text="Usuario:" />
             <Label text="Contraseña:" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" />
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="tfUsuario" GridPane.columnIndex="1" />
+            <PasswordField fx:id="tfPass" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
+      <Label fx:id="labelVal" textFill="RED" />
       <Button fx:id="primaryButton" onAction="#switchToSecondary" text="Iniciar sesión">
          <VBox.margin>
             <Insets top="30.0" />

@@ -36,26 +36,23 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="14.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Usuario:" />
-            <Label text="Contraseña:" GridPane.rowIndex="3" />
+            <Label text="Contraseña:" GridPane.rowIndex="2" />
             <TextField fx:id="tfUsuario" GridPane.columnIndex="1" />
-            <PasswordField fx:id="tfPass1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="Repetir:" GridPane.rowIndex="4" />
-            <PasswordField fx:id="tfPass2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="Nombre:" GridPane.rowIndex="1" />
-            <TextField fx:id="tfNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="tfPass1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Repetir:" GridPane.rowIndex="3" />
+            <PasswordField fx:id="tfPass2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <HBox alignment="TOP_CENTER" prefHeight="40.0" prefWidth="208.0" spacing="20.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="Sanitario" />
-            <RadioButton mnemonicParsing="false" text="Gestor" />
+            <RadioButton fx:id="radioSanitario" mnemonicParsing="false" text="Sanitario" />
+            <RadioButton fx:id="radioGestor" mnemonicParsing="false" text="Gestor" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">

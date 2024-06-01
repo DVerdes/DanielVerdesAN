@@ -144,6 +144,27 @@ public class JsonUtils {
         return listaUsuarios;
     }
     
+    public static boolean login(String responseBody){
+        int id = 12;
+                try{
+                     JSONArray array = new JSONArray(getResponseData(responseBody));
+        for(int i = 0; i< array.length(); i++){
+            JSONObject objeto = array.getJSONObject(i);
+            id = objeto.getInt("ID_PROFESIONAL");
+            return true;
+           
+            
+            
+            
+            
+        }
+                }catch(Exception e){
+                    e.printStackTrace();
+                    return false;
+                }
+       return true;
+    }
+    
     public static List<String> parseHabitacionCama(String responseBody) throws ParseException{
         
         JSONArray datos = new JSONArray(getResponseData(responseBody));
