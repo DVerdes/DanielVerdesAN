@@ -11,11 +11,18 @@ import com.mycompany.mavenproject1.utils.JsonUtils;
 import java.io.IOException;
 
 /**
- *
+ * Utilidades de API 
  * @author DVerd
  */
 public class APIConnector {
 
+    /**
+     * Método GET
+     * @param url url 
+     * @return cadena de texto con respuesta
+     * @throws IOException
+     * @throws UnirestException 
+     */
     public static String getMethod(String url) throws IOException, UnirestException {
         Unirest.setTimeouts(0, 0);
         HttpResponse<String> response = Unirest.get(url)
@@ -26,6 +33,13 @@ public class APIConnector {
 
     }
 
+    /**
+     * Método POST
+     * @param url url
+     * @param body parámetros del filtro/inserción
+     * @return cadena de texto con respuesta (JSON)
+     * @throws UnirestException 
+     */
     public static String postMethod(String url, String body) throws UnirestException {
         Unirest.setTimeouts(0, 0);
         return Unirest.post(url)
@@ -34,8 +48,15 @@ public class APIConnector {
                 .body(body)
                 .asString().getBody();
     }
-    
-       public static String putMethod(String url, String body) throws UnirestException {
+
+    /**
+     * Método PUT
+     * @param url url
+     * @param body parámetros del filtro/inserción
+     * @return cadena de texto con respuesta (JSON)
+     * @throws UnirestException 
+     */
+    public static String putMethod(String url, String body) throws UnirestException {
         Unirest.setTimeouts(0, 0);
         return Unirest.put(url)
                 .header("Content-Type", "application/json")
@@ -43,6 +64,5 @@ public class APIConnector {
                 .body(body)
                 .asString().getBody();
     }
-
 
 }

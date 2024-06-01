@@ -41,145 +41,122 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 /**
- * FXML Controller class
+ * FXML Controller class de Editar Usuario
  *
  * @author DVerd
  */
 public class EdituserController implements Initializable {
-    
-     @FXML
-    private Button subirImage;
-     
-     @FXML
-     private Label labelCentro;
-    
-  
-        
-     
-        
-        
 
-        
-         @FXML
-    private ComboBox comboCama;
-         
-          @FXML
-    private ChoiceBox comboGenero;
-          
-          @FXML
-          private TextField tfNombre;
-          
-                  @FXML
-          private TextField tfApellido1;
-                  
-                       
-                          
-                          final FileChooser f = new FileChooser();
     @FXML
-    ImageView mv = new ImageView(); 
+    private Button subirImage;
+
+    @FXML
+    private Label labelCentro;
+
+    @FXML
+    private ComboBox comboCama;
+
+    @FXML
+    private ChoiceBox comboGenero;
+
+    @FXML
+    private TextField tfNombre;
+
+    @FXML
+    private TextField tfApellido1;
+
+    final FileChooser f = new FileChooser();
+    @FXML
+    ImageView mv = new ImageView();
     String url = "";
 
-                          
-                          
-                                  @FXML
-          private Slider sliDependencia = new Slider(0, 3, 0);
-                                  
-                                  
-                                  
-                                  
-                                          @FXML
-          private DatePicker dateNacimiento;
-        
-    
-        
-                static ObservableList<Cama> listaCamas =  FXCollections.observableArrayList();
-                
-                                static ObservableList<String> listaGenero =  FXCollections.observableArrayList();
+    @FXML
+    private Slider sliDependencia = new Slider(0, 3, 0);
 
+    @FXML
+    private DatePicker dateNacimiento;
 
+    static ObservableList<Cama> listaCamas = FXCollections.observableArrayList();
+
+    static ObservableList<String> listaGenero = FXCollections.observableArrayList();
 
     static Centro centro;
-    
-    
-    
-    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         tfNombre.setText(UserdetailController.usuario_static.getNOMBRE_USUARIO());
         tfApellido1.setText(UserdetailController.usuario_static.getAPELLIDOS_USUARIO());
         Image img = new Image(UserdetailController.usuario_static.getFOTO_USUARIO());
-         mv.setImage(img);
-        
-        
+        mv.setImage(img);
+
         sliDependencia.setValue(parsearDependencia(UserdetailController.usuario_static.getDEPENDENCIA_USUARIO()));
         dateNacimiento.setValue(UserdetailController.usuario_static.getFECHA_NACIMIENTO().toLocalDate());
-        
-        
-        
+
         sliDependencia.setMax(3);
         sliDependencia.setMajorTickUnit(1);
         sliDependencia.setMinorTickCount(0);
         sliDependencia.setSnapToTicks(true);
         sliDependencia.setShowTickMarks(true);
         sliDependencia.setShowTickLabels(true);
-        
-        
+
         String fechaInicial = "01-01-1950";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        dateNacimiento.setValue( LocalDate.parse(fechaInicial, formatter));
+        dateNacimiento.setValue(LocalDate.parse(fechaInicial, formatter));
 
-        
-        
         comboCama.setVisibleRowCount(8);
         comboCama.getSelectionModel().selectFirst();
-        
+
         listaGenero.clear();
         listaGenero.add("Hombre");
-                listaGenero.add("Mujer");
+        listaGenero.add("Mujer");
         listaGenero.add("Otro");
 
-        
         comboGenero.setItems(listaGenero);
-        
-                comboGenero.setValue(UserdetailController.usuario_static.getGENERO_USUARIO());
 
-        
-        
+        comboGenero.setValue(UserdetailController.usuario_static.getGENERO_USUARIO());
+
         // TODO
-    }    
-    
-     @FXML
+    }
+
+    /**
+     * Actualiza usuario con datos aportados
+     * @throws IOException
+     * @throws UnirestException
+     * @throws ParseException 
+     */
+    @FXML
     private void actualizarUsuario() throws IOException, UnirestException, ParseException {
         String apellidos = tfApellido1.getText();
-        int dependenciaN= (int) Math.round(sliDependencia.getValue());
+        int dependenciaN = (int) Math.round(sliDependencia.getValue());
         String dependencia = completarDependencia(String.valueOf(dependenciaN));
         String genero = (String) comboGenero.getValue();
         Date sqlDate = Date.valueOf(dateNacimiento.getValue());
-        
-        System.out.println(apellidos+" "+dependencia+" "+genero+" "+sqlDate);
-        
-         String urlEndpoint = "http://localhost:33333/usuarios/usuario";
-        String body = "{\r\n    \"filter\":{\r\n        \"ID_USUARIO\":"+UserdetailController.usuario_static.getID_USUARIO()+"\r\n    },\r\n    \"data\": \r\n        {\r\n                        \"FOTO_USUARIO\": \""+url+"\",\r\n                                    \"NOMBRE_USUARIO\": \""+tfNombre.getText()+"\",\r\n\r\n   \"APELLIDOS_USUARIO\": \""+apellidos+"\",\r\n\r\n    \"FECHA_NACIMIENTO\": \""+sqlDate+"\",\r\n\r\n   \"GENERO_USUARIO\": \""+genero+"\",\r\n\r\n  \"DEPENDENCIA_USUARIO\": \""+dependencia+"\"\r\n            \r\n        }\r\n      \r\n    \r\n    \r\n}";
+
+        System.out.println(apellidos + " " + dependencia + " " + genero + " " + sqlDate);
+
+        String urlEndpoint = "http://localhost:33333/usuarios/usuario";
+        String body = "{\r\n    \"filter\":{\r\n        \"ID_USUARIO\":" + UserdetailController.usuario_static.getID_USUARIO() + "\r\n    },\r\n    \"data\": \r\n        {\r\n                        \"FOTO_USUARIO\": \"" + url + "\",\r\n                                    \"NOMBRE_USUARIO\": \"" + tfNombre.getText() + "\",\r\n\r\n   \"APELLIDOS_USUARIO\": \"" + apellidos + "\",\r\n\r\n    \"FECHA_NACIMIENTO\": \"" + sqlDate + "\",\r\n\r\n   \"GENERO_USUARIO\": \"" + genero + "\",\r\n\r\n  \"DEPENDENCIA_USUARIO\": \"" + dependencia + "\"\r\n            \r\n        }\r\n      \r\n    \r\n    \r\n}";
         APIConnector.putMethod(urlEndpoint, body);
-        
+
         Stage stage = (Stage) comboGenero.getScene().getWindow();
         stage.close();
 
-        
         MainViewController.searchUsuariosCentro();
-        
+
     }
-    
-    
-     @FXML
+
+    /**
+     * Permite subir imágen
+     * @throws IOException 
+     */
+    @FXML
     private void subirImagen() throws IOException {
-        
-       subirImage.setOnAction((event) -> {
+
+        subirImage.setOnAction((event) -> {
             File file = f.showOpenDialog(new Window() {
             });
             if (file != null) {
@@ -192,72 +169,90 @@ public class EdituserController implements Initializable {
         });
     }
 
+    /**
+     * Completa dependencia
+     * @param string dependencia del slider
+     * @return 
+     */
     private String completarDependencia(String string) {
-        String depend = "Grado "+string;
-        if(string.equals("0")){
+        String depend = "Grado " + string;
+        if (string.equals("0")) {
             return "Independiente";
-        }else{
+        } else {
             return depend;
         }
-        
-    }
-    
-    private Double parsearDependencia(String string){
-        if(string.equals("Independiente")){
-            return 0.0;
-        }else{
-            
-            String[]split = string.split(" ");
-            
-            
-            return  Double.valueOf(split[1]); 
-        }
-        
-    }
-    
-     public void setCentro(Centro c) throws UnirestException, ParseException{
-         this.centro = c;
-         System.out.println( getCamasDisponibles().toString());
-         
-         labelCentro.setText(c.getNOMBRE_CENTRO());
 
-         
-     }
-     
-     public List<Cama> getCamasDisponibles() throws UnirestException, ParseException{
-          int centroId = centro.getID_CENTRO();
+    }
+
+    /**
+     * Transforma dependencia recuperada en double
+     * @param string dependencia de BBDD
+     * @return 
+     */
+    private Double parsearDependencia(String string) {
+        if (string.equals("Independiente")) {
+            return 0.0;
+        } else {
+
+            String[] split = string.split(" ");
+
+            return Double.valueOf(split[1]);
+        }
+
+    }
+
+    /**
+     * Centro del usuario
+     * @param c centro
+     * @throws UnirestException
+     * @throws ParseException 
+     */
+    public void setCentro(Centro c) throws UnirestException, ParseException {
+        this.centro = c;
+        System.out.println(getCamasDisponibles().toString());
+
+        labelCentro.setText(c.getNOMBRE_CENTRO());
+
+    }
+
+    /**
+     * Devuelve camas disponibles
+     * @return
+     * @throws UnirestException
+     * @throws ParseException 
+     */
+    public List<Cama> getCamasDisponibles() throws UnirestException, ParseException {
+        int centroId = centro.getID_CENTRO();
         String url = "http://localhost:33333/camas/camaCentro/search";
-        String body = "{\n" +
-"    \"columns\" : [\"ID_CAMA\",\"NOMBRE_CAMA\",\"NOM_HABITACION\",\"ID_USUARIO\"],\n" +
-"    \"filter\" : {\n" +
-"        \"ID_CENTRO\" : "+centroId+"\n" +
-"    }\n" +
-"}";
-        List<Cama> listCamas =  JsonUtils.parseCama(APIConnector.postMethod(url, body));
-        
-                
+        String body = "{\n"
+                + "    \"columns\" : [\"ID_CAMA\",\"NOMBRE_CAMA\",\"NOM_HABITACION\",\"ID_USUARIO\"],\n"
+                + "    \"filter\" : {\n"
+                + "        \"ID_CENTRO\" : " + centroId + "\n"
+                + "    }\n"
+                + "}";
+        List<Cama> listCamas = JsonUtils.parseCama(APIConnector.postMethod(url, body));
+
         listaCamas.clear();
-        for(Cama c: listCamas){
+        for (Cama c : listCamas) {
             listaCamas.add(c);
         }
-               
-                comboCama.setItems(listaCamas);
 
+        comboCama.setItems(listaCamas);
 
-        
         return listCamas;
-     }
+    }
 
+    /**
+     * Inserta habitar
+     * @param idUsuario idUsuario de la habitación
+     * @throws UnirestException 
+     */
     private void insertarHabitar(int idUsuario) throws UnirestException {
         Cama cama = (Cama) comboCama.getValue();
         int idCama = cama.getID_CAMA();
-         String urlHabitar = "http://localhost:33333/habitares/habitar";
-        String body = "{\r\n    \"data\": \r\n        {\r\n                        \"ID_USUARIO\": \""+idUsuario+"\",\r\n\r\n  \"ID_CAMA\": \""+idCama+"\"\r\n            \r\n        }\r\n}";
+        String urlHabitar = "http://localhost:33333/habitares/habitar";
+        String body = "{\r\n    \"data\": \r\n        {\r\n                        \"ID_USUARIO\": \"" + idUsuario + "\",\r\n\r\n  \"ID_CAMA\": \"" + idCama + "\"\r\n            \r\n        }\r\n}";
         APIConnector.postMethod(urlHabitar, body);
     }
-    
- 
 
-   
-    
 }

@@ -45,7 +45,7 @@
          </children>
       </GridPane>
       <Label fx:id="labelVal" textFill="RED" />
-      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="Iniciar sesión">
+      <Button fx:id="primaryButton" onAction="#logearUsuario" text="Iniciar sesión">
          <VBox.margin>
             <Insets top="30.0" />
          </VBox.margin>

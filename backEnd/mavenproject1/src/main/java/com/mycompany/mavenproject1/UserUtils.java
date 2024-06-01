@@ -10,14 +10,17 @@ import java.time.Period;
 import java.time.ZoneId;
 
 /**
+ * Utilidades de usuario
  *
  * @author DVerd
  */
 public class UserUtils {
+
     /**
      * Calcula la edad de un usuario a partir de su fecha de nacimiento
+     *
      * @param birthDate fecha de nacimiento del usuario
-     * @return 
+     * @return
      */
     public static int calculateAge(Date birthDate) {
         if (birthDate == null) {

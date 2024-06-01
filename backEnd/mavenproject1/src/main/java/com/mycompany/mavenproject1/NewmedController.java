@@ -26,55 +26,55 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * FXML Controller class de Nueva Medicación
  *
  * @author DVerd
  */
 public class NewmedController implements Initializable {
-    
-           @FXML
-    private ComboBox comboAdmin;
-           
-           @FXML
-           private TextField tfFarmaco;
-           
-           @FXML
-           private TextField tfDosis;
-           
-           @FXML
-           private RadioButton rDesayuno;
-           @FXML
-           private RadioButton rComida;
-           @FXML
-           private RadioButton rCena;
-           @FXML
-           private DatePicker dateIniciotto;
-            @FXML
-           private DatePicker dateFintto;
-            
-            private UserdetailController usercontroller;
-           
-           
-           
-                                           static ObservableList<String> listaAdmin =  FXCollections.observableArrayList();
-                                           
-                                           
 
+    @FXML
+    private ComboBox comboAdmin;
+
+    @FXML
+    private TextField tfFarmaco;
+
+    @FXML
+    private TextField tfDosis;
+
+    @FXML
+    private RadioButton rDesayuno;
+    @FXML
+    private RadioButton rComida;
+    @FXML
+    private RadioButton rCena;
+    @FXML
+    private DatePicker dateIniciotto;
+    @FXML
+    private DatePicker dateFintto;
+
+    private UserdetailController usercontroller;
+
+    static ObservableList<String> listaAdmin = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         // TODO
-         listaAdmin.add("Oral");
-                listaAdmin.add("IV");
+        listaAdmin.add("Oral");
+        listaAdmin.add("IV");
         listaAdmin.add("sc");
-        
+
         comboAdmin.setItems(listaAdmin);
-    }    
-    
+    }
+
+    /**
+     * Añade nueva pauta
+     * @throws UnirestException
+     * @throws ParseException 
+     */
     @FXML
     private void anadirFarmaco() throws UnirestException, ParseException {
         String nombreFarmaco = tfFarmaco.getText();
@@ -84,44 +84,44 @@ public class NewmedController implements Initializable {
         Boolean enComida = rComida.isSelected();
         Boolean enCena = rCena.isSelected();
         String posologia = "";
-        
-        if(enDesayuno){
+
+        if (enDesayuno) {
             posologia += "desayuno,";
         }
-        if(enComida) posologia += "comida,";
-        if(enCena) posologia += "cena";
-        
+        if (enComida) {
+            posologia += "comida,";
+        }
+        if (enCena) {
+            posologia += "cena";
+        }
+
         Date sqlDateInicio = Date.valueOf(dateIniciotto.getValue());
         Date sqlDateFin = Date.valueOf(dateFintto.getValue());
 
-        
         int userId = UserdetailController.usuario_static.getID_USUARIO();
 
-         String urlHabitar = "http://localhost:33333/farmacos/farmaco";
-        String body = "{\r\n    \"data\": \r\n        {\r\n                        \"ID_USUARIO\": \""+userId+"\",\r\n\r\n   \"VIA_ADMINISTRACION\": \""+viaAdm+"\",\r\n\r\n   \"DOSIS\": \""+dosis+"\",\r\n\r\n   \"POSOLOGIA\": \""+posologia+"\",\r\n\r\n   \"INICIO_PAUTA\": \""+sqlDateInicio+"\",\r\n\r\n   \"FIN_PAUTA\": \""+sqlDateFin+"\",\r\n\r\n  \"NOMBRE_FARMACO\": \""+nombreFarmaco+"\"\r\n            \r\n        }\r\n}";
+        String urlHabitar = "http://localhost:33333/farmacos/farmaco";
+        String body = "{\r\n    \"data\": \r\n        {\r\n                        \"ID_USUARIO\": \"" + userId + "\",\r\n\r\n   \"VIA_ADMINISTRACION\": \"" + viaAdm + "\",\r\n\r\n   \"DOSIS\": \"" + dosis + "\",\r\n\r\n   \"POSOLOGIA\": \"" + posologia + "\",\r\n\r\n   \"INICIO_PAUTA\": \"" + sqlDateInicio + "\",\r\n\r\n   \"FIN_PAUTA\": \"" + sqlDateFin + "\",\r\n\r\n  \"NOMBRE_FARMACO\": \"" + nombreFarmaco + "\"\r\n            \r\n        }\r\n}";
         APIConnector.postMethod(urlHabitar, body);
-        
+
         Pauta p = new Pauta();
         p.setNombreFarmaco(nombreFarmaco);
         p.setDosis(dosis);
         p.setPosologia(posologia);
         p.setViaAdministracion(viaAdm);
-        
-        if(posologia.contains("desayuno")){
-                desayunoItems.add(p.toString());
-            }
-            if(posologia.contains("comida")){
-                comidaItems.add(p.toString());
-            }
-            if(posologia.contains("cena")){
-                cenaItems.add(p.toString());
-            }
-        
-        
-        
-        
+
+        if (posologia.contains("desayuno")) {
+            desayunoItems.add(p.toString());
+        }
+        if (posologia.contains("comida")) {
+            comidaItems.add(p.toString());
+        }
+        if (posologia.contains("cena")) {
+            cenaItems.add(p.toString());
+        }
+
         Stage stage = (Stage) comboAdmin.getScene().getWindow();
         stage.close();
     }
-    
+
 }
